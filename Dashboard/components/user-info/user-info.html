@@ -1,0 +1,24 @@
+<div class="user-info">
+    <div class="">
+        <div class="profile-header-container">   
+            <div class="profile-header-img text-center">
+                <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" />
+                <span class="rank-label-container">
+                    <div class="credits-info">{{ctrl.userInfo.credits}} XP</div>
+                    <div class="ful-name-info">{{ctrl.userInfo.fullName}}</div>
+                    <span class="position-info">{{ctrl.userInfo.position}}</span>
+                    <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>
+                    <span class="department-info">{{ctrl.userInfo.department}}</span>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class=" text-center">
+            <div class="badges-title-info">My Badges</div>
+            <div class="badges-item" ng-repeat="badge in ctrl.allBadges track by $index">
+                <img class="img-circle" ng-src="{{badge.Icon.Url}}" data-toggle="tooltip" data-placement="bottom" title="{{badge.Title}}"/>
+                <!-- <div class="rank-label-container">{{badge.Title}}</div> -->
+            </div>
+        </div>
+    </div>
+</div>
