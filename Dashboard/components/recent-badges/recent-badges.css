@@ -14,13 +14,15 @@
     vertical-align: top;
 }
 .recent-badges .badges-item>img{
-    width: 48px;
+    width: 60px;
 }
 .recent-badges .recent-badges-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+	font-size: 18px;
+	font-weight: 600;
 }
 .recent-badges .recent-badges-header .btn {
     margin-right: 53px;

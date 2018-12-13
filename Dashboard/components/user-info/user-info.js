@@ -1,6 +1,6 @@
 angular.module('DashboardApp')
     .component('userInfo', {
-        templateUrl: './../SiteAssets/app/Dashboard/components/user-info/user-info.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Dashboard/components/user-info/user-info.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },

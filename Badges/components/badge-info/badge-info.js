@@ -1,16 +1,16 @@
-angular.module('DashboardApp')
-    .component('quickLeaderboard', {
-        templateUrl: './../SiteAssets/app/Dashboard/components/quick-leaderboard/quick-leaderboard.html?rnd' + Math.random(),
+angular.module('BadgesApp')
+    .component('badgeInfo', {
+        templateUrl: './../SiteAssets/app/Badges/components/badge-info/badge-info.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$DashboardService', quickLeaderboardCtrl]
+        controller: ['$BadgesService', badgeInfoCtrl]
     });
 
-function quickLeaderboardCtrl($DashboardService){
+function badgeInfoCtrl($BadgesService){
     var ctrl = this;
-    $DashboardService.getBadgesItems().then(function(res){
+    $BadgesService.getBadgesItems().then(function(res){
         ctrl.allBadges = res;
     });
 }

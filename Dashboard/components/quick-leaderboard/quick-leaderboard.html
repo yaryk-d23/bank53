@@ -6,7 +6,7 @@
                 <a class="btn btn-success">View Leaderboard</a>
             </div>
         </div>
-        <div class="quick-leaderboard-header">
+        <div class="">
             <b>
                 In my Role (look at LeaderBoards your EID XP as compared to XP for other with Role)
             </b>
@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <div class="user-picture">
-                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username=alex%40alexspoint.com" />
+                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" />
                         <span>Alex Pashkevych</span>
                     </div>
                     <div>{{badge.Title}}</div>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <br/>
-        <div class="quick-leaderboard-header">
+        <div class="">
             <b>
                 Departments (calc each Deparment, compare for most XP)
             </b>
@@ -41,7 +41,7 @@
                 </div>
                 <div>
                     <div class="user-picture">
-                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username=alex%40alexspoint.com" />
+                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" />
                         <span>Alex Pashkevych</span>
                     </div>
                     <div>{{badge.Title}}</div>
