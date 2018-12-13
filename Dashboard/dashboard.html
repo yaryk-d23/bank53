@@ -1,0 +1,43 @@
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+<script>
+    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app";
+    var scripts = [
+        "modules/angular.min.js",
+        "modules/bootstrap/js/bootstrap.min.js",
+
+        "Dashboard/dashboard-app.js",
+        "Dashboard/services/dashboard-service.js",
+        "Dashboard/components/user-info/user-info.js",
+        "Dashboard/components/recent-badges/recent-badges.js",
+        "Dashboard/components/quick-leaderboard/quick-leaderboard.js"
+    ];
+    var styles = [
+        "modules/bootstrap/css/bootstrap.css",
+        "Dashboard/components/user-info/user-info.css",
+        "Dashboard/components/recent-badges/recent-badges.css",
+        "Dashboard/components/quick-leaderboard/quick-leaderboard.css",
+    ];
+    for(var i=0;i<scripts.length;i++){
+        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+    }
+    for(var i=0;i<styles.length;i++){
+        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+    }
+</script>
+
+<div class="app-container b" ng-app="DashboardApp" ng-controller="AppCtrl" id="dashboard">
+    <div class="row">
+        <div class="col-sm-3">
+            <user-info></user-info>
+        </div>
+        <div class="col-sm-9">
+            <recent-badges></recent-badges>
+            <br/>
+            <quick-leaderboard></quick-leaderboard>
+        </div>
+    </div>
+</div>
