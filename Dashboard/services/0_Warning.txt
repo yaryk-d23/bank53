@@ -1,0 +1,13 @@
+
+BLOCKED FILE ALERT
+
+A file has been blocked due to the 'Filtering_80' rule.
+Context: 'dashboard-service.js'
+Disallowed due to filename
+Ticket Number: '0844-5c06-d464-0005'
+
+
+For further information, contact your system administrator. 
+Copyright 1999-2014 McAfee, Inc.
+All Rights Reserved.
+http://www.mcafee.com

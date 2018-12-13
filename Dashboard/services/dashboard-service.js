@@ -22,7 +22,7 @@ angular.module('DashboardApp')
         }
 
         function getBadgesItems(filter){
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Badges\')/items?'+filter)
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
                 .then(function(res){
                     return res.data.value;
                 });

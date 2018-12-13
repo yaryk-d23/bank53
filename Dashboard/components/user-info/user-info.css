@@ -30,5 +30,8 @@
     margin: 5px 10px;
 }
 .user-info .badges-item>img{
-    width: 48px;
+    width: 72px;
+}
+.user-info .user-icon {
+	width: 100px;
 }
