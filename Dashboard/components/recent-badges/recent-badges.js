@@ -6,13 +6,43 @@ angular.module('DashboardApp')
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$DashboardService', recentBadgesCtrl]
+        controller: ['$DashboardService', '$q', '$filter', recentBadgesCtrl]
     });
 
-function recentBadgesCtrl($DashboardService){
+function recentBadgesCtrl($DashboardService, $q, $filter){
     var ctrl = this;
 	ctrl.allBadges = [];
-    $DashboardService.getBadgesItems('$top=3').then(function(res){
-        ctrl.allBadges = res;
+    var requests = {
+        allBadges: $DashboardService.getBadgesItems(),
+        allTask: $DashboardService.getTaskItems()
+    };
+    $q.all(requests).then(function(res){
+        var grupedTaskByBadge = groupBy(res.allTask, 'BadgeId');
+        angular.forEach(res.allBadges, function(badge, key){
+            angular.forEach(grupedTaskByBadge, function(groupTask, key){
+                groupTask = $filter('orderBy')(groupTask, '-Created');
+                if(badge.Id == groupTask[0].BadgeId && badge.XP == getSum(groupTask)){
+                    badge.Created = groupTask[0].Created;
+                    ctrl.allBadges.push(badge);
+                }
+            });
+        });
+        setTimeout(function(){
+            $('[data-toggle="tooltip"]').tooltip();   
+        },500);
     });
+
+    function getSum(arr){
+        var sum = 0;
+        angular.forEach(arr, function(item, key){
+            sum += item.XP;
+        });
+        return sum;
+    }
+    function groupBy(xs, key) {
+        return xs.reduce(function(rv, x) {
+          (rv[x[key]] = rv[x[key]] || []).push(x);
+          return rv;
+        }, {});
+      };
 }

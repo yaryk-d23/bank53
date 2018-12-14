@@ -1,47 +1,55 @@
-.quick-leaderboard {
-    min-height: 100px;
-    width: 100%;
-    padding: 10px 20px;
+.badges-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+.badges-info .badges-item{
+    display: flex;
+    flex-direction: column;
+    flex: 0 22%;
+    align-items: center;
+    padding: 20px;
     border: 1px solid #c8c8c8;
     border-top-right-radius: 40px;
-    border-bottom-left-radius: 40px;
     box-shadow: 2px 2px 3px 0px;
+    margin: 0 1% 1% 0;
 }
-.quick-leaderboard .quick-leaderboard-item,
-.quick-leaderboard .quick-leaderboard-item>div {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 15px;
+
+.badges-info .badge-container>img{
+    width: 72px;
 }
-.quick-leaderboard .quick-leaderboard-item {
-    border-right: 1px solid #c8c8c8;
-    padding-right: 20px;
-    margin-bottom: 10px;
+.badge-container{
+    flex-grow: 1
 }
-.quick-leaderboard .quick-leaderboard-item .user-badge>img{
-    width: 48px;
-}
-/* .quick-leaderboard .quick-leaderboard-item:first-child {
-    border-left: 0;
-    padding-left: 0;
-} */
-.quick-leaderboard .quick-leaderboard-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.quick-leaderboard .quick-leaderboard-header .btn {
-    margin-right: 20px;
-}
-.quick-leaderboard .quick-leaderboard-item .user-picture>img,
-.quick-leaderboard .quick-leaderboard-item .user-picture>span {
-    display: inline-block;
-}
-.quick-leaderboard .quick-leaderboard-item .user-picture>img {
-    width: 16px;
-}
-.quick-leaderboard .quick-leaderboard-item .user-xp {
-    font-size: 18px;
-    font-weight: bold;
-}
+#spinner:hover {
+    -webkit-animation-name: spinner;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 3s;
+
+    animation-name: spinner;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 3s;
+
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+
+  /* #spinner:hover {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+  } */
+@keyframes spinner {
+    from {
+      -moz-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }
+    to {
+      -moz-transform: rotateY(-360deg);
+      -ms-transform: rotateY(-360deg);
+      transform: rotateY(-360deg);
+    }
+  }

@@ -1,56 +1,17 @@
-<div class="quick-leaderboard">
-    <div class="">
-        <div class="quick-leaderboard-header">
-            <div>Quick view Leaderboard</div>
-            <div >
-                <a class="btn btn-success">View Leaderboard</a>
+<div class="badges-info">
+    <div class="badges-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index">
+        <div class="badge-container">
+            <img class="img-circle" ng-src="{{badge.Icon.Url}}"  id="spinner"/>
+            <div class="rank-label-container">
+                <div><b>{{badge.XP}} XP</b></div>
+                <div>{{badge.Title}}</div>
+                <div ng-bind-html="ctrl.trustHtml(badge.Description)"></div>
+                
             </div>
-        </div>
-        <div class="quick-leaderboard-header">
-            <b>
-                In my Role (look at LeaderBoards your EID XP as compared to XP for other with Role)
-            </b>
         </div>
         <div>
-            <div class="quick-leaderboard-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index" ng-if="$index<3">
-                <div class="user-badge">
-                    <img class="img-circle" ng-src="{{badge.Icon.Url}}" />
-                </div>
-                <div>
-                    <div class="user-picture">
-                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username=alex%40alexspoint.com" />
-                        <span>Alex Pashkevych</span>
-                    </div>
-                    <div>{{badge.Title}}</div>
-                </div>
-                <div class="user-xp">
-                    {{badge.XP}} XP
-                </div>
-            </div>
+            <button type="button" class="btn btn-success" ng-click="ctrl.createTaskItem('Task 1',badge.Id)" ng-disabled="ctrl.checkTask('Task 1',badge.Id)">Task 1</button>
+            <button type="button" class="btn btn-success" ng-click="ctrl.createTaskItem('Task 2',badge.Id)" ng-disabled="ctrl.checkTask('Task 2',badge.Id)">Task 2</button>
         </div>
-        <br/>
-        <div class="quick-leaderboard-header">
-            <b>
-                Departments (calc each Deparment, compare for most XP)
-            </b>
-        </div>
-        <div>
-            <div class="quick-leaderboard-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index" ng-if="$index>3">
-                <div class="user-badge">
-                    <img class="img-circle" ng-src="{{badge.Icon.Url}}" />
-                </div>
-                <div>
-                    <div class="user-picture">
-                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username=alex%40alexspoint.com" />
-                        <span>Alex Pashkevych</span>
-                    </div>
-                    <div>{{badge.Title}}</div>
-                </div>
-                <div class="user-xp">
-                    {{badge.XP}} XP
-                </div>
-            </div>
-        </div>
-        <br/>
     </div>
 </div>

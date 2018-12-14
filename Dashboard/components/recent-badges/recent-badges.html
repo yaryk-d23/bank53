@@ -7,11 +7,11 @@
             </div>
         </div>
         <div>
-            <div class="badges-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index">
-                <img class="img-circle" ng-src="{{badge.Icon.Url}}" />
+            <div class="badges-item  text-center" ng-repeat="badge in ctrl.allBadges | orderBy: '-Created' track by $index" ng-if="$index<3">
+                <img class="img-circle" ng-src="{{badge.Icon.Url}}" id="spinner"/>
                 <div class="rank-label-container">
                     <div>{{badge.Title}}</div>
-                    <div>10/12/18</div>
+                    <div>{{badge.Created | date}}</div>
                 </div>
             </div>
         </div>

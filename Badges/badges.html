@@ -24,16 +24,10 @@
         document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
     }
 </script>
-
-<div class="app-container b" ng-app="DashboardApp" ng-controller="AppCtrl" id="dashboard">
-    <div class="row">
-        <div class="col-sm-3">
-            <user-info></user-info>
-        </div>
-        <div class="col-sm-9">
-            <recent-badges></recent-badges>
-            <br/>
-            <quick-leaderboard></quick-leaderboard>
+<div class="app-container b" ng-app="BadgesApp" ng-controller="AppCtrl" id="badges">
+    <div class="">
+        <div class="">
+            <badge-info></badge-info>
         </div>
     </div>
 </div>

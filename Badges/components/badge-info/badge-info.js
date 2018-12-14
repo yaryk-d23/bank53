@@ -5,12 +5,82 @@ angular.module('BadgesApp')
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$BadgesService', badgeInfoCtrl]
+        controller: ['$BadgesService', '$sce', badgeInfoCtrl]
     });
 
-function badgeInfoCtrl($BadgesService){
+function badgeInfoCtrl($BadgesService, $sce){
     var ctrl = this;
+    ctrl.userInfo = {};
+    ctrl.allBadges = [];
+    ctrl.allTask = [];
     $BadgesService.getBadgesItems().then(function(res){
         ctrl.allBadges = res;
     });
+    updateData();
+    
+
+    ctrl.createTaskItem = function(taskName, badgeId){
+        console.log(this);
+        var taskWeight = 50;
+        var item = {
+            Title: taskName,
+            Badge: badgeId,
+            AssignedTo: _spPageContextInfo.userId,
+            XP: taskWeight
+        };
+        $BadgesService.createTaskItem(item).then(function(res){
+            var userItem = {
+                Id: ctrl.userInfo.userItemId,
+                XP: ctrl.userInfo.xp + taskWeight
+            };
+            $BadgesService.updateUserLogItem(userItem).then(function(res){
+                updateData();
+            }); 
+        });
+    }
+
+    ctrl.checkTask = function(taskName, badgeId){
+        var flag = false;
+        angular.forEach(ctrl.allTask,function(task, key){
+            if(task.Title == taskName && task.BadgeId == badgeId){
+                flag = true;
+            }
+        });
+        return flag;
+    }
+
+    function updateData(){
+        $BadgesService.getTaskItems().then(function(res){
+            ctrl.allTask = res;
+        });
+        $BadgesService.getUserProfile().then(function(data){
+            angular.forEach(data.UserProfileProperties, function(prop, key){
+                if(prop.Key == "PictureURL"){
+                    ctrl.userInfo.pictureUrl = prop.Value;
+                }
+                if(prop.Key == "UserName"){
+                    ctrl.userInfo.userName = prop.Value;
+                }
+                if(prop.Key == "Department"){
+                    ctrl.userInfo.department = prop.Value || '';
+                }
+                if(prop.Key == "Title"){
+                    ctrl.userInfo.position = prop.Value || '';
+                }
+            });
+            ctrl.userInfo.fullName = data.DisplayName;
+            $BadgesService.getUserLogItem(ctrl.userInfo.userName).then(function(data){
+                if(data.length) {
+                    var user = data[0];
+                    ctrl.userInfo.credits = user.Credits || 0;
+                    ctrl.userInfo.xp = user.XP || 0;
+                    ctrl.userInfo.userItemId = user.Id;
+                }
+            });
+        });
+    }
+
+    ctrl.trustHtml = function(html) {
+        return $sce.trustAsHtml(html);
+    }
 }

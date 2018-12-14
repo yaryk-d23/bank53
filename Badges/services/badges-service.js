@@ -1,9 +1,13 @@
-angular.module('DashboardApp')
-    .factory('$DashboardService', function ($http, $q) {
+angular.module('BadgesApp')
+    .factory('$BadgesService', function ($http, $q) {
         return {
             getUserProfile: getUserProfile,
             getUserLogItem: getUserLogItem,
-            getBadgesItems: getBadgesItems
+            getBadgesItems: getBadgesItems,
+            createTaskItem: createOrUpdateTaskItem,
+            updateTaskItem: createOrUpdateTaskItem,
+            updateUserLogItem: updateUserLogItem,
+            getTaskItems: getTaskItems
         };
 
         function getUserProfile(){
@@ -22,9 +26,78 @@ angular.module('DashboardApp')
         }
 
         function getBadgesItems(filter){
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Badges\')/items?'+filter)
+            filter = filter ? filter : '';
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
                 .then(function(res){
                     return res.data.value;
                 });
+        }
+
+        function getTaskItems(filter){
+            filter = filter ? filter : '';
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesTaskLog\')/items?'+filter)
+                .then(function(res){
+                    return res.data.value;
+                });
+        }
+
+        
+
+        function createOrUpdateTaskItem(item){
+            return new Promise(function(resolve, reject){
+                var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
+                var oList = clientContext.get_web().get_lists().getByTitle("BadgesTaskLog");
+                    
+                var itemCreateInfo = new SP.ListItemCreationInformation();
+                if(item.Id)
+                    var oListItem = oList.getItemById(item.Id);
+                else
+                    var oListItem = oList.addItem(itemCreateInfo);
+
+                for(var key in item){
+                    if(key!='Id' && key!='Badge' && key!='AssignedTo'){
+                        oListItem.set_item(key,item[key]);
+                    }
+                    else if(key=='Badge'){
+                        var lookupVal = new SP.FieldLookupValue();
+                        lookupVal.set_lookupId(item[key]);
+                        oListItem.set_item(key,lookupVal);
+                    }
+                    else if(key=='AssignedTo'){
+                        var lookupVal = new SP.FieldLookupValue();
+                        lookupVal.set_lookupId(item[key]);
+                        oListItem.set_item(key,lookupVal);
+                    }
+                }
+                oListItem.update();
+
+                clientContext.load(oListItem);
+                function thisSuccess(){
+                    resolve(oListItem);
+                }
+                function thisFailed(request, error){
+                    console.log(error);
+                }
+                clientContext.executeQueryAsync(thisSuccess, thisFailed);
+            });
+        }
+
+        function updateUserLogItem(item){
+            return new Promise(function(resolve, reject){
+                var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
+                var oList = clientContext.get_web().get_lists().getByTitle("UsersLog");
+                var oListItem = oList.getItemById(item.Id);
+                oListItem.set_item('XP',item.XP);
+                oListItem.update();
+
+                clientContext.load(oListItem);
+                function thisSuccess(){
+                    resolve(oListItem);
+                }
+                function thisFailed(request, error){
+                    console.log(error);
+                }
+                clientContext.executeQueryAsync(thisSuccess, thisFailed);
+            });
         }
     });
