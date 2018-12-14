@@ -1,6 +1,6 @@
 angular.module('BadgesApp')
     .component('badgeInfo', {
-        templateUrl: './../SiteAssets/app/Badges/components/badge-info/badge-info.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Badges/components/badge-info/badge-info.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
