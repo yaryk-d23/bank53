@@ -42,7 +42,21 @@ angular.module('BadgesApp')
         }
 
         
-
+        function createOrUpdateTaskItem(item){
+            return $http({
+                method: 'POST',
+                url: _spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items',
+                data: item,
+                headers: {
+                    "Accept": "application/json;odata=verbose",
+                    'X-RequestDigest': document.getElementById("__REQUESTDIGEST").value,
+                    "X-HTTP-Method": "MERGE",
+                    "If-Match": "*"
+                  }
+              }).then(function(res){
+                  return res;
+              });
+        }
         function createOrUpdateTaskItem(item){
             return new Promise(function(resolve, reject){
                 var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
