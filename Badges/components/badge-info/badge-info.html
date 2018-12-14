@@ -10,8 +10,18 @@
             </div>
         </div>
         <div>
-            <button type="button" class="btn btn-success" ng-click="ctrl.createTaskItem('Task 1',badge.Id)" ng-disabled="ctrl.checkTask('Task 1',badge.Id)">Task 1</button>
-            <button type="button" class="btn btn-success" ng-click="ctrl.createTaskItem('Task 2',badge.Id)" ng-disabled="ctrl.checkTask('Task 2',badge.Id)">Task 2</button>
+            <button type="button" class="btn btn-success" ng-click="ctrl.createTaskItem('Task 1',badge.Id); ctrl.showToast('Task1'+badge.Id);" ng-disabled="ctrl.checkTask('Task 1',badge.Id)">
+                Task 1
+                <div ng-attr-id="{{'Task1'+badge.Id}}" class="snackbar">+50 XP</div>
+
+            </button>
+            <button type="button" 
+                class="btn btn-success" 
+                ng-click="ctrl.createTaskItem('Task 2',badge.Id); ctrl.showToast('Task2'+badge.Id);" 
+                ng-disabled="ctrl.checkTask('Task 2',badge.Id)">
+                Task 2
+                <div ng-attr-id="{{'Task2'+badge.Id}}" class="snackbar">+50 XP</div>
+            </button>
         </div>
     </div>
 </div>

@@ -20,7 +20,6 @@ function badgeInfoCtrl($BadgesService, $sce){
     
 
     ctrl.createTaskItem = function(taskName, badgeId){
-        console.log(this);
         var taskWeight = 50;
         var item = {
             Title: taskName,
@@ -47,6 +46,12 @@ function badgeInfoCtrl($BadgesService, $sce){
             }
         });
         return flag;
+    }
+
+    ctrl.showToast = function(id) {
+        var x = document.getElementById(id);
+        x.className = "show snackbar";
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
     }
 
     function updateData(){
