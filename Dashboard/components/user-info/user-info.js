@@ -14,16 +14,21 @@ function userInfoCtrl($DashboardService, $q){
     ctrl.allBadges = [];
     var requests = {
         allBadges: $DashboardService.getBadgesItems(),
-        allTask: $DashboardService.getTaskItems()
+        allTask: $DashboardService.getTaskItems(),
+        tasksListItems: $DashboardService.getTaskListItems(),
     };
     $q.all(requests).then(function(res){
         var grupedTaskByBadge = groupBy(res.allTask, 'BadgeId');
+        var grupedTasksItemsByBadge = groupBy(res.tasksListItems, 'BadgeId');
         angular.forEach(res.allBadges, function(badge, key){
-            angular.forEach(grupedTaskByBadge, function(groupTask, key){
-                if(badge.Id == groupTask[0].BadgeId && badge.XP == getSum(groupTask)){
-                    ctrl.allBadges.push(badge);
-                }
-            });
+            if(grupedTaskByBadge[badge.Id] && grupedTaskByBadge[badge.Id].length == grupedTasksItemsByBadge[badge.Id].length){
+                ctrl.allBadges.push(badge);
+            }
+            // angular.forEach(grupedTaskByBadge, function(groupTask, key){
+            //     if(badge.Id == groupTask[0].BadgeId && badge.XP == getSum(groupTask)){
+            //         ctrl.allBadges.push(badge);
+            //     }
+            // });
         });
         setTimeout(function(){
             $('[data-toggle="tooltip"]').tooltip();   

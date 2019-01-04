@@ -1,6 +1,7 @@
 .badges-info {
     display: flex;
     flex-wrap: wrap;
+
 }
 .badges-info .badges-item{
     display: flex;
@@ -18,7 +19,11 @@
     width: 72px;
 }
 .badge-container{
-    flex-grow: 1
+    flex-grow: 1;
+    width: 100%;
+}
+.badge-buttons > button {
+  margin-right: 5px;
 }
 #spinner:hover {
     -webkit-animation-name: spinner;
@@ -65,7 +70,7 @@
     padding: 5px;
     position: absolute;
     z-index: 1;
-    bottom: 40px;
+    top: 0px;
     font-size: 17px;
     display: none;
   }
@@ -78,21 +83,21 @@
   }
   
   @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
-    to {bottom: 30px; opacity: 1;}
+    from {top: 40px; opacity: 0;} 
+    to {top: 0; opacity: 1;}
   }
   
   @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+    from {top: 40px; opacity: 0;} 
+    to {top: 0; opacity: 1;}
   }
   
   @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
-    to {bottom: 0; opacity: 0;}
+    from {top: 0; opacity: 1;} 
+    to {top: 40px; opacity: 0;}
   }
   
   @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+    from {top: 0; opacity: 1;} 
+    to {top: 40px; opacity: 0;}
   }

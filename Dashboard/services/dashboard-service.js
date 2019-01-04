@@ -4,7 +4,8 @@ angular.module('DashboardApp')
             getUserProfile: getUserProfile,
             getUserLogItem: getUserLogItem,
             getBadgesItems: getBadgesItems,
-            getTaskItems: getTaskItems
+            getTaskItems: getTaskItems,
+            getTaskListItems: getTaskListItems
         };
 
         function getUserProfile(){
@@ -32,6 +33,14 @@ angular.module('DashboardApp')
         function getTaskItems(filter){
             filter = filter ? filter : '';
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesTaskLog\')/items?'+filter)
+                .then(function(res){
+                    return res.data.value;
+                });
+        }
+
+        function getTaskListItems(filter){
+            filter = filter ? filter : '';
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Tasks\')/items?$select=*,Badge/Id,Badge/Title&$expand=Badge&'+filter)
                 .then(function(res){
                     return res.data.value;
                 });

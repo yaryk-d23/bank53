@@ -7,7 +7,9 @@ angular.module('BadgesApp')
             createTaskItem: createOrUpdateTaskItem,
             updateTaskItem: createOrUpdateTaskItem,
             updateUserLogItem: updateUserLogItem,
-            getTaskItems: getTaskItems
+            getTaskLogItems: getTaskLogItems,
+            getTaskItems: getTaskItems,
+            uploadFile: uploadFile
         };
 
         function getUserProfile(){
@@ -27,13 +29,27 @@ angular.module('BadgesApp')
 
         function getBadgesItems(filter){
             filter = filter ? filter : '';
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
-                .then(function(res){
-                    return res.data.value;
-                });
+            return new Promise(function(resolve, reject){
+                $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
+                    .then(function(res){
+                        var request = {};
+                        angular.forEach(res.data.value, function(item, k){
+                            request[item.Id] = $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Tasks\')/items?'+
+                                '$select=*,Badge/Id,Badge/Title&$expand=Badge'+
+                                '&$filter=Badge/Id eq '+item.Id);
+                        });
+                        $q.all(request).then(function(tasksRes){
+                            angular.forEach(res.data.value, function(item, k){
+                                item['Tasks'] = tasksRes[item.Id].data.value;
+                            });
+                            resolve(res.data.value);
+                        });
+                        //return res.data.value;
+                    });
+            });
         }
 
-        function getTaskItems(filter){
+        function getTaskLogItems(filter){
             filter = filter ? filter : '';
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesTaskLog\')/items?'+filter)
                 .then(function(res){
@@ -41,25 +57,35 @@ angular.module('BadgesApp')
                 });
         }
 
-        
-        function createOrUpdateTaskItem(item){
-            return $http({
-                method: 'POST',
-                url: _spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items',
-                data: item,
-                headers: {
-                    "Accept": "application/json;odata=verbose",
-                    'X-RequestDigest': document.getElementById("__REQUESTDIGEST").value,
-                    "X-HTTP-Method": "MERGE",
-                    "If-Match": "*"
-                  }
-              }).then(function(res){
-                  return res;
-              });
+        function getTaskItems(filter){
+            filter = filter ? filter : '';
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Tasks\')/items?$select=*,Badge/Id,Badge/Title&$expand=Badge&'+filter)
+                .then(function(res){
+                    return res.data.value;
+                });
         }
+
+        
+        // function createOrUpdateTaskItem(item){
+        //     return $http({
+        //         method: 'POST',
+        //         url: _spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items',
+        //         data: item,
+        //         headers: {
+        //             "Accept": "application/json;odata=verbose",
+        //             'X-RequestDigest': document.getElementById("__REQUESTDIGEST").value,
+        //             "X-HTTP-Method": "MERGE",
+        //             "If-Match": "*"
+        //           }
+        //       }).then(function(res){
+        //           return res;
+        //       });
+        // }
         function createOrUpdateTaskItem(item){
             return new Promise(function(resolve, reject){
-                var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
+                // var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
+                var clientContext = new SP.ClientContext.get_current();
+
                 var oList = clientContext.get_web().get_lists().getByTitle("BadgesTaskLog");
                     
                 var itemCreateInfo = new SP.ListItemCreationInformation();
@@ -114,4 +140,28 @@ angular.module('BadgesApp')
                 clientContext.executeQueryAsync(thisSuccess, thisFailed);
             });
         }
+
+        function uploadFile(data) {
+            var config = {
+                headers: {
+                    "Accept": "application/json; odata=verbose",
+                    "X-RequestDigest": $('#__REQUESTDIGEST').val(),  
+                    "Content-Type": undefined
+                },
+                responseType: "arraybuffer"
+            };
+            var url = _spPageContextInfo.webAbsoluteUrl + 
+                "/_api/web/getfolderbyserverrelativeurl('"+_spPageContextInfo.webServerRelativeUrl+"/TasksLogFiles')/Files/add(overwrite=true, url='"+data.fileName+"')";
+            return $http({
+                    method: "POST",
+                    url: url, 
+                    processData: false,
+                    data: data.arrayBuffer, 
+                    headers: config.headers
+                }).then(function(res){
+                    return res.data.d;
+                });
+                
+        }
+
     });

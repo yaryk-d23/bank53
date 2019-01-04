@@ -14,18 +14,26 @@ function recentBadgesCtrl($DashboardService, $q, $filter){
 	ctrl.allBadges = [];
     var requests = {
         allBadges: $DashboardService.getBadgesItems(),
-        allTask: $DashboardService.getTaskItems()
+        allTask: $DashboardService.getTaskItems(),
+        tasksListItems: $DashboardService.getTaskListItems(),
     };
     $q.all(requests).then(function(res){
         var grupedTaskByBadge = groupBy(res.allTask, 'BadgeId');
+        var grupedTasksItemsByBadge = groupBy(res.tasksListItems, 'BadgeId');
+
         angular.forEach(res.allBadges, function(badge, key){
-            angular.forEach(grupedTaskByBadge, function(groupTask, key){
-                groupTask = $filter('orderBy')(groupTask, '-Created');
-                if(badge.Id == groupTask[0].BadgeId && badge.XP == getSum(groupTask)){
-                    badge.Created = groupTask[0].Created;
-                    ctrl.allBadges.push(badge);
-                }
-            });
+            if(grupedTaskByBadge[badge.Id] && grupedTaskByBadge[badge.Id].length == grupedTasksItemsByBadge[badge.Id].length){
+                groupTask = $filter('orderBy')(grupedTaskByBadge[badge.Id], '-Created');
+                badge.Created = groupTask[0].Created;
+                ctrl.allBadges.push(badge);
+            }
+            // angular.forEach(grupedTaskByBadge, function(groupTask, key){
+            //     groupTask = $filter('orderBy')(groupTask, '-Created');
+            //     if(badge.Id == groupTask[0].BadgeId && badge.XP == getSum(groupTask)){
+            //         badge.Created = groupTask[0].Created;
+            //         ctrl.allBadges.push(badge);
+            //     }
+            // });
         });
         setTimeout(function(){
             $('[data-toggle="tooltip"]').tooltip();   

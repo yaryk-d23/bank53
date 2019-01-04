@@ -1,27 +1,33 @@
 <div class="badges-info">
+    <div style="position: relative; width: 100%;">
+        <div id="task-toast" class="snackbar"></div>
+    </div>
     <div class="badges-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index">
         <div class="badge-container">
             <img class="img-circle" ng-src="{{badge.Icon.Url}}"  id="spinner"/>
             <div class="rank-label-container">
-                <div><b>{{badge.XP}} XP</b></div>
+                <div><b>{{ctrl.getBadgeXP(badge.Tasks)}} XP</b></div>
                 <div>{{badge.Title}}</div>
                 <div ng-bind-html="ctrl.trustHtml(badge.Description)"></div>
                 
             </div>
         </div>
-        <div>
-            <button type="button" class="btn btn-success" ng-click="ctrl.createTaskItem('Task 1',badge.Id); ctrl.showToast('Task1'+badge.Id);" ng-disabled="ctrl.checkTask('Task 1',badge.Id)">
-                Task 1
-                <div ng-attr-id="{{'Task1'+badge.Id}}" class="snackbar">+50 XP</div>
-
+        <div class="badge-buttons">
+            <button 
+                ng-repeat="task in badge.Tasks"
+                type="button" 
+                class="btn btn-success" 
+                ng-click="ctrl.generatePdf($event, task);" 
+                ng-disabled="ctrl.checkTask(task.Title,badge.Id)">
+                {{task.Title}}
             </button>
-            <button type="button" 
+            <!-- <button type="button" 
                 class="btn btn-success" 
                 ng-click="ctrl.createTaskItem('Task 2',badge.Id); ctrl.showToast('Task2'+badge.Id);" 
                 ng-disabled="ctrl.checkTask('Task 2',badge.Id)">
                 Task 2
                 <div ng-attr-id="{{'Task2'+badge.Id}}" class="snackbar">+50 XP</div>
-            </button>
+            </button> -->
         </div>
     </div>
 </div>
