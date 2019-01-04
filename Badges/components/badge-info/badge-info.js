@@ -5,10 +5,10 @@ angular.module('BadgesApp')
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$BadgesService', '$sce', badgeInfoCtrl]
+        controller: ['$BadgesService', '$sce', '$q', badgeInfoCtrl]
     });
 
-function badgeInfoCtrl($BadgesService, $sce){
+function badgeInfoCtrl($BadgesService, $sce, $q){
     var ctrl = this;
     ctrl.userInfo = {};
     ctrl.allBadges = [];
@@ -177,10 +177,13 @@ function badgeInfoCtrl($BadgesService, $sce){
     }
 
     function updateData(){
-        $BadgesService.getTaskLogItems().then(function(res){
-            ctrl.allTask = res;
-        });
-        $BadgesService.getUserProfile().then(function(data){
+        var reqData = {
+            taskLogItems: $BadgesService.getTaskLogItems(),
+            userProfile: $BadgesService.getUserProfile()
+        };
+        $q.all(reqData).then(function(res){
+            ctrl.allTask = res.taskLogItems;
+            var data = res.userProfile;
             angular.forEach(data.UserProfileProperties, function(prop, key){
                 if(prop.Key == "PictureURL"){
                     ctrl.userInfo.pictureUrl = prop.Value;
@@ -205,6 +208,35 @@ function badgeInfoCtrl($BadgesService, $sce){
                 }
             });
         });
+        // $BadgesService.getTaskLogItems().then(function(res){
+        //     ctrl.allTask = res;
+        //     $scope.$apply();
+        // });
+        // $BadgesService.getUserProfile().then(function(data){
+        //     angular.forEach(data.UserProfileProperties, function(prop, key){
+        //         if(prop.Key == "PictureURL"){
+        //             ctrl.userInfo.pictureUrl = prop.Value;
+        //         }
+        //         if(prop.Key == "UserName"){
+        //             ctrl.userInfo.userName = prop.Value;
+        //         }
+        //         if(prop.Key == "Department"){
+        //             ctrl.userInfo.department = prop.Value || '';
+        //         }
+        //         if(prop.Key == "Title"){
+        //             ctrl.userInfo.position = prop.Value || '';
+        //         }
+        //     });
+        //     ctrl.userInfo.fullName = data.DisplayName;
+        //     $BadgesService.getUserLogItem(ctrl.userInfo.userName).then(function(data){
+        //         if(data.length) {
+        //             var user = data[0];
+        //             ctrl.userInfo.credits = user.Credits || 0;
+        //             ctrl.userInfo.xp = user.XP || 0;
+        //             ctrl.userInfo.userItemId = user.Id;
+        //         }
+        //     });
+        // });
     }
 
     ctrl.trustHtml = function(html) {
