@@ -49,6 +49,7 @@
     ];
     var styles = [
         "modules/bootstrap/css/bootstrap.css",
+		"Dashboard/dashboard-app.css",
         "Dashboard/components/user-info/user-info.css",
         "Dashboard/components/recent-badges/recent-badges.css",
         "Dashboard/components/quick-leaderboard/quick-leaderboard.css",
@@ -72,7 +73,7 @@
             </div>
         </div>
     </nav>
-    <h3>My Dashboard</h3>
+    <h2>My Dashboard</h2>
     <div class="row">
         <div class="col-sm-3">
             <user-info></user-info>
