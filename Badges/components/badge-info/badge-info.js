@@ -22,9 +22,9 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
         $BadgesService.getTaskLogItems('$filter=Task/Id eq '+urlTaskId).then(function(taskRes){
             if(!taskRes.length) {
                 $BadgesService.getTaskItems('$filter=Id eq '+urlTaskId).then(function (res){
-                    ExecuteOrDelayUntilScriptLoaded(function(){
+                    //ExecuteOrDelayUntilScriptLoaded(function(){
                         ctrl.createTaskItem(res[0]);
-                    }, "sp.js");
+                    //}, "SP.js");
                 });
             }
             else{
@@ -122,7 +122,7 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
         };
         $BadgesService.uploadFile(reqData).then(function(res){
             
-            var win = window.open(_spPageContextInfo.siteAbsoluteUrl + res.ServerRelativeUrl, '_blank');
+            var win = window.open(location.origin + res.ServerRelativeUrl, '_blank');
             win.focus();
         });
          

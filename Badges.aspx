@@ -31,6 +31,8 @@
     <script src="/_layouts/15/SP.Core.js"></script>
     <script src="/_layouts/15/SP.Runtime.js"></script>
     <script src="/_layouts/15/SP.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
   </head>
 
   <body >
@@ -45,13 +47,15 @@
         "modules/jquery-3.3.1.min.js",
         "modules/angular.min.js",
         "modules/bootstrap/js/bootstrap.min.js",
-
+		"modules/jsPDF/jsPDF.js",
+        "modules/jsPDF/jspdf.plugin.autotable.min.js",
         "Badges/badges-app.js",
         "Badges/services/badges-service.js",
         "Badges/components/badge-info/badge-info.js",
     ];
     var styles = [
         "modules/bootstrap/css/bootstrap.css",
+		"Badges/badges-app.css",
         "Badges/components/badge-info/badge-info.css",
     ];
     for(var i=0;i<scripts.length;i++){
@@ -72,7 +76,7 @@
             </div>
         </div>
     </nav>
-    <h3>Trainings</h3>
+    <h2>Trainings</h2>
     <div class="">
         <div class="">
             <badge-info></badge-info>
