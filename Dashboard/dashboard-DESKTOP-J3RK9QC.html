@@ -1,0 +1,28 @@
+<script src='/dev/SiteAssets/app/modules/angular.min.js'></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src='/dev/SiteAssets/app/modules/bootstrap/js/bootstrap.min.js'></script>
+<script src='/dev/SiteAssets/app/Dashboard/dashboard-app.js'></script>
+
+<script src='/dev/SiteAssets/app/Dashboard/services/dashboard-service.js'></script>
+
+
+<script src='/dev/SiteAssets/app/Dashboard/components/user-info/user-info.js'></script>
+<script src='/dev/SiteAssets/app/Dashboard/components/recent-badges/recent-badges.js'></script>
+
+<link href="/dev/SiteAssets/app/modules/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="/dev/SiteAssets/app/Dashboard/components/user-info/user-info.css" rel="stylesheet">
+<link href="/dev/SiteAssets/app/Dashboard/components/recent-badges/recent-badges.css" rel="stylesheet">
+
+<div class="app-container b" ng-app="DashboardApp">
+    <div class="row">
+        <div class="col-sm-3">
+            <user-info></user-info>
+        </div>
+        <div class="col-sm-9">
+            <resent-badges></resent-badges>
+        </div>
+    </div>
+</div>

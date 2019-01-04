@@ -62,6 +62,17 @@
 </script>
 
 <div class="app-container b" ng-app="DashboardApp" ng-controller="AppCtrl" id="dashboard">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Dashboard.aspx">My Dashboard</a></li>
+                    <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Badges.aspx">Trainings</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h3>My Dashboard</h3>
     <div class="row">
         <div class="col-sm-3">
             <user-info></user-info>
@@ -72,6 +83,6 @@
             <quick-leaderboard></quick-leaderboard>
         </div>
     </div>
-</div>
+</nav>
   </body>
 </html>
