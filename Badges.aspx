@@ -32,6 +32,7 @@
     <script src="/_layouts/15/SP.Runtime.js"></script>
     <script src="/_layouts/15/SP.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.3/bluebird.min.js"></script>
 
   </head>
 
@@ -41,7 +42,8 @@
 	<SharePoint:FormDigest runat="server"></SharePoint:FormDigest>
 	</form>
 
-        <script>
+        
+	<script>
     var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app";
     var scripts = [
         "modules/jquery-3.3.1.min.js",
@@ -70,6 +72,7 @@
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="">
                 <ul class="nav navbar-nav">
+                    <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Welcome.aspx">Home</a></li>
                     <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Dashboard.aspx">My Dashboard</a></li>
                     <li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Badges.aspx">Trainings</a></li>
                 </ul>
@@ -79,10 +82,9 @@
     <h2>Trainings</h2>
     <div class="">
         <div class="">
-            <div class="">
-                <welcome></welcome>
-            </div>
+            <badge-info></badge-info>
         </div>
     </div>
+</div>
   </body>
 </html>
