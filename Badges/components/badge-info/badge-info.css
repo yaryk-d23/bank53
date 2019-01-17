@@ -46,6 +46,7 @@
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
   } */
+
 @keyframes spinner {
     from {
       -moz-transform: rotateY(0deg);
@@ -82,6 +83,7 @@
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
   
+  
   @-webkit-keyframes fadein {
     from {top: 40px; opacity: 0;} 
     to {top: 0; opacity: 1;}
@@ -101,3 +103,11 @@
     from {top: 0; opacity: 1;} 
     to {top: 40px; opacity: 0;}
   }
+
+
+@media only screen and (max-width: 1199px) {
+    .badges-info .badges-item  {
+		flex: 0 100%;
+		margin-bottom: 20px;
+	}
+}

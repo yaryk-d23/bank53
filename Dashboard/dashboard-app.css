@@ -3,3 +3,9 @@
 }
 #dashboard > div > .col-sm-9 {
 }
+
+@media (min-width: 768px){
+	.navbar-toggle {
+		display: none;
+	}
+}
