@@ -60,6 +60,17 @@
 .item-container .user-xp{
     flex: 0 20%;
 }
+.item-container .user-badge{
+    align-items: center;
+}
 .item-container .user-picture{
     flex: 0 60%;
+}
+@media only screen and (max-width: 1199px) {
+    .item-container {
+        flex-direction: column;
+    }
+    .quick-leaderboard .quick-leaderboard-item {
+        flex: 0 100%;
+    }
 }
