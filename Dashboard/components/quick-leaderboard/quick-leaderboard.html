@@ -11,13 +11,13 @@
                 In my Role (look at LeaderBoards your EID XP as compared to XP for other with Role)
             </b>
         </div>
-        <div>
+        <div class="item-container">
             <div class="quick-leaderboard-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index" ng-if="$index<3">
                 <div class="user-badge">
                     <img class="img-circle" ng-src="{{badge.Icon.Url}}" />
                 </div>
-                <div>
-                    <div class="user-picture">
+                <div class="user-picture">
+                    <div>
                         <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" />
                         <span>Alex Pashkevych</span>
                     </div>
@@ -34,13 +34,13 @@
                 Departments (calc each Deparment, compare for most XP)
             </b>
         </div>
-        <div>
+        <div class="item-container">
             <div class="quick-leaderboard-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index" ng-if="$index>3">
                 <div class="user-badge">
                     <img class="img-circle" ng-src="{{badge.Icon.Url}}" />
                 </div>
-                <div>
-                    <div class="user-picture">
+                <div class="user-picture">
+                    <div>
                         <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" />
                         <span>Alex Pashkevych</span>
                     </div>

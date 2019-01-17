@@ -36,3 +36,8 @@
 .user-info .user-icon {
 	width: 100px;
 }
+@media only screen and (max-width: 1199px) {
+    .user-info{
+        margin-bottom: 20px;
+    }
+}
