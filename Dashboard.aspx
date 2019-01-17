@@ -67,6 +67,7 @@
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="">
                 <ul class="nav navbar-nav">
+                    <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Welcome.aspx">Home</a></li>
                     <li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Dashboard.aspx">My Dashboard</a></li>
                     <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Badges.aspx">Trainings</a></li>
                 </ul>
@@ -75,10 +76,10 @@
     </nav>
     <h2>My Dashboard</h2>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-12 col-md-12 col-lg-3">
             <user-info></user-info>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-12 col-md-12 col-lg-9">
             <recent-badges></recent-badges>
             <br/>
             <quick-leaderboard></quick-leaderboard>

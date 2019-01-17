@@ -13,9 +13,7 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
     ctrl.userInfo = {};
     ctrl.allBadges = [];
     ctrl.allTask = [];
-    $BadgesService.getBadgesItems().then(function(res){
-        ctrl.allBadges = res;
-    });
+    
 
     var urlTaskId = getParameterByName('task');
     if(urlTaskId) {
@@ -177,12 +175,17 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
     }
 
     function updateData(){
-        var reqData = {
+		try{
+        var requestData = {
             taskLogItems: $BadgesService.getTaskLogItems(),
-            userProfile: $BadgesService.getUserProfile()
+            userProfile: $BadgesService.getUserProfile(),
+			allBadges: $BadgesService.getBadgesItems()
         };
-        $q.all(reqData).then(function(res){
+		//alert('work');
+        $q.all(requestData).then(function(res){
+			//alert('work');
             ctrl.allTask = res.taskLogItems;
+			ctrl.allBadges = res.allBadges;
             var data = res.userProfile;
             angular.forEach(data.UserProfileProperties, function(prop, key){
                 if(prop.Key == "PictureURL"){
@@ -208,6 +211,10 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
                 }
             });
         });
+		}
+		catch(e){
+			alert(e);
+		};
         // $BadgesService.getTaskLogItems().then(function(res){
         //     ctrl.allTask = res;
         //     $scope.$apply();
