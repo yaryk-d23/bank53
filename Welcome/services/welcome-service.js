@@ -3,6 +3,7 @@ angular.module('WelcomeApp')
         return {
             getUserProfile: getUserProfile,
             getUserLogItem: getUserLogItem,
+            createUserLogItem: createUserLogItem,
             getBadgesItems: getBadgesItems,
             createTaskItem: createOrUpdateTaskItem,
             updateTaskItem: createOrUpdateTaskItem,
@@ -24,6 +25,22 @@ angular.module('WelcomeApp')
                 +'$select=*,User/Title,User/Id,User/EMail,User/UserName&$expand=User&$filter=User/UserName eq \'' + userName +'\'')
                 .then(function(res){
                     return res.data.value;
+                });
+        }
+
+        function createUserLogItem(data){
+            return $http({
+                method: "POST",
+                url: _spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'UsersLog\')/items?$select=*',
+                data: data,
+                headers: {
+                    "Content-Type" : "application/json;odata=verbose",
+                    "Accept": "application/json;odata=verbose",
+                    "X-RequestDigest": $("#__REQUESTDIGEST").val() 
+                 }
+                }).then(function(res){
+                    console.log(res);
+                    return res.data.d;
                 });
         }
 

@@ -12,19 +12,20 @@
             </b>
         </div>
         <div class="item-container">
-            <div class="quick-leaderboard-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index" ng-if="$index<3">
+            <div class="quick-leaderboard-item  text-center" ng-repeat="user in ctrl.leaderboardByRole track by $index">
                 <div class="user-badge">
-                    <img class="img-circle" ng-src="{{badge.Icon.Url}}" />
+                    <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{user.User.EMail}}" />
                 </div>
                 <div class="user-picture">
-                    <div>
-                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" />
-                        <span>Alex Pashkevych</span>
-                    </div>
-                    <div>{{badge.Title}}</div>
+                    <!-- <div>
+                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{user.User.EMail}}" />
+                        <span>{{user.User.Title}}</span>
+                    </div> -->
+                    <div>{{user.User.Title}}</div>
+                    <div>{{user.Role}}</div>
                 </div>
                 <div class="user-xp">
-                    {{badge.XP}} XP
+                    {{user.XP}} XP
                 </div>
             </div>
         </div>
@@ -35,19 +36,18 @@
             </b>
         </div>
         <div class="item-container">
-            <div class="quick-leaderboard-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index" ng-if="$index>3">
+            <div class="quick-leaderboard-item  text-center" ng-repeat="dept in ctrl.userLogItemsByDept | orderBy: '-xp' track by $index" ng-if="$index<3">
                 <div class="user-badge">
-                    <img class="img-circle" ng-src="{{badge.Icon.Url}}" />
+                    <!-- <img class="img-circle" ng-src="{{badge.Icon.Url}}" /> -->
                 </div>
                 <div class="user-picture">
                     <div>
-                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" />
-                        <span>Alex Pashkevych</span>
+                        <!-- <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" /> -->
+                        <span>{{dept.title}}</span>
                     </div>
-                    <div>{{badge.Title}}</div>
                 </div>
                 <div class="user-xp">
-                    {{badge.XP}} XP
+                    {{dept.xp}} XP
                 </div>
             </div>
         </div>

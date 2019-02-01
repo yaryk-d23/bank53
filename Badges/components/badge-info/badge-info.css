@@ -101,3 +101,10 @@
     from {top: 0; opacity: 1;} 
     to {top: 40px; opacity: 0;}
   }
+
+  @media only screen and (max-width: 1199px) {
+    .badges-info .badges-item{
+        flex: 0 100%;
+        margin-bottom: 20px;
+    }
+}

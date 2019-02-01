@@ -34,6 +34,21 @@ function welcomeCtrl($WelcomeService, $sce, $q){
                 ctrl.userInfo.xp = user.XP || 0;
                 ctrl.userInfo.userItemId = user.Id;
             }
+            else {
+                var newItem = { 
+                    Title : ctrl.userInfo.fullName,
+                    UserId: _spPageContextInfo.userId,
+                    Credits: 100,
+                    XP: 0,
+                    __metadata:  {type: 'SP.Data.UsersLogListItem' }
+                };
+                $WelcomeService.createUserLogItem(newItem).then(function(item){
+                    var user = item;
+                    ctrl.userInfo.credits = user.Credits || 0;
+                    ctrl.userInfo.xp = user.XP || 0;
+                    ctrl.userInfo.userItemId = user.Id;
+                });
+            }
         });
     });
 }

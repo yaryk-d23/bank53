@@ -5,7 +5,8 @@ angular.module('DashboardApp')
             getUserLogItem: getUserLogItem,
             getBadgesItems: getBadgesItems,
             getTaskItems: getTaskItems,
-            getTaskListItems: getTaskListItems
+            getTaskListItems: getTaskListItems,
+            getUserLogItems: getUserLogItems
         };
 
         function getUserProfile(){
@@ -18,6 +19,15 @@ angular.module('DashboardApp')
         function getUserLogItem(userName){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'UsersLog\')/items?'
                 +'$select=*,User/Title,User/Id,User/EMail,User/UserName&$expand=User&$filter=User/UserName eq \'' + userName +'\'')
+                .then(function(res){
+                    return res.data.value;
+                });
+        }
+
+        function getUserLogItems(filterValue){
+            var filter = filterValue ? '&$filter='+filterValue : '';
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'UsersLog\')/items?'
+                +'$select=*,User/Title,User/Id,User/EMail,User/UserName&$expand=User&$orderby=XP desc&$top=3'+filter)
                 .then(function(res){
                     return res.data.value;
                 });
