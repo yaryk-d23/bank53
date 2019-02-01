@@ -60,3 +60,9 @@
       transform: rotateY(-360deg);
     }
   }
+  
+@media only screen and (max-width: 1199px){
+	.recent-badges .recent-badges-container {
+	    text-align: center;
+	}
+}

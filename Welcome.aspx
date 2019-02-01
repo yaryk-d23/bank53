@@ -25,7 +25,7 @@
 
     <!--JS Links here-->
     
-	<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+	<script type="text/javascript" src="//thebank.info53.com///ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
 	<script src="/_layouts/1033/init.js"></script>
     <script src="/_layouts/1033/core.js"></script>
     <script src="/_layouts/15/SP.Core.js"></script>
@@ -66,15 +66,21 @@
 
 <div class="app-container b" ng-app="WelcomeApp" ng-controller="AppCtrl" id="welcome">
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Welcome.aspx">Home</a></li>
-                    <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Dashboard.aspx">My Dashboard</a></li>
-                    <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Badges.aspx">Trainings</a></li>
-                </ul>
-            </div>
-        </div>
+		<span 
+			class="glyphicon glyphicon-align-justify navbar-toggle" 
+			style="padding: 13px 10px;font-size: 20px;" 
+			data-toggle="collapse" 
+			data-target="#navbarSupportedContent" 
+			aria-controls="navbarSupportedContent" 
+			aria-expanded="false">
+		</span>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Welcome.aspx">Home</a></li>
+				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Dashboard.aspx">My Dashboard</a></li>
+				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Badges.aspx">Trainings</a></li>
+			</ul>
+		</div>
     </nav>
     <div class="">
         <div class="">
