@@ -38,6 +38,7 @@ function leaderboardTableCtrl($LeaderboardService, $sce, $q){
         $LeaderboardService.getUserLogItems('User/UserName eq \'' + ctrl.userInfo.userName +'\'').then(function(data){
             if(data.length) {
                 var user = data[0];
+                ctrl.userInfo.userId = user.User.Id;
                 ctrl.userInfo.credits = user.Credits || 0;
                 ctrl.userInfo.xp = user.XP || 0;
                 ctrl.userInfo.userItemId = user.Id;
@@ -63,7 +64,6 @@ function leaderboardTableCtrl($LeaderboardService, $sce, $q){
         // else if(ctrl.groupByValue == 'Region'){
 
         // }
-        console.log(filteredItems);
         return filteredItems;
     };
 
@@ -84,6 +84,10 @@ function leaderboardTableCtrl($LeaderboardService, $sce, $q){
     }
     ctrl.loadData = function() {
 
-        console.log(ctrl.groupByValue);
+    };
+
+    ctrl.setHideStyle = {
+            'text-shadow': '0px 0px 10px #000',
+            'color': 'transparent'
     };
 }

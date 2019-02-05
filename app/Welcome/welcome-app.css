@@ -1,8 +1,0 @@
-#welcome {
-    margin: 0 20px;
-}
-@media (min-width: 768px){
-	.navbar-toggle {
-		display: none;
-	}
-}

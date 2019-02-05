@@ -82,7 +82,7 @@
 				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Welcome.aspx">Home</a></li>
 				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Dashboard.aspx">My Dashboard</a></li>
 				<li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Badges.aspx">Trainings</a></li>
-				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Leaderboard.aspx">Leaderboard</a></li>
+				<!-- <li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Leaderboard.aspx">Leaderboard</a></li> -->
 			</ul>
 		</div>
     </nav>

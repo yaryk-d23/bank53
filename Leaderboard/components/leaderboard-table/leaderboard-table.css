@@ -1,3 +1,43 @@
-.leaderboard-table {
+.leaderboard-table .img-circle {
+    width: 16px;
+    border-radius: 50%;
+}
+.leaderboard-table .table>tbody>tr>td{
+    vertical-align: middle;
+}
+.user-container,
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+.user-container>img, 
+.user-container>div,
+.controls>div {
+    display: flex;
+}
+.user-container>img {
+    flex: 0 25%;
+    max-width: 36px;
+}
+.user-container>div {
+    flex: 0 75%;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
 
+.controls>div{
+    flex: 0 50%;
+}
+.controls .current-user {
+    justify-content: flex-end;
+}
+.hide-text {
+    text-shadow: 0px 0px 10px #000!important;
+    color: transparent!important;
+    user-select: none;
+}
+.hide-image {
+    filter: blur(3px);
 }
