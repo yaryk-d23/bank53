@@ -1,0 +1,43 @@
+
+.user-info {
+    min-height: 375px;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #c8c8c8;
+    border-top-right-radius: 40px;
+    box-shadow: 2px 2px 3px 0px;
+}
+.user-info .credits-info {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.user-info .ful-name-info {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.user-info .position-info, 
+.user-info .department-info {
+    font-size: 12px;
+}
+.user-info .badges-title-info {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.user-info .badges-item {
+    display: inline-block;
+    margin: 5px 10px;
+}
+.user-info .badges-item>img{
+    width: 72px;
+}
+.user-info .user-icon {
+	width: 100px;
+}
+@media only screen and (max-width: 1199px) {
+    .user-info{
+        margin-bottom: 20px;
+    }
+}
