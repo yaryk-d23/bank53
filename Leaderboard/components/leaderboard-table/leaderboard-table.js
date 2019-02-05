@@ -10,8 +10,8 @@ angular.module('LeaderboardApp')
 
 function leaderboardTableCtrl($LeaderboardService, $sce, $q){
     var ctrl = this;
-    ctrl.groupBy = ['Role', 'Department', 'Region'];
-    ctrl.groupByValue = ctrl.groupBy[1];
+    ctrl.groupBy = ['Role', 'Department'];
+    ctrl.groupByValue = ctrl.groupBy[0];
     ctrl.userLogItems = [];
     ctrl.userLogItemsByDept = [];
     ctrl.userInfo = {};
