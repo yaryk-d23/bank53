@@ -1,0 +1,45 @@
+<script>
+    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/tsprojecttracker";
+    var scripts = [
+		"modules/jquery-3.3.1.min.js",
+        "modules/angular.min.js",
+        "modules/angular/angular-sanitize.min.js",
+        // "modules/angular/textAngular.min.js",
+        "modules/bootstrap/js/bootstrap.min.js",
+        "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
+        "modules/angular/angular-validation.min.js",
+        "modules/angular/angular-validation-rule.min.js",
+        // "modules/angular/angular-toggle-switch.min.js",
+
+        "jump/app.js",
+        "jump/services/api-service.js",
+        "jump/components/tiles/tiles-component.js",
+        "jump/components/form/form-component.js",
+    ];
+    var styles = [
+        "modules/bootstrap/css/bootstrap.css",
+        "jump/style.css",
+        "jump/components/tiles/tiles-style.css",
+        "jump/components/form/form-style.css",
+    ];
+    for(var i=0;i<scripts.length;i++){
+        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+    }
+    for(var i=0;i<styles.length;i++){
+        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+    }
+</script>
+
+<link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-rangy.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-sanitize.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js'></script>
+
+<div class="app-container b" ng-app="App" ng-controller="AppCtrl as ctrl">
+    <div class="row">
+        <div class="container">
+            <tiles></tiles>
+            <track-form></track-form>
+        </div>
+    </div>
+</div>

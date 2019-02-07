@@ -1,0 +1,21 @@
+.tiles {
+    display: flex;
+    flex-wrap: wrap;
+}
+.tiles .tile {
+    display: flex;
+    flex: 0 25%;
+    flex-direction: column;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+.tiles .tile-image {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+.tiles .tile-image:after{
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}

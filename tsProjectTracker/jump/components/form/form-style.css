@@ -1,0 +1,31 @@
+.track-form .modal-header .close,
+.ta-toolbar .btn{
+    min-width: 0px;
+}
+.ta-root .ta-editor {
+    min-height: 100px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    position: relative;
+    padding: 0;
+}
+.ta-scroll-window > .ta-bind {
+    height: auto;
+    min-height: 100px;
+    padding: 6px 12px;
+}
+.b .dropdown-menu{
+    display: block;
+}
+.b .modal-dialog {
+    max-width: 900px;
+    width: auto;
+}
+@media screen and (max-width: 1366px) , screen and (max-height: 768px) {
+    .b .modal-body {
+        max-height: 400px;
+        overflow: auto;
+    }
+}

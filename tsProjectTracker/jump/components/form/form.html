@@ -1,0 +1,127 @@
+<div class="track-form">
+    <div class="modal fade" tabindex="-1" role="dialog" id="new-track-form">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">TS Project Tracker</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="Title">Title</label>
+                                <input type="text" class="form-control" id="Title" ng-model="ctrl.item.Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="Locus">Locus</label>
+                                <input type="text" class="form-control" id="Locus" ng-model="ctrl.item.OData__x006d_i95">
+                            </div>
+                            <div class="form-group">
+                                <label for="Format">Format</label>
+                                <input type="text" class="form-control" id="Format" ng-model="ctrl.item.q97q">
+                            </div>
+                            <div class="form-group">
+                                <label for="zagt">L&D Contact</label>
+                                <input type="text" class="form-control"
+                                    autocomplete="off"
+                                    id="Contact"
+                                    name="Contact"
+                                    ng-model="ctrl.item.zagt"
+                                    maxlength="255"
+                                    validator="requiredUser"
+                                    valid-method="watch"
+                                    use-view-value="false"
+                
+                                    uib-typeahead="user as user.Title for user in ctrl.getUser($viewValue)"
+                                    typeahead-min-length="2"
+                                    typeahead-loading="loadingLocations.Contact"
+                                    typeahead-no-results="noResults.Contact"
+                                    ng-class="{loading: loadingLocations.Contact}"
+                                    message-id="errorMessage-Contact"
+                                >
+                                <div ng-show="noResults.Contact && Contact">
+                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                </div>
+                                <div id="errorMessage-Contact"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="_x0061_q79">_x0061_q79</label>
+                                <input type="text" class="form-control" id="_x0061_q79" ng-model="ctrl.item.OData__x0061_q79">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="cz8i">cz8i</label>
+                                <input type="text" class="form-control" id="cz8i" ng-model="ctrl.item.cz8i">
+                            </div>
+                            <div class="form-group">
+                                <label for="tm1i">tm1i</label>
+                                <input type="number" class="form-control" id="tm1i" ng-model="ctrl.item.tm1i">
+                            </div>
+                            <div class="form-group">
+                                <label for="Priority">Priority</label>
+                                <select 
+                                    class="form-control" 
+                                    id="Priority" 
+                                    ng-model="ctrl.item.Priority" 
+                                    ng-options="opt as opt for opt in ctrl.priorityChoice track by opt"
+                                >
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Initiative">Initiative</label>
+                                <select 
+                                    class="form-control" 
+                                    id="Initiative" 
+                                    ng-model="ctrl.item.Initiative" 
+                                    ng-options="opt as opt for opt in ctrl.initiativeChoice track by opt"
+                                >
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Principal">Principal</label>
+                                <input type="text" class="form-control"
+                                    autocomplete="off"
+                                    id="Principal"
+                                    name="Principal"
+                                    ng-model="ctrl.item.Principal"
+                                    maxlength="255"
+                                    validator="requiredUser"
+                                    valid-method="watch"
+                                    use-view-value="false"
+                
+                                    uib-typeahead="user as user.Title for user in ctrl.getUser($viewValue)"
+                                    typeahead-min-length="2"
+                                    typeahead-loading="loadingLocations.Principal"
+                                    typeahead-no-results="noResults.Principal"
+                                    ng-class="{loading: loadingLocations.Principal}"
+                                    message-id="errorMessage-Principal"
+                                >
+                                <div ng-show="noResults.Principal && Principal">
+                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                </div>
+                                <div id="errorMessage-Principal"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label for="Log">Log</label>
+                                <text-angular ng-model="ctrl.item.Log"></text-angular>
+                            </div>
+                            <div class="form-group">
+                                <label for="pb">pb</label>
+                                <text-angular ng-model="ctrl.item.pb"></text-angular>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.saveData()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
