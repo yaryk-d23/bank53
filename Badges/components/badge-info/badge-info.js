@@ -52,6 +52,13 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
         return dataURL;
     }
     ctrl.generatePdf = function($event, task) {
+		if(task.LinkedSource){
+			window.open(task.LinkedSource.Url, '_blank');
+			return;
+		}
+		else {
+			
+		
         // var margins = {
         //     top: 0,
         //     bottom: 0,
@@ -126,6 +133,8 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
          
     }
 
+    };
+
     ctrl.createTaskItem = function(task){
         
         var item = {
@@ -145,8 +154,7 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
                 ctrl.showToast(task);
             }); 
         });
-    };
-
+	}
     ctrl.getBadgeXP = function(tasks){
         var xp = 0;
         if(tasks && tasks.length)  {
