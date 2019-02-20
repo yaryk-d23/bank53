@@ -1,6 +1,12 @@
 #welcome {
     margin: 0 20px;
 }
+#contentBox{
+	margin-left: 15px;
+}
+#sideNavBox{
+	display: none;
+}
 @media (min-width: 768px){
 	.navbar-toggle {
 		display: none;

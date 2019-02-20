@@ -8,6 +8,56 @@
                     <span class="position-info">{{ctrl.userInfo.position}}</span>
                     <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>
                     <span class="department-info">{{ctrl.userInfo.department}}</span>
+                </span>
+            </div>
+        </div>
+        <div class="row" ng-if="false">
+            <div class="tasks-map">
+                <div class="tasks-map-row">
+                    <div class="map-item first-map-item"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item end-bottom"></div>
+                </div>
+                <div class="tasks-map-row reverse">
+                    <div class="map-item end-top"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item start-bottom"></div>
+                </div>
+                <div class="tasks-map-row">
+                    <div class="map-item start-top"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item"></div>
+                    <div class="map-item last-map-item"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="tasks-map">
+                <div ng-repeat="row in ctrl.groupedTasks track by $index"
+                    ng-init="parentIdx = $index"
+                    class="tasks-map-row" ng-class="{'reverse': $index%2!=0}">
+                    <div class="map-item text-center" 
+                        ng-repeat="item in row track by $index"
+                        ng-style="{'background-color': ctrl.colorArr[$index]}"
+                        ng-class="{
+                            'first-map-item': (parentIdx==0 && $index==0),
+                            'end-bottom': (parentIdx%2==0 && $index==4),
+                            'end-top': (parentIdx%2!=0 && $index==0),
+                            'start-bottom': ((parentIdx%2!=0 && $index==4)),
+                            'start-top': (parentIdx!=0 && parentIdx%2==0 && $index==0),
+                            'last-map-item': (parentIdx==ctrl.groupedTasks.length-1 && $index==row.length-1)
+                        }"
+                    >
+                        <span class="glyphicon glyphicon-star" 
+                            ng-if="ctrl.checkTask(item.Title, item.BadgeId)">
+                        </span>
+                        <div class="snackbar">{{item.Badge.Title}}: {{item.Title}}</div>
+                    </div>
                 </div>
             </div>
         </div>
