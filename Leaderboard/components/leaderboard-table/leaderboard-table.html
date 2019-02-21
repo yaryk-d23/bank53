@@ -75,4 +75,18 @@
             </tr>
         </table>
     </div>
+    <div class="row" ng-if="ctrl.groupByValue == 'Region'">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Region</th>
+                <th>XP</th>
+            </tr>
+            <tr ng-repeat="(i, region) in ctrl.filterData() track by $index">
+                <td>{{$index + 1}}</td>
+                <td>{{i}}</td>
+                <td>{{ctrl.getSumOfXP(region)}}</td>
+            </tr>
+        </table>
+    </div>
 </div>

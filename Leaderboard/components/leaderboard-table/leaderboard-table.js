@@ -10,14 +10,16 @@ angular.module('LeaderboardApp')
 
 function leaderboardTableCtrl($LeaderboardService, $sce, $q){
     var ctrl = this;
-    ctrl.groupBy = ['Role', 'Department'];
+    ctrl.groupBy = ['Role', 'Department', 'Region'];
     ctrl.groupByValue = ctrl.groupBy[0];
     ctrl.userLogItems = [];
     ctrl.userLogItemsByDept = [];
+    ctrl.userLogItemsByRegion = [];
     ctrl.userInfo = {};
     $LeaderboardService.getUserLogItems().then(function(data){
         ctrl.userLogItems = data;
         ctrl.userLogItemsByDept = groupBy(ctrl.userLogItems, 'Department');
+        ctrl.userLogItemsByRegion = groupBy(ctrl.userLogItems, 'Region');
     });
     $LeaderboardService.getUserProfile().then(function(data){
         angular.forEach(data.UserProfileProperties, function(prop, key){
@@ -61,9 +63,9 @@ function leaderboardTableCtrl($LeaderboardService, $sce, $q){
         else if(ctrl.groupByValue == 'Department'){
             filteredItems = ctrl.userLogItemsByDept;
         }
-        // else if(ctrl.groupByValue == 'Region'){
-
-        // }
+        else if(ctrl.groupByValue == 'Region'){
+            filteredItems = ctrl.userLogItemsByRegion;
+        }
         return filteredItems;
     };
 

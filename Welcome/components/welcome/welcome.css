@@ -148,4 +148,20 @@
     font-size: 17px;
     display: none;
     white-space: nowrap;
-  }
+}
+.recent-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.recent-container>div{
+    display: flex;
+    flex: 0 50%;
+    align-items: center;
+    justify-content: center;
+}

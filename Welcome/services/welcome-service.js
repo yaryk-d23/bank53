@@ -10,7 +10,8 @@ angular.module('WelcomeApp')
             updateUserLogItem: updateUserLogItem,
             getTaskLogItems: getTaskLogItems,
             getTaskItems: getTaskItems,
-            uploadFile: uploadFile
+            uploadFile: uploadFile,
+            getBadgeIcon: getBadgeIcon
         };
 
         function getUserProfile(){
@@ -39,7 +40,6 @@ angular.module('WelcomeApp')
                     "X-RequestDigest": $("#__REQUESTDIGEST").val() 
                  }
                 }).then(function(res){
-                    console.log(res);
                     return res.data.d;
                 });
         }
@@ -79,6 +79,13 @@ angular.module('WelcomeApp')
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Tasks\')/items?$select=*,Badge/Id,Badge/Title&$expand=Badge&'+filter)
                 .then(function(res){
                     return res.data.value;
+                });
+        }
+
+        function getBadgeIcon(badgeId){
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items('+badgeId+')')
+                .then(function(res){
+                    return res.data.Icon;
                 });
         }
 

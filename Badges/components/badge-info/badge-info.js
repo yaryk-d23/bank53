@@ -5,10 +5,10 @@ angular.module('BadgesApp')
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$BadgesService', '$sce', '$q', badgeInfoCtrl]
+        controller: ['$BadgesService', '$GeneratePDF', '$sce', '$q', badgeInfoCtrl]
     });
 
-function badgeInfoCtrl($BadgesService, $sce, $q){
+function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q){
     var ctrl = this;
     ctrl.userInfo = {};
     ctrl.allBadges = [];
@@ -32,106 +32,14 @@ function badgeInfoCtrl($BadgesService, $sce, $q){
     }
 
     updateData();
-    function getBase64Image(img) {
-        // Create an empty canvas element
-        var canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-    
-        // Copy the image contents to the canvas
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-    
-        // Get the data-URL formatted image
-        // Firefox supports PNG and JPEG. You could check img.src to
-        // guess the original format, but be aware the using "image/jpg"
-        // will re-encode the image.
-        var dataURL = canvas.toDataURL("image/png");
-    
-        //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-        return dataURL;
-    }
     ctrl.generatePdf = function($event, task) {
 		if(task.LinkedSource){
 			window.open(task.LinkedSource.Url, '_blank');
 			return;
 		}
 		else {
-			
-		
-        // var margins = {
-        //     top: 0,
-        //     bottom: 0,
-        //     left: 0,
-        //     width: 190
-        // };
-        var logo = angular.element($event.currentTarget.parentElement.parentElement).find('img')[0];
-        var doc = new jsPDF('p', 'pt', 'a4');
-        doc.setFontStyle('normal');
-
-        //var logoData = getBase64Image(logo);
-        var img = new Image();
-		img.src = getBase64Image(logo);
-
-        doc.addImage(img, 'PNG', 250, 20);
-        //doc.text(10, 40, task.Description || '');
-        var drawHeaderRow= function (row, data) {
-            //data.cursor.y += 20;
-            doc.setTextColor(68, 68, 68);
-            doc.setFillColor(255, 255, 255);
+            $GeneratePDF.generatePDF($event, task);
         }
-        var table = [];
-        table.push({title:task.Description, dataKey: "title"});
-        var customHeader = {
-            cellPadding: 0,
-            //rowHeight: 30,
-            lineColor: [255, 255, 255],
-            halign: 'left',
-            valign: 'middle',
-            overflow: 'linebreak',
-            fontSize: 12,
-            fontStyle: 'normal',
-            fillColor:[255, 255, 255],
-            textColor: [0, 0, 0]
-         }
-		var style = getStyle(60,true,drawHeaderRow, undefined, undefined, customHeader);
-        doc.autoTable(table ,[] ,style);
-        // doc.fromHTML(task.Description, 10, 40, { 
-        //     'width': margins.width, 
-        //     'elementHandlers': null
-        // },
-
-        // function (dispose) {
-        //     // dispose: object with X, Y of the last line add to the PDF 
-        //     //          this allow the insertion of new lines after html
-        //     //pdf.save('Test.pdf');
-        // }, margins);
-        doc.textWithLink(task.Title, 300, 300, {url: location.origin + location.pathname + '?task='+task.Id});
-        // doc.save(task.Title.split(' ').join('_')+'.pdf');
-        // var blob = doc.output('blob'); 
-        var data = doc.output();   
-        var buffer = new ArrayBuffer(data.length);
-        var array = new Uint8Array(buffer);
-
-        for (var i = 0; i < data.length; i++) {
-            array[i] = data.charCodeAt(i);
-        }
-        var blob = new Blob(
-            [array],
-            {type: 'application/pdf', encoding: 'raw'}
-        );
-        
-        var reqData = {
-            fileName: task.Title.split(' ').join('_')+'_'+task.Id+'_'+task.Badge.Id+'_'+_spPageContextInfo.userId+'.pdf', 
-            arrayBuffer: blob
-        };
-        $BadgesService.uploadFile(reqData).then(function(res){
-            
-            var win = window.open(location.origin + res.ServerRelativeUrl, '_blank');
-            win.focus();
-        });
-         
-    }
 
     };
 

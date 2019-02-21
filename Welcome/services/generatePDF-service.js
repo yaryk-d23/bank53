@@ -1,5 +1,5 @@
-angular.module('BadgesApp')
-    .factory('$GeneratePDF', function ($http, $q, $BadgesService) {
+angular.module('WelcomeApp')
+    .factory('$GeneratePDF', function ($http, $q) {
         return {
             generatePDF: generatePDF
         };
@@ -25,7 +25,7 @@ angular.module('BadgesApp')
         }
         
         function generatePDF($event, task, logo) {
-            var logo = logo || angular.element($event.currentTarget.parentElement.parentElement).find('img')[0];
+            var logo = logo ? logo : angular.element($event.currentTarget.parentElement.parentElement).find('img')[0];
             var doc = new jsPDF('p', 'pt', 'a4');
             doc.setFontStyle('normal');
 
@@ -52,7 +52,7 @@ angular.module('BadgesApp')
             }
             var style = getStyle(60,true,drawHeaderRow, undefined, undefined, customHeader);
             doc.autoTable(table ,[] ,style);
-            doc.textWithLink(task.Title, 300, 300, {url: location.origin + location.pathname + '?task='+task.Id});
+            doc.textWithLink(task.Title, 300, 300, {url:  _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Badges.aspx?task='+task.Id});
             var data = doc.output();   
             var buffer = new ArrayBuffer(data.length);
             var array = new Uint8Array(buffer);
@@ -69,7 +69,7 @@ angular.module('BadgesApp')
                 fileName: task.Title.split(' ').join('_')+'_'+task.Id+'_'+task.Badge.Id+'_'+_spPageContextInfo.userId+'.pdf', 
                 arrayBuffer: blob
             };
-            $BadgesService.uploadFile(reqData).then(function(res){
+            uploadFile(reqData).then(function(res){
                 
                 var win = window.open(location.origin + res.ServerRelativeUrl, '_blank');
                 win.focus();
@@ -137,5 +137,28 @@ angular.module('BadgesApp')
             }
             return result;
         
-        };
+        }
+
+        function uploadFile(data) {
+            var config = {
+                headers: {
+                    "Accept": "application/json; odata=verbose",
+                    "X-RequestDigest": $('#__REQUESTDIGEST').val(),  
+                    "Content-Type": undefined
+                },
+                responseType: "arraybuffer"
+            };
+            var url = _spPageContextInfo.webAbsoluteUrl + 
+                "/_api/web/getfolderbyserverrelativeurl('"+_spPageContextInfo.webServerRelativeUrl+"/TasksLogFiles')/Files/add(overwrite=true, url='"+data.fileName+"')";
+            return $http({
+                    method: "POST",
+                    url: url, 
+                    processData: false,
+                    data: data.arrayBuffer, 
+                    headers: config.headers
+                }).then(function(res){
+                    return res.data.d;
+                });
+                
+        }
     });
