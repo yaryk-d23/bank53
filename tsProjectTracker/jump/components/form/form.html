@@ -53,6 +53,8 @@
                                 >
                                     <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
                                     <ui-select-choices 
+                                        refresh="ctrl.getUsers($select)"
+                                        refresh-delay="0"
                                         repeat="user as user in ctrl.allUsers | propsFilter: {Title: $select.search, Email: $select.search}">
                                         <div ng-bind-html="user.Title | highlight: $select.search"></div>
                                         <small>
