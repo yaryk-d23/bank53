@@ -44,29 +44,35 @@
 
         
 	<script>
-    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app";
-    var scripts = [
-        "modules/jquery-3.3.1.min.js",
-        "modules/angular.min.js",
-        "modules/bootstrap/js/bootstrap.min.js",
-		"modules/jsPDF/jsPDF.js",
-        "modules/jsPDF/jspdf.plugin.autotable.min.js",
-        "Badges/badges-app.js",
-        "Badges/services/badges-service.js",
-        "Badges/components/badge-info/badge-info.js",
-    ];
-    var styles = [
-        "modules/bootstrap/css/bootstrap.css",
-		"Badges/badges-app.css",
-        "Badges/components/badge-info/badge-info.css",
-    ];
-    for(var i=0;i<scripts.length;i++){
-        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
-    }
-    for(var i=0;i<styles.length;i++){
-        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
-    }
-</script>
+        var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app";
+        var scripts = [
+            "modules/jquery-3.3.1.min.js",
+            "modules/angular.min.js",
+            "modules/bootstrap/js/bootstrap.min.js",
+            "modules/jsPDF/jsPDF.js",
+            "modules/jsPDF/jspdf.plugin.autotable.min.js",
+            // "modules/jsPDF/zlib.js",
+            // "modules/jsPDF/png.js",
+            // "modules/jsPDF/support_png.js",
+            // "modules/jsPDF/addimage.js",
+            // "modules/jsPDF/split_text_to_size.js",
+    
+            "Badges/badges-app.js",
+            "Badges/services/badges-service.js",
+            "Badges/services/generatePDF-service.js",
+            "Badges/components/badge-info/badge-info.js",
+        ];
+        var styles = [
+            "modules/bootstrap/css/bootstrap.css",
+            "Badges/components/badge-info/badge-info.css",
+        ];
+        for(var i=0;i<scripts.length;i++){
+            document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+        }
+        for(var i=0;i<styles.length;i++){
+            document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+        }
+    </script>
 <div class="app-container b" ng-app="BadgesApp" ng-controller="AppCtrl" id="badges">
     <nav class="navbar navbar-default">
 		<span 
