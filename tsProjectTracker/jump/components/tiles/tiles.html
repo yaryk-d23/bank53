@@ -1,11 +1,13 @@
 <div class="tiles">
     <div ng-repeat="tile in ctrl.tiles track by $index" class="tile text-center">
-        <div class="tile-image" ng-style="{'background-image': 'url(' + tile.Image.Url + ')'}"></div>
-        <div class="tile-title">
-            <a ng-href="{{tile.Link.Url}}" ng-click="tile.Title == 'New Track' && ctrl.openNewTrackForm()">
-                {{tile.Title}}<br/>
-                {{tile.Description}}
-            </a>
-        </div>
+		<div class="tile-container">
+			<div class="tile-image" ng-style="{'background-image': 'url(' + tile.Image.Url + ')'}"></div>
+			<div class="tile-title">
+				<a ng-href="{{tile.Link.Url}}" ng-click="tile.Title == 'New Track' && ctrl.openNewTrackForm()">
+					{{tile.Title}}<br/>
+					{{tile.Description}}
+				</a>
+			</div>
+		</div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 .tiles {
     display: flex;
     flex-wrap: wrap;
+	width: 630px;
 }
 .tiles .tile {
     display: flex;
@@ -8,6 +9,10 @@
     flex-direction: column;
     padding: 10px 20px;
     box-sizing: border-box;
+}
+.tiles .tile-title {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 .tiles .tile-image {
     background-size: cover;
@@ -18,4 +23,9 @@
     content: "";
     display: block;
     padding-bottom: 100%;
+}
+.tiles .tile-container{
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+
 }

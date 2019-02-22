@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="zagt">L&D Contact</label>
-                                <!-- <input type="text" class="form-control"
+                                <input type="text" class="form-control"
                                     autocomplete="off"
                                     id="Contact"
                                     name="Contact"
@@ -43,38 +43,20 @@
                                 <div ng-show="noResults.Contact && Contact">
                                     <i class="glyphicon glyphicon-remove"></i> No Results Found
                                 </div>
-                                <div id="errorMessage-Contact"></div> -->
-                                <ui-select 
-                                    multiple 
-                                    ng-model="ctrl.item.zagt" 
-                                    theme="bootstrap" 
-                                    close-on-select="false" 
-                                    style="width: 800px;" 
-                                    title="Choose a person"
-                                >
-                                    <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
-                                    <ui-select-choices 
-                                        minimum-input-length="3"
-                                        repeat="user.Title as user in [{},{}]">
-                                        <div ng-bind-html="user.Title | highlight: $select.search"></div>
-                                        <small>
-                                            email: {{user.Email}}
-                                        </small>
-                                    </ui-select-choices>
-                                </ui-select>
+                                <div id="errorMessage-Contact"></div>
                             </div>
                             <div class="form-group">
-                                <label for="_x0061_q79">_x0061_q79</label>
+                                <label for="_x0061_q79">Notes</label>
                                 <input type="text" class="form-control" id="_x0061_q79" ng-model="ctrl.item.OData__x0061_q79">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <div class="form-group">
-                                <label for="cz8i">cz8i</label>
+                                <label for="cz8i">Status</label>
                                 <input type="text" class="form-control" id="cz8i" ng-model="ctrl.item.cz8i">
                             </div>
                             <div class="form-group">
-                                <label for="tm1i">tm1i</label>
+                                <label for="tm1i">Estimated Progress</label>
                                 <input type="number" class="form-control" id="tm1i" ng-model="ctrl.item.tm1i">
                             </div>
                             <div class="form-group">
