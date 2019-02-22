@@ -16,7 +16,7 @@
 	<!-- Sharepoint Dependencies -->
 	<!--<script src="/_layouts/1033/init.js"></script>
     <script src="/_layouts/1033/core.js"></script>
-    <script src="//thebank.info53.com///ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
     <script src="/_layouts/SP.Core.js"></script>
     <script src="/_layouts/SP.Runtime.js"></script>
     <script src="/_layouts/SP.js"></script>
@@ -25,7 +25,7 @@
 
     <!--JS Links here-->
     
-	<script type="text/javascript" src="//thebank.info53.com///ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+	<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
 	<script src="/_layouts/1033/init.js"></script>
     <script src="/_layouts/1033/core.js"></script>
     <script src="/_layouts/15/SP.Core.js"></script>
@@ -39,29 +39,32 @@
 	<SharePoint:FormDigest runat="server"></SharePoint:FormDigest>
 	</form>
 
-        <script>
-    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app";
-    var scripts = [
-        "modules/jquery-3.3.1.min.js",
-        "modules/angular.min.js",
-        "modules/bootstrap/js/bootstrap.min.js",
-
-        "Welcome/welcome-app.js",
-        "Welcome/services/welcome-service.js",
-        "Welcome/components/welcome/welcome.js",
-    ];
-    var styles = [
-        "Welcome/welcome-app.css",
-        "modules/bootstrap/css/bootstrap.css",
-        "Welcome/components/welcome/welcome.css",
-    ];
-    for(var i=0;i<scripts.length;i++){
-        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
-    }
-    for(var i=0;i<styles.length;i++){
-        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
-    }
-</script>
+    <script>
+        var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app";
+        var scripts = [
+            "modules/jquery-3.3.1.min.js",
+            "modules/angular.min.js",
+            "modules/bootstrap/js/bootstrap.min.js",
+            "modules/jsPDF/jsPDF.js",
+            "modules/jsPDF/jspdf.plugin.autotable.min.js",
+    
+            "Welcome/welcome-app.js",
+            "Welcome/services/welcome-service.js",
+            "Welcome/services/generatePDF-service.js",
+            "Welcome/components/welcome/welcome.js",
+        ];
+        var styles = [
+            "Welcome/welcome-app.css",
+            "modules/bootstrap/css/bootstrap.css",
+            "Welcome/components/welcome/welcome.css",
+        ];
+        for(var i=0;i<scripts.length;i++){
+            document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+        }
+        for(var i=0;i<styles.length;i++){
+            document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+        }
+    </script>
 
 
 <div class="app-container b" ng-app="WelcomeApp" ng-controller="AppCtrl" id="welcome">
