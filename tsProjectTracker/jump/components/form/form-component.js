@@ -39,7 +39,7 @@
             });
     }])
     .component('trackForm', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/tsProjectTracker/jump/components/form/form.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/Custom/app/tsProjectTracker/jump/components/form/form.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
@@ -50,9 +50,7 @@
     function formCtrl($ApiService, $q){
         var ctrl = this;
         var listTitle = 'TSProjectTracker';
-        ctrl.item = {
-            'zagt': []
-        };
+        ctrl.item = {};
         ctrl.initiativeChoice = [];
         ctrl.priorityChoice = [];
         ctrl.allUsers = [];
