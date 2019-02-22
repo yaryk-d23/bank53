@@ -52,7 +52,11 @@
                             ng-repeat="item in row track by $index"
                             ng-click="ctrl.generatePdf($event, item);"
                             ng-style="{'background-color': ctrl.colorArr[$index]}"
+                            ng-init="isHover = false"
+                            ng-mouseenter="isHover = true"
+                            ng-mouseleave="isHover = false"
                             ng-class="{
+                                'not-completed': (!isHover && !ctrl.checkTask(item.Title, item.BadgeId)),
                                 'first-map-item': (parentIdx==0 && $index==0),
                                 'end-bottom': (parentIdx%2==0 && $index==4),
                                 'end-top': (parentIdx%2!=0 && $index==0),
@@ -61,9 +65,9 @@
                                 'last-map-item': (parentIdx==ctrl.groupedTasks.length-1 && $index==row.length-1)
                             }"
                         >
-                            <span class="glyphicon glyphicon-star" 
+                            <!-- <span class="glyphicon glyphicon-star" 
                                 ng-if="ctrl.checkTask(item.Title, item.BadgeId)">
-                            </span>
+                            </span> -->
                             <div class="snackbar">{{item.Badge.Title}}: {{item.Title}}</div>
                         </div>
                     </div>

@@ -39,6 +39,9 @@
     position: relative;
     cursor: pointer;
 }
+.not-completed {
+    background-color: #c3c3c3!important;
+}
 .map-item .glyphicon-star {
     background: -webkit-linear-gradient(top, #8f6B29, #FDE08D, #DF9F28);
     background: linear-gradient(top, #8f6B29, #FDE08D, #DF9F28);

@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="zagt">L&D Contact</label>
-                                <input type="text" class="form-control"
+                                <!-- <input type="text" class="form-control"
                                     autocomplete="off"
                                     id="Contact"
                                     name="Contact"
@@ -43,7 +43,25 @@
                                 <div ng-show="noResults.Contact && Contact">
                                     <i class="glyphicon glyphicon-remove"></i> No Results Found
                                 </div>
-                                <div id="errorMessage-Contact"></div>
+                                <div id="errorMessage-Contact"></div> -->
+                                <ui-select 
+                                    multiple 
+                                    ng-model="ctrl.item.zagt" 
+                                    theme="bootstrap" 
+                                    close-on-select="false" 
+                                    style="width: 800px;" 
+                                    title="Choose a person"
+                                >
+                                    <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
+                                    <ui-select-choices 
+                                        minimum-input-length="3"
+                                        repeat="user.Title as user in [{},{}]">
+                                        <div ng-bind-html="user.Title | highlight: $select.search"></div>
+                                        <small>
+                                            email: {{user.Email}}
+                                        </small>
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                             <div class="form-group">
                                 <label for="_x0061_q79">_x0061_q79</label>

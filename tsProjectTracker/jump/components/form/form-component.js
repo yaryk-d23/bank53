@@ -50,7 +50,9 @@
     function formCtrl($ApiService, $q){
         var ctrl = this;
         var listTitle = 'TSProjectTracker';
-        ctrl.item = {};
+        ctrl.item = {
+            'zagt': []
+        };
         ctrl.initiativeChoice = [];
         ctrl.priorityChoice = [];
         ctrl.getUser = $ApiService.getUser;
