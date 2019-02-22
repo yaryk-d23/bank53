@@ -55,7 +55,13 @@
         };
         ctrl.initiativeChoice = [];
         ctrl.priorityChoice = [];
-        ctrl.getUser = $ApiService.getUser;
+        ctrl.allUsers = [];
+        // ctrl.getUser = $ApiService.getUser;
+        $ApiService.getUser().then(function(res){
+            ctrl.allUsers = res;
+        });
+
+
 
         var request = {
             initiativeField: $ApiService.getListChoiceField(listTitle, 'Initiative'),
@@ -69,8 +75,20 @@
 
         ctrl.saveData = function(){
             var item = angular.copy(ctrl.item);
-            item['zagtId'] = item['zagt'].Id;
-            item['PrincipalId'] = item['Principal'].Id;
+            // item['zagtId'] = item['zagt'].Id;
+            item['zagtId'] = {
+                'results': []
+            };
+            item['PrincipalId'] = {
+                'results': []
+            };
+            angular.forEach(item['zagt'], function(val, key){
+                item['zagtId'].results.push(val.Id);
+            });
+            angular.forEach(item['Principal'], function(val, key){
+                item['PrincipalId'].results.push(val.Id);
+            });
+            // item['PrincipalId'] = item['Principal'].Id;
             delete item['zagt'];
             delete item['Principal'];
             $ApiService.saveData(listTitle, item).then(function(){

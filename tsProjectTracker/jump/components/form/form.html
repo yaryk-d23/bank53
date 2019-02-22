@@ -48,14 +48,12 @@
                                     multiple 
                                     ng-model="ctrl.item.zagt" 
                                     theme="bootstrap" 
-                                    close-on-select="false" 
-                                    style="width: 800px;" 
+                                    close-on-select="true" 
                                     title="Choose a person"
                                 >
                                     <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
                                     <ui-select-choices 
-                                        minimum-input-length="3"
-                                        repeat="user.Title as user in [{},{}]">
+                                        repeat="user as user in ctrl.allUsers | propsFilter: {Title: $select.search, Email: $select.search}">
                                         <div ng-bind-html="user.Title | highlight: $select.search"></div>
                                         <small>
                                             email: {{user.Email}}
@@ -99,7 +97,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Principal">Principal</label>
-                                <input type="text" class="form-control"
+                                <!-- <input type="text" class="form-control"
                                     autocomplete="off"
                                     id="Principal"
                                     name="Principal"
@@ -119,7 +117,23 @@
                                 <div ng-show="noResults.Principal && Principal">
                                     <i class="glyphicon glyphicon-remove"></i> No Results Found
                                 </div>
-                                <div id="errorMessage-Principal"></div>
+                                <div id="errorMessage-Principal"></div> -->
+                                <ui-select 
+                                    multiple 
+                                    ng-model="ctrl.item.Principal" 
+                                    theme="bootstrap" 
+                                    close-on-select="true" 
+                                    title="Choose a person"
+                                >
+                                    <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
+                                    <ui-select-choices 
+                                        repeat="user as user in ctrl.allUsers | propsFilter: {Title: $select.search, Email: $select.search}">
+                                        <div ng-bind-html="user.Title | highlight: $select.search"></div>
+                                        <small>
+                                            email: {{user.Email}}
+                                        </small>
+                                    </ui-select-choices>
+                                </ui-select>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12">

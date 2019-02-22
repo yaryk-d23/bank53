@@ -55,14 +55,14 @@
                     "Title",
                     "Email"
                 ].join(",")+
-                "&$top=20"+
-                "&$filter=("+[
-                    "substringof('" + query + "',Title)",
-                    "substringof('" + query + "',Email)",
-                    "substringof('" + capitalizeFirstLetter(query) + "',Title)",
-                    "substringof('" + capitalizeFirstLetter(query) + "',Email)"
-                ].join(" or ")
-                + ") and PrincipalType eq 1";
+                "&$top=50000&$filter=PrincipalType eq 1";
+                // "&$filter=("+[
+                //     "substringof('" + query + "',Title)",
+                //     "substringof('" + query + "',Email)",
+                //     "substringof('" + capitalizeFirstLetter(query) + "',Title)",
+                //     "substringof('" + capitalizeFirstLetter(query) + "',Email)"
+                // ].join(" or ")
+                // ") and PrincipalType eq 1";
             return $http({
                 method: 'GET',
                 headers: {

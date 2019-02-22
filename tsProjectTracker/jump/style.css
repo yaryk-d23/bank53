@@ -17,3 +17,6 @@
   position: relative;
   z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
 }
+.ui-select-multiple.ui-select-bootstrap input.ui-select-search {
+    min-width: 100%; 
+}
