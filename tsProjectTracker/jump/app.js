@@ -5,7 +5,7 @@
         'textAngular',
         'validation',
         'validation.rule',
-        'ui.select'
+		'ui.select'
         // 'toggle-switch',
     ])
     .filter('propsFilter', function() {

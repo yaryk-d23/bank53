@@ -50,15 +50,12 @@
     function formCtrl($ApiService, $q){
         var ctrl = this;
         var listTitle = 'TSProjectTracker';
-        ctrl.item = {
-            'zagt': []
-        };
+        ctrl.item = {};
         ctrl.initiativeChoice = [];
         ctrl.priorityChoice = [];
         ctrl.allUsers = [];
         // ctrl.getUser = $ApiService.getUser;
         ctrl.getUsers = function($select) {
-            console.log($select);
             if(!$select.search || $select.search.length < 3) return;
             $ApiService.getUser($select.search).then(function(res){
                 ctrl.allUsers = res;
