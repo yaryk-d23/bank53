@@ -52,11 +52,13 @@
             "Welcome/services/welcome-service.js",
             "Welcome/services/generatePDF-service.js",
             "Welcome/components/welcome/welcome.js",
+            "Welcome/components/propertiesModal/propertiesModal.js",
         ];
         var styles = [
             "Welcome/welcome-app.css",
             "modules/bootstrap/css/bootstrap.css",
             "Welcome/components/welcome/welcome.css",
+        "Welcome/components/propertiesModal/propertiesModal.css",
         ];
         for(var i=0;i<scripts.length;i++){
             document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
@@ -88,7 +90,8 @@
     </nav>
     <div class="">
         <div class="">
-            <welcome></welcome>
+            <welcome user="ctrl.userInfo"></welcome>
+            <properties-modal user="ctrl.userInfo"></properties-modal>
         </div>
     </div>
 </div>

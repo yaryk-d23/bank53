@@ -23,6 +23,9 @@
     max-width: 900px;
     width: auto;
 }
+.b .dropdown {
+	overflow: visible;
+}
 @media screen and (max-width: 1366px) , screen and (max-height: 768px) {
     .b .modal-body {
         max-height: 400px;
