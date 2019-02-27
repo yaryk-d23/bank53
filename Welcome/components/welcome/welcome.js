@@ -79,7 +79,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
         var groupedTasksByBadge = groupBy(ctrl.allTasks, 'BadgeId');
         recentTasks = data.recentTasks;
         for(var i=0;i<recentTasks.length;i++){
-            if(ctrl.recentTasks.length < 3){
+            if(ctrl.recentTasks.length < 4){
                 let req = await $WelcomeService.getTaskLogItems('$filter=BadgeId eq '+recentTasks[i].BadgeId+'&$select=*,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=AssignedTo');
                 if(getSumOfXP(req) == getSumOfXP(groupedTasksByBadge[recentTasks[i].BadgeId])){
                     let badge = await $WelcomeService.getBadgesItems('$filter=Id eq '+recentTasks[i].BadgeId);
