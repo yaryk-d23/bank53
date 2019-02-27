@@ -8,7 +8,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="form">
-                            Hello
+                            <div class="avatar-item" ng-repeat="item in ctrl.allAvatars track by $index" ng-click="ctrl.setAvatar(item)">
+                                <div class="avatar-image" ng-style="{'background-image': 'url({{item.Avatar.Url}})'}"></div>
+                                <div ng-if="item.XP > ctrl.userInfo.xp" class="lock-image">Need: {{item.XP}}XP</div>
+                                <div ng-if="ctrl.userInfo.avatar.Url == item.Avatar.Url" class="cheked-avatar">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

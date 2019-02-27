@@ -4,6 +4,7 @@
     ])
 
     .controller('AppCtrl', [function() {
-        
+        var ctrl = this;
+        ctrl.userInfo = {};
     }]);
 })();

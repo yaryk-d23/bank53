@@ -7,6 +7,7 @@
                         <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=M&username={{ctrl.userInfo.userName}}" />
                         <i class="glyphicon glyphicon-pencil" ng-click="ctrl.openPropModal()"></i>
                         <span class="rank-label-container">
+                            <div class="credits-info">{{ctrl.userInfo.xp}} XP</div>
                             <div class="ful-name-info">{{ctrl.userInfo.fullName}}</div>
                             <span class="position-info">{{ctrl.userInfo.position}}</span>
                             <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>

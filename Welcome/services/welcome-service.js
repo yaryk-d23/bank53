@@ -11,7 +11,8 @@ angular.module('WelcomeApp')
             getTaskLogItems: getTaskLogItems,
             getTaskItems: getTaskItems,
             uploadFile: uploadFile,
-            getBadgeIcon: getBadgeIcon
+            getBadgeIcon: getBadgeIcon,
+            getAvatarsItems: getAvatarsItems
         };
 
         function getUserProfile(){
@@ -24,6 +25,14 @@ angular.module('WelcomeApp')
         function getUserLogItem(userName){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'UsersLog\')/items?'
                 +'$select=*,User/Title,User/Id,User/EMail,User/UserName&$expand=User&$filter=User/UserName eq \'' + userName +'\'')
+                .then(function(res){
+                    return res.data.value;
+                });
+        }
+
+        function getAvatarsItems(filter){
+            filter = filter ? filter : '';
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Avatars\')/items?'+filter)
                 .then(function(res){
                     return res.data.value;
                 });

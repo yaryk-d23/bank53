@@ -13,6 +13,7 @@
     ];
     var styles = [
         "modules/bootstrap/css/bootstrap.css",
+        "Dashboard/dashboard-app.css",
         "Dashboard/components/user-info/user-info.css",
         "Dashboard/components/recent-badges/recent-badges.css",
         "Dashboard/components/quick-leaderboard/quick-leaderboard.css",
@@ -31,9 +32,12 @@
             <user-info></user-info>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-9">
-            <recent-badges></recent-badges>
-            <br/>
-            <quick-leaderboard></quick-leaderboard>
+            <div>
+                <recent-badges></recent-badges>
+                <br/>
+                <quick-leaderboard></quick-leaderboard>
+            </div>
+            <div class="clear-fix"></div>
         </div>
     </div>
 </div>

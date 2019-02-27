@@ -4,7 +4,7 @@ angular.module('WelcomeApp')
     .component('welcome', {
         templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Welcome/components/welcome/welcome.html?rnd' + Math.random(),
         bindings: {
-            //user: '<'
+            user: '='
         },
         controllerAs: 'ctrl',
         controller: ['$WelcomeService', '$GeneratePDF', '$sce', '$q', welcomeCtrl]
@@ -12,12 +12,13 @@ angular.module('WelcomeApp')
 
 function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     var ctrl = this;
-    ctrl.userInfo = {};
+    ctrl.userInfo = ctrl.user;
     ctrl.allTasks = [];
     ctrl.allTasksLog = [];
     ctrl.groupedTasks = [];
     var recentTasks = [];
     ctrl.recentTasks = [];
+    var allBadges = [];
     ctrl.moment = moment;
     ctrl.colorArr = ['#5cb85c', '#07b16a', '#33cddd', '#245698', '#79569c'];
 
@@ -32,13 +33,15 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     });
 
     var requests = {
+        allBadges: $WelcomeService.getBadgesItems(),
         allTasks: $WelcomeService.getTaskItems(),
         allTasksLog: $WelcomeService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId),
         userProfile: $WelcomeService.getUserProfile(),
         recentTasks: $WelcomeService.getTaskLogItems('$top=20&$orderby=Created desc&$select=*,Badge/Id,Badge/Title,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=Badge,AssignedTo'),
     };
 
-    $q.all(requests).then(async function(data){
+    $q.all(requests).then(function(data){
+        allBadges = data.allBadges;
         ctrl.allTasks = data.allTasks;
         
         ctrl.groupedTasks = createChunksFromArra(ctrl.allTasks, 5);
@@ -87,21 +90,43 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
         });
         var groupedTasksByBadge = groupBy(ctrl.allTasks, 'BadgeId');
         recentTasks = data.recentTasks;
+        var recentActRequests = {};
         for(var i=0;i<recentTasks.length;i++){
-            if(ctrl.recentTasks.length < 3){
-                let req = await $WelcomeService.getTaskLogItems('$filter=BadgeId eq '+recentTasks[i].BadgeId+'&$select=*,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=AssignedTo');
-                if(getSumOfXP(req) == getSumOfXP(groupedTasksByBadge[recentTasks[i].BadgeId])){
-                    let badge = await $WelcomeService.getBadgesItems('$filter=Id eq '+recentTasks[i].BadgeId);
-                    badge[0]['TaskLog'] = recentTasks[i];
-                    if(!checkIfItemExist(badge[0])){
-                        ctrl.recentTasks.push(badge[0]);
+            recentActRequests[i] = $WelcomeService.getTaskLogItems('$filter=BadgeId eq '+recentTasks[i].BadgeId+'&$select=*,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=AssignedTo');
+        }
+        $q.all(recentActRequests).then(function(res){
+            angular.forEach(res, function(req, key){
+                if(ctrl.recentTasks.length < 3){
+                    if(getSumOfXP(req) == getSumOfXP(groupedTasksByBadge[recentTasks[key].BadgeId])){
+                        let badge = allBadges.filter(function(x){
+                            return x.Id == recentTasks[key].BadgeId;
+                        })[0];
+                        badge['TaskLog'] = recentTasks[key];
+                        if(!checkIfItemExist(badge)){
+                            ctrl.recentTasks.push(badge);
+                        }
+                    }
+                    else {
+                        ctrl.recentTasks.push(recentTasks[key]); 
                     }
                 }
-                else {
-                    ctrl.recentTasks.push(recentTasks[i]); 
-                }
-            }
-        }
+            });
+        });
+        // for(var i=0;i<recentTasks.length;i++){
+        //     if(ctrl.recentTasks.length < 3){
+        //         let req = await $WelcomeService.getTaskLogItems('$filter=BadgeId eq '+recentTasks[i].BadgeId+'&$select=*,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=AssignedTo');
+        //         if(getSumOfXP(req) == getSumOfXP(groupedTasksByBadge[recentTasks[i].BadgeId])){
+        //             let badge = await $WelcomeService.getBadgesItems('$filter=Id eq '+recentTasks[i].BadgeId);
+        //             badge[0]['TaskLog'] = recentTasks[i];
+        //             if(!checkIfItemExist(badge[0])){
+        //                 ctrl.recentTasks.push(badge[0]);
+        //             }
+        //         }
+        //         else {
+        //             ctrl.recentTasks.push(recentTasks[i]); 
+        //         }
+        //     }
+        // }
     });
 
     function checkIfItemExist(badge){
