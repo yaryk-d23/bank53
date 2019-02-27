@@ -168,3 +168,6 @@
     align-items: center;
     justify-content: center;
 }
+.avatar-image {
+    width: 32px;
+}

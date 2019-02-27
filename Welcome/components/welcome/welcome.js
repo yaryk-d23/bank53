@@ -18,7 +18,14 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     ctrl.groupedTasks = [];
     var recentTasks = [];
     ctrl.recentTasks = [];
+    ctrl.moment = moment;
     ctrl.colorArr = ['#5cb85c', '#07b16a', '#33cddd', '#245698', '#79569c'];
+
+    
+    ctrl.openPropModal = function(){
+        $('#propeties-form').modal('show');
+    };
+
     $WelcomeService.getTaskItems().then(function(res) {
         ctrl.allTasks = res;
         ctrl.groupedTasks = createChunksFromArra(ctrl.allTasks, 5);
@@ -59,6 +66,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                 ctrl.userInfo.credits = user.Credits || 0;
                 ctrl.userInfo.xp = user.XP || 0;
                 ctrl.userInfo.userItemId = user.Id;
+                ctrl.userInfo.avatar = user.Avatar;
             }
             else {
                 var newItem = { 
@@ -73,6 +81,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                     ctrl.userInfo.credits = user.Credits || 0;
                     ctrl.userInfo.xp = user.XP || 0;
                     ctrl.userInfo.userItemId = user.Id;
+                    ctrl.userInfo.avatar = user.Avatar;
                 });
             }
         });

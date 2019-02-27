@@ -52,5 +52,27 @@
             </div>
         </div>
         <br/>
+        <div class="">
+            <b>
+                Regions (calc each Region, compare for most XP)
+            </b>
+        </div>
+        <div class="item-container">
+            <div class="quick-leaderboard-item  text-center" ng-repeat="region in ctrl.userLogItemsByRegion | orderBy: '-xp' track by $index" ng-if="$index<3">
+                <div class="user-badge">
+                    <!-- <img class="img-circle" ng-src="{{badge.Icon.Url}}" /> -->
+                </div>
+                <div class="user-picture">
+                    <div>
+                        <!-- <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" /> -->
+                        <span>{{region.title}}</span>
+                    </div>
+                </div>
+                <div class="user-xp">
+                    {{region.xp}} XP
+                </div>
+            </div>
+        </div>
+        <br/>
     </div>
 </div>

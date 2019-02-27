@@ -5,6 +5,7 @@
                 <div class="profile-header-container">   
                     <div class="profile-header-img text-center">
                         <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=M&username={{ctrl.userInfo.userName}}" />
+                        <i class="glyphicon glyphicon-pencil" ng-click="ctrl.openPropModal()"></i>
                         <span class="rank-label-container">
                             <div class="ful-name-info">{{ctrl.userInfo.fullName}}</div>
                             <span class="position-info">{{ctrl.userInfo.position}}</span>
@@ -15,31 +16,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row" ng-if="false">
-            <div class="tasks-map">
-                <div class="tasks-map-row">
-                    <div class="map-item first-map-item"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item end-bottom"></div>
-                </div>
-                <div class="tasks-map-row reverse">
-                    <div class="map-item end-top"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item start-bottom"></div>
-                </div>
-                <div class="tasks-map-row">
-                    <div class="map-item start-top"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item"></div>
-                    <div class="map-item last-map-item"></div>
-                </div>
-            </div>
-        </div> -->
         <br/>
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-6 text-center">
@@ -68,6 +44,11 @@
                             <!-- <span class="glyphicon glyphicon-star" 
                                 ng-if="ctrl.checkTask(item.Title, item.BadgeId)">
                             </span> -->
+                            <img 
+                                class="avatar-image" 
+                                ng-src="{{ctrl.userInfo.avatar.Url}}"
+                                ng-if="ctrl.checkTask(item.Title, item.BadgeId) && !ctrl.checkTask(row[$index+1].Title, row[$index+1].BadgeId)"
+                            >
                             <div class="snackbar">{{item.Badge.Title}}: {{item.Title}}</div>
                         </div>
                     </div>
@@ -82,7 +63,8 @@
                             <div>&nbsp;{{item.AssignedTo.Title}}</div>
                         </div>
                         <div>
-                            {{item.Badge.Title}}: {{item.Title}}
+                            <div>{{item.Badge.Title}}: {{item.Title}}</div>
+                            <div>{{ctrl.moment(item.Created).format('MM/DD/YYYY h:mm a')}}</div>
                         </div>
                     </div>
                     <div ng-if="item['odata.type'] == 'SP.Data.BadgesListItem'" class="recent-container">
@@ -92,7 +74,10 @@
                         </div>
                         <div>
                             <img class="img-circle" ng-src="{{item.Icon.Url}}" />
-                            <div>{{item.Title}}</div>
+                            <div>
+                                <div>{{item.Title}}</div>
+                                <div>{{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

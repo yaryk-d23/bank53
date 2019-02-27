@@ -6,16 +6,19 @@
         "modules/bootstrap/js/bootstrap.min.js",
         "modules/jsPDF/jsPDF.js",
         "modules/jsPDF/jspdf.plugin.autotable.min.js",
+        "modules/moment.min.js",
 
         "Welcome/welcome-app.js",
         "Welcome/services/welcome-service.js",
         "Welcome/services/generatePDF-service.js",
         "Welcome/components/welcome/welcome.js",
+        "Welcome/components/propertiesModal/propertiesModal.js",
     ];
     var styles = [
         "Welcome/welcome-app.css",
         "modules/bootstrap/css/bootstrap.css",
         "Welcome/components/welcome/welcome.css",
+        "Welcome/components/propertiesModal/propertiesModal.css",
     ];
     for(var i=0;i<scripts.length;i++){
         document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
@@ -41,6 +44,7 @@
     <div class="">
         <div class="">
             <welcome></welcome>
+            <properties-modal></properties-modal>
         </div>
     </div>
 </div>

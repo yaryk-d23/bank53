@@ -14,6 +14,7 @@ function quickLeaderboardCtrl($DashboardService){
     ctrl.allBadges = [];
     ctrl.leaderboardByRole = [];
     ctrl.userLogItemsByDept = [];
+    ctrl.userLogItemsByRegion = [];
     getAllUsers();
     $DashboardService.getBadgesItems().then(function(res){
         ctrl.allBadges = res;
@@ -66,6 +67,13 @@ function quickLeaderboardCtrl($DashboardService){
             let tmpArr = groupBy(data, 'Department');
             angular.forEach(tmpArr, function(value, key){
                 ctrl.userLogItemsByDept.push({
+                    title: key,
+                    xp: ctrl.getSumOfXP(value)
+                });
+            });
+            tmpArr = groupBy(data, 'Region');
+            angular.forEach(tmpArr, function(value, key){
+                ctrl.userLogItemsByRegion.push({
                     title: key,
                     xp: ctrl.getSumOfXP(value)
                 });
