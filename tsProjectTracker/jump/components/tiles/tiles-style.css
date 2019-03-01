@@ -13,6 +13,7 @@
 .tiles .tile-title {
 	margin-top: 15px;
 	margin-bottom: 15px;
+	cursor: pointer;
 }
 .tiles .tile-image {
     background-size: cover;

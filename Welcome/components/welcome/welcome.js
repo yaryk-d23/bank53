@@ -1,4 +1,4 @@
-'use strict'
+
 
 angular.module('WelcomeApp')
     .component('welcome', {
@@ -11,6 +11,7 @@ angular.module('WelcomeApp')
     });
 
 function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
+	try{
     var ctrl = this;
     ctrl.userInfo = ctrl.user;
     ctrl.allTasks = [];
@@ -94,6 +95,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
         for(var i=0;i<recentTasks.length;i++){
             recentActRequests[i] = $WelcomeService.getTaskLogItems('$filter=BadgeId eq '+recentTasks[i].BadgeId+'&$select=*,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=AssignedTo');
         }
+		
         $q.all(recentActRequests).then(function(res){
             angular.forEach(res, function(req, key){
                 if(ctrl.recentTasks.length < 3){
@@ -128,6 +130,8 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
         //     }
         // }
     });
+		}
+		catch(e){alert(e);}
 
     function checkIfItemExist(badge){
         var isExist = false;
