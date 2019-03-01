@@ -60,7 +60,7 @@
             "Welcome/welcome-app.css",
             "modules/bootstrap/css/bootstrap.css",
             "Welcome/components/welcome/welcome.css",
-        "Welcome/components/propertiesModal/propertiesModal.css",
+            "Welcome/components/propertiesModal/propertiesModal.css",
         ];
         for(var i=0;i<scripts.length;i++){
             document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')

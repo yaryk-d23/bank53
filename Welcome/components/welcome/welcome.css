@@ -4,9 +4,20 @@
 
 }
 .welcome .credits-info {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
+}
+.welcome .user-info {
+    padding: 20px 20px 20px 70px;
+    box-shadow: 0 0 10px 0px;
+    border-radius: 5px;
+}
+.welcome .avatar .user-icon{
+    width: 100px;
+}
+.welcome .rank-label-container {
+    font-size: 18px;
 }
 .tasks-map {
     max-width: 500px;

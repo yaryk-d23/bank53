@@ -71,6 +71,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                 ctrl.userInfo.xp = user.XP || 0;
                 ctrl.userInfo.userItemId = user.Id;
                 ctrl.userInfo.avatar = user.Avatar;
+                ctrl.userInfo.avatarItem = user.AvatarItem;
             }
             else {
                 var newItem = { 
@@ -86,6 +87,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                     ctrl.userInfo.xp = user.XP || 0;
                     ctrl.userInfo.userItemId = user.Id;
                     ctrl.userInfo.avatar = user.Avatar;
+                    ctrl.userInfo.avatarItem = user.AvatarItem;
                 });
             }
         });
@@ -170,6 +172,15 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
         }
 
     };
+    ctrl.getLastCompletedTask = function(){
+        var taskId = 0;
+        angular.forEach(ctrl.allTasks, function(task, key){
+            if(ctrl.checkTask(task.Title, task.BadgeId)){
+                taskId = task.Id;
+            }
+        });
+        return taskId;
+    };
 
     ctrl.checkTask = function(taskName, badgeId){
         var flag = false;
@@ -179,7 +190,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
             }
         });
         return flag;
-    }
+    };
 
     function createChunksFromArra(array, chankLength){
         var temparray = [];

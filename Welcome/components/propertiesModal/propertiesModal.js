@@ -21,11 +21,15 @@
         ctrl.setAvatar = function(avatar){
             if(avatar.XP <= ctrl.userInfo.xp){
                 ctrl.userInfo.avatar = avatar.Avatar;
+                ctrl.userInfo.avatarItem.Id = avatar.Id;
+                ctrl.userInfo.avatarItem.Title = avatar.Title;
             }
         };
 
         ctrl.saveData = function(){
             ctrl.user.avatar = ctrl.userInfo.avatar;
+            ctrl.user.avatarItem.Id = ctrl.userInfo.avatarItem.Id;
+            ctrl.user.avatarItem.Title = ctrl.userInfo.avatarItem.Title;
 
             var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
             var oList = clientContext.get_web().get_lists().getByTitle("UsersLog");
@@ -34,6 +38,9 @@
             urlValue.set_url(ctrl.userInfo.avatar.Url);
             urlValue.set_description(ctrl.userInfo.avatar.Url);
             oListItem.set_item("Avatar", urlValue); 
+            var avatarItemValue = new SP.FieldLookupValue();
+            avatarItemValue.set_lookupId(ctrl.userInfo.avatarItem.Id);
+            oListItem.set_item("AvatarItem", avatarItemValue);
             oListItem.update();
 
             clientContext.load(oListItem);

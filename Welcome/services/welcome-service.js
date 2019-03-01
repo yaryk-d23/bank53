@@ -24,7 +24,7 @@ angular.module('WelcomeApp')
 
         function getUserLogItem(userName){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'UsersLog\')/items?'
-                +'$select=*,User/Title,User/Id,User/EMail,User/UserName&$expand=User&$filter=User/UserName eq \'' + userName +'\'')
+                +'$select=*,User/Title,User/Id,User/EMail,User/UserName,AvatarItem/Id,AvatarItem/Title&$expand=User,AvatarItem&$filter=User/UserName eq \'' + userName +'\'')
                 .then(function(res){
                     return res.data.value;
                 });

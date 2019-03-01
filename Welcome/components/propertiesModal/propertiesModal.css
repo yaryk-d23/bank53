@@ -25,7 +25,7 @@
 }
 .propeties-form .avatar-item {
     position: relative;
-    width: 50px;
+    width: 100px;
     display: inline-block;
     padding: 5px;
     margin-left: 5px;
@@ -55,7 +55,7 @@
     background: #f1f1f1;
     opacity: 0.8;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 40%;
 }
 .propeties-form .cheked-avatar {
 }
