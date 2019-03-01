@@ -44,9 +44,10 @@
     position: relative;
     cursor: pointer;
 }
-.not-completed {
+.not-completed, .not-completed:after {
     background-color: #c3c3c3!important;
 }
+
 .map-item .glyphicon-star {
     background: -webkit-linear-gradient(top, #8f6B29, #FDE08D, #DF9F28);
     background: linear-gradient(top, #8f6B29, #FDE08D, #DF9F28);
@@ -79,14 +80,14 @@
     border-top-right-radius: 100%;
     position: relative;
 }
-.map-item.end-bottom::after {
-    content: '';
-    display: block;
+.tasks-map-row .map-item.end-bottom:after {
+    content: ' ';
+    display: inline-block;
     position: absolute;
     bottom: -15px;
+    left: 0;
     width: 100%;
     height: 15px;
-    background: inherit;
     border-bottom: 1px solid #fff;
 }
 .map-item.end-top {
@@ -95,14 +96,14 @@
     border-bottom-right-radius: 100%;
     position: relative;
 }
-.map-item.end-top::after {
-    content: '';
-    display: block;
+.map-item.end-top:after {
+    content: ' ';
+    display: inline-block;
     position: absolute;
     top: -15px;
+    left: 0;
     width: 100%;
     height: 15px;
-    background: inherit;
 }
 .map-item.start-bottom {
     flex: 0 10%;
@@ -111,14 +112,14 @@
     position: relative;
     border-left: 0;
 }
-.map-item.start-bottom::after{
-    content: '';
-    display: block;
+.map-item.start-bottom:after{
+    content: ' ';
+    display: inline-block;
     position: absolute;
     bottom: -15px;
+    left: 0;
     width: 100%;
     height: 15px;
-    background: inherit;
 }
 .map-item.start-top {
     flex: 0 10%;
@@ -127,14 +128,14 @@
     position: relative;
     border-left: 0;
 }
-.map-item.start-top::after {
-    content: '';
-    display: block;
+.map-item.start-top:after {
+    content: ' ';
+    display: inline-block;
     position: absolute;
     top: -15px;
+    left: 0;
     width: 100%;
     height: 15px;
-    background: inherit;
     border-top: 1px solid #fff;
 }
 
@@ -178,4 +179,19 @@
 }
 .welcome .profile-header-img i {
     cursor: pointer;
+}
+.map-item.bg-color-0:after {
+    background-color: #5cb85c;
+}
+.map-item.bg-color-1:after {
+    background-color: #07b16a;
+}
+.map-item.bg-color-2:after {
+    background-color: #33cddd;
+}
+.map-item.bg-color-3:after {
+    background-color: #245698;
+}
+.map-item.bg-color-4:after {
+    background-color: #79569c;
 }

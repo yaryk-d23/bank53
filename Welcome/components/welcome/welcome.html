@@ -25,7 +25,7 @@
                     <div ng-repeat="row in ctrl.groupedTasks track by $index"
                         ng-init="parentIdx = $index"
                         class="tasks-map-row" ng-class="{'reverse': $index%2!=0}">
-                        <div class="map-item text-center" 
+                        <div class="map-item text-center bg-color-{{$index}}" 
                             ng-repeat="item in row track by $index"
                             ng-click="ctrl.generatePdf($event, item);"
                             ng-style="{'background-color': ctrl.colorArr[$index]}"

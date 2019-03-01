@@ -98,7 +98,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
             angular.forEach(res, function(req, key){
                 if(ctrl.recentTasks.length < 3){
                     if(getSumOfXP(req) == getSumOfXP(groupedTasksByBadge[recentTasks[key].BadgeId])){
-                        let badge = allBadges.filter(function(x){
+                        var badge = allBadges.filter(function(x){
                             return x.Id == recentTasks[key].BadgeId;
                         })[0];
                         badge['TaskLog'] = recentTasks[key];
