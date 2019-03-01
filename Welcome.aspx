@@ -31,6 +31,7 @@
     <script src="/_layouts/15/SP.Core.js"></script>
     <script src="/_layouts/15/SP.Runtime.js"></script>
     <script src="/_layouts/15/SP.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
   </head>
 
   <body >
@@ -47,6 +48,7 @@
             "modules/bootstrap/js/bootstrap.min.js",
             "modules/jsPDF/jsPDF.js",
             "modules/jsPDF/jspdf.plugin.autotable.min.js",
+			"modules/moment.min.js",
     
             "Welcome/welcome-app.js",
             "Welcome/services/welcome-service.js",
@@ -69,7 +71,7 @@
     </script>
 
 
-<div class="app-container b" ng-app="WelcomeApp" ng-controller="AppCtrl" id="welcome">
+<div class="app-container b" ng-app="WelcomeApp" ng-controller="AppCtrl as ctrl" id="welcome">
     <nav class="navbar navbar-default">
 		<span 
 			class="glyphicon glyphicon-align-justify navbar-toggle" 
