@@ -13,6 +13,17 @@
     box-shadow: 0 0 10px 0px;
     border-radius: 5px;
 }
+.user-info .user-icon{
+    width: 300px;
+    background-size: cover;
+    background-position: center;
+    margin: auto;
+}
+.user-info .user-icon:after{
+    content:'';
+    display: block;
+    padding-bottom: 100%;
+}
 .welcome .avatar .user-icon{
     width: 100px;
 }

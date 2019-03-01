@@ -4,7 +4,8 @@
             <div class="col-sm-12 col-md-12 col-lg-6">
                 <div class="profile-header-container user-info">   
                     <div class="profile-header-img text-center">
-                        <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" />
+                        <!-- <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" /> -->
+                        <div class="img-circle user-icon" style="background-image: url('/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}')"></div>
                         <span class="rank-label-container">
                             <div class="credits-info">{{ctrl.userInfo.xp}} XP</div>
                             <div class="full-name-info">{{ctrl.userInfo.fullName}}</div>
