@@ -39,7 +39,7 @@
             });
     }])
     .component('trackForm', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/tsProjectTracker/jump/components/form/form.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/Custom/app/tsProjectTracker/jump/components/form/form.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
@@ -48,6 +48,7 @@
     });
 
     function formCtrl($ApiService, $q){
+		try{
         var ctrl = this;
         var listTitle = 'TSProjectTracker';
         ctrl.item = {};
@@ -96,6 +97,8 @@
                 $('#new-track-form').modal('hide');
             });
         };
+		}
+		catch(e){alert(e);}
 
 
     }
