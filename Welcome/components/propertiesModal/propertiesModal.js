@@ -21,15 +21,22 @@
         ctrl.setAvatar = function(avatar){
             if(avatar.XP <= ctrl.userInfo.xp){
                 ctrl.userInfo.avatar = avatar.Avatar;
-                ctrl.userInfo.avatarItem.Id = avatar.Id;
-                ctrl.userInfo.avatarItem.Title = avatar.Title;
+                if(ctrl.userInfo.avatarItem){
+                    ctrl.userInfo.avatarItem.Id = avatar.Id;
+                    ctrl.userInfo.avatarItem.Title = avatar.Title;
+                }
+                else{
+                    ctrl.userInfo.avatarItem = {
+                        Id: avatar.Id,
+                        Title: avatar.Title
+                    };
+                }
             }
         };
 
         ctrl.saveData = function(){
             ctrl.user.avatar = ctrl.userInfo.avatar;
-            ctrl.user.avatarItem.Id = ctrl.userInfo.avatarItem.Id;
-            ctrl.user.avatarItem.Title = ctrl.userInfo.avatarItem.Title;
+            ctrl.user.avatarItem = ctrl.userInfo.avatarItem;
 
             var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
             var oList = clientContext.get_web().get_lists().getByTitle("UsersLog");

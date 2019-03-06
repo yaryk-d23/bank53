@@ -14,7 +14,7 @@ function userInfoCtrl($DashboardService, $q){
     ctrl.allBadges = [];
     var requests = {
         allBadges: $DashboardService.getBadgesItems(),
-        allTask: $DashboardService.getTaskItems(),
+        allTask: $DashboardService.getTaskItems('$filter=AssignedToId eq '+_spPageContextInfo.userId),
         tasksListItems: $DashboardService.getTaskListItems(),
     };
     $q.all(requests).then(function(res){

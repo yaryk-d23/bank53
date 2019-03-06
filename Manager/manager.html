@@ -1,0 +1,92 @@
+<script>
+    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app";
+    var scripts = [
+        "modules/jquery-3.3.1.min.js",
+        "modules/angular.min.js",
+        "modules/bootstrap/js/bootstrap.min.js",
+        "modules/angular/angular-sanitize.min.js",
+        // "modules/angular/textAngular.min.js",
+        "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
+        "modules/angular/angular-validation.min.js",
+        "modules/angular/angular-validation-rule.min.js",
+		
+        "Manager/manager-app.js",
+    ];
+    var styles = [
+        "modules/bootstrap/css/bootstrap.css",
+        "Manager/manager-app.css",
+    ];
+    for(var i=0;i<scripts.length;i++){
+        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+    }
+    for(var i=0;i<styles.length;i++){
+        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+    }
+</script>
+
+<div class="app-container b" ng-app="ManagerApp" ng-controller="AppCtrl as ctrl" id="manager">
+    <div class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="form">
+                        <div class="form-group">
+                            <label>Select user</label>
+                            <input type="text" class="form-control"
+                                autocomplete="off"
+                                id="SelectedUser"
+                                name="SelectedUser"
+                                ng-model="ctrl.userInfo"
+                                maxlength="255"
+                                validator="requiredUser"
+                                valid-method="watch"
+                                use-view-value="false"
+            
+                                uib-typeahead="user as user.User.Title for user in ctrl.getUser($viewValue)"
+                                typeahead-min-length="2"
+                                typeahead-loading="loadingLocations.SelectedUser"
+                                typeahead-no-results="noResults.SelectedUser"
+                                ng-class="{loading: loadingLocations.SelectedUser}"
+                                message-id="errorMessage-SelectedUser"
+                            >
+                            <div ng-show="noResults.SelectedUser && SelectedUser">
+                                <i class="glyphicon glyphicon-remove"></i> No Results Found
+                            </div>
+                            <div id="errorMessage-SelectedUser"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="profile-header-container user-info">   
+                        <div class="profile-header-img text-center">
+                            <!-- <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" /> -->
+                            <div class="img-circle user-icon" style="background-image: url('/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}')"></div>
+                            <span class="rank-label-container">
+                                <div class="credits-info">{{ctrl.userInfo.xp}} XP</div>
+                                <div class="full-name-info">{{ctrl.userInfo.fullName}}</div>
+                                <span class="position-info">{{ctrl.userInfo.position}}</span>
+                                <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>
+                                <span class="department-info">{{ctrl.userInfo.department}}</span>
+                            </span>
+                        </div>
+                        <div class="text-center">
+                            <h4>Avatar</h4>
+                            <div class="profile-header-container avatar">   
+                                <div class="profile-header-img text-center">
+                                    <img class="img-circle user-icon" ng-src="{{ctrl.userInfo.avatar.Url}}" />
+                                    <i class="glyphicon glyphicon-pencil" ng-click="ctrl.openPropModal()"></i>
+                                    <!-- <span class="rank-label-container">
+                                        <div class="full-name-info">{{ctrl.userInfo.avatarItem.Title}}</div>
+                                    </span> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

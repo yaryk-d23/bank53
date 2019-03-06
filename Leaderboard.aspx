@@ -83,6 +83,5 @@
             <leaderboard-table></leaderboard-table>
         </div>
     </div>
-</nav>
   </body>
 </html>

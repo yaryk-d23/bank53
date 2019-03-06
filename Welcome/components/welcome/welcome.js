@@ -138,7 +138,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     function checkIfItemExist(badge){
         var isExist = false;
         angular.forEach(ctrl.recentTasks, function(item, key){
-            if(item['odata.type'] == "SP.Data.BadgesListItem" && 
+            if(item['odata.type'] == "SP.Data.BadgesListListItem" && 
                 item.Id == badge.Id && 
                 badge['TaskLog'].AssignedToId ==  item['TaskLog'].AssignedToId){
                     isExist = true;
