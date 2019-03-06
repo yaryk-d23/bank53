@@ -44,14 +44,16 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', formCtrl]
     });
 
-    function formCtrl($ApiService, $q){
+    function formCtrl($ApiService, $q, $scope){
 		try{
         var ctrl = this;
         var listTitle = 'TSProjectTracker';
-        ctrl.item = {};
+        ctrl.item = {
+            ExpirationDate: new Date()
+        };
         ctrl.initiativeChoice = [];
         ctrl.priorityChoice = [];
         ctrl.allUsers = [];
@@ -78,6 +80,9 @@
         ctrl.saveData = function(){
             var item = angular.copy(ctrl.item);
             // item['zagtId'] = item['zagt'].Id;
+            if(item.ExpirationDate){
+                item.ExpirationDate = item.ExpirationDate.toISOString();
+            }
             item['zagtId'] = {
                 'results': []
             };
@@ -97,6 +102,35 @@
                 $('#new-track-form').modal('hide');
             });
         };
+        
+        
+          $scope.inlineOptions = {
+            minDate: new Date(),
+            showWeeks: true
+          };
+        
+          $scope.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1,
+            showWeeks: false
+          };
+
+        
+          $scope.open1 = function() {
+            $scope.popup1.opened = true;
+          };
+
+        
+          $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+          $scope.format = $scope.formats[0];
+        
+          $scope.popup1 = {
+            opened: false
+          };
+        
+        
 		}
 		catch(e){alert(e);}
 

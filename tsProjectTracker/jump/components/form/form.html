@@ -67,6 +67,23 @@
                                 <label for="_x0061_q79">Notes</label>
                                 <input type="text" class="form-control" id="_x0061_q79" ng-model="ctrl.item.OData__x0061_q79">
                             </div>
+                            <div class="form-group">
+                                <label for="ExpirationDate">Expiration Date</label>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" 
+                                        uib-datepicker-popup="{{format}}" 
+                                        ng-model="ctrl.item.ExpirationDate" 
+                                        is-open="popup1.opened" 
+                                        datepicker-options="dateOptions" 
+                                        ng-required="true" 
+                                        close-text="Close" 
+                                        show-button-bar="false"
+                                    />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <div class="form-group">
@@ -99,27 +116,6 @@
                             </div>
                             <div class="form-group">
                                 <label for="Principal">Principal</label>
-                                <!-- <input type="text" class="form-control"
-                                    autocomplete="off"
-                                    id="Principal"
-                                    name="Principal"
-                                    ng-model="ctrl.item.Principal"
-                                    maxlength="255"
-                                    validator="requiredUser"
-                                    valid-method="watch"
-                                    use-view-value="false"
-                
-                                    uib-typeahead="user as user.Title for user in ctrl.getUser($viewValue)"
-                                    typeahead-min-length="2"
-                                    typeahead-loading="loadingLocations.Principal"
-                                    typeahead-no-results="noResults.Principal"
-                                    ng-class="{loading: loadingLocations.Principal}"
-                                    message-id="errorMessage-Principal"
-                                >
-                                <div ng-show="noResults.Principal && Principal">
-                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
-                                </div>
-                                <div id="errorMessage-Principal"></div> -->
                                 <ui-select 
                                     multiple 
                                     ng-model="ctrl.item.Principal" 
@@ -138,6 +134,14 @@
                                         </small>
                                     </ui-select-choices>
                                 </ui-select>
+                            </div>
+                            <div>
+                                <label for="Budget">Budget (in dollars)</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">$</div>
+                                    <input type="number" class="form-control" id="Budget" placeholder="Amount" ng-model="ctrl.item.Budget">
+                                    <div class="input-group-addon">.00</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12">
