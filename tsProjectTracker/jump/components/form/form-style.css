@@ -29,9 +29,6 @@
 .b .input-group button {
     min-width: 0;
 }
-@media screen and (max-width: 1366px) , screen and (max-height: 768px) {
-    .b .modal-body {
-        max-height: 400px;
-        overflow: auto;
-    }
+.b #new-track-form{
+	overflow: auto;
 }
