@@ -30,6 +30,11 @@
 .welcome .rank-label-container {
     font-size: 18px;
 }
+.welcome .recent-activity {
+    padding: 20px 20px 20px 70px;
+    box-shadow: 0 0 10px 0px;
+    border-radius: 5px;
+}
 .tasks-map {
     max-width: 500px;
     padding: 20px 20px 20px 70px;

@@ -51,6 +51,7 @@
             "modules/bootstrap/js/bootstrap.min.js",
             "modules/jsPDF/jsPDF.js",
             "modules/jsPDF/jspdf.plugin.autotable.min.js",
+            "modules/popUpMsg/app.js",
             // "modules/jsPDF/zlib.js",
             // "modules/jsPDF/png.js",
             // "modules/jsPDF/support_png.js",

@@ -1,0 +1,15 @@
+.award-badge #award-badge-form{
+	overflow: auto;
+}
+.award-badge .badges-info .img-circle {
+    width: 72px;
+}
+.award-badge .tooltip-inner {
+    max-width: none;
+}
+.award-badge .table > tbody > tr > td {
+    vertical-align: middle;
+}
+.badge-icon {
+    width: 72px;
+}

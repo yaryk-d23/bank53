@@ -1,20 +1,22 @@
 <div class="welcome">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-12 col-md-12 col-lg-7">
                 <div class="profile-header-container user-info">   
-                    <div class="profile-header-img text-center">
-                        <!-- <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" /> -->
-                        <div class="img-circle user-icon" style="background-image: url('/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}')"></div>
-                        <span class="rank-label-container">
-                            <div class="credits-info">{{ctrl.userInfo.xp}} XP</div>
-                            <div class="full-name-info">{{ctrl.userInfo.fullName}}</div>
-                            <span class="position-info">{{ctrl.userInfo.position}}</span>
-                            <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>
-                            <span class="department-info">{{ctrl.userInfo.department}}</span>
-                        </span>
+                    <div class="col-sm-12 col-md-12 col-lg-8">
+                        <div class="profile-header-img text-center">
+                            <!-- <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" /> -->
+                            <div class="img-circle user-icon" style="background-image: url('/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}')"></div>
+                            <span class="rank-label-container">
+                                <div class="credits-info">{{ctrl.userInfo.xp}} XP</div>
+                                <div class="full-name-info">{{ctrl.userInfo.fullName}}</div>
+                                <span class="position-info">{{ctrl.userInfo.position}}</span>
+                                <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>
+                                <span class="department-info">{{ctrl.userInfo.department}}</span>
+                            </span>
+                        </div>
                     </div>
-                    <div class="text-center">
+                    <div class="col-sm-12 col-md-12 col-lg-4 text-center">
                         <h4>Avatar</h4>
                         <div class="profile-header-container avatar">   
                             <div class="profile-header-img text-center">
@@ -26,43 +28,48 @@
                             </div>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                <h4 class="text-center">Recent Activity</h4>
-                <div ng-repeat="item in ctrl.recentTasks track by $index" class="col-sm-12 col-md-12 col-lg-4">
-                    <div ng-if="item['odata.type'] == 'SP.Data.BadgesTaskLogListItem'" class="recent-container">
-                        <div class="user-image">
-                            <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.AssignedTo.EMail}}" />
-                            <div>&nbsp;{{item.AssignedTo.Title}}</div>
-                        </div>
-                        <div>
-                            <div>{{item.Badge.Title}}: {{item.Title}}</div>
-                            <div>{{ctrl.moment(item.Created).format('MM/DD/YYYY h:mm a')}}</div>
-                        </div>
-                    </div>
-                    <div ng-if="item['odata.type'] == 'SP.Data.BadgesListListItem'" class="recent-container">
-                        <div class="user-image">
-                            <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.TaskLog.AssignedTo.EMail}}" />
-                            <div>&nbsp;{{item.TaskLog.AssignedTo.Title}}</div>
-                        </div>
-                        <div>
-                            <img class="img-circle" ng-src="{{item.Icon.Url}}" />
+            <div class="col-sm-12 col-md-12 col-lg-5 text-center">
+                <div class="recent-activity">
+                    <h4 class="text-center">Recent Activity</h4>
+                    <div ng-repeat="item in ctrl.recentTasks track by $index" class="col-sm-12 col-md-12 col-lg-12">
+                        <div ng-if="item['odata.type'] == 'SP.Data.BadgesTaskLogListItem'" class="recent-container">
+                            <div class="user-image">
+                                <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.AssignedTo.EMail}}" />
+                                <div>&nbsp;{{item.AssignedTo.Title}}</div>
+                            </div>
                             <div>
-                                <div>{{item.Title}}</div>
-                                <div>{{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}</div>
+                                <div>{{item.Badge.Title}}: {{item.Title}}</div>
+                                <div>{{ctrl.moment(item.Created).format('MM/DD/YYYY h:mm a')}}</div>
+                            </div>
+                        </div>
+                        <div ng-if="item['odata.type'] == 'SP.Data.BadgesListListItem'" class="recent-container">
+                            <div class="user-image">
+                                <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.TaskLog.AssignedTo.EMail}}" />
+                                <div>&nbsp;{{item.TaskLog.AssignedTo.Title}}</div>
+                            </div>
+                            <div>
+                                <img class="img-circle" ng-src="{{item.Icon.Url}}" />
+                                <div>
+                                    <div>{{item.Title}}</div>
+                                    <div>{{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
         <br/>
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+            
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-7 text-center">
                 <h4 class="text-center">Tasks Map</h4>
                 <div class="tasks-map">
                     <div ng-repeat="row in ctrl.groupedTasks track by $index"

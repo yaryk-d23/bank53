@@ -1,5 +1,6 @@
 (function(){
     angular.module('BadgesApp', [
+        'PopUpMsg'
         //'ngSanitize'
     ])
 

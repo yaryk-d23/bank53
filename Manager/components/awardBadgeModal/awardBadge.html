@@ -1,0 +1,66 @@
+<div class="award-badge text-center">
+    <div>
+        <button class="btn btn-primary"  data-toggle="modal" data-target="#award-badge-form">Award with a badge</button>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="award-badge-form">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">Award with a badge</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                            <div class="badges-info">
+                                <div style="position: relative; width: 100%;">
+                                    <div id="task-toast" class="snackbar"></div>
+                                </div>
+                                <table class="table table-bordered">
+                                    <tr ng-repeat="badge in ctrl.badges track by $index"
+                                        data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{ctrl.trustHtml(badge.Description)}}">
+                                        <td><img class="img-circle badge-icon" ng-src="{{badge.Icon.Url}}"  id="spinner"/></td>
+                                        <td><div>{{badge.Title}}</div></td>
+                                        <td><b>{{ctrl.getBadgeXP(badge.Tasks)}} XP</b></td>
+                                        <td>
+                                            <button 
+                                                ng-repeat="task in badge.Tasks"
+                                                type="button" 
+                                                class="btn btn-success" 
+                                                ng-click="ctrl.createTaskItem($event, task)" 
+                                                ng-disabled="ctrl.checkTask(task.Title,badge.Id)">
+                                                Add
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!-- <div class="badges-item  text-center" ng-repeat="badge in ctrl.badges track by $index">
+                                    <div class="badge-container">
+                                        <img class="img-circle" ng-src="{{badge.Icon.Url}}"  id="spinner"/>
+                                        <div class="rank-label-container">
+                                            <div><b>{{ctrl.getBadgeXP(badge.Tasks)}} XP</b></div>
+                                            <div>{{badge.Title}}</div>
+                                            <div ng-bind-html="ctrl.trustHtml(badge.Description)"></div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="badge-buttons">
+                                        <button 
+                                            ng-repeat="task in badge.Tasks"
+                                            type="button" 
+                                            class="btn btn-success" 
+                                            ng-click="ctrl.createTaskItem(task)" 
+                                            ng-disabled="ctrl.checkTask(task.Title,badge.Id)">
+                                            {{task.Title}}
+                                        </button>
+                                    </div>
+                                </div> -->
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

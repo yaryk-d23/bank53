@@ -52,11 +52,14 @@
                 "modules/angular/angular-validation.min.js",
                 "modules/angular/angular-validation-rule.min.js",
                 "modules/moment.min.js",
+                "modules/popUpMsg/app.js",
                 "Manager/manager-app.js",
+                "Manager/components/awardBadgeModal/awardBadge.js",
             ];
             var styles = [
                 "modules/bootstrap/css/bootstrap.css",
                 "Manager/manager-app.css",
+                "Manager/components/awardBadgeModal/awardBadge.css"
             ];
             for(var i=0;i<scripts.length;i++){
                 document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
@@ -86,12 +89,15 @@
                 </div>
             </nav>
             <h2>Manager Page</h2>
-            <div class="row">
+            <div class="container" ng-if="ctrl.currentUser.userRole=='User'">
+                <h1>Sorry, you don't have access to this page</h1>
+            </div>
+            <div class="row" ng-if="ctrl.currentUser.userRole=='Manager'">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form">
-                                <div class="form-group">
+                                <div class="form-group" id="select-user-container">
                                     <label>Select user</label>
                                     <input type="text" class="form-control"
                                         autocomplete="off"
@@ -103,13 +109,14 @@
                                         valid-method="watch"
                                         use-view-value="false"
                     
-                                        uib-typeahead="user as user.User.Title for user in ctrl.getUser($viewValue)"
+                                        uib-typeahead="user as user.User.Title for user in ctrl.getUser($viewValue,ctrl.currentUser.usesId)"
                                         typeahead-min-length="2"
                                         typeahead-loading="loadingLocations.SelectedUser"
                                         typeahead-no-results="noResults.SelectedUser"
                                         ng-class="{loading: loadingLocations.SelectedUser}"
                                         message-id="errorMessage-SelectedUser"
                                     >
+                                    <span class="clear-user glyphicon glyphicon-remove" ng-click="ctrl.clearSelectedUser()"></span>
                                     <div ng-show="noResults.SelectedUser && SelectedUser">
                                         <i class="glyphicon glyphicon-remove"></i> No Results Found
                                     </div>
@@ -119,103 +126,107 @@
                         </div>
                     </div>
                     <br/>
+                    <div class="row" ng-if="!ctrl.userInfo.userName">
+                        <table class="table">
+                            <tr>
+                                <th>#</th>
+                                <th>User</th>
+                                <th>XP</th>
+                                <th>Role</th>
+                                <th>Department</th>
+                                <th>Region</th>
+                            </tr>
+                            <tr ng-repeat="user in ctrl.allManagerUsers track by $index">
+                                <td>{{$index + 1}}</td>
+                                <td>
+                                    <div class="user-container">
+                                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{user.User.EMail}}" />
+                                        <div>{{user.User.Title}}</div>
+                                    </div>
+                                </td>
+                                <td>{{user.XP}}</td>
+                                <td>
+                                    <div>{{user.Role}}</div>
+                                </td>
+                                <td>
+                                    <div>{{user.Department}}</div>
+                                </td>
+                                <td>
+                                    <div>{{user.Region}}</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br/>
                     <div class="row" ng-if="ctrl.userInfo.userName">
-                        <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="col-sm-12 col-md-12 col-lg-7">
                             <div class="profile-header-container user-info">   
-                                <div class="profile-header-img text-center">
-                                    <!-- <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" /> -->
-                                    <div class="img-circle user-icon" style="background-image: url('/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}')"></div>
-                                    <span class="rank-label-container">
-                                        <div class="credits-info">{{ctrl.userInfo.xp}} XP</div>
-                                        <div class="full-name-info">{{ctrl.userInfo.fullName}}</div>
-                                        <span class="position-info">{{ctrl.userInfo.position}}</span>
-                                        <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>
-                                        <span class="department-info">{{ctrl.userInfo.department}}</span>
-                                    </span>
+                                <div class="col-sm-9">
+                                    <div class="profile-header-img text-center">
+                                        <!-- <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" /> -->
+                                        <div class="img-circle user-icon" style="background-image: url('/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}')"></div>
+                                        <span class="rank-label-container">
+                                            <div class="credits-info">{{ctrl.userInfo.xp}} XP</div>
+                                            <div class="full-name-info">{{ctrl.userInfo.fullName}}</div>
+                                            <span class="position-info">{{ctrl.userInfo.position}}</span>
+                                            <span ng-if="ctrl.userInfo.position && ctrl.userInfo.department">&nbsp;|&nbsp;</span>
+                                            <span class="department-info">{{ctrl.userInfo.department}}</span>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="text-center">
-                                    <h4>Avatar</h4>
-                                    <div class="profile-header-container avatar">   
-                                        <div class="profile-header-img text-center">
-                                            <img class="img-circle user-icon" ng-src="{{ctrl.userInfo.avatar.Url}}" />
-                                            <!-- <span class="rank-label-container">
-                                                <div class="full-name-info">{{ctrl.userInfo.avatarItem.Title}}</div>
-                                            </span> -->
-                                        </div>
+                                <div class="col-sm-3">
+                                    <award-badge badges="ctrl.allManagerBadges" all-tasks-log="ctrl.allTasksLog" user-info="ctrl.userInfo" update="ctrl.update"></award-badge>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br/>
+                                <div class=" text-center">
+                                    <div class="badges-title-info">Badges</div>
+                                    <div class="badges-item" ng-repeat="badge in ctrl.userAssignedBadges track by $index">
+                                        <img class="img-circle" ng-src="{{badge.Icon.Url}}" data-toggle="tooltip" data-placement="bottom" title="{{badge.Title}}"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br/>
-                    <div class="row" ng-if="ctrl.userInfo.userName">
-                        <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                            <h4 class="text-center">Recent Activity</h4>
-                            <div ng-repeat="item in ctrl.recentTasks track by $index" class="col-sm-12 col-md-12 col-lg-4">
-                                <div ng-if="item['odata.type'] == 'SP.Data.BadgesTaskLogListItem'" class="recent-container">
-                                    <div class="user-image">
-                                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.AssignedTo.EMail}}" />
-                                        <div>&nbsp;{{item.AssignedTo.Title}}</div>
-                                    </div>
-                                    <div>
-                                        <div>{{item.Badge.Title}}: {{item.Title}}</div>
-                                        <div>{{ctrl.moment(item.Created).format('MM/DD/YYYY h:mm a')}}</div>
-                                    </div>
-                                </div>
-                                <div ng-if="item['odata.type'] == 'SP.Data.BadgesListListItem'" class="recent-container">
-                                    <div class="user-image">
-                                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.TaskLog.AssignedTo.EMail}}" />
-                                        <div>&nbsp;{{item.TaskLog.AssignedTo.Title}}</div>
-                                    </div>
-                                    <div>
-                                        <img class="img-circle" ng-src="{{item.Icon.Url}}" />
+                        <div class="col-sm-12 col-md-12 col-lg-5 text-center">
+                            <div class="recent-activity">
+                                <h4 class="text-center">Recent Activity</h4>
+                                <div ng-repeat="item in ctrl.recentTasks track by $index" class="col-sm-12 col-md-12 col-lg-12">
+                                    <div ng-if="item['odata.type'] == 'SP.Data.BadgesTaskLogListItem'" class="recent-container">
+                                        <div class="user-image">
+                                            <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.AssignedTo.EMail}}" />
+                                            <div>&nbsp;{{item.AssignedTo.Title}}</div>
+                                        </div>
                                         <div>
-                                            <div>{{item.Title}}</div>
-                                            <div>{{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}</div>
+                                            <div>{{item.Badge.Title}}: {{item.Title}}</div>
+                                            <div>{{ctrl.moment(item.Created).format('MM/DD/YYYY h:mm a')}}</div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="item['odata.type'] == 'SP.Data.BadgesListListItem' || item['odata.type'] == 'SP.Data.BadgesListItem'" class="recent-container">
+                                        <div class="user-image">
+                                            <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.TaskLog.AssignedTo.EMail}}" />
+                                            <div>&nbsp;{{item.TaskLog.AssignedTo.Title}}</div>
+                                        </div>
+                                        <div>
+                                            <img class="img-circle recent-badge-icon" ng-src="{{item.Icon.Url}}" />
+                                            <div>
+                                                <div>{{item.Title}}</div>
+                                                <div>
+                                                    <span ng-if="item.BadgeType == 'Manager'">
+                                                        Awarded by {{item.TaskLog.Author.Title}}
+                                                    </span>
+                                                    <span>
+                                                        {{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>
                     <br/>
-                    <div class="row" ng-if="ctrl.userInfo.userName">
-                        <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                            <h4 class="text-center">Tasks Map</h4>
-                            <div class="tasks-map">
-                                <div ng-repeat="row in ctrl.groupedTasks track by $index"
-                                    ng-init="parentIdx = $index"
-                                    class="tasks-map-row" ng-class="{'reverse': $index%2!=0}">
-                                    <div class="map-item text-center bg-color-{{$index}}" 
-                                        ng-repeat="item in row track by $index"
-                                        ng-style="{'background-color': ctrl.colorArr[$index]}"
-                                        ng-init="isHover = false"
-                                        ng-mouseenter="isHover = true"
-                                        ng-mouseleave="isHover = false"
-                                        ng-class="{
-                                            'not-completed': (!isHover && !ctrl.checkTask(item.Title, item.BadgeId)),
-                                            'first-map-item': (parentIdx==0 && $index==0),
-                                            'end-bottom': (parentIdx%2==0 && $index==4),
-                                            'end-top': (parentIdx%2!=0 && $index==0),
-                                            'start-bottom': ((parentIdx%2!=0 && $index==4)),
-                                            'start-top': (parentIdx!=0 && parentIdx%2==0 && $index==0),
-                                            'last-map-item': (parentIdx==ctrl.groupedTasks.length-1 && $index==row.length-1)
-                                        }"
-                                    >
-                                        <!-- <span class="glyphicon glyphicon-star" 
-                                            ng-if="ctrl.checkTask(item.Title, item.BadgeId)">
-                                        </span> -->
-                                        <img 
-                                            class="avatar-image" 
-                                            ng-src="{{ctrl.userInfo.avatar.Url}}"
-                                            ng-if="ctrl.checkTask(item.Title, item.BadgeId) && ctrl.getLastCompletedTask() == item.Id"
-                                        >
-                                        <div class="snackbar">{{item.Badge.Title}}: {{item.Title}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

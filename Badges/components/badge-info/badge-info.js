@@ -5,10 +5,10 @@ angular.module('BadgesApp')
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$BadgesService', '$GeneratePDF', '$sce', '$q', badgeInfoCtrl]
+        controller: ['$BadgesService', '$GeneratePDF', '$sce', '$q' , '$PopUpMsg', badgeInfoCtrl]
     });
 
-function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q){
+function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
     var ctrl = this;
     ctrl.userInfo = {};
     ctrl.allBadges = [];
@@ -16,20 +16,6 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q){
     
 
     var urlTaskId = getParameterByName('task');
-    if(urlTaskId) {
-        $BadgesService.getTaskLogItems('$filter=Task/Id eq '+urlTaskId).then(function(taskRes){
-            if(!taskRes.length) {
-                $BadgesService.getTaskItems('$filter=Id eq '+urlTaskId).then(function (res){
-                    //ExecuteOrDelayUntilScriptLoaded(function(){
-                        ctrl.createTaskItem(res[0]);
-                    //}, "SP.js");
-                });
-            }
-            else{
-                window.history.pushState(null,null,'?');
-            }
-        });
-    }
 
     updateData();
     ctrl.generatePdf = function($event, task) {
@@ -44,7 +30,6 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q){
     };
 
     ctrl.createTaskItem = function(task){
-        
         var item = {
             Title: task.Title,
             Badge: task.BadgeId,
@@ -60,9 +45,24 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q){
             $BadgesService.updateUserLogItem(userItem).then(function(res){
                 updateData();
                 ctrl.showToast(task);
+                $PopUpMsg.show({
+                    title: task.Title + ' completed!', 
+                    body: getBadgeHtml(task)
+                });
             }); 
         });
-	}
+    };
+    
+    function getBadgeHtml(task){
+        var badgeHtml = '';
+        var el = angular.element(document.getElementById('badge_'+task.BadgeId));
+        var parentEl = angular.element('<div class="badges-info"><div class="badges-item text-center"></div></div>');
+        parentEl.find('.badges-item').append(angular.copy(el));
+        parentEl.find('.badges-item').append('<div><h3>'+task.Title+' +<b>'+task.XP+'XP</b></h3></div>');
+        badgeHtml = parentEl.html();
+        return badgeHtml;
+    }
+
     ctrl.getBadgeXP = function(tasks){
         var xp = 0;
         if(tasks && tasks.length)  {
@@ -93,15 +93,33 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q){
     function updateData(){
 		try{
         var requestData = {
-            taskLogItems: $BadgesService.getTaskLogItems(),
+            taskLogItems: $BadgesService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId),
             userProfile: $BadgesService.getUserProfile(),
-			allBadges: $BadgesService.getBadgesItems()
+			allBadges: $BadgesService.getBadgesItems("$filter=BadgeType eq 'User'")
         };
 		//alert('work');
         $q.all(requestData).then(function(res){
 			//alert('work');
             ctrl.allTask = res.taskLogItems;
-			ctrl.allBadges = res.allBadges;
+            ctrl.allBadges = res.allBadges;
+
+            //add task if id is exist
+            if(urlTaskId) {
+                $BadgesService.getTaskLogItems('$filter=Task/Id eq '+urlTaskId).then(function(taskRes){
+                    if(!taskRes.length) {
+                        $BadgesService.getTaskItems('$filter=Id eq '+urlTaskId).then(function (res){
+                            //ExecuteOrDelayUntilScriptLoaded(function(){
+                                ctrl.createTaskItem(res[0]);
+                            //}, "SP.js");
+                        });
+                    }
+                    else{
+                        window.history.pushState(null,null,'?');
+                    }
+                });
+            }
+
+            //set user info
             var data = res.userProfile;
             angular.forEach(data.UserProfileProperties, function(prop, key){
                 if(prop.Key == "PictureURL"){
