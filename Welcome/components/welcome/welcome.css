@@ -9,12 +9,12 @@
     margin-bottom: 5px;
 }
 .welcome .user-info {
-    padding: 20px 20px 20px 70px;
+    padding: 20px;
     box-shadow: 0 0 10px 0px;
     border-radius: 5px;
 }
 .user-info .user-icon{
-    width: 250px;
+    width: 200px;
     background-size: cover;
     background-position: center;
     margin: auto;
@@ -31,9 +31,12 @@
     font-size: 18px;
 }
 .welcome .recent-activity {
-    padding: 20px 20px 20px 70px;
+    padding: 20px;
     box-shadow: 0 0 10px 0px;
     border-radius: 5px;
+}
+.recent-container .recent-badge-icon {
+    width: 72px;
 }
 .tasks-map {
     max-width: 500px;
@@ -53,12 +56,22 @@
     flex-direction: row-reverse;
     justify-content: flex-end;
 }
-.tasks-map-row.reverse .map-item:nth-child(2),
-.tasks-map-row.reverse .map-item:nth-child(4){
+.tasks-map-row:not(.first-map-row) .map-item:nth-child(2),
+.tasks-map-row:not(.first-map-row) .map-item:nth-child(4){
     flex: 0 23%;
 }
-.tasks-map-row.reverse .map-item:nth-child(3) {
+.tasks-map-row:not(.first-map-row) .map-item:nth-child(3) {
     flex: 0 24%;
+}
+.tasks-map-row .empty-map-item {
+    background: none!important;
+    border: none;
+    cursor: default;
+}
+.tasks-map-row .empty-map-item:after {
+    background: none!important;
+    border: none;
+    cursor: default;
 }
 .map-item {
     display: flex;

@@ -109,7 +109,7 @@
                                         valid-method="watch"
                                         use-view-value="false"
                     
-                                        uib-typeahead="user as user.User.Title for user in ctrl.getUser($viewValue,ctrl.currentUser.usesId)"
+                                        uib-typeahead="user as user.User.Title for user in ctrl.getUser($viewValue,ctrl.currentUser.userId)"
                                         typeahead-min-length="2"
                                         typeahead-loading="loadingLocations.SelectedUser"
                                         typeahead-no-results="noResults.SelectedUser"
@@ -126,10 +126,11 @@
                         </div>
                     </div>
                     <br/>
-                    <div class="row" ng-if="!ctrl.userInfo.userName">
-                        <table class="table">
+                    <div class="row manager-users" ng-if="!ctrl.userInfo.userName">
+                        <table class="table table-responsive">
                             <tr>
                                 <th>#</th>
+                                <th>Manage</th>
                                 <th>User</th>
                                 <th>XP</th>
                                 <th>Role</th>
@@ -138,6 +139,11 @@
                             </tr>
                             <tr ng-repeat="user in ctrl.allManagerUsers track by $index">
                                 <td>{{$index + 1}}</td>
+                                <td>
+                                    <div class="manage-user text-center">
+                                        <i class="glyphicon glyphicon-cog" ng-click="ctrl.selectUser(user.User.Title)"></i>
+                                    </div>
+                                </td>
                                 <td>
                                     <div class="user-container">
                                         <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{user.User.EMail}}" />
@@ -159,9 +165,9 @@
                     </div>
                     <br/>
                     <div class="row" ng-if="ctrl.userInfo.userName">
-                        <div class="col-sm-12 col-md-12 col-lg-7">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
                             <div class="profile-header-container user-info">   
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <div class="profile-header-img text-center">
                                         <!-- <img class="img-circle user-icon" ng-src="/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}" /> -->
                                         <div class="img-circle user-icon" style="background-image: url('/_layouts/15/userphoto.aspx?size=L&username={{ctrl.userInfo.userName}}')"></div>
@@ -174,7 +180,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-4">
                                     <award-badge badges="ctrl.allManagerBadges" all-tasks-log="ctrl.allTasksLog" user-info="ctrl.userInfo" update="ctrl.update"></award-badge>
                                 </div>
                                 <div class="clearfix"></div>
@@ -187,7 +193,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-12 col-lg-5 text-center">
+                        <div class="col-sm-12 col-md-12 col-lg-6 text-center">
                             <div class="recent-activity">
                                 <h4 class="text-center">Recent Activity</h4>
                                 <div ng-repeat="item in ctrl.recentTasks track by $index" class="col-sm-12 col-md-12 col-lg-12">
@@ -211,12 +217,12 @@
                                             <div>
                                                 <div>{{item.Title}}</div>
                                                 <div>
-                                                    <span ng-if="item.BadgeType == 'Manager'">
+                                                    <div ng-if="item.BadgeType == 'Manager'">
                                                         Awarded by {{item.TaskLog.Author.Title}}
-                                                    </span>
-                                                    <span>
+                                                    </div>
+                                                    <div>
                                                         {{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}
-                                                    </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

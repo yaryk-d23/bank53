@@ -63,7 +63,7 @@ angular.module('ManagerApp')
                 
     
                 $PopUpMsg.show({
-                    title: 'Add new badge!', 
+                    title: 'Badge has been assigned', 
                     body: newTable.html()
                 });
                 ctrl.update += 1;

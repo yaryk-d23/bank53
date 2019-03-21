@@ -15,6 +15,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     var ctrl = this;
     ctrl.userInfo = ctrl.user;
     ctrl.allTasks = [];
+    ctrl.allUserTasks = [];
     ctrl.allTasksLog = [];
     ctrl.groupedTasks = [];
     var recentTasks = [];
@@ -30,22 +31,24 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
 
     $WelcomeService.getTaskItems().then(function(res) {
         ctrl.allTasks = res;
-        ctrl.groupedTasks = createChunksFromArra(ctrl.allTasks, 5);
+        ctrl.groupedTasks = createChunksFromArray(ctrl.allUserTasks, 5);
     });
 
     var requests = {
         allBadges: $WelcomeService.getBadgesItems(),
+        allUserTasks: $WelcomeService.getTaskItems("$filter=BadgeType eq 'User'"),
         allTasks: $WelcomeService.getTaskItems(),
         allTasksLog: $WelcomeService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId),
         userProfile: $WelcomeService.getUserProfile(),
-        recentTasks: $WelcomeService.getTaskLogItems('$top=20&$orderby=Created desc&$select=*,Badge/Id,Badge/Title,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=Badge,AssignedTo'),
+        recentTasks: $WelcomeService.getTaskLogItems('$top=20&$orderby=Created desc&$select=*,Badge/Id,Badge/Title,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id,Author/Id,Author/Title&$expand=Badge,AssignedTo,Author'),
     };
 
     $q.all(requests).then(function(data){
         allBadges = data.allBadges;
         ctrl.allTasks = data.allTasks;
+        ctrl.allUserTasks = data.allUserTasks;
         
-        ctrl.groupedTasks = createChunksFromArra(ctrl.allTasks, 5);
+        ctrl.groupedTasks = createChunksFromArray(ctrl.allUserTasks, 5);
         ctrl.allTasksLog = data.allTasksLog;
         
 
@@ -62,6 +65,9 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
             if(prop.Key == "Title"){
                 ctrl.userInfo.position = prop.Value || '';
             }
+            if(prop.Key == "Manager"){
+                ctrl.userInfo.managerLogName = prop.Value || '';
+            }
         });
         ctrl.userInfo.fullName = data.userProfile.DisplayName;
         $WelcomeService.getUserLogItem(ctrl.userInfo.userName).then(function(res){
@@ -72,22 +78,34 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                 ctrl.userInfo.userItemId = user.Id;
                 ctrl.userInfo.avatar = user.Avatar;
                 ctrl.userInfo.avatarItem = user.AvatarItem;
+                ctrl.userInfo.userRole = user.UserRole;
+                
             }
             else {
-                var newItem = { 
-                    Title : ctrl.userInfo.fullName,
-                    UserId: _spPageContextInfo.userId,
-                    Credits: 100,
-                    XP: 0,
-                    __metadata:  {type: 'SP.Data.UsersLogListItem' }
-                };
-                $WelcomeService.createUserLogItem(newItem).then(function(item){
-                    var user = item;
-                    ctrl.userInfo.credits = user.Credits || 0;
-                    ctrl.userInfo.xp = user.XP || 0;
-                    ctrl.userInfo.userItemId = user.Id;
-                    ctrl.userInfo.avatar = user.Avatar;
-                    ctrl.userInfo.avatarItem = user.AvatarItem;
+                $WelcomeService.getSPUser(ctrl.userInfo.managerLogName).then(function(res){
+                    var newItem = { 
+                        Title : ctrl.userInfo.fullName,
+                        UserId: _spPageContextInfo.userId,
+                        Department: ctrl.userInfo.department,
+                        Position: ctrl.userInfo.position,
+                        Credits: 100,
+                        XP: 0,
+                        __metadata:  {type: 'SP.Data.UsersLogListItem' }
+                    };
+                    if(res.length == 1){
+                        newItem['ManagerId'] = res[0].Id;
+                        newItem['UserRole'] = 'User';
+                    }
+                    $WelcomeService.createUserLogItem(newItem).then(function(item){
+                        var user = item;
+                        ctrl.userInfo.credits = user.Credits || 0;
+                        ctrl.userInfo.xp = user.XP || 0;
+                        ctrl.userInfo.userItemId = user.Id;
+                        ctrl.userInfo.avatar = user.Avatar;
+                        ctrl.userInfo.avatarItem = user.AvatarItem;
+                        ctrl.userInfo.userRole = user.UserRole;
+                        
+                    });
                 });
             }
         });
@@ -116,24 +134,9 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                 }
             });
         });
-        // for(var i=0;i<recentTasks.length;i++){
-        //     if(ctrl.recentTasks.length < 3){
-        //         let req = await $WelcomeService.getTaskLogItems('$filter=BadgeId eq '+recentTasks[i].BadgeId+'&$select=*,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=AssignedTo');
-        //         if(getSumOfXP(req) == getSumOfXP(groupedTasksByBadge[recentTasks[i].BadgeId])){
-        //             let badge = await $WelcomeService.getBadgesItems('$filter=Id eq '+recentTasks[i].BadgeId);
-        //             badge[0]['TaskLog'] = recentTasks[i];
-        //             if(!checkIfItemExist(badge[0])){
-        //                 ctrl.recentTasks.push(badge[0]);
-        //             }
-        //         }
-        //         else {
-        //             ctrl.recentTasks.push(recentTasks[i]); 
-        //         }
-        //     }
-        // }
     });
-		}
-		catch(e){alert(e);}
+    }
+    catch(e){alert(e);}
 
     function checkIfItemExist(badge){
         var isExist = false;
@@ -174,7 +177,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     };
     ctrl.getLastCompletedTask = function(){
         var taskId = 0;
-        angular.forEach(ctrl.allTasks, function(task, key){
+        angular.forEach(ctrl.allUserTasks, function(task, key){
             if(ctrl.checkTask(task.Title, task.BadgeId)){
                 taskId = task.Id;
             }
@@ -192,12 +195,20 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
         return flag;
     };
 
-    function createChunksFromArra(array, chankLength){
+    function createChunksFromArray(array, chankLength){
         var temparray = [];
         var i,j;
         for (i=0,j=array.length; i<j; i+=chankLength) {
             temparray.push(array.slice(i,i+chankLength));
         }
+        angular.forEach(temparray, function(value,k){
+            if(value.length < 5){
+                var emptyLength = 5-value.length;
+                for(var i=0;i<emptyLength;i++){
+                    value.push({isEmpty: true});
+                }
+            }
+        });
         return temparray;
     }
 

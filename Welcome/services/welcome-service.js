@@ -12,8 +12,35 @@ angular.module('WelcomeApp')
             getTaskItems: getTaskItems,
             uploadFile: uploadFile,
             getBadgeIcon: getBadgeIcon,
-            getAvatarsItems: getAvatarsItems
+            getAvatarsItems: getAvatarsItems,
+            getSPUser: getSPUser
         };
+
+        function getSPUser(query){
+            var url = _spPageContextInfo.webAbsoluteUrl +
+                '/_api/web/siteusers?'+
+                "$select="+[
+                    "Id",
+                    "Title",
+                    "Email"
+                ].join(",")+
+                "&$top=20"+
+                "&$filter=("+[
+                    "substringof('" + query + "',LoginName)",
+                    "substringof('" + query.toLowerCase() + "',LoginName)"
+                ].join(" or ")
+                + ") and PrincipalType eq 1";
+            return $http({
+                method: 'GET',
+                headers: {
+                    "accept": "application/json;odata=verbose",
+                    "content-type": "application/json;odata=verbose"
+                },
+                url: url                    
+            }).then(function (res) {
+                return res.data.d.results;
+            });
+        }
 
         function getUserProfile(){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/SP.UserProfiles.PeopleManager/GetMyProperties')

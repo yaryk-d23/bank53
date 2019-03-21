@@ -81,6 +81,6 @@ function userInfoCtrl($DashboardService, $q){
           (rv[x[key]] = rv[x[key]] || []).push(x);
           return rv;
         }, {});
-      };
+    }
 
 }

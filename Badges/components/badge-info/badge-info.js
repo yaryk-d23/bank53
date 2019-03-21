@@ -42,24 +42,58 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
                 Id: ctrl.userInfo.userItemId,
                 XP: ctrl.userInfo.xp + task.XP
             };
-            $BadgesService.updateUserLogItem(userItem).then(function(res){
+            var requests = {
+                allBadges: $BadgesService.getBadgesItems('$filter=Id eq '+task.BadgeId),
+                allTask: $BadgesService.getTaskLogItems('$filter=BadgeId eq '+task.BadgeId+' and AssignedToId eq '+_spPageContextInfo.userId),
+                tasksListItems: $BadgesService.getTaskItems('$filter=BadgeId eq '+task.BadgeId),
+                updateUserLogItem: $BadgesService.updateUserLogItem(userItem),
+            };
+            $q.all(requests).then(function(res){
                 updateData();
                 ctrl.showToast(task);
-                $PopUpMsg.show({
-                    title: task.Title + ' completed!', 
-                    body: getBadgeHtml(task)
-                });
-            }); 
+
+                var grupedTaskByBadge = groupBy(res.allTask, 'BadgeId');
+                var grupedTasksItemsByBadge = groupBy(res.tasksListItems, 'BadgeId');
+                var badge = res.allBadges[0];
+                if(grupedTaskByBadge[badge.Id] && grupedTaskByBadge[badge.Id].length == grupedTasksItemsByBadge[badge.Id].length){
+                    $PopUpMsg.show({
+                        title: '<div>' + task.Title + ' Completed<br/>You Achived a new Badge</div>', 
+                        body: getBadgeHtml(task, badge)
+                    });
+                }
+                else {
+                    $PopUpMsg.show({
+                        title: '<div>' + task.Title + ' Completed</div>',  
+                        body: getBadgeHtml(task)
+                    });
+                }
+            });
+
+            // $BadgesService.updateUserLogItem(userItem).then(function(res){
+            //     updateData();
+            //     ctrl.showToast(task);
+            //     $PopUpMsg.show({
+            //         title: task.Title + ' completed!', 
+            //         body: getBadgeHtml(task)
+            //     });
+            // }); 
         });
     };
     
-    function getBadgeHtml(task){
+    function getBadgeHtml(task, badge){
         var badgeHtml = '';
-        var el = angular.element(document.getElementById('badge_'+task.BadgeId));
-        var parentEl = angular.element('<div class="badges-info"><div class="badges-item text-center"></div></div>');
-        parentEl.find('.badges-item').append(angular.copy(el));
-        parentEl.find('.badges-item').append('<div><h3>'+task.Title+' +<b>'+task.XP+'XP</b></h3></div>');
-        badgeHtml = parentEl.html();
+        if(badge){
+            badgeHtml = '<div class="text-center">'+
+                        '<div><h4>'+task.Title+' +'+task.XP+'XP</h4></div>'+
+                        '<img class="img-circle" src="'+badge.Icon.Url+'"/>'+
+                        '<div>'+badge.Title+'</div>'+
+                        '</div>';
+        }
+        else {
+            badgeHtml = '<div class="text-center">'+
+                        '<div><div><h4>'+task.Title+'</h4></div><div>+'+task.XP+'XP</div></div>'+
+                        '</div>';
+        }
         return badgeHtml;
     }
 
@@ -97,7 +131,6 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
             userProfile: $BadgesService.getUserProfile(),
 			allBadges: $BadgesService.getBadgesItems("$filter=BadgeType eq 'User'")
         };
-		//alert('work');
         $q.all(requestData).then(function(res){
 			//alert('work');
             ctrl.allTask = res.taskLogItems;
@@ -148,41 +181,12 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
 		}
 		catch(e){
 			alert(e);
-		};
-        // $BadgesService.getTaskLogItems().then(function(res){
-        //     ctrl.allTask = res;
-        //     $scope.$apply();
-        // });
-        // $BadgesService.getUserProfile().then(function(data){
-        //     angular.forEach(data.UserProfileProperties, function(prop, key){
-        //         if(prop.Key == "PictureURL"){
-        //             ctrl.userInfo.pictureUrl = prop.Value;
-        //         }
-        //         if(prop.Key == "UserName"){
-        //             ctrl.userInfo.userName = prop.Value;
-        //         }
-        //         if(prop.Key == "Department"){
-        //             ctrl.userInfo.department = prop.Value || '';
-        //         }
-        //         if(prop.Key == "Title"){
-        //             ctrl.userInfo.position = prop.Value || '';
-        //         }
-        //     });
-        //     ctrl.userInfo.fullName = data.DisplayName;
-        //     $BadgesService.getUserLogItem(ctrl.userInfo.userName).then(function(data){
-        //         if(data.length) {
-        //             var user = data[0];
-        //             ctrl.userInfo.credits = user.Credits || 0;
-        //             ctrl.userInfo.xp = user.XP || 0;
-        //             ctrl.userInfo.userItemId = user.Id;
-        //         }
-        //     });
-        // });
+		}
     }
 
     ctrl.trustHtml = function(html) {
         return $sce.trustAsHtml(html);
-    }
+    };
 
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
@@ -192,8 +196,15 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
         if (!results) return null;
         if (!results[2]) return '';
         return parseInt(decodeURIComponent(results[2].replace(/\+/g, " ")), 10);
-      }
-      var getStyle= function(startY,haveHeader,drawHeaderRow, drawCell, drawRow, customHeader){
+    }
+
+    function groupBy(xs, key) {
+        return xs.reduce(function(rv, x) {
+          (rv[x[key]] = rv[x[key]] || []).push(x);
+          return rv;
+        }, {});
+    }
+    var getStyle= function(startY,haveHeader,drawHeaderRow, drawCell, drawRow, customHeader){
         var result ={
             margin: {
                         top: 40,

@@ -1,7 +1,7 @@
 <div class="welcome">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-7">
+            <div class="col-sm-12 col-md-12 col-lg-6">
                 <div class="profile-header-container user-info">   
                     <div class="col-sm-12 col-md-12 col-lg-8">
                         <div class="profile-header-img text-center">
@@ -29,9 +29,10 @@
                         </div>
                     </div>
                     <div class="clearfix"></div>
+                    <br/>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-5 text-center">
+            <div class="col-sm-12 col-md-12 col-lg-6 text-center">
                 <div class="recent-activity">
                     <h4 class="text-center">Recent Activity</h4>
                     <div ng-repeat="item in ctrl.recentTasks track by $index" class="col-sm-12 col-md-12 col-lg-12">
@@ -45,16 +46,23 @@
                                 <div>{{ctrl.moment(item.Created).format('MM/DD/YYYY h:mm a')}}</div>
                             </div>
                         </div>
-                        <div ng-if="item['odata.type'] == 'SP.Data.BadgesListListItem'" class="recent-container">
+                        <div ng-if="item['odata.type'] == 'SP.Data.BadgesListListItem' || item['odata.type'] == 'SP.Data.BadgesListItem'" class="recent-container">
                             <div class="user-image">
                                 <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{item.TaskLog.AssignedTo.EMail}}" />
                                 <div>&nbsp;{{item.TaskLog.AssignedTo.Title}}</div>
                             </div>
                             <div>
-                                <img class="img-circle" ng-src="{{item.Icon.Url}}" />
+                                <img class="img-circle recent-badge-icon" ng-src="{{item.Icon.Url}}" />
                                 <div>
                                     <div>{{item.Title}}</div>
-                                    <div>{{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}</div>
+                                    <div>
+                                        <div ng-if="item.BadgeType == 'Manager'">
+                                            Awarded by {{item.TaskLog.Author.Title}}
+                                        </div>
+                                        <div>
+                                            {{ctrl.moment(item.TaskLog.Created).format('MM/DD/YYYY h:mm a')}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -69,13 +77,18 @@
         </div>
         <br/>
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-7 text-center">
+            <div class="col-sm-12 col-md-12 col-lg-6 text-center">
                 <h4 class="text-center">Tasks Map</h4>
                 <div class="tasks-map">
                     <div ng-repeat="row in ctrl.groupedTasks track by $index"
                         ng-init="parentIdx = $index"
-                        class="tasks-map-row" ng-class="{'reverse': $index%2!=0}">
-                        <div class="map-item text-center bg-color-{{$index}}" 
+                        class="tasks-map-row" 
+                        ng-class="{'reverse': $index%2!=0,
+                                    'first-map-row': $index==0
+                                }"
+                    >
+                        <div class="map-item text-center bg-color-{{$index}}"
+                            ng-if="!item.isEmpty" 
                             ng-repeat="item in row track by $index"
                             ng-click="ctrl.generatePdf($event, item);"
                             ng-style="{'background-color': ctrl.colorArr[$index]}"
@@ -102,9 +115,26 @@
                             >
                             <div class="snackbar">{{item.Badge.Title}}: {{item.Title}}</div>
                         </div>
+                        <div class="map-item text-center empty-map-item"
+                            ng-repeat="item in row track by $index"
+                            ng-class="{
+                                'not-completed': (!isHover && !ctrl.checkTask(item.Title, item.BadgeId)),
+                                'first-map-item': (parentIdx==0 && $index==0),
+                                'end-bottom': (parentIdx%2==0 && $index==4),
+                                'end-top': (parentIdx%2!=0 && $index==0),
+                                'start-bottom': ((parentIdx%2!=0 && $index==4)),
+                                'start-top': (parentIdx!=0 && parentIdx%2==0 && $index==0),
+                                'last-map-item': (parentIdx==ctrl.groupedTasks.length-1 && $index==row.length-1)
+                            }"
+                            ng-if="item.isEmpty">
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 text-center">
+                <a ng-if="ctrl.userInfo.userRole == 'Manager'" class="btn btn-success" href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Manager.aspx">Manager Page</a>
+            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>

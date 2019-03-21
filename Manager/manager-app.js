@@ -71,7 +71,7 @@
                     ctrl.currentUser.avatar = user.Avatar;
                     ctrl.currentUser.avatarItem = user.AvatarItem;
                     ctrl.currentUser.userRole = user.UserRole;
-                    ctrl.currentUser.usesId = _spPageContextInfo.userId;
+                    ctrl.currentUser.userId = _spPageContextInfo.userId;
                 }
             });
         });
@@ -169,6 +169,14 @@
             ctrl.userInfo = {};
         };
 
+        ctrl.selectUser = function(userName){
+            $ManagerService.getUser(userName,ctrl.currentUser.userId).then(function(res){
+                if(res.length == 1){
+                    ctrl.selectedUser = res[0];
+                }
+            });
+        };
+
         ctrl.getBadgeXP = function(tasks){
             var xp = 0;
             if(tasks && tasks.length)  {
@@ -220,76 +228,6 @@
             x.className = "show snackbar";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         };
-        // ctrl.getData = function(){
-        //     if(ctrl.selectedUser == null || typeof ctrl.selectedUser != 'object') return;
-        //     var requests = {
-        //         allBadges: $ManagerService.getBadgesItems(),
-        //         allTasks: $ManagerService.getTaskItems(),
-        //         allTasksLog: $ManagerService.getTaskLogItems('$filter=AssignedToId eq '+ctrl.selectedUser.User.Id),
-        //         userProfile: $ManagerService.getUserProfile(encodeURIComponent(ctrl.selectedUser.User.Name)),
-        //         recentTasks: $ManagerService.getTaskLogItems('$top=20&$orderby=Created desc&$select=*,Badge/Id,Badge/Title,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=Badge,AssignedTo'),
-        //     };
-        //     $q.all(requests).then(function(data){
-        //         allBadges = data.allBadges;
-        //         ctrl.allTasks = data.allTasks;
-                
-        //         ctrl.groupedTasks = createChunksFromArra(ctrl.allTasks, 5);
-        //         ctrl.allTasksLog = data.allTasksLog;
-                
-    
-        //         angular.forEach(data.userProfile.UserProfileProperties, function(prop, key){
-        //             if(prop.Key == "PictureURL"){
-        //                 ctrl.userInfo.pictureUrl = prop.Value;
-        //             }
-        //             if(prop.Key == "UserName"){
-        //                 ctrl.userInfo.userName = prop.Value;
-        //             }
-        //             if(prop.Key == "Department"){
-        //                 ctrl.userInfo.department = prop.Value || '';
-        //             }
-        //             if(prop.Key == "Title"){
-        //                 ctrl.userInfo.position = prop.Value || '';
-        //             }
-        //         });
-        //         ctrl.userInfo.fullName = data.userProfile.DisplayName;
-        //         $ManagerService.getUserLogItem(ctrl.userInfo.userName).then(function(res){
-        //             var user = res[0];
-        //             ctrl.userInfo.credits = user.Credits || 0;
-        //             ctrl.userInfo.xp = user.XP || 0;
-        //             ctrl.userInfo.userItemId = user.Id;
-        //             ctrl.userInfo.avatar = user.Avatar;
-        //             ctrl.userInfo.avatarItem = user.AvatarItem;
-        //         });
-        //         var groupedTasksByBadge = groupBy(ctrl.allTasks, 'BadgeId');
-        //         recentTasks = data.recentTasks;
-        //         var recentActRequests = {};
-        //         for(var i=0;i<recentTasks.length;i++){
-        //             recentActRequests[i] = $ManagerService.getTaskLogItems('$filter=BadgeId eq '+recentTasks[i].BadgeId+'&$select=*,AssignedTo/Title,AssignedTo/EMail,AssignedTo/Id&$expand=AssignedTo');
-        //         }
-                
-        //         $q.all(recentActRequests).then(function(res){
-        //             angular.forEach(res, function(req, key){
-        //                 if(ctrl.recentTasks.length < 3){
-        //                     if(getSumOfXP(req) == getSumOfXP(groupedTasksByBadge[recentTasks[key].BadgeId])){
-        //                         var badge = allBadges.filter(function(x){
-        //                             return x.Id == recentTasks[key].BadgeId;
-        //                         })[0];
-        //                         badge['TaskLog'] = recentTasks[key];
-        //                         if(!checkIfItemExist(badge)){
-        //                             ctrl.recentTasks.push(badge);
-        //                         }
-        //                     }
-        //                     else {
-        //                         ctrl.recentTasks.push(recentTasks[key]); 
-        //                     }
-        //                 }
-        //             });
-        //         });
-        //     });
-
-        // }
-
-        
 
         function checkIfItemExist(badge){
             var isExist = false;
@@ -310,51 +248,6 @@
                 sum += item.XP;
             });
             return sum;
-        }
-
-        ctrl.generatePdf = function($event, task) {
-            if(task.LinkedSource){
-                window.open(task.LinkedSource.Url, '_blank');
-                return;
-            }
-            else {
-                $ManagerService.getBadgeIcon(task.BadgeId).then(function(icon){
-                    var myImage = new Image();
-                    myImage.src = icon.Url;
-                    myImage.onload = function(){
-                        $GeneratePDF.generatePDF($event, task, myImage);
-                    };
-                });
-            }
-
-        };
-        // ctrl.getLastCompletedTask = function(){
-        //     var taskId = 0;
-        //     angular.forEach(ctrl.allTasks, function(task, key){
-        //         if(ctrl.checkTask(task.Title, task.BadgeId)){
-        //             taskId = task.Id;
-        //         }
-        //     });
-        //     return taskId;
-        // };
-
-        // ctrl.checkTask = function(taskName, badgeId){
-        //     var flag = false;
-        //     angular.forEach(ctrl.allTasksLog,function(task, key){
-        //         if(task.Title == taskName && task.BadgeId == badgeId){
-        //             flag = true;
-        //         }
-        //     });
-        //     return flag;
-        // };
-
-        function createChunksFromArra(array, chankLength){
-            var temparray = [];
-            var i,j;
-            for (i=0,j=array.length; i<j; i+=chankLength) {
-                temparray.push(array.slice(i,i+chankLength));
-            }
-            return temparray;
         }
 
         function groupBy(xs, prop) {
@@ -378,8 +271,11 @@
             getTaskItems: getTaskItems,
             getBadgeIcon: getBadgeIcon,
             getAvatarsItems: getAvatarsItems,
-            getUser: getUser
+            getUser: getUser,
         };
+
+        
+
         function getUser(query, managerId){
             var url = _spPageContextInfo.webAbsoluteUrl +
                 '/_api/web/lists/getbytitle(\'UsersLog\')/items?'+
