@@ -38,7 +38,7 @@
         // $ApiService.getListItems('TSProjectTracker').then(function(res){
         //     	console.log(res);
         //     });
-		$ApiService.getListItems('Tiles').then(function(res){
+		$ApiService.getListItems('Tiles', '$filter=IsVisible eq 1').then(function(res){
 			ctrl.tiles = res;
 		});
         // ctrl.openNewTrackForm = function(tile){

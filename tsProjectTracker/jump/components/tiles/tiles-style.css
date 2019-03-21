@@ -5,10 +5,13 @@
 }
 .tiles .tile {
     display: flex;
-    flex: 0 25%;
+    flex: 0 33.33%;
     flex-direction: column;
     padding: 10px 20px;
     box-sizing: border-box;
+}
+.tiles .tile:first-child {
+	flex: 0 33.34%;
 }
 .tiles .tile-title {
 	margin-top: 15px;
@@ -19,6 +22,8 @@
     background-size: cover;
     background-position: center;
     width: 100%;
+	cursor: pointer;
+	display: block;
 }
 .tiles .tile-image:after{
     content: "";
@@ -26,7 +31,7 @@
     padding-bottom: 100%;
 }
 .tiles .tile-container{
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	/*box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);*/
     transition: 0.3s;
 
 }
