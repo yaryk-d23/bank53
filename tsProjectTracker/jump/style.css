@@ -20,3 +20,15 @@
 .ui-select-multiple.ui-select-bootstrap input.ui-select-search {
     min-width: 100%; 
 }
+.b * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  *behavior: url(https://thebank.info53.com/teams/HCInt/Learn/OT/Custom/app/tsprojecttracker/modules/boxsizing.htc);
+}
+.b *:before, .b *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  *behavior: url(https://thebank.info53.com/teams/HCInt/Learn/OT/Custom/app/tsprojecttracker/modules/boxsizing.htc);
+}
