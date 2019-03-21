@@ -105,7 +105,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
 
             //add task if id is exist
             if(urlTaskId) {
-                $BadgesService.getTaskLogItems('$filter=Task/Id eq '+urlTaskId).then(function(taskRes){
+                $BadgesService.getTaskLogItems('$filter=Task/Id eq '+urlTaskId+' and AssignedTo/Id eq '+_spPageContextInfo.userId).then(function(taskRes){
                     if(!taskRes.length) {
                         $BadgesService.getTaskItems('$filter=Id eq '+urlTaskId).then(function (res){
                             //ExecuteOrDelayUntilScriptLoaded(function(){
