@@ -27,6 +27,7 @@
         };
 
         ctrl.isActiveLink = function(link){
+			if(!link.Link) return;
             return location.href.indexOf(link.Link.Url) != -1;
         };
     }
