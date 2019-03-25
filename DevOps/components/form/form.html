@@ -1,0 +1,149 @@
+<div class="track-form">
+    <div class="modal fade" tabindex="-1" role="dialog" id="new-track-form">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">TS Project Tracker</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="Title">Project Name</label>
+                                <input type="text" class="form-control" id="Title" ng-model="ctrl.item.Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="LineOfBusiness">Line of Business</label>
+                                <input type="text" class="form-control" id="LineOfBusiness" ng-model="ctrl.item.LineOfBusiness">
+                            </div>
+                            <div class="form-group">
+                                <label for="LDLeader">L&D Leader</label>
+                                <!-- <input type="text" class="form-control"
+                                    autocomplete="off"
+                                    id="Contact"
+                                    name="Contact"
+                                    ng-model="ctrl.item.zagt"
+                                    maxlength="255"
+                                    validator="requiredUser"
+                                    valid-method="watch"
+                                    use-view-value="false"
+                
+                                    uib-typeahead="user as user.Title for user in ctrl.getUser($viewValue)"
+                                    typeahead-min-length="2"
+                                    typeahead-loading="loadingLocations.Contact"
+                                    typeahead-no-results="noResults.Contact"
+                                    ng-class="{loading: loadingLocations.Contact}"
+                                    message-id="errorMessage-Contact"
+                                >
+                                <div ng-show="noResults.Contact && Contact">
+                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                </div>
+                                <div id="errorMessage-Contact"></div> -->
+                                <ui-select 
+                                    multiple 
+                                    ng-model="ctrl.item.LDLeader" 
+                                    theme="bootstrap" 
+                                    close-on-select="true" 
+                                    title="Choose a person"
+                                >
+                                    <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
+                                    <ui-select-choices 
+                                    refresh="ctrl.getUsers($select)"
+                                        refresh-delay="0"
+                                        repeat="user as user in ctrl.allUsers | propsFilter: {Title: $select.search, Email: $select.search}">
+                                        <div ng-bind-html="user.Title | highlight: $select.search"></div>
+                                        <small>
+                                            email: {{user.Email}}
+                                        </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group">
+                                <label for="VendorContractor">Vendor / Contractor</label>
+                                <ui-select 
+                                    multiple 
+                                    ng-model="ctrl.item.VendorContractor" 
+                                    theme="bootstrap" 
+                                    close-on-select="true" 
+                                    title="Choose a person"
+                                >
+                                    <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
+                                    <ui-select-choices 
+                                    refresh="ctrl.getUsers($select)"
+                                        refresh-delay="0"
+                                        repeat="user as user in ctrl.allUsers | propsFilter: {Title: $select.search, Email: $select.search}">
+                                        <div ng-bind-html="user.Title | highlight: $select.search"></div>
+                                        <small>
+                                            email: {{user.Email}}
+                                        </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group">
+                                <label for="Budget">Budget</label>
+                                <input type="number" class="form-control" id="Budget" ng-model="ctrl.item.Budget">
+                            </div>
+                            <div class="form-group">
+                                <label for="InForecast">In Forecast</label>
+                                <input type="number" class="form-control" id="InForecast" ng-model="ctrl.item.InForecast">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="form-group">
+                                <label for="EstimatedDate">Estimated Launch Date to Learner</label>
+                                <input type="text" class="form-control" id="EstimatedDate" ng-model="ctrl.item.EstimatedDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="BusinessValue">Business Value</label>
+                                <input type="number" class="form-control" id="BusinessValue" ng-model="ctrl.item.BusinessValue">
+                            </div>
+                            <div class="form-group">
+                                <label for="RegulatoryComplianceRelated">Regulatory / Compliance Related</label>
+                                <input type="number" class="form-control" id="RegulatoryComplianceRelated" ng-model="ctrl.item.RegulatoryComplianceRelated">
+                            </div>
+                            <div class="form-group">
+                                <label for="CustomerEmployeeValue">Customer / Employee Value</label>
+                                <input type="number" class="form-control" id="CustomerEmployeeValue" ng-model="ctrl.item.CustomerEmployeeValue">
+                            </div>
+                            <div class="form-group">
+                                <label for="TimeSensitivity">TimeSensitivity</label>
+                                <input type="number" class="form-control" id="TimeSensitivity" ng-model="ctrl.item.TimeSensitivity">
+                            </div>
+                            <div class="form-group">
+                                <label for="Prioritization">Prioritization</label>
+                                <input type="number" class="form-control" id="Prioritization" >
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label for="Priority">Priority</label>
+                                <select 
+                                    class="form-control" 
+                                    id="Priority" 
+                                    ng-model="ctrl.item.Priority" 
+                                    ng-options="opt as opt for opt in ctrl.priorityChoice track by opt"
+                                >
+                                </select>
+                            </div> -->
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <text-angular ng-model="ctrl.item.Description"></text-angular>
+                            </div>
+                            <div class="form-group">
+                                <label for="Notes">Notes</label>
+                                <text-angular ng-model="ctrl.item.Notes"></text-angular>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.saveData()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

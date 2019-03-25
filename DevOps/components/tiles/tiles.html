@@ -1,0 +1,18 @@
+<div class="tiles">
+    <div ng-repeat="tile in ctrl.tiles track by $index" class="tile text-center">
+		<div class="tile-container">
+			<a ng-if="tile.Title != 'New Track'" class="tile-image" ng-href="{{tile.Link.Url}}" ng-style="{'background-image': 'url(' + tile.Image.Url + ')'}"></a>
+			<a class="tile-image" ng-if="tile.Title == 'New Track'" data-toggle="modal" data-target="#new-track-form" ng-style="{'background-image': 'url(' + tile.Image.Url + ')'}"></a>
+			<!--<div class="tile-title">
+				<a ng-if="tile.Title != 'New Track'" ng-href="{{tile.Link.Url}}">
+					{{tile.Title}}<br/>
+					{{tile.Description}}
+				</a>
+				<a ng-if="tile.Title == 'New Track'" data-toggle="modal" data-target="#new-track-form">
+					{{tile.Title}}<br/>
+					{{tile.Description}}
+				</a>
+			</div>-->
+		</div>
+    </div>
+</div>
