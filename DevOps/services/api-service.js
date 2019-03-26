@@ -16,7 +16,7 @@
         }
 
         function saveData(listTitle, data){
-            data['__metadata'] = { "type": 'SP.Data.TSPorjectsListItem' };
+            data['__metadata'] = { "type": 'SP.Data.TSProjectsListItem' };
             return $http({
                         url: _spPageContextInfo.webAbsoluteUrl + 
                             '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items',

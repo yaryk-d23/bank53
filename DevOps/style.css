@@ -1,3 +1,15 @@
 #jump-page {
     max-width: 800px;
 }
+#sideNavBox {
+    display: none;
+}
+#contentBox {
+    margin-left: 0px;
+}
+#ms-cui-ribbonTopBars, #s4-titlerow, #s4-pr s4-notdlg s4-titlerowhidetitle, #s4-leftpanel-content {
+    display: none !important;
+}
+#s4-ribbonrow {
+    height: auto!important;
+}
