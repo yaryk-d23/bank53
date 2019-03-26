@@ -1,0 +1,44 @@
+<script>
+    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/DevOps";
+    var scripts = [
+        "modules/jquery-3.3.1.min.js",
+        "modules/angular.min.js",
+        "modules/angular/angular-sanitize.min.js",
+        // "modules/angular/textAngular.min.js",
+        "modules/bootstrap/js/bootstrap.min.js",
+        "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
+        "modules/angular/angular-validation.min.js",
+        "modules/angular/angular-validation-rule.min.js",
+        
+        "modules/ui-select/select.js",
+        // "modules/angular/angular-toggle-switch.min.js",
+        "modules/textAngular/textAngular-rangy.min.js",
+        "modules/textAngular/textAngular-sanitize.min.js",
+        "modules/textAngular/textAngular.min.js",
+
+        "app.js",
+        "services/api-service.js",
+        "components/nav-bar/navBar-app.js",
+    ];
+    var styles = [
+        "modules/bootstrap/css/bootstrap.css",
+        "/modules/font-awesome/css/font-awesome.min.css",
+        "modules/ui-select/select.css",
+        "style.css",
+        "components/nav-bar/navBar-style.css",
+    ];
+    for(var i=0;i<scripts.length;i++){
+        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+    }
+    for(var i=0;i<styles.length;i++){
+        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+    }
+</script>
+
+<div class="app-container b" ng-app="App" ng-controller="AppCtrl as ctrl">
+    <div class="container" id="jump-page">
+        <div>
+            <nav-bar></nav-bar>
+        </div>
+    </div>
+</div>

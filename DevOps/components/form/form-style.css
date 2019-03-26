@@ -33,9 +33,12 @@
 	overflow: auto;
 }
 .ui-select-multiple.ui-select-bootstrap input.ui-select-search {
-	width: auto!important;
+	min-width: 50px!important;
 }
 .ui-select-multiple.ui-select-bootstrap {
     padding: 6px 12px;
-    height: 34px;
+    min-height: 34px;
+}
+.b .uib-datepicker-popup.dropdown-menu {
+    display: block;
 }

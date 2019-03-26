@@ -61,7 +61,9 @@
         };
 
         if(urlItemId){
-            $ApiService.getListItems(listTitle, '$select=*,LDLeader/Title,LDLeader/Id,VendorContractor/Title,VendorContractor/Id&$expand=LDLeader,VendorContractor&$filter=Id eq '+urlItemId).then(function(res){
+            $ApiService.getListItems(listTitle, '$select=*,LDLeader/Title,LDLeader/Id,LDLeader/EMail,VendorContractor/Title,VendorContractor/Id,VendorContractor/EMail'+
+                '&$expand=LDLeader,VendorContractor&$filter=Id eq '+urlItemId)
+                .then(function(res){
                 if(res.length){
                     var item = res[0];
                     ctrl.item.ExpirationDate = new Date(item.ExpirationDate);
@@ -155,21 +157,21 @@
         
         
         $scope.inlineOptions = {
-        minDate: new Date(),
-        showWeeks: true
+            minDate: new Date(),
+            showWeeks: true
         };
     
         $scope.dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date(2020, 5, 22),
-        minDate: new Date(),
-        startingDay: 1,
-        showWeeks: false
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1,
+            showWeeks: false
         };
 
     
         $scope.open1 = function() {
-        $scope.popup1.opened = true;
+            $scope.popup1.opened = true;
         };
 
     
@@ -177,7 +179,7 @@
         $scope.format = $scope.formats[0];
     
         $scope.popup1 = {
-        opened: false
+            opened: false
         };
         
         
