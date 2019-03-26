@@ -18,6 +18,16 @@
                                 <input type="text" class="form-control" id="LineOfBusiness" ng-model="ctrl.item.LineOfBusiness">
                             </div>
                             <div class="form-group">
+                                <label for="Initiative">Initiative</label>
+                                <select 
+                                    class="form-control" 
+                                    id="Initiative" 
+                                    ng-model="ctrl.item.Initiative" 
+                                    ng-options="opt as opt for opt in ctrl.initiativeChoice track by opt"
+                                >
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="LDLeader">L&D Leader</label>
                                 <!-- <input type="text" class="form-control"
                                     autocomplete="off"
@@ -81,6 +91,16 @@
                                 </ui-select>
                             </div>
                             <div class="form-group">
+                                <label for="Team">Team</label>
+                                <select 
+                                    class="form-control" 
+                                    id="Team" 
+                                    ng-model="ctrl.item.Team" 
+                                    ng-options="opt as opt for opt in ctrl.teamChoice track by opt"
+                                >
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="Budget">Budget</label>
                                 <input type="number" class="form-control" id="Budget" ng-model="ctrl.item.Budget">
                             </div>
@@ -95,6 +115,27 @@
                                 <input type="text" class="form-control" id="EstimatedDate" ng-model="ctrl.item.EstimatedDate">
                             </div>
                             <div class="form-group">
+                                <label for="ExpirationDate">Expiration Date</label>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" 
+                                        uib-datepicker-popup="{{format}}" 
+                                        ng-model="ctrl.item.ExpirationDate" 
+                                        is-open="popup1.opened" 
+                                        datepicker-options="dateOptions" 
+                                        ng-required="true" 
+                                        close-text="Close" 
+                                        show-button-bar="false"
+                                    />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="EstimatedProgress">Estimated Progress</label>
+                                <input type="number" class="form-control" id="EstimatedProgress" ng-model="ctrl.item.EstimatedProgress">
+                            </div>
+                            <div class="form-group">
                                 <label for="BusinessValue">Business Value</label>
                                 <input type="number" class="form-control" id="BusinessValue" ng-model="ctrl.item.BusinessValue">
                             </div>
@@ -107,24 +148,13 @@
                                 <input type="number" class="form-control" id="CustomerEmployeeValue" ng-model="ctrl.item.CustomerEmployeeValue">
                             </div>
                             <div class="form-group">
-                                <label for="TimeSensitivity">TimeSensitivity</label>
+                                <label for="TimeSensitivity">Time Sensitivity</label>
                                 <input type="number" class="form-control" id="TimeSensitivity" ng-model="ctrl.item.TimeSensitivity">
                             </div>
                             <div class="form-group">
                                 <label for="Prioritization">Prioritization</label>
-                                <input type="number" class="form-control" id="Prioritization" >
+                                <input type="number" class="form-control" id="Prioritization" value="{{ctrl.getPrioritization()}}" readonly>
                             </div>
-
-                            <!-- <div class="form-group">
-                                <label for="Priority">Priority</label>
-                                <select 
-                                    class="form-control" 
-                                    id="Priority" 
-                                    ng-model="ctrl.item.Priority" 
-                                    ng-options="opt as opt for opt in ctrl.priorityChoice track by opt"
-                                >
-                                </select>
-                            </div> -->
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <div class="form-group">

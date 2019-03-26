@@ -5,7 +5,8 @@
             getUser: getUser,
             getListItems: getListItems,
             getListChoiceField: getListChoiceField,
-            saveData: saveData
+            saveData: saveData,
+            updateData: updateData
         };
 
         function getListItems(listTitle, params){
@@ -25,6 +26,25 @@
                             "accept": "application/json;odata=verbose",
                             "content-type": "application/json;odata=verbose",
                             "X-RequestDigest": $('#__REQUESTDIGEST').val()
+                        },
+                        data: data
+                    }).then(function(res){
+                        return res;
+                    });
+        }
+
+        function updateData(listTitle, itemId, data){
+            data['__metadata'] = { "type": 'SP.Data.TSProjectsListItem' };
+            return $http({
+                        url: _spPageContextInfo.webAbsoluteUrl + 
+                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items('+itemId+')',
+                        method: 'POST',
+                        headers: {
+                            "accept": "application/json;odata=verbose",
+                            "content-type": "application/json;odata=verbose",
+                            "X-RequestDigest": $('#__REQUESTDIGEST').val(),
+                            "IF-MATCH": "*",  
+                            "X-HTTP-Method": "MERGE"
                         },
                         data: data
                     }).then(function(res){

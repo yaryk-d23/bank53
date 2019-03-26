@@ -50,9 +50,44 @@
     function formCtrl($ApiService, $q, $scope){
         var ctrl = this;
         var listTitle = 'TSProjects';
-        ctrl.item = {};
+        var urlItemId = getParameterByName('ItemId');
+
+        ctrl.item = {
+            ExpirationDate: new Date(),
+            BusinessValue: 0,
+            RegulatoryComplianceRelated: 0,
+            CustomerEmployeeValue: 0,
+            TimeSensitivity: 0
+        };
+
+        if(urlItemId){
+            $ApiService.getListItems(listTitle, '$select=*,LDLeader/Title,LDLeader/Id,VendorContractor/Title,VendorContractor/Id&$expand=LDLeader,VendorContractor&$filter=Id eq '+urlItemId).then(function(res){
+                if(res.length){
+                    var item = res[0];
+                    ctrl.item.ExpirationDate = new Date(item.ExpirationDate);
+                    ctrl.item.Title = item.Title;
+                    ctrl.item.LineOfBusiness = item.LineOfBusiness;
+                    ctrl.item.Initiative = item.Initiative;
+                    ctrl.item.LDLeader = item.LDLeader;
+                    ctrl.item.VendorContractor = item.VendorContractor;
+                    ctrl.item.Team = item.Team;
+                    ctrl.item.Budget = item.Budget;
+                    ctrl.item.InForecast = item.InForecast;
+                    ctrl.item.EstimatedDate = item.EstimatedDate;
+                    ctrl.item.EstimatedProgress = item.EstimatedProgress;
+                    ctrl.item.BusinessValue = item.BusinessValue;
+                    ctrl.item.RegulatoryComplianceRelated = item.RegulatoryComplianceRelated;
+                    ctrl.item.CustomerEmployeeValue = item.CustomerEmployeeValue;
+                    ctrl.item.TimeSensitivity = item.TimeSensitivity;
+                    ctrl.item.Prioritization = item.Prioritization;
+                    ctrl.item.Description = item.Description;
+                    ctrl.item.Notes = item.Notes;
+                }
+            });
+        }
+
+        ctrl.teamChoice = [];
         ctrl.initiativeChoice = [];
-        ctrl.priorityChoice = [];
         ctrl.allUsers = [];
         // ctrl.getUser = $ApiService.getUser;
         ctrl.getUsers = function($select) {
@@ -62,24 +97,25 @@
             });
         };
 
+        ctrl.getPrioritization = function(){
+            return (ctrl.item.BusinessValue * 0.35) + (ctrl.item.RegulatoryComplianceRelated * 0.3) + (ctrl.item.CustomerEmployeeValue * 0.2) + (ctrl.item.TimeSensitivity * 0.15);
+        };
 
+        var request = {
+            teamField: $ApiService.getListChoiceField(listTitle, 'Team'),
+            initiativeField: $ApiService.getListChoiceField(listTitle, 'Initiative'),
+        };
 
-        // var request = {
-        //     initiativeField: $ApiService.getListChoiceField(listTitle, 'Initiative'),
-        //     priorityField: $ApiService.getListChoiceField(listTitle, 'Priority'),
-        // };
-
-        // $q.all(request).then(function(res){
-        //     ctrl.initiativeChoice = res.initiativeField.Choices.results;
-        //     ctrl.priorityChoice = res.priorityField.Choices.results;
-        // });
+        $q.all(request).then(function(res){
+            ctrl.teamChoice = res.teamField.Choices.results;
+            ctrl.initiativeChoice = res.initiativeField.Choices.results;
+        });
 
         ctrl.saveData = function(){
             var item = angular.copy(ctrl.item);
-            // item['zagtId'] = item['zagt'].Id;
-            // if(item.ExpirationDate){
-            //     item.ExpirationDate = item.ExpirationDate.toISOString();
-            // }
+            if(item.ExpirationDate){
+                item.ExpirationDate = item.ExpirationDate.toISOString();
+            }
             item['LDLeaderId'] = {
                 'results': []
             };
@@ -92,40 +128,57 @@
             angular.forEach(item['VendorContractor'], function(val, key){
                 item['VendorContractorId'].results.push(val.Id);
             });
-            // item['PrincipalId'] = item['Principal'].Id;
             delete item['LDLeader'];
             delete item['VendorContractor'];
-            $ApiService.saveData(listTitle, item).then(function(){
-                $('#new-track-form').modal('hide');
-            });
+            if(urlItemId){
+                $ApiService.updateData(listTitle, urlItemId, item).then(function(){
+                    $('#new-track-form').modal('hide');
+                });
+            }
+            else {
+                $ApiService.saveData(listTitle, item).then(function(){
+                    $('#new-track-form').modal('hide');
+                });
+            }
         };
-        
-        
-          $scope.inlineOptions = {
-            minDate: new Date(),
-            showWeeks: true
-          };
-        
-          $scope.dateOptions = {
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 1,
-            showWeeks: false
-          };
 
         
-          $scope.open1 = function() {
-            $scope.popup1.opened = true;
-          };
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return parseInt(decodeURIComponent(results[2].replace(/\+/g, " ")), 10);
+        }
+        
+        
+        $scope.inlineOptions = {
+        minDate: new Date(),
+        showWeeks: true
+        };
+    
+        $scope.dateOptions = {
+        formatYear: 'yy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1,
+        showWeeks: false
+        };
 
-        
-          $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-          $scope.format = $scope.formats[0];
-        
-          $scope.popup1 = {
-            opened: false
-          };
+    
+        $scope.open1 = function() {
+        $scope.popup1.opened = true;
+        };
+
+    
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+    
+        $scope.popup1 = {
+        opened: false
+        };
         
         
 
