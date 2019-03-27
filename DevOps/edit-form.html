@@ -18,6 +18,7 @@
 
         "app.js",
         "services/api-service.js",
+        "components/nav-bar/navBar-app.js",
         "components/form/form-component.js",
     ];
     var styles = [
@@ -25,6 +26,7 @@
         "/modules/font-awesome/css/font-awesome.min.css",
         "modules/ui-select/select.css",
         "style.css",
+        "components/nav-bar/navBar-style.css",
         "components/form/form-style.css",
     ];
     for(var i=0;i<scripts.length;i++){
@@ -38,14 +40,37 @@
 <script>
     (function(){
         $(document).ready(function(){
-            
+            createEditIcon()
         });
+
+        function hideIdColumn(){
+            $("#scriptWPQ4 tr>th:nth-child(2)").hide();
+            $("#scriptWPQ4 tr>td:nth-child(2)").hide();
+        }
+
+        function createEditIcon(){
+            var items = $("#scriptWPQ4 tbody>tr");
+            $.each(items, function(key, row){
+                $(row).find('.ms-list-itemLink-td').html('<div class="edit-item" '+
+                'data-toggle="modal" data-target="#new-track-form" style="cursor: pointer;height: 25px;vertical-align:sub;display: inline-block;">'+
+                '<i class="fa fa-pencil" aria-hidden="true"></i></div>');
+                $(row).find('.ms-list-itemLink-td').css({'vertical-align': 'middle', 'text-align': 'center'});
+                $(row).find('.ms-list-itemLink-td .edit-item').on('click',function(){
+                    var formId = $(row).find("td:nth-child(2)").text();
+                    window.history.pushState(null,null,'?ItemId='+formId);
+                    location.reload();
+                });
+            });
+            hideIdColumn();
+        }
+
     })();
 </script>
 
 <div class="app-container b" ng-app="App" ng-controller="AppCtrl as ctrl">
     <div class="container" id="jump-page">
         <div>
+            <nav-bar></nav-bar>
             <track-form></track-form>
         </div>
     </div>

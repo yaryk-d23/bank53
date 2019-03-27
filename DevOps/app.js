@@ -41,6 +41,26 @@
 
     .controller('AppCtrl', [function() {
         var ctrl = this;
+        
+        var urlItemId = getParameterByName('ItemId');
+        if(urlItemId){
+            setTimeout(function(){
+                $('.b #new-track-form').modal('show');
+                $('.b #new-track-form').on('hidden.bs.modal', function (e) {
+                    window.history.pushState(null,null,'?');
+                });
+            },500);
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return parseInt(decodeURIComponent(results[2].replace(/\+/g, " ")), 10);
+        }
     }]);
     // .config(function($routeProvider, CONSTANT) {
     //     $routeProvider
