@@ -121,17 +121,10 @@
             item['LDLeaderId'] = {
                 'results': []
             };
-            item['VendorContractorId'] = {
-                'results': []
-            };
             angular.forEach(item['LDLeader'], function(val, key){
                 item['LDLeaderId'].results.push(val.Id);
             });
-            angular.forEach(item['VendorContractor'], function(val, key){
-                item['VendorContractorId'].results.push(val.Id);
-            });
             delete item['LDLeader'];
-            delete item['VendorContractor'];
             if(urlItemId){
                 $ApiService.updateData(listTitle, urlItemId, item).then(function(){
                     $('#new-track-form').modal('hide');
