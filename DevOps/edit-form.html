@@ -36,7 +36,9 @@
         document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
     }
 </script>
-
+<style>
+.ms-core-webpartadder{z-index:9;}
+</style>
 <script>
     (function(){
         $(document).ready(function(){
@@ -44,17 +46,17 @@
         });
 
         function hideIdColumn(){
-            $("#scriptWPQ4 tr>th:nth-child(2)").hide();
-            $("#scriptWPQ4 tr>td:nth-child(2)").hide();
+            $("table[summary='TSProjects'] tr>th:nth-child(2)").hide();
+            $("table[summary='TSProjects'] tr>td:nth-child(2)").hide();
         }
 
         function createEditIcon(){
-            var items = $("#scriptWPQ4 tbody>tr");
+            var items = $("table[summary='TSProjects'] tbody>tr");
             $.each(items, function(key, row){
                 $(row).find('.ms-list-itemLink-td').html('<div class="edit-item" '+
                 'data-toggle="modal" data-target="#new-track-form" style="cursor: pointer;height: 25px;vertical-align:sub;display: inline-block;">'+
                 '<i class="fa fa-pencil" aria-hidden="true"></i></div>');
-                $(row).find('.ms-list-itemLink-td').css({'vertical-align': 'middle', 'text-align': 'center'});
+                $(row).find('.ms-list-itemLink-td').css({'text-align': 'center'});
                 $(row).find('.ms-list-itemLink-td .edit-item').on('click',function(){
                     var formId = $(row).find("td:nth-child(2)").text();
                     window.history.pushState(null,null,'?ItemId='+formId);
