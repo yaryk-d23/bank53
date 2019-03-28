@@ -9,7 +9,7 @@
                     >
                         <a href="{{link.Link ? link.Link.Url : ''}}" 
                             ng-class="{'dropdown-toggle': ctrl.getChildrenLink(link).length != 0}" 
-                            data-toggle="dropdown" role="button" 
+                            role="button" 
                             aria-haspopup="true" aria-expanded="false"
                         >{{link.Title}} <span class="caret" ng-if="ctrl.getChildrenLink(link).length != 0"></span></a>
                         <ul class="dropdown-menu" ng-if="ctrl.getChildrenLink(link).length != 0">
