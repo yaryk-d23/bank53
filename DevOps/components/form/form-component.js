@@ -60,6 +60,17 @@
             TimeSensitivity: 0
         };
 
+        
+        $('.b #new-track-form').on('hidden.bs.modal', function (e) {
+            ctrl.item = {
+                ExpirationDate: new Date(),
+                BusinessValue: 0,
+                RegulatoryComplianceRelated: 0,
+                CustomerEmployeeValue: 0,
+                TimeSensitivity: 0
+            };
+        });
+
         if(urlItemId){
             $ApiService.getListItems(listTitle, '$select=*,LDLeader/Title,LDLeader/Id,LDLeader/EMail,VendorContractor/Title,VendorContractor/Id,VendorContractor/EMail'+
                 '&$expand=LDLeader,VendorContractor&$filter=Id eq '+urlItemId)
