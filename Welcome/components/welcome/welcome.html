@@ -102,7 +102,8 @@
                                 'end-top': (parentIdx%2!=0 && $index==0),
                                 'start-bottom': ((parentIdx%2!=0 && $index==4)),
                                 'start-top': (parentIdx!=0 && parentIdx%2==0 && $index==0),
-                                'last-map-item': (parentIdx==ctrl.groupedTasks.length-1 && $index==row.length-1)
+                                'last-map-item': (parentIdx==ctrl.groupedTasks.length-1 && $index==row.length-1),
+                                'disabled-task': !ctrl.checkIsAllowedTask(item.BadgeId)
                             }"
                         >
                             <!-- <span class="glyphicon glyphicon-star" 

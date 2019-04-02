@@ -179,6 +179,15 @@
     border-top: 1px solid #fff;
 }
 
+.tasks-map-row .map-item.disabled-task, 
+.tasks-map-row .map-item.disabled-task.start-top:after,
+.tasks-map-row .map-item.disabled-task.start-bottom:after,
+.tasks-map-row .map-item.disabled-task.end-top:after,
+.tasks-map-row .map-item.disabled-task.end-bottom:after {
+    background-color: #c3c3c3!important;
+    cursor: not-allowed!important;
+}
+
 .map-item:hover .snackbar{
     visibility: visible;
     display: block;

@@ -14,6 +14,7 @@
         </div>
         <div class="badge-buttons">
             <button 
+                ng-if="ctrl.checkIsAllowedTask(badge.Id)"
                 id="task_{{badge.Id}}_{{task.Id}}"
                 ng-repeat="task in badge.Tasks"
                 type="button" 
@@ -22,6 +23,7 @@
                 ng-disabled="ctrl.checkTask(task.Title,badge.Id)">
                 {{task.Title}}
             </button>
+            <div ng-if="!ctrl.checkIsAllowedTask(badge.Id)">Complete <b>{{badge.Previous.Title}}</b></div>
             <!-- <button type="button" 
                 class="btn btn-success" 
                 ng-click="ctrl.createTaskItem('Task 2',badge.Id); ctrl.showToast('Task2'+badge.Id);" 

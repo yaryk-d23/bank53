@@ -52,7 +52,7 @@ angular.module('BadgesApp')
             }
             var style = getStyle(60,true,drawHeaderRow, undefined, undefined, customHeader);
             doc.autoTable(table ,[] ,style);
-            doc.textWithLink(task.Title, 300, 300, {url: location.origin + location.pathname + '?task='+task.Id});
+            doc.textWithLink(task.Title, 300, 300, {url: location.origin + location.pathname + '?task='+('TSK-'+(task.Id*task.Id*53))});
             var data = doc.output();   
             var buffer = new ArrayBuffer(data.length);
             var array = new Uint8Array(buffer);

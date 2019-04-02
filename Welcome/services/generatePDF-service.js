@@ -52,7 +52,7 @@ angular.module('WelcomeApp')
             }
             var style = getStyle(60,true,drawHeaderRow, undefined, undefined, customHeader);
             doc.autoTable(table ,[] ,style);
-            doc.textWithLink(task.Title, 300, 300, {url:  _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Badges.aspx?task='+task.Id});
+            doc.textWithLink(task.Title, 300, 300, {url:  _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Badges.aspx?task='+('TSK-'+(task.Id*task.Id*53))});
             var data = doc.output();   
             var buffer = new ArrayBuffer(data.length);
             var array = new Uint8Array(buffer);

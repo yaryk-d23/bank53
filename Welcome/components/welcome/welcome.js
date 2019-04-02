@@ -35,7 +35,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     });
 
     var requests = {
-        allBadges: $WelcomeService.getBadgesItems(),
+        allBadges: $WelcomeService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous"),
         allUserTasks: $WelcomeService.getTaskItems("$filter=BadgeType eq 'User'"),
         allTasks: $WelcomeService.getTaskItems(),
         allTasksLog: $WelcomeService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId),
@@ -141,7 +141,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     function checkIfItemExist(badge){
         var isExist = false;
         angular.forEach(ctrl.recentTasks, function(item, key){
-            if(item['odata.type'] == "SP.Data.BadgesListListItem" && 
+            if((item['odata.type'] == "SP.Data.BadgesListListItem" || item['odata.type'] == "SP.Data.BadgesListItem") && 
                 item.Id == badge.Id && 
                 badge['TaskLog'].AssignedToId ==  item['TaskLog'].AssignedToId){
                     isExist = true;
@@ -160,6 +160,8 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     }
 
     ctrl.generatePdf = function($event, task) {
+        if(!ctrl.checkIsAllowedTask(task.BadgeId)) return;
+        if(ctrl.checkTask(task.Title, task.BadgeId)) return;
 		if(task.LinkedSource){
 			window.open(task.LinkedSource.Url, '_blank');
 			return;
@@ -192,6 +194,24 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                 flag = true;
             }
         });
+        return flag;
+    };
+
+    ctrl.checkIsAllowedTask = function(badgeId){
+        var flag = false;
+        var badge = allBadges.filter(function(x){
+            return x.Id == badgeId;
+        })[0];
+        if(!badge.PreviousId){
+            flag = true;
+        }
+        else {
+            var grupedTaskByBadge = groupBy(ctrl.allTasksLog, 'BadgeId');
+            var grupedTasksItemsByBadge = groupBy(ctrl.allTasks, 'BadgeId');
+            if(grupedTaskByBadge[badge.PreviousId] && grupedTaskByBadge[badge.PreviousId].length == grupedTasksItemsByBadge[badge.PreviousId].length){
+                flag = true;
+            }
+        }
         return flag;
     };
 

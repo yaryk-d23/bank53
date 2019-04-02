@@ -46,7 +46,7 @@
         if(urlItemId){
             setTimeout(function(){
                 $('.b #new-track-form').modal('show');
-                $('.b #new-track-form').on('hidden.bs.modal', function (e) {
+                $(document).on('hidden.bs.modal', '#new-track-form', function (e) {
                     window.history.pushState(null,null,'?');
                 });
             },500);

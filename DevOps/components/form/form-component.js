@@ -61,7 +61,7 @@
         };
 
         
-        $('.b #new-track-form').on('hidden.bs.modal', function (e) {
+        $(document).on('hidden.bs.modal', '#new-track-form', function (e) {
             ctrl.item = {
                 ExpirationDate: new Date(),
                 BusinessValue: 0,
@@ -69,6 +69,7 @@
                 CustomerEmployeeValue: 0,
                 TimeSensitivity: 0
             };
+            $scope.$apply();
         });
 
         if(urlItemId){

@@ -13,6 +13,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
     ctrl.userInfo = {};
     ctrl.allBadges = [];
     ctrl.allTask = [];
+    ctrl.allTaskItems = [];
     
 
     var urlTaskId = getParameterByName('task');
@@ -129,18 +130,20 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
         var requestData = {
             taskLogItems: $BadgesService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId),
             userProfile: $BadgesService.getUserProfile(),
-			allBadges: $BadgesService.getBadgesItems("$filter=BadgeType eq 'User'")
+            allBadges: $BadgesService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous&$filter=BadgeType eq 'User'"),
+            allTaskItems: $BadgesService.getTaskItems()
         };
         $q.all(requestData).then(function(res){
 			//alert('work');
             ctrl.allTask = res.taskLogItems;
             ctrl.allBadges = res.allBadges;
+            ctrl.allTaskItems = res.allTaskItems;
 
             //add task if id is exist
             if(urlTaskId) {
-                $BadgesService.getTaskLogItems('$filter=Task/Id eq '+urlTaskId+' and AssignedTo/Id eq '+_spPageContextInfo.userId).then(function(taskRes){
+                $BadgesService.getTaskLogItems('$filter=Task/Id eq '+decodeTaskId(urlTaskId)+' and AssignedTo/Id eq '+_spPageContextInfo.userId).then(function(taskRes){
                     if(!taskRes.length) {
-                        $BadgesService.getTaskItems('$filter=Id eq '+urlTaskId).then(function (res){
+                        $BadgesService.getTaskItems('$filter=Id eq '+decodeTaskId(urlTaskId)).then(function (res){
                             //ExecuteOrDelayUntilScriptLoaded(function(){
                                 ctrl.createTaskItem(res[0]);
                             //}, "SP.js");
@@ -184,6 +187,24 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
 		}
     }
 
+    ctrl.checkIsAllowedTask = function(badgeId){
+        var flag = false;
+        var badge = ctrl.allBadges.filter(function(x){
+            return x.Id == badgeId;
+        })[0];
+        if(!badge.PreviousId){
+            flag = true;
+        }
+        else {
+            var grupedTaskByBadge = groupBy(ctrl.allTask, 'BadgeId');
+            var grupedTasksItemsByBadge = groupBy(ctrl.allTaskItems, 'BadgeId');
+            if(grupedTaskByBadge[badge.PreviousId] && grupedTaskByBadge[badge.PreviousId].length == grupedTasksItemsByBadge[badge.PreviousId].length){
+                flag = true;
+            }
+        }
+        return flag;
+    };
+
     ctrl.trustHtml = function(html) {
         return $sce.trustAsHtml(html);
     };
@@ -195,7 +216,14 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
           results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
-        return parseInt(decodeURIComponent(results[2].replace(/\+/g, " ")), 10);
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    function decodeTaskId(value){
+        var taskId = parseInt(value.split('TSK-')[1],10);
+        taskId = taskId/53;
+        taskId = Math.sqrt(taskId);
+        return taskId;
     }
 
     function groupBy(xs, key) {
