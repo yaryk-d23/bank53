@@ -60,20 +60,33 @@
             TimeSensitivity: 0
         };
 
-        
-        $('.b #new-track-form').on('hidden.bs.modal', function (e) {
-            ctrl.item = {
-                ExpirationDate: new Date(),
-                BusinessValue: 0,
-                RegulatoryComplianceRelated: 0,
-                CustomerEmployeeValue: 0,
-                TimeSensitivity: 0
-            };
-        });
+		$(document).on('hidden.bs.modal', '#new-track-form', function (e) {
+			ctrl.item = {
+				ExpirationDate: new Date(),
+				BusinessValue: 0,
+				RegulatoryComplianceRelated: 0,
+				CustomerEmployeeValue: 0,
+				TimeSensitivity: 0
+			};
+			$scope.$apply();
+		});   
+
+		function clearForm(){
+			ctrl.item = {
+				ExpirationDate: new Date(),
+				BusinessValue: 0,
+				RegulatoryComplianceRelated: 0,
+				CustomerEmployeeValue: 0,
+				TimeSensitivity: 0
+			};
+		}
+		
+		ctrl.clearForm = clearForm;
+ 		
 
         if(urlItemId){
-            $ApiService.getListItems(listTitle, '$select=*,LDLeader/Title,LDLeader/Id,LDLeader/EMail,VendorContractor/Title,VendorContractor/Id,VendorContractor/EMail'+
-                '&$expand=LDLeader,VendorContractor&$filter=Id eq '+urlItemId)
+            $ApiService.getListItems(listTitle, '$select=*,LDLeader/Title,LDLeader/Id,LDLeader/EMail'+
+                '&$expand=LDLeader&$filter=Id eq '+urlItemId)
                 .then(function(res){
                 if(res.length){
                     var item = res[0];
