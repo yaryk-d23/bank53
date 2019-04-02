@@ -7,14 +7,14 @@
                         ng-if="!link.ParentId"
                         ng-class="{'active': ctrl.isActiveLink(link), 'dropdown': ctrl.getChildrenLink(link).length != 0}"
                     >
-                        <a href="{{link.Link ? link.Link.Url : ''}}" 
+                        <a href="{{link.Link ? link.Link.Url : '#'}}" 
                             ng-class="{'dropdown-toggle': ctrl.getChildrenLink(link).length != 0}" 
                             role="button" 
                             aria-haspopup="true" aria-expanded="false"
                         >{{link.Title}} <span class="caret" ng-if="ctrl.getChildrenLink(link).length != 0"></span></a>
                         <ul class="dropdown-menu" ng-if="ctrl.getChildrenLink(link).length != 0">
                             <li ng-repeat="childLink in ctrl.getChildrenLink(link) track by $index">
-                                <a ng-href="{{childLink.Link ? childLink.Link.Url : ''}}">{{childLink.Title}}</a>
+                                <a ng-href="{{childLink.Link ? childLink.Link.Url : '#'}}">{{childLink.Title}}</a>
                             </li>
                         </ul>
                     </li>

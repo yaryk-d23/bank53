@@ -13,3 +13,12 @@
 #s4-ribbonrow {
     height: auto!important;
 }
+.b .open .dropdown-menu{
+    display: block;
+}
+.b .dropdown {
+	overflow: visible;
+}
+.ms-core-webpartadder {
+    z-index: 99;
+}
