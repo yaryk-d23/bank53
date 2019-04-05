@@ -1,0 +1,29 @@
+.request-form .form-title {
+    background-color: rgb(197,217,241);
+    padding: 10px 20px;
+    margin: 0 -20px;
+}
+.request-form .section-header {
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #818181;
+}
+
+.b .selectize-input {
+    height: 34px;
+    padding: 6px 12px;
+}
+.b .form-horizontal .control-label {
+    text-align: left;
+}
+.b .form-control.ng-invalid:not(.ng-untouched),
+.b .ui-select-container.ng-invalid:not(.ng-untouched)>div {
+    border-color: pink;
+}
+.request-form .control-label.required:after {
+    content: '*';
+    color: red;
+}
+.b .error-msg {
+    color: red;
+}

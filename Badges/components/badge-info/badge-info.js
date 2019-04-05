@@ -136,7 +136,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
         $q.all(requestData).then(function(res){
 			//alert('work');
             ctrl.allTask = res.taskLogItems;
-            ctrl.allBadges = res.allBadges;
+            ctrl.allBadges = setBadgesOrder(res.allBadges);
             ctrl.allTaskItems = res.allTaskItems;
 
             //add task if id is exist
@@ -185,6 +185,24 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
 		catch(e){
 			alert(e);
 		}
+    }
+
+    function setBadgesOrder(badges){
+        var orderedBadges = [];
+        var allUserBadges = badges.filter(function(item){return item.BadgeType == 'User';});
+        angular.forEach(allUserBadges, function(badge, k){
+            if(!badge.PreviousId){
+                orderedBadges.push(badge);
+            }
+        });
+        for(var i=0;i<allUserBadges.length;i++){
+            angular.forEach(allUserBadges, function(badge, k){
+                if(orderedBadges[orderedBadges.length-1].Id == badge.PreviousId){
+                    orderedBadges.push(badge);
+                }
+            });
+        }
+        return orderedBadges;
     }
 
     ctrl.checkIsAllowedTask = function(badgeId){

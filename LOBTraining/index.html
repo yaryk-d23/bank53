@@ -1,0 +1,38 @@
+<script>
+    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/LOBTraining";
+    var scripts = [
+        "modules/jquery-3.3.1.min.js",
+        "modules/angular.min.js",
+        "modules/angular/angular-sanitize.min.js",
+        "modules/bootstrap/js/bootstrap.min.js",
+        "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
+        "modules/angular/angular-validation.min.js",
+        "modules/angular/angular-validation-rule.min.js",
+        "modules/ui-select/select.js",
+
+        "app.js",
+        "services/api-service.js",
+        "components/request-form/request-form.js",
+    ];
+    var styles = [
+        "modules/bootstrap/css/bootstrap.css",
+        "/modules/font-awesome/css/font-awesome.min.css",
+        "modules/ui-select/select.css",
+        "style.css",
+        "components/request-form/request-form-style.css"
+    ];
+    for(var i=0;i<scripts.length;i++){
+        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+    }
+    for(var i=0;i<styles.length;i++){
+        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+    }
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+<div class="app-container b" ng-app="App" ng-controller="AppCtrl as ctrl">
+    <div class="container" >
+        <div>
+            <request-form></request-form>
+        </div>
+    </div>
+</div>

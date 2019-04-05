@@ -11,7 +11,6 @@ angular.module('WelcomeApp')
     });
 
 function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
-	try{
     var ctrl = this;
     ctrl.userInfo = ctrl.user;
     ctrl.allTasks = [];
@@ -47,8 +46,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
         allBadges = data.allBadges;
         ctrl.allTasks = data.allTasks;
         ctrl.allUserTasks = data.allUserTasks;
-        
-        ctrl.groupedTasks = createChunksFromArray(ctrl.allUserTasks, 5);
+        ctrl.groupedTasks = createChunksFromArray(setTasksOrder(ctrl.allUserTasks), 5);
         ctrl.allTasksLog = data.allTasksLog;
         
 
@@ -135,8 +133,40 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
             });
         });
     });
+
+    function setBadgesOrder(){
+        var orderedBadges = [];
+        var allUserBadges = allBadges.filter(function(item){return item.BadgeType == 'User';});
+        angular.forEach(allUserBadges, function(badge, k){
+            if(!badge.PreviousId){
+                orderedBadges.push(badge);
+            }
+        });
+        for(var i=0;i<allUserBadges.length;i++){
+            angular.forEach(allUserBadges, function(badge, k){
+                if(orderedBadges[orderedBadges.length-1].Id == badge.PreviousId){
+                    orderedBadges.push(badge);
+                }
+            });
+        }
+        return orderedBadges;
     }
-    catch(e){alert(e);}
+
+    function setTasksOrder(tasks){
+        var orderedBadges = setBadgesOrder();
+        var orderedTasks = [];        
+        angular.forEach(orderedBadges, function(badge, k){
+            angular.forEach(badge.Tasks, function(task, key){
+                angular.forEach(tasks, function(item, i){
+                    if(item.Id == task.Id){
+                        orderedTasks.push(item);
+                    }
+                    
+                });
+            });
+        });
+        return orderedTasks;
+    }
 
     function checkIfItemExist(badge){
         var isExist = false;

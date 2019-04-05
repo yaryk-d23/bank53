@@ -1,0 +1,507 @@
+<ng-form class="request-form" name="requestForm">
+    <div class="form-horizontal" ng-if="ctrl.stage==1">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="form-title">LOB Training Request Form</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="section-header">Requestor Information</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4"> 
+                        <label for="Employee" class="control-label required">Employee</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control"
+                            autocomplete="off"
+                            id="Employee"
+                            name="Employee"
+                            ng-model="ctrl.item.Employee"
+                            maxlength="255"
+                            validator="requiredUser"
+                            valid-method="watch"
+                            use-view-value="false"
+                            uib-typeahead="user as user.Title for user in ctrl.getUser($viewValue)"
+                            typeahead-min-length="2"
+                            typeahead-loading="loadingEmployee.Employee"
+                            typeahead-no-results="noResults.Contact"
+                            ng-class="{loading: loadingEmployee.Employee}"
+                            message-id="errorMessage-Employee"
+                            placeholder="Select.."
+                            required
+                        >
+                        <div ng-show="noResults.Employee && Employee">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                        </div>
+                        <div id="errorMessage-Employee"></div>
+                        <span class="error-msg" ng-show="requestForm.Employee.$touched && requestForm.Employee.$invalid">The Employee is required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="EmployeeEmail" class="control-label ">Email</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" name="EmployeeEmail" class="form-control" ng-model="ctrl.item.EmployeeEmail" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="EmployeeLineOfBusiness" class="control-label ">Line of Business</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" name="EmployeeLineOfBusiness" class="form-control" ng-model="ctrl.item.EmployeeLineOfBusiness" readonly>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="RequestDate" class="control-label required">Request Date</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="input-group">
+                            <input type="text" class="form-control" 
+                                uib-datepicker-popup="{{ctrl.format}}" 
+                                ng-model="ctrl.item.RequestDate" 
+                                is-open="ctrl.RequestDatePopup" 
+                                datepicker-options="ctrl.dateOptions" 
+                                ng-required="true" 
+                                close-text="Close" 
+                                show-button-bar="false"
+                                ng-init="ctrl.RequestDatePopup=fasle"
+                                name="RequestDate"
+                                required
+                            />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.RequestDatePopup=!ctrl.RequestDatePopup"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <span class="error-msg" ng-show="requestForm.RequestDate.$touched && requestForm.RequestDate.$invalid">The Request Date is required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="RoleForCourse" class="control-label required">Your Role for the course</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <label class="radio-inline">
+                            <input type="radio" name="RoleForCourseRadioOptions" ng-model="ctrl.item.RoleForCourse" value="Requester"> Requester
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="RoleForCourseRadioOptions" ng-model="ctrl.item.RoleForCourse" value="Instructor"> Allow Instructors
+                        </label>
+                        <span class="error-msg" ng-show="requestForm.RoleForCourseRadioOptions.$touched && requestForm.RoleForCourseRadioOptions.$invalid">Your Role for the course is required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="RoleForCourseUser" class="control-label " ng-class="{'required':ctrl.item.RoleForCourse=='Instructor'}">Instructor</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control"
+                            ng-required="ctrl.item.RoleForCourse=='Instructor'"
+                            ng-disabled="ctrl.item.RoleForCourse!='Instructor'"
+                            autocomplete="off"
+                            id="RoleForCourseUser"
+                            name="RoleForCourseUser"
+                            ng-model="ctrl.item.RoleForCourseUser"
+                            maxlength="255"
+                            validator="requiredUser"
+                            valid-method="watch"
+                            use-view-value="false"
+                            uib-typeahead="user as user.Title for user in ctrl.getUser($viewValue)"
+                            typeahead-min-length="2"
+                            typeahead-loading="loadingRoleForCourseUser.RoleForCourseUser"
+                            typeahead-no-results="noResults.Contact"
+                            ng-class="{loading: loadingRoleForCourseUser.RoleForCourseUser}"
+                            message-id="errorMessage-RoleForCourseUser"
+                            placeholder="Select.."
+                        >
+                        <div ng-show="noResults.RoleForCourseUser && RoleForCourseUser">
+                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                        </div>
+                        <div id="errorMessage-RoleForCourseUser"></div>
+                        <span class="error-msg" ng-show="requestForm.RoleForCourseUser.$touched && requestForm.RoleForCourseUser.$invalid">Instructor is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="section-header">Request Type</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-12"> 
+                        <label class="checkbox-inline" ng-repeat="choice in ctrl.requestTypeChoice track by $index">
+                            <input 
+                                type="checkbox" 
+                                ng-value="choice"
+                                ng-checked="ctrl.item.RequestType.indexOf(choice) > -1"
+                                ng-click="ctrl.toggleSelection(choice)"
+                            > {{choice}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="section-header">Course Information</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="BlendedCourseType" class="control-label required">Blended Course Type</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select 
+                            required
+                            name="BlendedCourseType"
+                            class="form-control" 
+                            ng-class="{'ng-invalid':requestForm.BlendedCourseType.$touched && requestForm.BlendedCourseType.$invalid}"
+                            id="BlendedCourseType" 
+                            ng-model="ctrl.item.BlendedCourseType" 
+                            ng-options="opt as opt for opt in ctrl.blendedCourseTypeChoice track by opt"
+                        >
+                        </select>
+                        <span class="error-msg" ng-show="requestForm.BlendedCourseType.$touched && requestForm.BlendedCourseType.$invalid">Blended Course Type is required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="Topics" class="control-label required">Topics</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <ui-select name="Topics" 
+                            ng-model="ctrl.item.Topic" theme="selectize" style="height: 34px;" title="Choose a topic" required
+                        >
+                            <ui-select-match placeholder="Select or search a topic in the list...">{{$select.selected.Title}}</ui-select-match>
+                            <ui-select-choices repeat="topic in ctrl.topicsChoice | filter: $select.search">
+                                <span ng-bind-html="topic.Title | highlight: $select.search"></span>
+                                <small ng-bind-html="topic.CourseNumber | highlight: $select.search"></small>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span class="error-msg" ng-show="requestForm.Topics.$touched && requestForm.Topics.$invalid">Topics is required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="CourseNumber" class="control-label ">Course Number</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.Topic.CourseNumber" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="CourseTitle" class="control-label required">Course Title</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" name="CourseTitle" class="form-control" ng-model="ctrl.item.CourseTitle" required>
+                        <span class="error-msg" ng-show="requestForm.CourseTitle.$touched && requestForm.CourseTitle.$invalid">Course Title is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="WaitlistCapacity" class="control-label ">Waitlist Capacity</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="ctrl.item.WaitlistCapacity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="EffectiveDate" class="control-label ">Effective Date</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="input-group">
+                            <input type="text" class="form-control" 
+                                uib-datepicker-popup="{{ctrl.format}}" 
+                                ng-model="ctrl.item.EffectiveDate" 
+                                is-open="ctrl.EffectiveDatePopup" 
+                                datepicker-options="ctrl.dateOptions" 
+                                close-text="Close" 
+                                show-button-bar="false"
+                                ng-init="ctrl.EffectiveDatePopup=fasle"
+                            />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.EffectiveDatePopup=!ctrl.EffectiveDatePopup"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="CourseTimeValue" class="control-label ">Time Value </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.CourseTimeValue">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="CourseDescription" class="control-label required">Course Description/Learning Objectives</label>
+                        <textarea rows="3" name="CourseDescription" type="text" class="form-control" ng-model="ctrl.item.CourseDescription" required></textarea>
+                        <span class="error-msg" ng-show="requestForm.CourseDescription.$touched && requestForm.CourseDescription.$invalid">Course Description is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                        <button type="button" class="btn btn-primary" ng-click="ctrl.stage=2">Next</button>
+                        <button type="button" class="btn btn-default" ng-click="ctrl.cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal" ng-if="ctrl.stage==2">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2 class="form-title">LOB Training Request Form</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="section-header">Scheduled Offering Details</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="NumberOfOfferingsToSchedule" class="control-label required">Number of Offerings to Schedule</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" name="NumberOfOfferingsToSchedule" class="form-control" ng-model="ctrl.item.NumberOfOfferingsToSchedule" required>
+                        <span class="error-msg" ng-show="requestForm.NumberOfOfferingsToSchedule.$touched && requestForm.NumberOfOfferingsToSchedule.$invalid">Number of Offerings to Schedule is required.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="Instructor" class="control-label required">Instructor</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <ui-select ng-model="ctrl.item.Instructor" theme="selectize" style="height: 34px;" title="Choose Instructor">
+                            <ui-select-match placeholder="Select or search a instructor in the list...">{{$select.selected.Title}}</ui-select-match>
+                            <ui-select-choices repeat="instructor in ctrl.instructorsChoice | filter: $select.search">
+                                <span ng-bind-html="instructor.Title | highlight: $select.search"></span>
+                                <!-- <small ng-bind-html="instructor.Email | highlight: $select.search"></small> -->
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="ClassStartDate" class="control-label required">Class Start Date</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="input-group">
+                            <input type="text" class="form-control" 
+                                uib-datepicker-popup="{{ctrl.format}}" 
+                                ng-model="ctrl.item.ClassStartDate" 
+                                is-open="ctrl.ClassStartDatePopup" 
+                                datepicker-options="ctrl.dateOptions" 
+                                ng-required="true" 
+                                close-text="Close" 
+                                show-button-bar="false"
+                                ng-init="ctrl.ClassStartDatePopup=fasle"
+                            />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.ClassStartDatePopup=!ctrl.ClassStartDatePopup">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="ClassEndDate" class="control-label required">Class End Date</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="input-group">
+                            <input type="text" class="form-control" 
+                                uib-datepicker-popup="{{ctrl.format}}" 
+                                ng-model="ctrl.item.ClassEndDate" 
+                                is-open="ctrl.ClassEndDatePopup" 
+                                datepicker-options="ctrl.dateOptions" 
+                                ng-required="true" 
+                                close-text="Close" 
+                                show-button-bar="false"
+                                ng-init="ctrl.ClassEndDatePopup=fasle"
+                            />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="ctrl.ClassEndDatePopup=!ctrl.ClassEndDatePopup">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="MinimumEnrollmentCapacity" class="control-label required">Minimum Enrollment Capacity</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="ctrl.item.MinimumEnrollmentCapacity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="MaximumEnrollmentCapacity" class="control-label required">Maximum Enrollment Capacity</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" ng-model="ctrl.item.MaximumEnrollmentCapacity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="EnableAutoEnrollmentWaitlist" class="control-label">Enable Auto-Enrollment from the Waitlist</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="btn-switch" 
+                            ng-class="{'btn-switch--on':ctrl.item.EnableAutoEnrollmentWaitlist}" 
+                            ng-model="ctrl.item.EnableAutoEnrollmentWaitlist" 
+                            ng-click="ctrl.item.EnableAutoEnrollmentWaitlist = !ctrl.item.EnableAutoEnrollmentWaitlist"
+                        >
+                            <div class="btn-switch-circle" 
+                                ng-class="{'btn-switch-circle--on':ctrl.item.EnableAutoEnrollmentWaitlist}" 
+                                ng-model="ctrl.item.EnableAutoEnrollmentWaitlist"
+                            >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-form>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="section-header">Scheduled Offering Details</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="Affiliate" class="control-label required">Affiliate</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <ui-select ng-model="ctrl.item.Affiliate" theme="selectize" style="height: 34px;" title="Choose a affiliate">
+                            <ui-select-match placeholder="Select or search a affiliate in the list...">{{$select.selected}}</ui-select-match>
+                            <ui-select-choices repeat="affiliate in ctrl.affiliateChoice | filter: $select.search">
+                                <span ng-bind-html="affiliate | highlight: $select.search"></span>
+                                <!-- <small ng-bind-html="affiliate.CourseNumber | highlight: $select.search"></small> -->
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="WebinarURL" class="control-label required">Webinar URL (if applicable)</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.WebinarURL">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="TrainingRoomReserved" class="control-label required">Training Room Reserved</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <ui-select ng-model="ctrl.item.TrainingRoomReserved" theme="selectize" style="height: 34px;" title="Choose a training room">
+                            <ui-select-match placeholder="Select or search a training room in the list...">{{$select.selected.Title}}</ui-select-match>
+                            <ui-select-choices repeat="room in ctrl.trainingRoomsChoice | filter: $select.search">
+                                <span ng-bind-html="room.Title | highlight: $select.search"></span>
+                                <small ng-bind-html="room.Address | highlight: $select.search"></small>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="TrainingRoomName" class="control-label required">Training Room Name</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.TrainingRoomName" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="Floor" class="control-label required">Floor</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.Floor" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="Address" class="control-label required">Address</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.Address" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="City" class="control-label required">City</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.City" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="State" class="control-label required">State</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.State" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="Zip" class="control-label required">Zip</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" ng-model="ctrl.item.Zip" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                        <button type="button" class="btn btn-success" ng-click="ctrl.saveData(requestForm)">Submit Form</button>
+                        <button type="button" class="btn btn-primary" ng-click="ctrl.stage=1">Back</button>
+                        <button type="button" class="btn btn-default" ng-click="ctrl.cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
