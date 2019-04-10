@@ -4,7 +4,7 @@
         'ngSanitize',
         'validation',
         'validation.rule',
-		'ui.select'
+		    'ui.select'
     ])
     .filter('propsFilter', function() {
         return function(items, props) {

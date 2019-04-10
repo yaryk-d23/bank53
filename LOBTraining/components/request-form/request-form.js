@@ -40,7 +40,7 @@
 
     function formCtrl($ApiService, $q, $scope){
         var ctrl = this;
-        var listTitle = 'LOBTrainingRequests';
+        var listTitle = 'LOBTrainingRequest';
         var urlItemId = getParameterByName('ItemId');
         ctrl.stage = 1;
         ctrl.item = {
@@ -86,9 +86,9 @@
             // ctrl.initiativeChoice = res.initiativeField.Choices.results;
         });
 
-        $scope.$watch('requestForm', function(newVal, oldVal){
-            console.log($scope);
-        }, true);
+        // $scope.$watch('requestForm', function(newVal, oldVal){
+        //     console.log($scope);
+        // }, true);
         $scope.$watch('ctrl.item.Employee', function(newVal, oldVal){
             if(ctrl.item.Employee && ctrl.item.Employee.Id){
                 ctrl.item.EmployeeEmail = ctrl.item.Employee.Email;
@@ -121,52 +121,52 @@
                         errorField.$setTouched();
                     });
                 });
-                alert("Form is invalid.");
+                return;
             }
-            // var item = angular.copy(ctrl.item);
-            // if(item.RequestDate){
-            //     item.RequestDate = item.RequestDate.toISOString();
-            // }
-            // if(item.EffectiveDate){
-            //     item.EffectiveDate = item.EffectiveDate.toISOString();
-            // }
-            // if(item.ClassStartDate){
-            //     item.ClassStartDate = item.ClassStartDate.toISOString();
-            // }
-            // if(item.EffectiveDate){
-            //     item.ClassEndDate = item.ClassEndDate.toISOString();
-            // }
-            // angular.forEach(item, function(value, key){
-            //     if(!value){
-            //         delete item[key];
-            //     }
-            // });
-            // item['Title'] = item.Employee.Title;
-            // if(item.Employee){
-            //     item['EmployeeId'] = item.Employee.Id;
-            //     delete item.Employee;
-            // }
-            // if(item.RoleForCourseUser){
-            //     item['RoleForCourseUserId'] = item.RoleForCourseUser.Id;
-            //     delete item.RoleForCourseUser;
-            // }
-            // item['RequestType'] = {"__metadata":{"type":"Collection(Edm.String)"},"results":item.RequestType};
-            // if(item.Topic){
-            //     item['TopicId'] = item.Topic.Id;
-            //     delete item.Topic;
-            // }
-            // if(item.Instructor){
-            //     item['InstructorId'] = item.Instructor.Id;
-            //     delete item.Instructor;
-            // }
-            // if(item.TrainingRoomReserved){
-            //     item['TrainingRoomReservedId'] = item.TrainingRoomReserved.Id;
-            //     delete item.TrainingRoomReserved;
-            // }
-            // item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestsListItem' };
-            // $ApiService.saveData(listTitle, item).then(function(){
-            //     alert("Completed");
-            // });
+            var item = angular.copy(ctrl.item);
+            if(item.RequestDate){
+                item.RequestDate = item.RequestDate.toISOString();
+            }
+            if(item.EffectiveDate){
+                item.EffectiveDate = item.EffectiveDate.toISOString();
+            }
+            if(item.ClassStartDate){
+                item.ClassStartDate = item.ClassStartDate.toISOString();
+            }
+            if(item.EffectiveDate){
+                item.ClassEndDate = item.ClassEndDate.toISOString();
+            }
+            angular.forEach(item, function(value, key){
+                if(!value){
+                    delete item[key];
+                }
+            });
+            item['Title'] = item.Employee.Title;
+            if(item.Employee){
+                item['EmployeeId'] = item.Employee.Id;
+                delete item.Employee;
+            }
+            if(item.RoleForCourseUser){
+                item['RoleForCourseUserId'] = item.RoleForCourseUser.Id;
+                delete item.RoleForCourseUser;
+            }
+            item['RequestType'] = {"__metadata":{"type":"Collection(Edm.String)"},"results":item.RequestType};
+            if(item.Topic){
+                item['TopicId'] = item.Topic.Id;
+                delete item.Topic;
+            }
+            if(item.Instructor){
+                item['InstructorId'] = item.Instructor.Id;
+                delete item.Instructor;
+            }
+            if(item.TrainingRoomReserved){
+                item['TrainingRoomReservedId'] = item.TrainingRoomReserved.Id;
+                delete item.TrainingRoomReserved;
+            }
+            item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
+            $ApiService.saveData(listTitle, item).then(function(){
+                alert("Completed");
+            });
         };
 
         ctrl.toggleSelection = function toggleSelection(choise) {
