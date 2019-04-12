@@ -109,13 +109,12 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <div class="col-sm-12"> 
-                        <label class="checkbox-inline" ng-repeat="choice in ctrl.requestTypeChoice track by $index">
+                        <label class="checkbox-inline" ng-repeat="choice in ctrl.item.RequestType track by $index">
                             <input 
                                 type="checkbox" 
                                 ng-value="choice"
                                 ng-checked="ctrl.item.RequestType.indexOf(choice) > -1"
-                                ng-click="ctrl.toggleSelection(choice)"
-                                readonly
+                                disabled
                             > {{choice}}
                         </label>
                     </div>
