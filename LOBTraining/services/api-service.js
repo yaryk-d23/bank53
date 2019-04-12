@@ -93,5 +93,69 @@
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
+    })
+    .factory('$SendEmail', function ($ApiService, $http, $q, $compile, $timeout, $rootScope) {
+        return {
+            Send: function (emailCode, scope) {
+                return $q(function(resolve, reject) {
+                    $ApiService.getListItems('EmailTemplates',"$select="+[
+                            "*",
+                            "To/EMail"
+                        ].join(",")+
+                        "&$top=1"+
+                        "&$expand=To"+
+                        "&$filter=Title eq '"+emailCode+"'")
+                    .then(function(data){
+                        var template=data[0];
+                        to = []
+                        angular.forEach(template.To, function(value, key) {
+                            to.push(value.EMail);
+                        });
+                        if(to.length){
+                            var $scope = $rootScope.$new();
+                            angular.merge($scope, scope)
+                            var elBody = $compile('<div style="display:none">' + template.Body + '</div>')($scope);
+                            angular.element(document).append(elBody);
+    
+                            var elSubject = $compile('<div style="display:none">' + template.Subject + '</div>')($scope);
+                            angular.element(document).append(elSubject);
+    
+                            $timeout(function() {
+                                var Body = elBody.html();
+                                var Subject = elSubject.html();
+    
+                                elBody.remove();
+                                elSubject.remove();
+    
+                                var mail = {
+                                        properties: {
+                                            __metadata: { 'type': 'SP.Utilities.EmailProperties' },
+                                            To: { 'results':  to },
+                                            Body: Body,
+                                            Subject: Subject
+                                        }
+                                    };
+                                var siteurl = _spPageContextInfo.webAbsoluteUrl;
+                                var urlTemplate = siteurl + "/_api/SP.Utilities.Utility.SendEmail";
+                    
+                                $http({
+                                    method: 'POST',  
+                                    url: urlTemplate,
+                                    data:mail,  
+                                    headers: { "Accept": "application/json;odata=verbose","content-type": "application/json;odata=verbose","X-RequestDigest": document.getElementById("__REQUESTDIGEST").value}  
+                                }).then(function(data){
+                                    resolve($scope.item);
+                                }, function (data) {
+                                    console.error('$SendEmail '+data);
+                                    reject(data);
+                                });
+                            }, 300);
+                        }else{
+                            resolve()
+                        }
+                    }, reject);   
+                });
+            }
+        }
     });
 })();

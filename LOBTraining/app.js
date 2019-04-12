@@ -1,5 +1,6 @@
 (function(){
     angular.module('App', [
+        'ngRoute',
         'ui.bootstrap',
         'ngSanitize',
         'validation',
@@ -52,12 +53,17 @@
             if (!results[2]) return '';
             return parseInt(decodeURIComponent(results[2].replace(/\+/g, " ")), 10);
         }
-    }]);
-    // .config(function($routeProvider, CONSTANT) {
-    //     $routeProvider
-    //         .when("/", {
-    //             templateUrl: CONSTANT.template_base_path + '/dashboard.html?' + Math.random(),
-    //             controller: "dashboardController"
-    //         })        
-    // });
+    }])
+    .config(function($routeProvider, $locationProvider) {
+      $locationProvider.hashPrefix('');
+
+      $routeProvider
+          .when('/request/new', {
+              template: '<request-form></request-form>'
+          })
+          .when('/request/:id', {
+              template: '<request-form-readonly></request-form-readonly>'
+          })
+         .otherwise('/request/new');      
+    });
 })();

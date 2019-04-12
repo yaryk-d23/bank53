@@ -1,9 +1,14 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
     var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/LOBTraining";
     var scripts = [
         "modules/jquery-3.3.1.min.js",
-        "modules/angular.min.js",
-        "modules/angular/angular-sanitize.min.js",
+        // "modules/angular.min.js",
+        // "modules/angular/angular-sanitize.min.js",
         "modules/bootstrap/js/bootstrap.min.js",
         "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
         "modules/angular/angular-validation.min.js",
@@ -13,6 +18,7 @@
         "app.js",
         "services/api-service.js",
         "components/request-form/request-form.js",
+        "components/request-form/request-form-readonly.js"
     ];
     var styles = [
         "modules/bootstrap/css/bootstrap.css",
@@ -31,8 +37,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
 <div class="app-container b" ng-app="App" ng-controller="AppCtrl as ctrl">
     <div class="container" >
-        <div>
-            <request-form></request-form>
+        <div ng-view>
         </div>
     </div>
 </div>

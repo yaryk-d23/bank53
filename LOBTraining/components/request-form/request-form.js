@@ -35,10 +35,10 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', '$scope', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', '$SendEmail', formCtrl]
     });
 
-    function formCtrl($ApiService, $q, $scope){
+    function formCtrl($ApiService, $q, $scope, $SendEmail){
         var ctrl = this;
         var listTitle = 'LOBTrainingRequest';
         var urlItemId = getParameterByName('ItemId');
@@ -165,7 +165,13 @@
             }
             item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
             $ApiService.saveData(listTitle, item).then(function(){
-                alert("Completed");
+                $SendEmail.Send(
+                    'NewRequest', 
+                    {LinkToForm: 'https://netorgft4174095.sharepoint.com/dev/SitePages/LOBTraining.aspx'+
+                            '#/request/1'})
+                    .then(function(){
+                        alert("Completed");
+                });
             });
         };
 
