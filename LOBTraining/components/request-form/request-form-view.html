@@ -85,7 +85,7 @@
                         <span class="error-msg" ng-show="requestForm.RequestDate.$touched && requestForm.RequestDate.$invalid">The Request Date is required.</span>
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <div class="col-sm-4">
                         <label for="RoleForCourse" class="control-label required">Your Role for the course</label>
                     </div>
@@ -98,15 +98,14 @@
                         </label>
                         <span class="error-msg" ng-show="requestForm.RoleForCourseRadioOptions.$touched && requestForm.RoleForCourseRadioOptions.$invalid">Your Role for the course is required.</span>
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <label for="RoleForCourseUser" class="control-label " ng-class="{'required':ctrl.item.RoleForCourse=='Instructor'}">Instructor</label>
+                        <label for="RoleForCourseUser" class="control-label required">Course Owner</label>
                     </div>
                     <div class="col-sm-8">
                         <input type="text" class="form-control"
-                            ng-required="ctrl.item.RoleForCourse=='Instructor'"
-                            ng-disabled="ctrl.item.RoleForCourse!='Instructor'"
+                            required
                             autocomplete="off"
                             id="RoleForCourseUser"
                             name="RoleForCourseUser"
@@ -201,7 +200,7 @@
                         <label for="CourseNumber" class="control-label ">Course Number</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.Topic.CourseNumber" readonly>
+                        <input type="text" class="form-control" ng-model="ctrl.item.Topic.CourseNumber" ng-readonly="ctrl.item.RequestType.indexOf('New Course') == -1">
                     </div>
                 </div>
                 <div class="form-group">
@@ -313,50 +312,16 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <label for="ClassStartDate" class="control-label required">Class Start Date</label>
+                        <label for="ClassStartEndDateTime" class="control-label required">Class Start and End Date and Time</label>
                     </div>
                     <div class="col-sm-8">
-                        <p class="input-group">
-                            <input type="text" class="form-control" 
-                                uib-datepicker-popup="{{ctrl.format}}" 
-                                ng-model="ctrl.item.ClassStartDate" 
-                                is-open="ctrl.ClassStartDatePopup" 
-                                datepicker-options="ctrl.dateOptions" 
-                                ng-required="true" 
-                                close-text="Close" 
-                                show-button-bar="false"
-                                ng-init="ctrl.ClassStartDatePopup=fasle"
-                            />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="ctrl.ClassStartDatePopup=!ctrl.ClassStartDatePopup">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </button>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-4">
-                        <label for="ClassEndDate" class="control-label required">Class End Date</label>
-                    </div>
-                    <div class="col-sm-8">
-                        <p class="input-group">
-                            <input type="text" class="form-control" 
-                                uib-datepicker-popup="{{ctrl.format}}" 
-                                ng-model="ctrl.item.ClassEndDate" 
-                                is-open="ctrl.ClassEndDatePopup" 
-                                datepicker-options="ctrl.dateOptions" 
-                                ng-required="true" 
-                                close-text="Close" 
-                                show-button-bar="false"
-                                ng-init="ctrl.ClassEndDatePopup=fasle"
-                            />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="ctrl.ClassEndDatePopup=!ctrl.ClassEndDatePopup">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </button>
-                            </span>
-                        </p>
+                        <textarea rows="3" 
+                            name="ClassStartEndDateTime" 
+                            id="ClassStartEndDateTime" 
+                            class="form-control" 
+                            ng-model="ctrl.item.ClassStartEndDateTime"
+                            required
+                        ></textarea>
                     </div>
                 </div>
             </div>
@@ -402,9 +367,22 @@
                 <h3 class="section-header">Training Site</h3>
             </div>
         </div>
-        <div class="row">
+        <div class="row" ng-if="ctrl.item.BlendedCourseType=='Webinar ILT'">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="WebinarURL" class="control-label required">Webinar URL (if applicable)</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" name="WebinarURL" ng-model="ctrl.item.WebinarURL" required>
+                        <span class="error-msg" ng-show="requestForm.WebinarURL.$touched && requestForm.WebinarURL.$invalid">The Webinar URL is required.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="ctrl.item.BlendedCourseType!='Webinar ILT'">
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group" >
                     <div class="col-sm-4">
                         <label for="Affiliate" class="control-label required">Affiliate</label>
                     </div>
@@ -420,10 +398,10 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-4">
-                        <label for="WebinarURL" class="control-label required">Webinar URL (if applicable)</label>
+                        <label for="WebinarURL" class="control-label">Webinar URL (if applicable)</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.WebinarURL">
+                        <input type="text" name="WebinarURL" class="form-control" ng-model="ctrl.item.WebinarURL">
                     </div>
                 </div>
                 <div class="form-group">
@@ -488,6 +466,25 @@
                     </div>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" ng-model="ctrl.item.Zip" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="section-header">Additional Details</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea rows="3" 
+                            name="AdditionalDetails" 
+                            id="AdditionalDetails" 
+                            class="form-control" 
+                            ng-model="ctrl.item.AdditionalDetails"
+                        ></textarea>
                     </div>
                 </div>
             </div>

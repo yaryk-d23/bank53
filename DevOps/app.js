@@ -49,7 +49,7 @@
                 $(document).on('hidden.bs.modal', '#new-track-form', function (e) {
                     window.history.pushState(null,null,'?');
                 });
-            },500);
+            },1000);
         }
 
         function getParameterByName(name, url) {

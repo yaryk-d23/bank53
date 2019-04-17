@@ -130,12 +130,12 @@
             if(item.EffectiveDate){
                 item.EffectiveDate = item.EffectiveDate.toISOString();
             }
-            if(item.ClassStartDate){
-                item.ClassStartDate = item.ClassStartDate.toISOString();
-            }
-            if(item.EffectiveDate){
-                item.ClassEndDate = item.ClassEndDate.toISOString();
-            }
+            // if(item.ClassStartDate){
+            //     item.ClassStartDate = item.ClassStartDate.toISOString();
+            // }
+            // if(item.EffectiveDate){
+            //     item.ClassEndDate = item.ClassEndDate.toISOString();
+            // }
             angular.forEach(item, function(value, key){
                 if(!value){
                     delete item[key];
@@ -151,7 +151,9 @@
                 delete item.RoleForCourseUser;
             }
             item['RequestType'] = {"__metadata":{"type":"Collection(Edm.String)"},"results":item.RequestType};
+            
             if(item.Topic){
+                item['CourseNumber'] = item.Topic.CourseNumber;
                 item['TopicId'] = item.Topic.Id;
                 delete item.Topic;
             }
