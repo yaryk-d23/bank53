@@ -42,7 +42,7 @@
                         },
                         data: data
                     }).then(function(res){
-                        return res;
+                        return res.data.d;
                     });
         }
 

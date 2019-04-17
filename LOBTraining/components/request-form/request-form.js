@@ -164,11 +164,11 @@
                 delete item.TrainingRoomReserved;
             }
             item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
-            $ApiService.saveData(listTitle, item).then(function(){
+            $ApiService.saveData(listTitle, item).then(function(res){
                 $SendEmail.Send(
                     'NewRequest', 
-                    {LinkToForm: 'https://netorgft4174095.sharepoint.com/dev/SitePages/LOBTraining.aspx'+
-                            '#/request/1'})
+                    {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
+                            '#/request/'+res.Id})
                     .then(function(){
                         alert("Completed");
                 });
