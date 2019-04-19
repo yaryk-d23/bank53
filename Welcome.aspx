@@ -72,7 +72,7 @@
 
 
 <div class="app-container b" ng-app="WelcomeApp" ng-controller="AppCtrl as ctrl" id="welcome">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" >
 		<span 
 			class="glyphicon glyphicon-align-justify navbar-toggle" 
 			style="padding: 13px 10px;font-size: 20px;" 
