@@ -14,7 +14,7 @@
         <div class="item-container">
             <div class="quick-leaderboard-item  text-center" ng-repeat="user in ctrl.leaderboardByRole track by $index">
                 <div class="user-badge">
-                    <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{user.User.EMail}}" />
+                    <img class="img-circle" ng-src="{{user.Avatar ? user.Avatar.Url : '/_layouts/15/userphoto.aspx?size=S&username='+user.User.EMail}}" />
                 </div>
                 <div class="user-picture">
                     <!-- <div>

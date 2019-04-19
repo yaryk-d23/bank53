@@ -19,6 +19,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     ctrl.groupedTasks = [];
     var recentTasks = [];
     ctrl.recentTasks = [];
+    ctrl.allAvatars = [];
     var allBadges = [];
     ctrl.moment = moment;
     ctrl.colorArr = ['#5cb85c', '#07b16a', '#33cddd', '#245698', '#79569c'];
@@ -34,6 +35,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     });
 
     var requests = {
+        allAvatars: $WelcomeService.getAvatarsItems(),
         allBadges: $WelcomeService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous"),
         allUserTasks: $WelcomeService.getTaskItems("$filter=BadgeType eq 'User'"),
         allTasks: $WelcomeService.getTaskItems(),
@@ -43,6 +45,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     };
 
     $q.all(requests).then(function(data){
+        ctrl.allAvatars = data.allAvatars;
         allBadges = data.allBadges;
         ctrl.allTasks = data.allTasks;
         ctrl.allUserTasks = data.allUserTasks;
@@ -123,16 +126,49 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                         })[0];
                         badge['TaskLog'] = recentTasks[key];
                         if(!checkIfItemExist(badge)){
+                            // var avatarItem = await $WelcomeService.getUserLogItemByUserId(badge['TaskLog'].AssignedToId);
+                            // badge['AvatarItem'] = avatarItem[0].Avatar;
                             ctrl.recentTasks.push(badge);
                         }
                     }
                     else {
+                        // var avatarItem = await $WelcomeService.getUserLogItemByUserId(recentTasks[key].AssignedToId);
+                        // recentTasks[key].AvatarItem = avatarItem[0].Avatar;
                         ctrl.recentTasks.push(recentTasks[key]); 
                     }
                 }
             });
+            var avatarsReq = {};
+            angular.forEach(ctrl.recentTasks, function(task, key){
+                if(task['odata.type'] == 'SP.Data.BadgesListListItem' || task['odata.type'] == 'SP.Data.BadgesListItem'){
+                    avatarsReq[key] = $WelcomeService.getUserLogItemByUserId(task['TaskLog'].AssignedToId);
+                }
+                else if(task['odata.type'] == 'SP.Data.BadgesTaskLogListItem'){
+                    avatarsReq[key] = $WelcomeService.getUserLogItemByUserId(task.AssignedToId);
+                }
+                
+            });
+            $q.all(avatarsReq).then(function(res){
+                angular.forEach(ctrl.recentTasks, function(task, key){
+                    task.AvatarItem = (res[key].length && res[key][0].Avatar) ? res[key][0].Avatar : {Url: '/_layouts/15/userphoto.aspx?size=S&username=EMail'};
+                });
+            });
         });
     });
+
+    ctrl.getAvatarUrlById =  function(userId){
+        var url = "/_layouts/15/userphoto.aspx?size=S&username=email";
+        // var item = await $WelcomeService.getUserLogItemByUserId(userId);
+        // angular.forEach(ctrl.allAvatars, function(avatar, i){
+        //     if(avatar.Id == itemId){
+        //         url = avatar.Avatar.Url;
+        //     }
+        // });
+        // if(item.Avatar){
+        //     url = item.Avatar.Url;
+        // }
+        return url;
+    };
 
     function setBadgesOrder(){
         var orderedBadges = [];

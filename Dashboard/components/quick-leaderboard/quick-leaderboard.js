@@ -58,6 +58,7 @@ function quickLeaderboardCtrl($DashboardService){
         var filter = 'Role eq \''+role+'\'';
         $DashboardService.getUserLogItems(filter).then(function(data){
             ctrl.leaderboardByRole = data;
+            console.log(data);
         });
     }
 

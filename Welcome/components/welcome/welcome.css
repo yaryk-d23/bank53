@@ -55,6 +55,9 @@
     box-shadow: 0 0 10px 0px;
     border-radius: 5px;
 }
+.welcome .recent-activity .user-image img {
+    width: 48px;
+}
 .recent-container .recent-badge-icon {
     width: 72px;
 }
@@ -124,9 +127,9 @@
     linear-gradient( 45deg,black 25%, transparent 25%, transparent 74%, black 75%, black);
     background-size:20px 20px;
     background-position: 0 0, 10px 10px;
-    position: absolute;
-    bottom: 85px;
-    right: 58px;
+    position: relative;
+    bottom: 125px;
+    right: -90%;
     height: 60px;
     width: 40px;
     writing-mode: tb-rl;
@@ -180,7 +183,7 @@
     border-bottom-right-radius: 5%;
 }
 .last-map-item:after,.last-map-item:before {
-    content: unset!important;
+    content: none!important;
 }
 .map-item.end-bottom {
     flex: 0 10%;

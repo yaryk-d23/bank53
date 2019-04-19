@@ -13,7 +13,8 @@ angular.module('WelcomeApp')
             uploadFile: uploadFile,
             getBadgeIcon: getBadgeIcon,
             getAvatarsItems: getAvatarsItems,
-            getSPUser: getSPUser
+            getSPUser: getSPUser,
+            getUserLogItemByUserId: getUserLogItemByUserId
         };
 
         function getSPUser(query){
@@ -52,6 +53,14 @@ angular.module('WelcomeApp')
         function getUserLogItem(userName){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'UsersLog\')/items?'
                 +'$select=*,User/Title,User/Id,User/EMail,User/UserName,AvatarItem/Id,AvatarItem/Title&$expand=User,AvatarItem&$filter=User/UserName eq \'' + userName +'\'')
+                .then(function(res){
+                    return res.data.value;
+                });
+        }
+
+        function getUserLogItemByUserId(userId){
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'UsersLog\')/items?'
+                +'$select=*,User/Title,User/Id,User/EMail,User/UserName,AvatarItem/Id,AvatarItem/Title&$expand=User,AvatarItem&$filter=User/Id eq \'' + userId +'\'')
                 .then(function(res){
                     return res.data.value;
                 });
