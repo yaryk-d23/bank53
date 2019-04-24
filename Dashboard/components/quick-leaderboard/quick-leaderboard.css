@@ -1,11 +1,11 @@
 .quick-leaderboard {
     min-height: 100px;
     width: 100%;
-    padding: 10px 20px;
-    border: 1px solid #c8c8c8;
-    border-top-right-radius: 40px;
-    border-bottom-left-radius: 40px;
-    box-shadow: 2px 2px 3px 0px;
+    box-shadow: 0 0 10px 0px;
+    border-radius: 5px;
+}
+.quick-leaderboard>div:not(.section-title){
+    padding: 0 20px 20px;
 }
 .quick-leaderboard .quick-leaderboard-item,
 .quick-leaderboard .quick-leaderboard-item>div {

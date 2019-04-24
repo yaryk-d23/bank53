@@ -2,10 +2,8 @@
 .user-info {
     min-height: 375px;
     width: 100%;
-    padding: 20px;
-    border: 1px solid #c8c8c8;
-    border-top-right-radius: 40px;
-    box-shadow: 2px 2px 3px 0px;
+    box-shadow: 0 0 10px 0px;
+    border-radius: 5px;
 }
 .user-info .credits-info {
     font-size: 16px;

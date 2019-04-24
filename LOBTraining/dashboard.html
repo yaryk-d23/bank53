@@ -1,0 +1,44 @@
+<script>
+    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/LOBTraining";
+    var scripts = [
+        "modules/jquery-3.3.1.min.js",
+        // "modules/angular.min.js",
+        // "modules/angular/angular-sanitize.min.js",
+        "modules/bootstrap/js/bootstrap.min.js",
+    ];
+    var styles = [
+        "modules/bootstrap/css/bootstrap.css",
+        "/modules/font-awesome/css/font-awesome.min.css",
+    ];
+    for(var i=0;i<scripts.length;i++){
+        document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+    }
+    for(var i=0;i<styles.length;i++){
+        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+    }
+</script>
+<script>
+    (function(){
+        $(document).ready(function(){
+            createEditIcon()
+        });
+
+        function hideIdColumn(){
+            $("table[summary='TSProjects'] tr>th:nth-child(2)").hide();
+            $("table[summary='TSProjects'] tr>td:nth-child(2)").hide();
+        }
+
+        function createEditIcon(){
+            var items = $("table[summary='LOBTraining'] tbody>tr");
+            $.each(items, function(key, row){
+                var formId = $(row).find("td:nth-child(2)").text();
+                $(row).find('.ms-list-itemLink-td').html('<div class="edit-item" '+
+                'style="cursor: pointer;height: 25px;vertical-align:sub;display: inline-block;">'+
+                '<a href="#/request/'+formId+'"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>');
+                $(row).find('.ms-list-itemLink-td').css({'text-align': 'center'});
+            });
+            hideIdColumn();
+        }
+
+    })();
+</script>

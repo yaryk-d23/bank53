@@ -23,6 +23,7 @@
         ctrl.trainingRoomsChoice = [];
         ctrl.getUser = $ApiService.getUser;
         ctrl.requestId = $routeParams.id;
+        ctrl.lobTrainingText = {};
         if(ctrl.requestId){
             $ApiService.getListItems(listTitle, '$select=*,Employee/Title,Employee/Id,Employee/EMail,'+
                 'Instructor/Title,Instructor/Id,'+
@@ -40,6 +41,10 @@
                 }
             });
         }
+        $ApiService.getListItems("LOBTrainingText").then(function(res){
+            ctrl.lobTrainingText = res[0];
+        });
+
 
         
         function getParameterByName(name, url) {

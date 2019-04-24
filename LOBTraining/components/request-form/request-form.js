@@ -49,6 +49,7 @@
             EnableAutoEnrollmentWaitlist: true,
             TrainingRoomReserved: {}
         };
+        ctrl.lobTrainingText = {};
 
         ctrl.requestTypeChoice = [];
         ctrl.blendedCourseTypeChoice = [];
@@ -72,6 +73,7 @@
             instructorsChoice: $ApiService.getListItems("Instructors"),
             trainingRoomsChoice: $ApiService.getListItems("TrainingRooms"),
             currentUser: $ApiService.getCurrentUser(),
+            lobTrainingText: $ApiService.getListItems("LOBTrainingText"),
         };
 
         $q.all(request).then(function(res){
@@ -83,6 +85,7 @@
             ctrl.instructorsChoice = res.instructorsChoice;
             ctrl.trainingRoomsChoice = res.trainingRoomsChoice;
             ctrl.trainingRoomsChoice.push({Title: 'Other'});
+            ctrl.lobTrainingText = res.lobTrainingText[0];
             // ctrl.initiativeChoice = res.initiativeField.Choices.results;
         });
 

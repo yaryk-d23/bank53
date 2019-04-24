@@ -1,11 +1,11 @@
 .recent-badges {
     min-height: 100px;
     width: 100%;
-    padding: 10px 20px;
-    border: 1px solid #c8c8c8;
-    border-top-right-radius: 40px;
-    border-bottom-left-radius: 40px;
-    box-shadow: 2px 2px 3px 0px;
+    box-shadow: 0 0 10px 0px;
+    border-radius: 5px;
+}
+.recent-badges>div:not(.section-title){
+    padding: 0 20px 20px;
 }
 .recent-badges .badges-item {
     display: inline-block;
