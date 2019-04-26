@@ -30,7 +30,6 @@
                             <div class="form-group">
                                 <label for="LDLeader">Assigned To</label>
                                 <ui-select 
-                                    ng-if="!ctrl.urlItemId"
                                     multiple 
                                     ng-model="ctrl.item.LDLeader" 
                                     theme="bootstrap" 
@@ -44,11 +43,11 @@
                                         repeat="user as user in ctrl.allUsers | propsFilter: {DisplayText: $select.search}">
                                         <div ng-bind-html="user.DisplayText | highlight: $select.search"></div>
                                         <small>
-                                            email: {{user.EntityData.Email || user.EMail}}
+                                            email: {{user.EntityData.Email}}
                                         </small>
                                     </ui-select-choices>
                                 </ui-select>
-                                <ui-select 
+                                <!-- <ui-select 
                                     ng-if="ctrl.urlItemId"
                                     multiple 
                                     ng-model="ctrl.item.LDLeader" 
@@ -66,7 +65,7 @@
                                             email: {{user.EMail}}
                                         </small>
                                     </ui-select-choices>
-                                </ui-select>
+                                </ui-select> -->
 								<div class="clearfix"></div>
                             </div>
                             <div class="form-group">

@@ -97,7 +97,6 @@
                     ctrl.item.Title = item.Title;
                     ctrl.item.LineOfBusiness = item.LineOfBusiness;
                     ctrl.item.Initiative = item.Initiative;
-                    ctrl.item.LDLeader = item.LDLeader;
                     ctrl.item.VendorContractor = item.VendorContractor;
                     ctrl.item.Team = item.Team;
                     ctrl.item.Budget = item.Budget;
@@ -112,6 +111,16 @@
                     ctrl.item.Description = item.Description;
 					ctrl.item.Status = item.Status;
                     ctrl.item.Notes = item.Notes;
+
+                    ctrl.item.LDLeader = [];
+                    angular.forEach(item.LDLeader, function(val){
+                        ctrl.item.LDLeader.push({
+                            DisplayText: val.Title,
+                            EntityData: {
+                                Email: val.EMail
+                            }
+                        });
+                    });
 					$('.b #new-track-form').modal('show');
                 }
             });
@@ -148,8 +157,8 @@
             var item = angular.copy(ctrl.item);
             var usersReq = [];
             angular.forEach(item['LDLeader'], function(val){
-                var email = val.EntityData ? val.EntityData.Email : val.EMail;
-                usersReq.push($ApiService.getUserByEmail(email));
+                // var email = val.EntityData ? val.EntityData.Email : val.EMail;
+                usersReq.push($ApiService.getUserByEmail(val.EntityData.Email));
             });
             if(item.ExpirationDate){
                 item.ExpirationDate = item.ExpirationDate.toISOString();
