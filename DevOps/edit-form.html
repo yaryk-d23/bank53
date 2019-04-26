@@ -53,14 +53,14 @@
         function createEditIcon(){
             var items = $("table[summary='TSProjects'] tbody>tr");
             $.each(items, function(key, row){
-                $(row).find('.ms-list-itemLink-td').html('<div class="edit-item" '+
+                $(row).find('.ms-list-itemLink-td').html('<a class="edit-item" '+
                 'data-toggle="modal" data-target="#new-track-form" style="cursor: pointer;height: 25px;vertical-align:sub;display: inline-block;">'+
-                '<i class="fa fa-pencil" aria-hidden="true"></i></div>');
+                '<i class="fa fa-pencil" aria-hidden="true"></i></a>');
                 $(row).find('.ms-list-itemLink-td').css({'text-align': 'center'});
                 $(row).find('.ms-list-itemLink-td .edit-item').on('click',function(){
                     var formId = $(row).find("td:nth-child(2)").text();
                     window.history.pushState(null,null,'?ItemId='+formId);
-                    location.reload();
+                    //location.reload();
                 });
             });
             hideIdColumn();
@@ -73,7 +73,9 @@
     <div class="container" id="jump-page">
         <div>
             <nav-bar></nav-bar>
-            <track-form></track-form>
+			<div ng-if="ctrl.showModal">
+				<track-form></track-form>
+			</div>
         </div>
     </div>
 </div>

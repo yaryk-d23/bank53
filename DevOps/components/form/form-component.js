@@ -57,7 +57,8 @@
             BusinessValue: 0,
             RegulatoryComplianceRelated: 0,
             CustomerEmployeeValue: 0,
-            TimeSensitivity: 0
+            TimeSensitivity: 0,
+			EstimatedProgress: 0
         };
 
 		$(document).on('hidden.bs.modal', '#new-track-form', function (e) {
@@ -66,7 +67,8 @@
 				BusinessValue: 0,
 				RegulatoryComplianceRelated: 0,
 				CustomerEmployeeValue: 0,
-				TimeSensitivity: 0
+				TimeSensitivity: 0,
+				EstimatedProgress: 0
 			};
 			$scope.$apply();
 		});   
@@ -77,12 +79,14 @@
 				BusinessValue: 0,
 				RegulatoryComplianceRelated: 0,
 				CustomerEmployeeValue: 0,
-				TimeSensitivity: 0
+				TimeSensitivity: 0,
+				EstimatedProgress: 0
 			};
 		}
 		
 		ctrl.clearForm = clearForm;
  		
+
         if(urlItemId){
             $ApiService.getListItems(listTitle, '$select=*,LDLeader/Title,LDLeader/Id,LDLeader/EMail'+
                 '&$expand=LDLeader&$filter=Id eq '+urlItemId)
@@ -106,11 +110,13 @@
                     ctrl.item.TimeSensitivity = item.TimeSensitivity;
                     ctrl.item.Prioritization = item.Prioritization;
                     ctrl.item.Description = item.Description;
+					ctrl.item.Status = item.Status;
                     ctrl.item.Notes = item.Notes;
+					$('.b #new-track-form').modal('show');
                 }
             });
         }
-
+		ctrl.statusChoice = [];
         ctrl.teamChoice = [];
         ctrl.initiativeChoice = [];
         ctrl.allUsers = [];
@@ -127,11 +133,13 @@
         };
 
         var request = {
+			statusField: $ApiService.getListChoiceField(listTitle, 'Status'),
             teamField: $ApiService.getListChoiceField(listTitle, 'Team'),
             initiativeField: $ApiService.getListChoiceField(listTitle, 'Initiative'),
         };
 
         $q.all(request).then(function(res){
+			ctrl.statusChoice = res.statusField.Choices.results;
             ctrl.teamChoice = res.teamField.Choices.results;
             ctrl.initiativeChoice = res.initiativeField.Choices.results;
         });
