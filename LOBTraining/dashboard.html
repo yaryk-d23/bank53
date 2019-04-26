@@ -24,17 +24,17 @@
         });
 
         function hideIdColumn(){
-            $("table[summary='TSProjects'] tr>th:nth-child(2)").hide();
-            $("table[summary='TSProjects'] tr>td:nth-child(2)").hide();
+            $("table[summary='LOBTrainingRequest'] tr>th:nth-child(2)").hide();
+            $("table[summary='LOBTrainingRequest'] tr>td:nth-child(2)").hide();
         }
 
         function createEditIcon(){
-            var items = $("table[summary='LOBTraining'] tbody>tr");
+            var items = $("table[summary='LOBTrainingRequest'] tbody>tr");
             $.each(items, function(key, row){
                 var formId = $(row).find("td:nth-child(2)").text();
                 $(row).find('.ms-list-itemLink-td').html('<div class="edit-item" '+
                 'style="cursor: pointer;height: 25px;vertical-align:sub;display: inline-block;">'+
-                '<a href="#/request/'+formId+'"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>');
+                '<a href="/teams/HCInt/Learn/LobTR/SitePages/App.aspx#/request/'+formId+'"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>');
                 $(row).find('.ms-list-itemLink-td').css({'text-align': 'center'});
             });
             hideIdColumn();

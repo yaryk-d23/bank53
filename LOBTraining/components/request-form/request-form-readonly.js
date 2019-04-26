@@ -42,13 +42,16 @@
                     var requests = [];
                     angular.forEach(ctrl.item.ScheduledOfferingDetailsId,function(val){
                         requests.push($ApiService.getListItems("ScheduledOfferingDetails", '$select=*'+
-                        // ',Instructor/Title,Instructor/Id,'+
-                        // 'TrainingRoomReserved/Title,TrainingRoomReserved/Id,'+
-                        // '&$expand=Instructor,TrainingRoomReserved'+
+                        ',Instructor/Title,Instructor/Id,'+
+                        'TrainingRoomReserved/Title,TrainingRoomReserved/Id'+
+                        '&$expand=Instructor,TrainingRoomReserved'+
                         '&$filter=Id eq '+val));
                     });
                     $q.all(requests).then(function(res){
-                        ctrl.NumberOfOfferingsToScheduleArr = res;
+						angular.forEach(res,function(val){
+							val[0].EnableAutoEnrollmentWaitlist = val[0].EnableAutoEnrollmentWaitlist ? "Yes" : "No";
+							ctrl.NumberOfOfferingsToScheduleArr.push(val[0]);
+						});
                     });
                 }
             });
