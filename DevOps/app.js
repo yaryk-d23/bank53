@@ -39,18 +39,46 @@
         };
       })
 
-    .controller('AppCtrl', [function() {
+    .controller('AppCtrl',  ['$scope',function($scope) {
         var ctrl = this;
-        
+        var intervalId = 0;
         var urlItemId = getParameterByName('ItemId');
-        if(urlItemId){
-            setTimeout(function(){
-                $('.b #new-track-form').modal('show');
-                $(document).on('hidden.bs.modal', '#new-track-form', function (e) {
-                    window.history.pushState(null,null,'?');
-                });
-            },1000);
+		ctrl.showModal=false;
+		intervalId = setInterval(function(){
+			urlItemId = getParameterByName('ItemId');
+			if(urlItemId){
+				$('.b #new-track-form').on('hidden.bs.modal', function (e) {
+					window.history.pushState(null,null,'?');
+					ctrl.showModal=false;
+				});
+				ctrl.showModal = true;
+				$scope.$apply();
+				//clearInterval(intervalId);
+				
+			}
+			else {
+				ctrl.showModal=false;
+			}
+		},500);
+        /*if(urlItemId){
+            intervalId = setInterval(function(){
+				//alert($('#new-track-form').css('display'));
+				if($('#new-track-form').css('display') == 'none'){
+					showModal();
+				}
+				else if($('#new-track-form').css('display') == 'block') {
+					clearInterval(intervalId);
+				}
+				
+            },500);
         }
+		
+		function showModal(){
+			$('.b #new-track-form').modal('show');
+			$('.b #new-track-form').on('hidden.bs.modal', function (e) {
+				window.history.pushState(null,null,'?');
+			});
+		}*/
 
         function getParameterByName(name, url) {
             if (!url) url = window.location.href;
