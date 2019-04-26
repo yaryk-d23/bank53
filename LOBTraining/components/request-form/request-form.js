@@ -224,7 +224,7 @@
                         $SendEmail.Send(
                             'NewRequest', 
                             {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
-                                    '#/request/'+res.Id})
+                                    '#/request/'+newItemId})
                             .then(function(){
                                 alert("Completed");
                         });
