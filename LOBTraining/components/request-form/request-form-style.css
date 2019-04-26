@@ -27,3 +27,18 @@
 .b .error-msg {
     color: red;
 }
+
+.b .nav > li > div{
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+.b .nav > li.active{
+    background-color: #f7f7f7;
+    cursor: default;
+}

@@ -29,28 +29,27 @@
                             </div>
                             <div class="form-group">
                                 <label for="LDLeader">L&D Leader</label>
-                                <!-- <input type="text" class="form-control"
-                                    autocomplete="off"
-                                    id="Contact"
-                                    name="Contact"
-                                    ng-model="ctrl.item.zagt"
-                                    maxlength="255"
-                                    validator="requiredUser"
-                                    valid-method="watch"
-                                    use-view-value="false"
-                
-                                    uib-typeahead="user as user.Title for user in ctrl.getUser($viewValue)"
-                                    typeahead-min-length="2"
-                                    typeahead-loading="loadingLocations.Contact"
-                                    typeahead-no-results="noResults.Contact"
-                                    ng-class="{loading: loadingLocations.Contact}"
-                                    message-id="errorMessage-Contact"
-                                >
-                                <div ng-show="noResults.Contact && Contact">
-                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
-                                </div>
-                                <div id="errorMessage-Contact"></div> -->
                                 <ui-select 
+                                    ng-if="!ctrl.urlItemId"
+                                    multiple 
+                                    ng-model="ctrl.item.LDLeader" 
+                                    theme="bootstrap" 
+                                    close-on-select="true" 
+                                    title="Choose a person"
+                                >
+                                    <ui-select-match placeholder="Select person...">{{$item.DisplayText}} &lt;{{$item.EntityData.Email}}&gt;</ui-select-match>
+                                    <ui-select-choices 
+                                    refresh="ctrl.getUsers($select)"
+                                        refresh-delay="0"
+                                        repeat="user as user in ctrl.allUsers | propsFilter: {DisplayText: $select.search}">
+                                        <div ng-bind-html="user.DisplayText | highlight: $select.search"></div>
+                                        <small>
+                                            email: {{user.EntityData.Email || user.EMail}}
+                                        </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <ui-select 
+                                    ng-if="ctrl.urlItemId"
                                     multiple 
                                     ng-model="ctrl.item.LDLeader" 
                                     theme="bootstrap" 
@@ -64,7 +63,7 @@
                                         repeat="user as user in ctrl.allUsers | propsFilter: {Title: $select.search, Email: $select.search}">
                                         <div ng-bind-html="user.Title | highlight: $select.search"></div>
                                         <small>
-                                            email: {{user.Email || user.EMail}}
+                                            email: {{user.EMail}}
                                         </small>
                                     </ui-select-choices>
                                 </ui-select>

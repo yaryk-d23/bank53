@@ -1,7 +1,7 @@
+<div style="position: relative; width: 100%;">
+    <div id="task-toast" class="snackbar"></div>
+</div>
 <div class="badges-info">
-    <div style="position: relative; width: 100%;">
-        <div id="task-toast" class="snackbar"></div>
-    </div>
     <div class="badges-item  text-center" ng-repeat="badge in ctrl.allBadges track by $index">
         <div class="badge-container" id="badge_{{badge.Id}}">
             <img class="img-circle" ng-src="{{badge.Icon.Url}}"  id="spinner"/>

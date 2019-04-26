@@ -14,7 +14,8 @@
         var listTitle = 'LOBTrainingRequest';
         ctrl.stage = 1;
         ctrl.item = {};
-
+        ctrl.NumberOfOfferingsToScheduleArr = [];
+        ctrl.selectetTab = 0;
         ctrl.requestTypeChoice = [];
         ctrl.blendedCourseTypeChoice = [];
         ctrl.topicsChoice = [];
@@ -38,6 +39,17 @@
                     ctrl.item.ClassStartDate = moment(ctrl.item.ClassStartDate).format('MM/DD/YYYY');
                     ctrl.item.ClassEndDate = moment(ctrl.item.ClassEndDate).format('MM/DD/YYYY');
                     ctrl.item.EnableAutoEnrollmentWaitlist = ctrl.item.EnableAutoEnrollmentWaitlist ? 'Yes' : 'No';
+                    var requests = [];
+                    angular.forEach(ctrl.item.ScheduledOfferingDetailsId,function(val){
+                        requests.push($ApiService.getListItems("ScheduledOfferingDetails", '$select=*'+
+                        // ',Instructor/Title,Instructor/Id,'+
+                        // 'TrainingRoomReserved/Title,TrainingRoomReserved/Id,'+
+                        // '&$expand=Instructor,TrainingRoomReserved'+
+                        '&$filter=Id eq '+val));
+                    });
+                    $q.all(requests).then(function(res){
+                        ctrl.NumberOfOfferingsToScheduleArr = res;
+                    });
                 }
             });
         }

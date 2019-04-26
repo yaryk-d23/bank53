@@ -12,7 +12,7 @@
     function tilesCtrl($ApiService, $q){
 		try{
         var ctrl = this;
-        /*ctrl.tiles = [
+        ctrl.tiles = [
             {
                 Title: 'Title1',
                 Description: 'Descriptio1',
@@ -35,12 +35,12 @@
                 Link: {Url: '#'}
             },
         ];
-        $ApiService.getListItems('TSProjectTracker').then(function(res){
-            	console.log(res);
-            });*/
-		$ApiService.getListItems('Tiles', '$filter=IsVisible eq 1').then(function(res){
-			ctrl.tiles = res;
-		});
+        // $ApiService.getListItems('TSProjectTracker').then(function(res){
+        //     	console.log(res);
+        //     });
+		// $ApiService.getListItems('Tiles', '$filter=IsVisible eq 1').then(function(res){
+		// 	ctrl.tiles = res;
+		// });
         // ctrl.openNewTrackForm = function(tile){
 		// 	if(tile.Title == 'New Track'){
 		// 		$('#new-track-form').modal('show');

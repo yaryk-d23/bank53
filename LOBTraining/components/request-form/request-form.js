@@ -42,12 +42,12 @@
         var ctrl = this;
         var listTitle = 'LOBTrainingRequest';
         var urlItemId = getParameterByName('ItemId');
-        ctrl.stage = 1;
+        ctrl.stage = 2;
         ctrl.item = {
             RequestDate: new Date(),
             RequestType: [],
             EnableAutoEnrollmentWaitlist: true,
-            TrainingRoomReserved: {}
+            // TrainingRoomReserved: {}
         };
         ctrl.lobTrainingText = {};
 
@@ -58,6 +58,26 @@
         ctrl.affiliateChoice = [];
         ctrl.trainingRoomsChoice = [];
         ctrl.getUser = $ApiService.getUser;
+        ctrl.selectetTab = 0;
+        ctrl.NumberOfOfferingsToScheduleArr = [];
+        var NumberOfOfferingsToScheduleItem = {
+            Instructor: null,
+            ClassStartEndDateTime: null,
+            MinimumEnrollmentCapacity: null,
+            MaximumEnrollmentCapacity: 0,
+            EnableAutoEnrollmentWaitlist: 0,
+            EnableAutoEnrollmentWaitlist: false,
+            Affiliate: null,
+            WebinarURL: '',
+            TrainingRoomReserved: null,
+            TrainingRoomName: null,
+            Floor: null,
+            Address: null,
+            City: null,
+            State: null,
+            Zip: null,
+
+        };
         // ctrl.getUsers = function($select) {
         //     if(!$select.search || $select.search.length < 3) return;
         //     $ApiService.getUser($select.search).then(function(res){
@@ -98,24 +118,33 @@
                 ctrl.item.EmployeeLineOfBusiness = ctrl.item.Employee.EmployeeLineOfBusiness || '-';
             }
         }, true);
-        $scope.$watch('ctrl.item.TrainingRoomReserved', function(newVal, oldVal){
-            if(ctrl.item.TrainingRoomReserved && ctrl.item.TrainingRoomReserved.Title != 'Other'){
-                ctrl.item.TrainingRoomName = ctrl.item.TrainingRoomReserved.Title;
-                ctrl.item.Floor = ctrl.item.TrainingRoomReserved.Floor;
-                ctrl.item.Address = ctrl.item.TrainingRoomReserved.Address;
-                ctrl.item.City = ctrl.item.TrainingRoomReserved.City;
-                ctrl.item.State = ctrl.item.TrainingRoomReserved.State;
-                ctrl.item.Zip = ctrl.item.TrainingRoomReserved.Zip;
-            }
-            if(ctrl.item.TrainingRoomReserved && ctrl.item.TrainingRoomReserved.Title == 'Other'){
-                ctrl.item.TrainingRoomName = "";
-                ctrl.item.Floor = "";
-                ctrl.item.Address = "";
-                ctrl.item.City = "";
-                ctrl.item.State = "";
-                ctrl.item.Zip = "";
-            }
+        $scope.$watch('ctrl.NumberOfOfferingsToScheduleArr', function(newVal, oldVal){
+            angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(val){
+                if(val.TrainingRoomReserved && val.TrainingRoomReserved.Title != 'Other'){
+                    val.TrainingRoomName = val.TrainingRoomReserved.Title;
+                    val.Floor = val.TrainingRoomReserved.Floor;
+                    val.Address = val.TrainingRoomReserved.Address;
+                    val.City = val.TrainingRoomReserved.City;
+                    val.State = val.TrainingRoomReserved.State;
+                    val.Zip = val.TrainingRoomReserved.Zip;
+                }
+                if(val.TrainingRoomReserved && val.TrainingRoomReserved.Title == 'Other'){
+                    val.TrainingRoomName = "";
+                    val.Floor = "";
+                    val.Address = "";
+                    val.City = "";
+                    val.State = "";
+                    val.Zip = "";
+                }
+            });
         }, true);
+
+        ctrl.onBlurNumberOfOfferingsToSchedule = function(){
+            ctrl.NumberOfOfferingsToScheduleArr = [];
+            for(var i=0;i<ctrl.item.NumberOfOfferingsToSchedule;i++){
+                ctrl.NumberOfOfferingsToScheduleArr.push(angular.copy(NumberOfOfferingsToScheduleItem));
+            }
+        };
 
         ctrl.saveData = function(form){
             if (form.$invalid) {
@@ -160,22 +189,46 @@
                 item['TopicId'] = item.Topic.Id;
                 delete item.Topic;
             }
-            if(item.Instructor){
-                item['InstructorId'] = item.Instructor.Id;
-                delete item.Instructor;
-            }
-            if(item.TrainingRoomReserved){
-                item['TrainingRoomReservedId'] = item.TrainingRoomReserved.Id;
-                delete item.TrainingRoomReserved;
-            }
-            item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
+            item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestsListItem' };
             $ApiService.saveData(listTitle, item).then(function(res){
-                $SendEmail.Send(
-                    'NewRequest', 
-                    {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
-                            '#/request/'+res.Id})
-                    .then(function(){
-                        alert("Completed");
+                var newItemId = res.Id;
+                var offeringDetailsReq = [];
+                angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(item){
+                    var data = angular.copy(item);
+                    data['__metadata'] = { "type": 'SP.Data.ScheduledOfferingDetailsListItem' };
+                    if(data.Instructor){
+                        item['InstructorId'] = data.Instructor.Id;
+                        delete data.Instructor;
+                    }
+                    if(data.TrainingRoomReserved){
+                        data['TrainingRoomReservedId'] = data.TrainingRoomReserved.Id;
+                        delete data.TrainingRoomReserved;
+                    }
+                    angular.forEach(data, function(value, key){
+                        if(!value){
+                            delete data[key];
+                        }
+                    });
+                    offeringDetailsReq.push($ApiService.saveData('ScheduledOfferingDetails', data));
+                    $q.all(offeringDetailsReq).then(function(res){
+                        var updateData = {};
+                        updateData['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestsListItem' };
+                        updateData['ScheduledOfferingDetailsId'] = {
+                            'results': []
+                        };
+                        angular.forEach(res, function(val){
+                            updateData['ScheduledOfferingDetailsId'].results.push(val.Id);
+                        });
+                        $ApiService.updateData(listTitle, newItemId, updateData).then(function(){
+                            $SendEmail.Send(
+                                'NewRequest', 
+                                {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
+                                        '#/request/'+res.Id})
+                                .then(function(){
+                                    alert("Completed");
+                            });
+                        });
+                    });
                 });
             });
         };

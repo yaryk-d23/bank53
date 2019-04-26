@@ -7,7 +7,8 @@
             getCurrentUser: getCurrentUser,
             getListItems: getListItems,
             getListChoiceField: getListChoiceField,
-            saveData: saveData
+            saveData: saveData,
+            updateData: updateData
         };
 
         function getUserProfile(){
@@ -33,12 +34,30 @@
         function saveData(listTitle, data){
             return $http({
                         url: _spPageContextInfo.webAbsoluteUrl + 
-                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items',
+                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items?$select=Id',
                         method: 'POST',
                         headers: {
                             "accept": "application/json;odata=verbose",
                             "content-type": "application/json;odata=verbose",
                             "X-RequestDigest": $('#__REQUESTDIGEST').val()
+                        },
+                        data: data
+                    }).then(function(res){
+                        return res.data.d;
+                    });
+        }
+
+        function updateData(listTitle, itemId, data){
+            return $http({
+                        url: _spPageContextInfo.webAbsoluteUrl + 
+                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items('+itemId+')?$select=Id',
+                        method: 'POST',
+                        headers: {
+                            "accept": "application/json;odata=verbose",
+                            "content-type": "application/json;odata=verbose",
+                            "X-RequestDigest": $('#__REQUESTDIGEST').val(),
+                            "IF-MATCH": "*",  
+                            "X-HTTP-Method": "MERGE"
                         },
                         data: data
                     }).then(function(res){

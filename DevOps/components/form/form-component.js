@@ -51,7 +51,7 @@
         var ctrl = this;
         var listTitle = 'TSProjects';
         var urlItemId = getParameterByName('ItemId');
-
+        ctrl.urlItemId = urlItemId;
         ctrl.item = {
             ExpirationDate: new Date(),
             BusinessValue: 0,
@@ -138,26 +138,34 @@
 
         ctrl.saveData = function(){
             var item = angular.copy(ctrl.item);
+            var usersReq = [];
+            angular.forEach(item['LDLeader'], function(val){
+                var email = val.EntityData ? val.EntityData.Email : val.EMail;
+                usersReq.push($ApiService.getUserByEmail(email));
+            });
             if(item.ExpirationDate){
                 item.ExpirationDate = item.ExpirationDate.toISOString();
             }
             item['LDLeaderId'] = {
                 'results': []
             };
-            angular.forEach(item['LDLeader'], function(val, key){
-                item['LDLeaderId'].results.push(val.Id);
+            $q.all(usersReq).then(function(res){
+                angular.forEach(res, function(val){
+                    item['LDLeaderId'].results.push(val.Id);
+                });
+                delete item['LDLeader'];
+
+                if(urlItemId){
+                    $ApiService.updateData(listTitle, urlItemId, item).then(function(){
+                        $('#new-track-form').modal('hide');
+                    });
+                }
+                else {
+                    $ApiService.saveData(listTitle, item).then(function(){
+                        $('#new-track-form').modal('hide');
+                    });
+                }
             });
-            delete item['LDLeader'];
-            if(urlItemId){
-                $ApiService.updateData(listTitle, urlItemId, item).then(function(){
-                    $('#new-track-form').modal('hide');
-                });
-            }
-            else {
-                $ApiService.saveData(listTitle, item).then(function(){
-                    $('#new-track-form').modal('hide');
-                });
-            }
         };
 
 

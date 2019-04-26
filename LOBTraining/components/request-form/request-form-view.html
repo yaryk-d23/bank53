@@ -1,5 +1,5 @@
 <ng-form class="request-form" name="requestForm">
-    <div class="form-horizontal" ng-if="ctrl.stage==1">
+        <div class="form-horizontal" ng-if="ctrl.stage==1">
         <div class="row">
             <div class="col-sm-12">
                 <h2 class="form-title">LOB Training Request Form</h2>
@@ -292,16 +292,40 @@
                         <label for="NumberOfOfferingsToSchedule" class="control-label required">Number of Offerings to Schedule</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="number" name="NumberOfOfferingsToSchedule" class="form-control" ng-model="ctrl.item.NumberOfOfferingsToSchedule" required>
+                        <input type="number" 
+                            name="NumberOfOfferingsToSchedule" 
+                            class="form-control" 
+                            ng-model="ctrl.item.NumberOfOfferingsToSchedule" 
+                            required
+                            ng-blur="ctrl.onBlurNumberOfOfferingsToSchedule()"
+                        >
                         <span class="error-msg" ng-show="requestForm.NumberOfOfferingsToSchedule.$touched && requestForm.NumberOfOfferingsToSchedule.$invalid">Number of Offerings to Schedule is required.</span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length">
+            <div class="col-sm-12">
+                <div class="navigation-tabs">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" 
+                            ng-repeat="item in ctrl.NumberOfOfferingsToScheduleArr track by $index"
+                            ng-class="{'active': ctrl.selectetTab == $index}"
+                            ng-click="ctrl.selectetTab = $index"
+                        >
+                            <div>Section {{$index+1}}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12"><br/></div>
+            <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <div class="col-sm-4">
                         <label for="Instructor" class="control-label required">Instructor</label>
                     </div>
                     <div class="col-sm-8">
-                        <ui-select ng-model="ctrl.item.Instructor" theme="selectize" style="height: 34px;" title="Choose Instructor">
+                        <ui-select ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Instructor" theme="selectize" style="height: 34px;" title="Choose Instructor">
                             <ui-select-match placeholder="Select or search a instructor in the list...">{{$select.selected.Title}}</ui-select-match>
                             <ui-select-choices repeat="instructor in ctrl.instructorsChoice | filter: $select.search">
                                 <span ng-bind-html="instructor.Title | highlight: $select.search"></span>
@@ -316,10 +340,10 @@
                     </div>
                     <div class="col-sm-8">
                         <textarea rows="3" 
-                            name="ClassStartEndDateTime" 
+                            name="ClassStartEndDateTime{{ctrl.selectetTab}}" 
                             id="ClassStartEndDateTime" 
                             class="form-control" 
-                            ng-model="ctrl.item.ClassStartEndDateTime"
+                            ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].ClassStartEndDateTime"
                             required
                         ></textarea>
                     </div>
@@ -331,7 +355,7 @@
                         <label for="MinimumEnrollmentCapacity" class="control-label required">Minimum Enrollment Capacity</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" ng-model="ctrl.item.MinimumEnrollmentCapacity">
+                        <input type="number" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].MinimumEnrollmentCapacity">
                     </div>
                 </div>
                 <div class="form-group">
@@ -339,7 +363,7 @@
                         <label for="MaximumEnrollmentCapacity" class="control-label required">Maximum Enrollment Capacity</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="number" class="form-control" ng-model="ctrl.item.MaximumEnrollmentCapacity">
+                        <input type="number" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].MaximumEnrollmentCapacity">
                     </div>
                 </div>
                 <div class="form-group">
@@ -348,46 +372,47 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="btn-switch" 
-                            ng-class="{'btn-switch--on':ctrl.item.EnableAutoEnrollmentWaitlist}" 
-                            ng-model="ctrl.item.EnableAutoEnrollmentWaitlist" 
-                            ng-click="ctrl.item.EnableAutoEnrollmentWaitlist = !ctrl.item.EnableAutoEnrollmentWaitlist"
+                            ng-class="{'btn-switch--on':ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].EnableAutoEnrollmentWaitlist}" 
+                            ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].EnableAutoEnrollmentWaitlist" 
+                            ng-click="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].EnableAutoEnrollmentWaitlist = !ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].EnableAutoEnrollmentWaitlist"
                         >
                             <div class="btn-switch-circle" 
-                                ng-class="{'btn-switch-circle--on':ctrl.item.EnableAutoEnrollmentWaitlist}" 
-                                ng-model="ctrl.item.EnableAutoEnrollmentWaitlist"
+                                ng-class="{'btn-switch-circle--on':ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].EnableAutoEnrollmentWaitlist}" 
+                                ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].EnableAutoEnrollmentWaitlist"
                             >
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </ng-form>
-        <div class="row">
+            <div class="clearfix"></div>
+        </div>
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length">
             <div class="col-sm-12">
                 <h3 class="section-header">Training Site</h3>
             </div>
         </div>
-        <div class="row" ng-if="ctrl.item.BlendedCourseType=='Webinar ILT'">
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.item.BlendedCourseType=='Webinar ILT'">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <div class="col-sm-4">
                         <label for="WebinarURL" class="control-label required">Webinar URL (if applicable)</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" name="WebinarURL" ng-model="ctrl.item.WebinarURL" required>
+                        <input type="text" class="form-control" name="WebinarURL{{ctrl.selectetTab}}" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].item.WebinarURL" required>
                         <span class="error-msg" ng-show="requestForm.WebinarURL.$touched && requestForm.WebinarURL.$invalid">The Webinar URL is required.</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="ctrl.item.BlendedCourseType!='Webinar ILT'">
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.item.BlendedCourseType!='Webinar ILT'">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group" >
                     <div class="col-sm-4">
                         <label for="Affiliate" class="control-label required">Affiliate</label>
                     </div>
                     <div class="col-sm-8">
-                        <ui-select ng-model="ctrl.item.Affiliate" theme="selectize" style="height: 34px;" title="Choose a affiliate">
+                        <ui-select ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Affiliate" theme="selectize" style="height: 34px;" title="Choose a affiliate">
                             <ui-select-match placeholder="Select or search a affiliate in the list...">{{$select.selected}}</ui-select-match>
                             <ui-select-choices repeat="affiliate in ctrl.affiliateChoice | filter: $select.search">
                                 <span ng-bind-html="affiliate | highlight: $select.search"></span>
@@ -401,7 +426,7 @@
                         <label for="WebinarURL" class="control-label">Webinar URL (if applicable)</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" name="WebinarURL" class="form-control" ng-model="ctrl.item.WebinarURL">
+                        <input type="text" name="WebinarURL{{ctrl.selectetTab}}" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].WebinarURL">
                     </div>
                 </div>
                 <div class="form-group">
@@ -409,7 +434,7 @@
                         <label for="TrainingRoomReserved" class="control-label required">Training Room Reserved</label>
                     </div>
                     <div class="col-sm-8">
-                        <ui-select ng-model="ctrl.item.TrainingRoomReserved" theme="selectize" style="height: 34px;" title="Choose a training room">
+                        <ui-select ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomReserved" theme="selectize" style="height: 34px;" title="Choose a training room">
                             <ui-select-match placeholder="Select or search a training room in the list...">{{$select.selected.Title}}</ui-select-match>
                             <ui-select-choices repeat="room in ctrl.trainingRoomsChoice | filter: $select.search">
                                 <span ng-bind-html="room.Title | highlight: $select.search"></span>
@@ -425,7 +450,7 @@
                         <label for="TrainingRoomName" class="control-label required">Training Room Name</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.TrainingRoomName" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                        <input type="text" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomName" ng-disabled="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomReserved.Title!='Other'">
                     </div>
                 </div>
                 <div class="form-group">
@@ -433,7 +458,7 @@
                         <label for="Floor" class="control-label required">Floor</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.Floor" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                        <input type="text" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Floor" ng-disabled="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomReserved.Title!='Other'">
                     </div>
                 </div>
                 <div class="form-group">
@@ -441,7 +466,7 @@
                         <label for="Address" class="control-label required">Address</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.Address" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                        <input type="text" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Address" ng-disabled="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomReserved.Title!='Other'">
                     </div>
                 </div>
                 <div class="form-group">
@@ -449,7 +474,7 @@
                         <label for="City" class="control-label required">City</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.City" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                        <input type="text" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].City" ng-disabled="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomReserved.Title!='Other'">
                     </div>
                 </div>
                 <div class="form-group">
@@ -457,7 +482,7 @@
                         <label for="State" class="control-label required">State</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.State" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                        <input type="text" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].State" ng-disabled="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomReserved.Title!='Other'">
                     </div>
                 </div>
                 <div class="form-group">
@@ -465,7 +490,7 @@
                         <label for="Zip" class="control-label required">Zip</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" ng-model="ctrl.item.Zip" ng-disabled="ctrl.item.TrainingRoomReserved.Title!='Other'">
+                        <input type="text" class="form-control" ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Zip" ng-disabled="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].TrainingRoomReserved.Title!='Other'">
                     </div>
                 </div>
             </div>
@@ -501,7 +526,7 @@
             </div>
         </div>
     </div>
-</div>
+</ng-form>
 <div class="row">
     <div class="col-sm-12 text-center">
         {{ctrl.lobTrainingText.Body}}

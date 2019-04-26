@@ -9,12 +9,20 @@
     flex: 0 22%;
     align-items: center;
     padding: 20px;
-    border: 1px solid #c8c8c8;
-    border-top-right-radius: 40px;
+    border-top: 1px solid #c8c8c8;
+    border-right: 1px solid #c8c8c8;
+    /* border-top-right-radius: 40px;
     box-shadow: 2px 2px 3px 0px;
-    margin: 0 1% 1% 0;
+    margin: 0 1% 1% 0; */
 }
 
+.badges-info .badges-item:nth-child(4n) {
+  border-right: none;
+}
+
+.badges-info .badges-item:nth-child(-n+4) {
+  border-top: none;
+}
 .badges-info .badge-container>img{
     width: 72px;
 }
@@ -108,5 +116,9 @@
     .badges-info .badges-item{
         flex: 0 100%;
         margin-bottom: 20px;
+    }
+    .badges-info .badges-item:nth-child(n) {
+      border-top: 1px solid #c8c8c8;
+      border-right: none;
     }
 }
