@@ -168,7 +168,7 @@
             };
             $q.all(usersReq).then(function(res){
                 angular.forEach(res, function(val){
-                    item['LDLeaderId'].results.push(val.Id);
+                    item['LDLeaderId'].results.push(val[0].Id);
                 });
                 delete item['LDLeader'];
 

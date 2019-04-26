@@ -42,7 +42,7 @@
         var ctrl = this;
         var listTitle = 'LOBTrainingRequest';
         var urlItemId = getParameterByName('ItemId');
-        ctrl.stage = 2;
+        ctrl.stage = 1;
         ctrl.item = {
             RequestDate: new Date(),
             RequestType: [],
@@ -189,7 +189,7 @@
                 item['TopicId'] = item.Topic.Id;
                 delete item.Topic;
             }
-            item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestsListItem' };
+            item['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
             $ApiService.saveData(listTitle, item).then(function(res){
                 var newItemId = res.Id;
                 var offeringDetailsReq = [];
@@ -209,24 +209,24 @@
                             delete data[key];
                         }
                     });
-                    offeringDetailsReq.push($ApiService.saveData('ScheduledOfferingDetails', data));
-                    $q.all(offeringDetailsReq).then(function(res){
-                        var updateData = {};
-                        updateData['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestsListItem' };
-                        updateData['ScheduledOfferingDetailsId'] = {
-                            'results': []
-                        };
-                        angular.forEach(res, function(val){
-                            updateData['ScheduledOfferingDetailsId'].results.push(val.Id);
-                        });
-                        $ApiService.updateData(listTitle, newItemId, updateData).then(function(){
-                            $SendEmail.Send(
-                                'NewRequest', 
-                                {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
-                                        '#/request/'+res.Id})
-                                .then(function(){
-                                    alert("Completed");
-                            });
+                    offeringDetailsReq.push($ApiService.saveData('ScheduledOfferingDetails', data));                    
+                });
+                $q.all(offeringDetailsReq).then(function(res){
+                    var updateData = {};
+                    updateData['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
+                    updateData['ScheduledOfferingDetailsId'] = {
+                        'results': []
+                    };
+                    angular.forEach(res, function(val){
+                        updateData['ScheduledOfferingDetailsId'].results.push(val.Id);
+                    });
+                    $ApiService.updateData(listTitle, newItemId, updateData).then(function(){
+                        $SendEmail.Send(
+                            'NewRequest', 
+                            {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
+                                    '#/request/'+res.Id})
+                            .then(function(){
+                                alert("Completed");
                         });
                     });
                 });
