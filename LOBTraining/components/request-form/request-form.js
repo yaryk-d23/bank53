@@ -35,10 +35,10 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', '$scope', '$SendEmail', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', '$SendEmail', '$sce', formCtrl]
     });
 
-    function formCtrl($ApiService, $q, $scope, $SendEmail){
+    function formCtrl($ApiService, $q, $scope, $SendEmail, $sce){
         var ctrl = this;
         var listTitle = 'LOBTrainingRequest';
         var urlItemId = getParameterByName('ItemId');
@@ -50,7 +50,7 @@
             // TrainingRoomReserved: {}
         };
         ctrl.lobTrainingText = {};
-
+        ctrl.trustHtml = $sce.trustAsHtml;
         ctrl.requestTypeChoice = [];
         ctrl.blendedCourseTypeChoice = [];
         ctrl.topicsChoice = [];
@@ -98,6 +98,7 @@
 
         $q.all(request).then(function(res){
             ctrl.item.RoleForCourseUser = res.currentUser;
+            ctrl.item.Employee = res.currentUser;
             ctrl.requestTypeChoice = res.requestTypeField.Choices.results;
             ctrl.blendedCourseTypeChoice = res.blendedCourseTypeField.Choices.results;
             ctrl.affiliateChoice = res.affiliateField.Choices.results;
@@ -227,6 +228,7 @@
                                     '#/request/'+newItemId})
                             .then(function(){
                                 alert("Completed");
+                                location.href = '/teams/HCInt/Learn/LobTR/';
                         });
                     });
                 });

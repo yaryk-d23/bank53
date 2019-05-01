@@ -120,6 +120,7 @@
                                     id="Status" 
                                     ng-model="ctrl.item.Status" 
                                     ng-options="opt as opt for opt in ctrl.statusChoice track by opt"
+                                    ng-change="ctrl.onChangeStatus()"
                                 >
                                 </select>
                             </div>

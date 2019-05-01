@@ -6,10 +6,10 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', '$scope', '$routeParams', '$location', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', '$routeParams', '$location', '$sce', formCtrl]
     });
 
-    function formCtrl($ApiService, $q, $scope, $routeParams, $location){
+    function formCtrl($ApiService, $q, $scope, $routeParams, $location, $sce){
         var ctrl = this;
         var listTitle = 'LOBTrainingRequest';
         ctrl.stage = 1;
@@ -25,6 +25,8 @@
         ctrl.getUser = $ApiService.getUser;
         ctrl.requestId = $routeParams.id;
         ctrl.lobTrainingText = {};
+        ctrl.trustHtml = $sce.trustAsHtml;
+
         if(ctrl.requestId){
             $ApiService.getListItems(listTitle, '$select=*,Employee/Title,Employee/Id,Employee/EMail,'+
                 'Instructor/Title,Instructor/Id,'+

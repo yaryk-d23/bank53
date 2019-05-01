@@ -137,6 +137,12 @@
             });
         };
 
+        ctrl.onChangeStatus = function(){
+            if(ctrl.item.Status == 'Complete'){
+                ctrl.item.EstimatedProgress = 100; 
+            }
+        }
+
         ctrl.getPrioritization = function(){
             return (ctrl.item.BusinessValue * 0.35) + (ctrl.item.RegulatoryComplianceRelated * 0.3) + (ctrl.item.CustomerEmployeeValue * 0.2) + (ctrl.item.TimeSensitivity * 0.15);
         };

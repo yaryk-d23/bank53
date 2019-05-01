@@ -509,7 +509,6 @@
 </ng-form>
 
 <div class="row">
-    <div class="col-sm-12 text-center">
-        {{ctrl.lobTrainingText.Body}}
+    <div class="col-sm-12 text-center" ng-bind-html="ctrl.trustHtml(ctrl.lobTrainingText.Body)">
     </div>
 </div>

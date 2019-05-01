@@ -21,7 +21,7 @@
             data['__metadata'] = { "type": 'SP.Data.TSProjectsListItem' };
             return $http({
                         url: _spPageContextInfo.webAbsoluteUrl + 
-                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items',
+                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items?$select=*',
                         method: 'POST',
                         headers: {
                             "accept": "application/json;odata=verbose",
