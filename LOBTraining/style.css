@@ -69,11 +69,3 @@
 #contentBox {
     margin-left: 20px;
 }
-
-.select-file-container {
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 24px;
-    color: #444;
-    padding: 0 0 0 5px;
-}

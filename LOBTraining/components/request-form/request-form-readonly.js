@@ -26,7 +26,6 @@
         ctrl.requestId = $routeParams.id;
         ctrl.lobTrainingText = {};
         ctrl.trustHtml = $sce.trustAsHtml;
-        ctrl.$AttachmentFile = [];
 
         if(ctrl.requestId){
             $ApiService.getListItems(listTitle, '$select=*,Employee/Title,Employee/Id,Employee/EMail,'+
@@ -34,7 +33,7 @@
                 'RoleForCourseUser/Title,RoleForCourseUser/Id,RoleForCourseUser/EMail,'+
                 'TrainingRoomReserved/Title,TrainingRoomReserved/Id,'+
                 'Topic/Title,Topic/Id,Topic/CourseNumber'+
-                '&$expand=Instructor,TrainingRoomReserved,Employee,Topic,RoleForCourseUser,AttachmentFiles&$filter=Id eq '+ctrl.requestId).then(function(res){
+                '&$expand=Instructor,TrainingRoomReserved,Employee,Topic,RoleForCourseUser&$filter=Id eq '+ctrl.requestId).then(function(res){
                 if(res.length){
                     ctrl.item = res[0];
                     ctrl.item.RequestDate = moment(ctrl.item.RequestDate).format('MM/DD/YYYY');
@@ -42,16 +41,6 @@
                     ctrl.item.ClassStartDate = moment(ctrl.item.ClassStartDate).format('MM/DD/YYYY');
                     ctrl.item.ClassEndDate = moment(ctrl.item.ClassEndDate).format('MM/DD/YYYY');
                     ctrl.item.EnableAutoEnrollmentWaitlist = ctrl.item.EnableAutoEnrollmentWaitlist ? 'Yes' : 'No';
-
-                    if(ctrl.item.AttachmentFiles.length){
-                        ctrl.$AttachmentFile = [{
-                            $file: {
-                                name: ctrl.item.AttachmentFiles[0].FileName
-                            },
-                            url: ctrl.item.AttachmentFiles[0].ServerRelativeUrl
-                        }];
-                        // $scope.$apply();
-                    }
                     var requests = [];
                     angular.forEach(ctrl.item.ScheduledOfferingDetailsId,function(val){
                         requests.push($ApiService.getListItems("ScheduledOfferingDetails", '$select=*'+
