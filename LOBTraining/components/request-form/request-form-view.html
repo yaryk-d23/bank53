@@ -297,14 +297,46 @@
                             class="form-control" 
                             ng-model="ctrl.item.NumberOfOfferingsToSchedule" 
                             required
+                            min="1"
+                            max="99"
                             ng-blur="ctrl.onBlurNumberOfOfferingsToSchedule()"
                         >
-                        <span class="error-msg" ng-show="requestForm.NumberOfOfferingsToSchedule.$touched && requestForm.NumberOfOfferingsToSchedule.$invalid">Number of Offerings to Schedule is required.</span>
+                        <span class="error-msg" ng-show="requestForm.NumberOfOfferingsToSchedule.$touched && requestForm.NumberOfOfferingsToSchedule.$invalid">Number of Offerings to Schedule is required(1 - 99).</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length">
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.NumberOfOfferingsToScheduleArr.length > 5">
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div><label class="control-label">
+                            Please download 
+                            <a href="https://thebank.info53.com/teams/HCInt/Learn/LobTR/SiteAssets/LOBTR-Template.xlsx">file</a> 
+                            and enter data, then attach to this form!
+                        </label></div>
+                        <label for="Attachment" class="control-label">
+                            Attachment
+                            <select-files 
+                                name="Attachment" 
+                                model="ctrl.$AttachmentFile"
+                                
+                            ></select-files>
+                        </label>
+                        <p></p>
+                        <p ng-repeat="file in ctrl.$AttachmentFile track by $index">
+                            <input type="text" 
+                                class="form-control" 
+                                ng-value="file.$file.name" 
+                                disabled
+                                style="width: 250px;"
+                            >
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.NumberOfOfferingsToScheduleArr.length <= 5">
             <div class="col-sm-12">
                 <div class="navigation-tabs">
                     <ul class="nav nav-tabs">
@@ -317,6 +349,10 @@
                         </li>
                     </ul>
                 </div>
+            </div>
+            <div class="col-sm-12">
+                <br/>
+                <button ng-if="ctrl.selectetTab != 0" type="button" class="btn btn-primary" ng-click="ctrl.copyPreviousSection()">Copy Previous Section Data</button>
             </div>
             <div class="col-sm-12"><br/></div>
             <div class="col-sm-12 col-md-6">
@@ -387,12 +423,12 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length">
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.NumberOfOfferingsToScheduleArr.length <= 5">
             <div class="col-sm-12">
                 <h3 class="section-header">Training Site</h3>
             </div>
         </div>
-        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.item.BlendedCourseType=='Webinar ILT'">
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.NumberOfOfferingsToScheduleArr.length <= 5 && ctrl.item.BlendedCourseType=='Webinar ILT'">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group">
                     <div class="col-sm-4">
@@ -405,7 +441,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.item.BlendedCourseType!='Webinar ILT'">
+        <div class="row" ng-if="ctrl.NumberOfOfferingsToScheduleArr.length && ctrl.NumberOfOfferingsToScheduleArr.length <= 5 && ctrl.item.BlendedCourseType!='Webinar ILT'">
             <div class="col-sm-12 col-md-6">
                 <div class="form-group" >
                     <div class="col-sm-4">

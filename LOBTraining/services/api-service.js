@@ -8,8 +8,26 @@
             getListItems: getListItems,
             getListChoiceField: getListChoiceField,
             saveData: saveData,
-            updateData: updateData
+            updateData: updateData,
+            uploadAttachments: uploadAttachments
         };
+
+        function uploadAttachments(listTitle, itemId, file){
+            return $http({
+                url: _spPageContextInfo.webAbsoluteUrl + 
+                    '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items('+itemId+')/AttachmentFiles/add(FileName=\''+file.name+'\')?$select=*',
+                method: 'POST',
+                data: file,
+                headers: {
+                    "accept": "application/json;odata=verbose",
+                    "content-type": file.type,
+                    "X-RequestDigest": $('#__REQUESTDIGEST').val()
+                },
+                data: file
+            }).then(function(res){
+                return res.data.d;
+            });
+        }
 
         function getUserProfile(){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/SP.UserProfiles.PeopleManager/GetMyProperties')
