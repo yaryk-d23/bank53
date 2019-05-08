@@ -17,7 +17,23 @@
                         <label for="Employee" class="control-label required">Employee</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control"
+                        <ui-select 
+                            ng-model="ctrl.item.Employee" 
+                            theme="bootstrap" 
+                            close-on-select="true" 
+                            title="Choose a person"
+                        >
+                            <ui-select-match placeholder="Select person...">{{$select.selected.DisplayText}} &lt;{{$select.selected.EntityData.Email}}&gt;</ui-select-match>
+                            <ui-select-choices 
+                                refresh="ctrl.getUsers($select)"
+                                repeat="user as user in ctrl.allUsers | propsFilter: {DisplayText: $select.search}">
+                                <div ng-bind-html="user.DisplayText | highlight: $select.search"></div>
+                                <small>
+                                    email: {{user.EntityData.Email}}
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                        <!-- <input type="text" class="form-control"
                             autocomplete="off"
                             id="Employee"
                             name="Employee"
@@ -38,7 +54,7 @@
                         <div ng-show="noResults.Employee && Employee">
                             <i class="glyphicon glyphicon-remove"></i> No Results Found
                         </div>
-                        <div id="errorMessage-Employee"></div>
+                        <div id="errorMessage-Employee"></div> -->
                         <span class="error-msg" ng-show="requestForm.Employee.$touched && requestForm.Employee.$invalid">The Employee is required.</span>
                     </div>
                 </div>
@@ -104,7 +120,24 @@
                         <label for="RoleForCourseUser" class="control-label required">Course Owner</label>
                     </div>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control"
+                        <ui-select 
+                            ng-model="ctrl.item.RoleForCourseUser" 
+                            theme="bootstrap" 
+                            close-on-select="true" 
+                            title="Choose a person"
+                        >
+                            <ui-select-match placeholder="Select person...">{{$select.selected.DisplayText}} &lt;{{$select.selected.EntityData.Email}}&gt;</ui-select-match>
+                            <ui-select-choices 
+                                refresh="ctrl.getUsers($select)"
+                                refresh-delay="0"
+                                repeat="user as user in ctrl.allUsers | propsFilter: {DisplayText: $select.search}">
+                                <div ng-bind-html="user.DisplayText | highlight: $select.search"></div>
+                                <small>
+                                    email: {{user.EntityData.Email}}
+                                </small>
+                            </ui-select-choices>
+                        </ui-select>
+                        <!-- <input type="text" class="form-control"
                             required
                             autocomplete="off"
                             id="RoleForCourseUser"
@@ -125,7 +158,7 @@
                         <div ng-show="noResults.RoleForCourseUser && RoleForCourseUser">
                             <i class="glyphicon glyphicon-remove"></i> No Results Found
                         </div>
-                        <div id="errorMessage-RoleForCourseUser"></div>
+                        <div id="errorMessage-RoleForCourseUser"></div> -->
                         <span class="error-msg" ng-show="requestForm.RoleForCourseUser.$touched && requestForm.RoleForCourseUser.$invalid">Instructor is required.</span>
                     </div>
                 </div>
