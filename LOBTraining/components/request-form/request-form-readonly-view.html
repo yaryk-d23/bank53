@@ -287,7 +287,7 @@
                         </label>
                         <p></p>
                         <p ng-repeat="file in ctrl.$AttachmentFile track by $index">
-                            <a ng-href="{{'https://thebank.info53.com/teams/HCInt/Learn/LobTR/_layouts/15/WopiFrame.aspx?sourcedoc='+file.url+'&action=default'}}" target="_blank">
+                            <a ng-href="{{file.url}}" target="_blank">
                                 <input type="text" 
                                     class="form-control" 
                                     ng-value="file.$file.name" 
