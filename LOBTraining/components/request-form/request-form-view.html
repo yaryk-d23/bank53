@@ -23,7 +23,7 @@
                             close-on-select="true" 
                             title="Choose a person"
                         >
-                            <ui-select-match placeholder="Select person...">{{$select.selected.DisplayText}} &lt;{{$select.selected.EntityData.Email}}&gt;</ui-select-match>
+                            <ui-select-match placeholder="Select person...">{{$select.selected.DisplayText}}</ui-select-match>
                             <ui-select-choices 
                                 refresh="ctrl.getUsers($select)"
                                 repeat="user as user in ctrl.allUsers | propsFilter: {DisplayText: $select.search}">
@@ -126,7 +126,7 @@
                             close-on-select="true" 
                             title="Choose a person"
                         >
-                            <ui-select-match placeholder="Select person...">{{$select.selected.DisplayText}} &lt;{{$select.selected.EntityData.Email}}&gt;</ui-select-match>
+                            <ui-select-match placeholder="Select person...">{{$select.selected.DisplayText}}</ui-select-match>
                             <ui-select-choices 
                                 refresh="ctrl.getUsers($select)"
                                 refresh-delay="0"
