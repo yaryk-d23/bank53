@@ -1,0 +1,12 @@
+<script>
+    var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/LOBTraining";
+    var styles = [
+        "modules/bootstrap/css/bootstrap.css"
+    ];
+    for(var i=0;i<styles.length;i++){
+        document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+    }
+</script>
+<div class="b">
+    <a class="btn nth-success" href="/teams/HCInt/Learn/LobTR/SitePages/App.aspx#/request/new">Create New LOB Trainig Request</a>
+</div>

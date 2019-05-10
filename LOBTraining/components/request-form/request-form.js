@@ -234,6 +234,7 @@
 
                 $ApiService.saveData(listTitle, item).then(function(res){
                     var newItemId = res.Id;
+                    var newItem = res;
                     var offeringDetailsReq = [];
                     angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(item){
                         var data = angular.copy(item);
@@ -246,6 +247,8 @@
                             data['TrainingRoomReservedId'] = data.TrainingRoomReserved.Id;
                             delete data.TrainingRoomReserved;
                         }
+                        data['CourseTitle'] = newItem.CourseTitle;
+                        data['CourseNumber'] = newItem.CourseNumber;
                         angular.forEach(data, function(value, key){
                             if(!value){
                                 delete data[key];
