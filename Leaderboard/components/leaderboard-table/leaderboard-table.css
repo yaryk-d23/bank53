@@ -1,6 +1,11 @@
 .leaderboard-table .img-circle {
-    width: 16px;
+    width: 100%;
     border-radius: 50%;
+    padding-right: 5px;
+}
+.leaderboard-table .table td {
+    /* overflow: hidden;
+    word-break: break-all; */
 }
 .leaderboard-table .table>tbody>tr>td{
     vertical-align: middle;
@@ -12,18 +17,16 @@
     flex-direction: row;
     align-items: center;
 }
-.user-container>img, 
+.user-container>.img-container, 
 .user-container>div,
 .controls>div {
     display: flex;
 }
-.user-container>img {
+.user-container>.img-container {
     flex: 0 25%;
-    max-width: 36px;
 }
 .user-container>div {
     flex: 0 75%;
-    padding-left: 10px;
     box-sizing: border-box;
 }
 

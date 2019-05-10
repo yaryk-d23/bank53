@@ -29,7 +29,7 @@
         <table class="table">
             <tr>
                 <th>#</th>
-                <th>User</th>
+                <th style="min-width: 100px;">User</th>
                 <th>XP</th>
                 <th>Role</th>
                 <th>Department</th>
@@ -39,8 +39,12 @@
                 <td>{{$index + 1}}</td>
                 <td>
                     <div class="user-container">
-                        <img ng-if="$index < 3" class="img-circle" ng-src="{{user.Avatar ? user.Avatar.Url : '/_layouts/15/userphoto.aspx?size=S&username='+user.User.EMail}}" />
-                        <img ng-if="$index >= 3" class="hide-image img-circle" src="/_layouts/15/userphoto.aspx?size=S&username=username"/>
+                        <div ng-if="$index < 3" class="img-container">
+                            <img class="img-circle" ng-src="{{user.Avatar ? user.Avatar.Url : '/_layouts/15/userphoto.aspx?size=S&username='+user.User.EMail}}" />
+                        </div>
+                        <div ng-if="$index >= 3" class="img-container">
+                            <img class="hide-image img-circle" src="/_layouts/15/userphoto.aspx?size=S&username=username"/>
+                        </div>
                         <div ng-if="$index < 3">{{user.User.Title}}</div>
                         <div ng-if="$index >= 3" class="hide-text">##############</div>
                     </div>
