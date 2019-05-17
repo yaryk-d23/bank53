@@ -53,7 +53,7 @@
         function saveData(listTitle, data){
             return $http({
                         url: _spPageContextInfo.webAbsoluteUrl + 
-                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items?$select=Id',
+                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items?$select=*',
                         method: 'POST',
                         headers: {
                             "accept": "application/json;odata=verbose",
@@ -69,7 +69,7 @@
         function updateData(listTitle, itemId, data){
             return $http({
                         url: _spPageContextInfo.webAbsoluteUrl + 
-                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items('+itemId+')?$select=Id',
+                            '/_api/web/lists/getbytitle(\''+listTitle+'\')/Items('+itemId+')?$select=*',
                         method: 'POST',
                         headers: {
                             "accept": "application/json;odata=verbose",

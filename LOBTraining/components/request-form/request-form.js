@@ -177,7 +177,7 @@
         };
 
         ctrl.copyPreviousSection = function(){
-            ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab] = ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab-1];
+            ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab] = angular.copy(ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab-1]);
         }
 
         ctrl.saveData = function(form){
@@ -235,62 +235,84 @@
                 $ApiService.saveData(listTitle, item).then(function(res){
                     var newItemId = res.Id;
                     var newItem = res;
-                    var offeringDetailsReq = [];
-                    angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(item){
-                        var data = angular.copy(item);
-                        data['__metadata'] = { "type": 'SP.Data.ScheduledOfferingDetailsListItem' };
-                        if(data.Instructor){
-                            item['InstructorId'] = data.Instructor.Id;
-                            delete data.Instructor;
-                        }
-                        if(data.TrainingRoomReserved){
-                            data['TrainingRoomReservedId'] = data.TrainingRoomReserved.Id;
-                            delete data.TrainingRoomReserved;
-                        }
-                        data['CourseTitle'] = newItem.CourseTitle;
-                        data['CourseNumber'] = newItem.CourseNumber;
-                        angular.forEach(data, function(value, key){
-                            if(!value){
-                                delete data[key];
+                    var updateData = {};
+                    updateData['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
+                    updateData['UniqueId'] = 'LOB-'+(newItemId*53);
+                    $ApiService.updateData(listTitle, newItemId, updateData).then(function(){
+                        var offeringDetailsReq = [];
+                        angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(item, key){
+                            var data = angular.copy(item);
+                            data['__metadata'] = { "type": 'SP.Data.ScheduledOfferingDetailsListItem' };
+                            if(data.Instructor){
+                                item['InstructorId'] = data.Instructor.Id;
+                                delete data.Instructor;
                             }
-                        });
-                        offeringDetailsReq.push($ApiService.saveData('ScheduledOfferingDetails', data));                    
-                    });
-                    if(ctrl.$AttachmentFile.length){
-                        $ApiService.uploadAttachments(listTitle, newItemId, ctrl.$AttachmentFile[0].$file).then(function(res){
-                            $SendEmail.Send(
-                                'NewRequest', 
-                                {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
-                                        '#/request/'+newItemId})
-                                .then(function(){
-                                    alert("Completed");
-                                    location.href = '/teams/HCInt/Learn/LobTR/';
+                            if(data.TrainingRoomReserved){
+                                data['TrainingRoomReservedId'] = data.TrainingRoomReserved.Id;
+                                delete data.TrainingRoomReserved;
+                            }
+                            data['CourseTitle'] = newItem.CourseTitle;
+                            data['CourseNumber'] = newItem.CourseNumber;
+                            data['LOBRequestId'] = newItemId;
+                            data['UniqueId'] = 'LOB-'+(newItemId*53)+'-'+(key+1);
+                            angular.forEach(data, function(value, key){
+                                if(!value){
+                                    delete data[key];
+                                }
                             });
+                            offeringDetailsReq.push($ApiService.saveData('ScheduledOfferingDetails', data));                    
                         });
-                    }
-                    else {
-                        $q.all(offeringDetailsReq).then(function(res){
-                            var updateData = {};
-                            updateData['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
-                            updateData['ScheduledOfferingDetailsId'] = {
-                                'results': []
-                            };
-                            angular.forEach(res, function(val){
-                                updateData['ScheduledOfferingDetailsId'].results.push(val.Id);
-                            });
-                            $ApiService.updateData(listTitle, newItemId, updateData).then(function(){
+                        if(ctrl.$AttachmentFile.length){
+                            $ApiService.uploadAttachments(listTitle, newItemId, ctrl.$AttachmentFile[0].$file).then(function(res){
                                 $SendEmail.Send(
                                     'NewRequest', 
                                     {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
-                                            '#/request/'+newItemId})
+                                            '#/request/'+newItemId,
+                                    UniqueId: 'LOB-'+(newItemId*53),
+                                    Employee: usersReqRes.Employee[0].Title,
+                                    RoleForCourseUser: usersReqRes.RoleForCourseUser[0].Title,
+                                    RequestType: newItem.RequestType,
+                                    BlendedCourseType: newItem.BlendedCourseType,
+                                    RequestStatus: newItem.RequestStatus,
+                                    CourseTitle: newItem.CourseTitle
+                                    })
                                     .then(function(){
                                         alert("Completed");
                                         location.href = '/teams/HCInt/Learn/LobTR/';
                                 });
                             });
-                        });
-                    }
-                    
+                        }
+                        else {
+                            $q.all(offeringDetailsReq).then(function(res){
+                                var updateData = {};
+                                updateData['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
+                                updateData['ScheduledOfferingDetailsId'] = {
+                                    'results': []
+                                };
+                                angular.forEach(res, function(val){
+                                    updateData['ScheduledOfferingDetailsId'].results.push(val.Id);
+                                });
+                                $ApiService.updateData(listTitle, newItemId, updateData).then(function(){
+                                    $SendEmail.Send(
+                                        'NewRequest', 
+                                        {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
+                                                '#/request/'+newItemId,
+                                        UniqueId: 'LOB-'+(newItemId*53),
+                                        Employee: usersReqRes.Employee[0].Title,
+                                        RoleForCourseUser: usersReqRes.RoleForCourseUser[0].Title,
+                                        RequestType: newItem.RequestType,
+                                        BlendedCourseType: newItem.BlendedCourseType,
+                                        RequestStatus: newItem.RequestStatus,
+                                        CourseTitle: newItem.CourseTitle
+                                        })
+                                        .then(function(){
+                                            alert("Completed");
+                                            location.href = '/teams/HCInt/Learn/LobTR/';
+                                    });
+                                });
+                            });
+                        }
+                    });
                     
                 });
             });
