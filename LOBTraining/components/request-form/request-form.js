@@ -177,7 +177,7 @@
         };
 
         ctrl.copyPreviousSection = function(){
-            ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab] = ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab-1];
+            ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab] = angular.copy(ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab-1]);
         }
 
         ctrl.saveData = function(form){
