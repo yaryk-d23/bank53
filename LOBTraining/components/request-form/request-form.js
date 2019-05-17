@@ -237,7 +237,7 @@
                     var newItem = res;
                     var updateData = {};
                     updateData['__metadata'] = { "type": 'SP.Data.LOBTrainingRequestListItem' };
-                    updateData['UniqueId'] = 'LOB-'+(newItemId*53);
+                    updateData['UniqueId0'] = 'LOB-'+(newItemId*53);
                     $ApiService.updateData(listTitle, newItemId, updateData).then(function(){
                         var offeringDetailsReq = [];
                         angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(item, key){
@@ -254,7 +254,7 @@
                             data['CourseTitle'] = newItem.CourseTitle;
                             data['CourseNumber'] = newItem.CourseNumber;
                             data['LOBRequestId'] = newItemId;
-                            data['UniqueId'] = 'LOB-'+(newItemId*53)+'-'+(key+1);
+                            data['UniqueId0'] = 'LOB-'+(newItemId*53)+'-'+(key+1);
                             angular.forEach(data, function(value, key){
                                 if(!value){
                                     delete data[key];
@@ -269,9 +269,9 @@
                                     {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
                                             '#/request/'+newItemId,
                                     UniqueId: 'LOB-'+(newItemId*53),
-                                    Employee: usersReqRes.Employee[0].Title,
-                                    RoleForCourseUser: usersReqRes.RoleForCourseUser[0].Title,
-                                    RequestType: newItem.RequestType,
+                                    Employee: ctrl.item.Employee.DisplayText,
+                                    RoleForCourseUser: ctrl.item.RoleForCourseUser.DisplayText,
+                                    RequestType: newItem.RequestType.results.join('; '),
                                     BlendedCourseType: newItem.BlendedCourseType,
                                     RequestStatus: newItem.RequestStatus,
                                     CourseTitle: newItem.CourseTitle
@@ -298,9 +298,9 @@
                                         {LinkToForm: 'https://thebank.info53.com/teams/HCInt/Learn/LobTR/SitePages/App.aspx'+
                                                 '#/request/'+newItemId,
                                         UniqueId: 'LOB-'+(newItemId*53),
-                                        Employee: usersReqRes.Employee[0].Title,
-                                        RoleForCourseUser: usersReqRes.RoleForCourseUser[0].Title,
-                                        RequestType: newItem.RequestType,
+                                        Employee: ctrl.item.Employee.DisplayText,
+                                    RoleForCourseUser: ctrl.item.RoleForCourseUser.DisplayText,
+                                        RequestType: newItem.RequestType.results.join('; '),
                                         BlendedCourseType: newItem.BlendedCourseType,
                                         RequestStatus: newItem.RequestStatus,
                                         CourseTitle: newItem.CourseTitle
