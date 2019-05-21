@@ -1,0 +1,8 @@
+/*ADDS BACKGROUND FADED IMAGE*/
+BODY
+{
+                background-image:url("https://thebank.info53.com/teams/HCInt/Learn/leading/SiteAssets/IMG/leadership-collection.jpg") !important;
+                background-repeat:no-repeat;
+                BACKGROUND-COLOR: transparent !important;
+}
+</style>

@@ -1,0 +1,42 @@
+
+<style>
+table, td, th{
+	border: 1px solid blue
+}
+
+th{
+background-color: green;
+color: white;
+}
+</style>
+
+
+
+
+
+<h1> WHAT IS UP?,</h1>
+
+<div ng-app="SPAngApp" class="row">
+	<div ng-controller="SPLinkController" class="span10">
+		<table class="table table-condensed table-hover">
+			<tr>
+				<th>Heading1</th>
+				<th>Heading2</th>
+
+			</tr>
+			
+			<tr ng-repeat="link in links">
+				<td>{{link.Title}}</td>
+				<td>{{link.kind}}</td>
+				
+
+			</tr>
+
+		</table>
+	</div>
+</div>
+			
+
+
+
+
