@@ -10,8 +10,9 @@
     });
 
     function formCtrl($ApiService, $q, $scope, $routeParams){
+		$('#link-style').remove();
         var ctrl = this;
-        ctrl.parrentLinkId = $routeParams.parentLinkId;
+        ctrl.parentLinkId = $routeParams.parentLinkId;
         ctrl.allCategories = [];
         ctrl.groupedMainLinks = [];
         ctrl.allLinks = [];
@@ -26,13 +27,12 @@
             ctrl.groupedMainLinks = groupBy(res.allMainLinks, 'CategoryId');
         });
 
-        if(ctrl.parrentLinkId){
-            $ApiService.getListItems('Links', "$orderBy=SortOrder&$filter=Status eq 'Active'").then(function(res){
+        if(ctrl.parentLinkId){
+            $ApiService.getListItems('Links', "$orderBy=SortOrder&$filter=Status eq 'Active' and ParentLinkId eq "+ctrl.parentLinkId).then(function(res){
                 ctrl.allLinks = res;
-                debugger;
-                document.write('<link href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
+                $('body .app-container').before('<link id="link-style" href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
             }).catch(function(e){
-                $('body .app-container').before('<link href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
+                $('body .app-container').before('<link id="link-style" href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
             });
         }
 

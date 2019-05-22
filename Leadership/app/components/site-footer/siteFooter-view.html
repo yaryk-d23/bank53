@@ -1,7 +1,7 @@
 <footer>
     <div class="footer">
         <div class="contain">
-            <div class="col" ng-repeat="category in ctrl.allCategories track by $index">
+            <div class="col" ng-class="{'social': category=='Social'}" ng-repeat="category in ctrl.allCategories track by $index">
                 <h1>{{category}}</h1>
                 <ul>
                     <li ng-repeat="link in ctrl.groupedLinks[category] track by $index">

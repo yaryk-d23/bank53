@@ -1,7 +1,6 @@
 (function(){
     angular.module('App', [
         'ngRoute',
-        'ui.bootstrap',
         'ngSanitize',
     ])
     .controller('AppCtrl', [function() {
