@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Leadership Nav 3</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script>
+            var STATIC_PATH = "https://netorgft4174095.sharepoint.com/dev/SiteAssets/app/Leadership/app";
+            var scripts = [
+                "modules/jquery-3.3.1.min.js",
+                "modules/angular/angular.min.js",
+                "modules/angular/angular-route.min.js",
+                "modules/angular/angular-sanitize.min.js",
+                "modules/bootstrap/js/bootstrap.min.js",
+                "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
+
+                "app.js",
+                "services/api-service.js",
+                "services/fileSelect.js",
+                "components/site-header/siteHeader.js",
+            ];
+            var styles = [
+                "modules/bootstrap/css/bootstrap.css",
+                "style.css",
+                "components/site-header/siteHeader-style.css",
+            ];
+            for(var i=0;i<scripts.length;i++){
+                document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
+            }
+            for(var i=0;i<styles.length;i++){
+                document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
+            }
+        </script>
+    </head>
+    <body>
+        <div class="app-container b" ng-app="App" ng-controller="AppCtrl as ctrl">
+            <div class="container" >
+                <site-header></site-header>
+                <!-- <div ng-view>
+                </div> -->
+            </div>
+        </div>
+    </body>
+</html>

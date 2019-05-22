@@ -1,0 +1,15 @@
+(function(){
+    angular.module('App')
+    .component('siteMenu', {
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Leadership/app/components/site-menu/siteMenu-view.html?rnd' + Math.random(),
+        bindings: {
+            //user: '<'
+        },
+        controllerAs: 'ctrl',
+        controller: ['$ApiService', '$q', '$scope', formCtrl]
+    });
+
+    function formCtrl($ApiService, $q, $scope){
+        var ctrl = this;
+    }
+})();

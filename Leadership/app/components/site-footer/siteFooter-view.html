@@ -1,0 +1,18 @@
+<footer>
+    <div class="footer">
+        <div class="contain">
+            <div class="col" ng-repeat="category in ctrl.allCategories track by $index">
+                <h1>{{category}}</h1>
+                <ul>
+                    <li ng-repeat="link in ctrl.groupedLinks[category] track by $index">
+                        <a ng-href="{{link.Link ? link.Link.Url : '#'}}">
+                            <span ng-if="!link.LinkIcon">{{link.Title}}</span>
+                            <img ng-if="link.LinkIcon" ng-src="{{link.LinkIcon.Url}}" style="width: 32px;">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</footer>
