@@ -18,7 +18,7 @@
         ctrl.allLinks = [];
 
         var request = {
-            allCategory: $ApiService.getListItems('LinksCategories', '$orderBy=SortOrder'),
+            allCategory: $ApiService.getListItems('LinksCategories', '$orderBy=SortOrder&$top=4'),
             allMainLinks: $ApiService.getListItems('MainLinks', "$orderBy=SortOrder&$filter=Status eq 'Active'")
         };
 
@@ -28,7 +28,7 @@
         });
 
         if(ctrl.parentLinkId){
-            $ApiService.getListItems('Links', "$orderBy=SortOrder&$filter=Status eq 'Active' and ParentLinkId eq "+ctrl.parentLinkId).then(function(res){
+            $ApiService.getListItems('Subcards Links', "$orderBy=SortOrder&$filter=Status eq 'Active' and ParentLinkId eq "+ctrl.parentLinkId).then(function(res){
                 ctrl.allLinks = res;
                 $('body .app-container').before('<link id="link-style" href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
             }).catch(function(e){
