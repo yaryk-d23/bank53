@@ -18,7 +18,7 @@
         ctrl.allLinks = [];
 
         var request = {
-            allCategory: $ApiService.getListItems('LinksCategories', '$orderBy=SortOrder&$top=4'),
+            allCategory: $ApiService.getListItems('LinksCategories', '$orderBy=SortOrder'),
             allMainLinks: $ApiService.getListItems('MainLinks', "$orderBy=SortOrder&$filter=Status eq 'Active'")
         };
 
