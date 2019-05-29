@@ -29,7 +29,6 @@
         if(ctrl.parrentLinkId){
             $ApiService.getListItems('Links', "$orderBy=SortOrder&$filter=Status eq 'Active'").then(function(res){
                 ctrl.allLinks = res;
-                debugger;
                 document.write('<link href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
             }).catch(function(e){
                 $('body .app-container').before('<link href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')

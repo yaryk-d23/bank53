@@ -7,12 +7,12 @@
                 <h3>{{category.Title}}</h3>
                 <p>{{category.Description}}</p> 
                 <br/> 
-                <a ng-href="{{category.Link ? category.Link.Url : ''}}">{{category.LinkTitle}}</a>
+                <a ng-href="{{category.Link ? category.Link.Url : '#'}}">{{category.LinkTitle}}</a>
             </div>
         </div>
         <div class="back">
             <h3>{{category.BackTitle}}</h3> 
-            <a href="{{link.Link ? link.Link.Url : ''}}" ng-repeat="link in ctrl.groupedMainLinks[category.Id] track by $index">{{link.Title}}</a>
+            <a href="{{link.Link ? link.Link.Url : '#'}}" ng-repeat="link in ctrl.groupedMainLinks[category.Id] track by $index">{{link.Title}}</a>
         </div>
     </div>
 </div>
