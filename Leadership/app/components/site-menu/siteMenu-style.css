@@ -2,21 +2,21 @@
     font-weight: 100;
     background: #FF8800;
     width: 150px;
+	max-width: 50px;
     height: 100%;
-    padding-left: 30px;
+    padding-left: 20px;
     position: fixed;
     z-index: 100;
     -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
     box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-    right: -120px;
-    transition: all 0.3s;
+    right: 0;
     -webkit-transition: all 0.3s;
+    transition: all 0.3s;
     color: #222;
     border-radius: 8px;
 }
 .menu:hover, .menu:focus {
-    transform: translate3d(-120px, 0, 0);
-    animation-timing-function: 1s ease-in;
+	max-width: 150px;
 }
 .menu .title {
     top: 50%;
@@ -61,4 +61,12 @@
     font-size: 45px;
     text-align: center;
     font-style: italic;
+}
+@media only screen and (max-height: 670px) {
+	.menu .title, .menu .navigation {
+		top: 30%;
+	}
+	.menu .navigation li {
+		padding-bottom: 10px;
+	}
 }

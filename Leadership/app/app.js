@@ -5,6 +5,16 @@
     ])
     .controller('AppCtrl', [function() {
         var ctrl = this;
+		$(document).ready(function(){
+			setInterval(function(){
+				setContentWrapPadding();
+			},300);
+		});
+		
+		function setContentWrapPadding(){
+			var footerHeight = $('.footer').height();
+			$('.content-wrap').css('padding-bottom', footerHeight);
+		}
 
     }])
     .config(function($routeProvider, $locationProvider) {
