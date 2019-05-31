@@ -1,4 +1,4 @@
-<div class="wrapper portal-cards" ng-if="!ctrl.parrentLinkId">
+<div class="wrapper portal-cards" ng-if="!ctrl.parentLinkId">
     <div class="tile job-bucket" ng-repeat="category in ctrl.allCategories track by $index">
         <div class="front">
             <div class="contents"> 
@@ -12,11 +12,11 @@
         </div>
         <div class="back">
             <h3>{{category.BackTitle}}</h3> 
-            <a href="{{link.Link ? link.Link.Url : '#'}}" ng-repeat="link in ctrl.groupedMainLinks[category.Id] track by $index">{{link.Title}}</a>
+            <a ng-href="{{'#/'+link.Id}}" ng-repeat="link in ctrl.groupedMainLinks[category.Id] track by $index">{{link.Title}}</a>
         </div>
     </div>
 </div>
-<div ng-if="ctrl.parrentLinkId">
+<div ng-if="ctrl.parentLinkId">
     <div>
         <a href="#/" class="dbutton">Back</a>
     </div>
@@ -35,27 +35,8 @@
             <div class="back">
                 <h3>{{link.BackTitle}}</h3> 
                 </p>{{link.BackDescription}}</p> 
-                <a href="{{link.BackLink ? link.BackLink.Url : ''}}" target="_blank">{{link.BackLinkTitle}}</a>
+                <a ng-href="{{link.BackLink ? link.BackLink.Url : ''}}" target="_blank">{{link.BackLinkTitle}}</a>
             </div>
-        </div>
-        <div class="tile job-bucket">
-            <div class="front">
-                <div class="contents"> 
-                    <img src="/teams/HCInt/Learn/leading/SiteAssets/Site/media/img/connect1.jpg" alt=""/> 
-                    <p> &#160;</p>
-                    <h3>Professional Networking</h3>
-                    <p>The Strength of your netwok multiplies your reach</p> 
-                    <br/> 
-                    <a href="#">Away we go</a>
-                </div>
-            </div>
-            <div class="back">
-                <h3>Video Content</h3> 
-                </p> This module will provide a primer on professional networking. Perfect for those just beginning to make connection or anyone wanting a refersher on growing their exisitng network.</p> 
-
-                <a href="https://www.linkedin.com/learning/professional-networking?u=2148850" target="_blank">Click to Start</a>
-            </div>
-        </div>
-
+        </div>        
     </div>
 </div>

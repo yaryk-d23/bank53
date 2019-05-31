@@ -48,9 +48,6 @@
                 "modules/angular/angular.min.js",
                 "modules/angular/angular-route.min.js",
                 "modules/angular/angular-sanitize.min.js",
-                // "modules/bootstrap/js/bootstrap.min.js",
-                // "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
-
                 "app.js",
                 "services/api-service.js",
                 "components/site-header/siteHeader.js",

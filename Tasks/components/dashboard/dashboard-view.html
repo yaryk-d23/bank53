@@ -1,0 +1,36 @@
+<div class="dashboard">
+    <div>
+        <button class="btn btn-success" type="button" ng-click="ctrl.openForm('new')">Add New Task</button>
+    </div>
+    <br/>
+    <table class="table table-bordered">
+        <tr>
+            <th style="min-width:50px;"></th>
+            <th style="min-width:100px;">Unique ID</th>
+            <th style="min-width:100px;">Title</th>
+            <th>Description</th>
+            <th style="min-width:100px;">Badge</th>
+            <th>XP</th>
+            <th style="min-width:100px;">Badge Type</th>
+            <th>Linked Source</th>
+        </tr>
+        <tr ng-repeat="task in ctrl.allTasks track by $index">
+            <td>
+                <span 
+                    class="glyphicon glyphicon-pencil" 
+                    style="cursor:pointer;"
+                    ng-click="ctrl.openForm(task.Id)"
+                ></span>
+            </td>
+            <td>{{task.UniqueId}}</td>
+            <td>{{task.Title}}</td>
+            <td>{{task.Description}}</td>
+            <td>{{task.Badge ? task.Badge.Title : ''}}</td>
+            <td>{{task.XP}}</td>
+            <td>{{task.BadgeType}}</td>
+            <td><a ng-href="{{task.LinkedSource ? task.LinkedSource.Url : ''}}">Link</a></td>
+        </tr>
+    </table>
+</div>
+
+<task-form item-id="ctrl.itemId" ng-if="ctrl.itemId"></task-form>
