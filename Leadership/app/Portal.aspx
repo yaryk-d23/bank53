@@ -48,6 +48,9 @@
                 "modules/angular/angular.min.js",
                 "modules/angular/angular-route.min.js",
                 "modules/angular/angular-sanitize.min.js",
+                "modules/bootstrap/js/bootstrap.min.js",
+                //"modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
+
                 "app.js",
                 "services/api-service.js",
                 "components/site-header/siteHeader.js",
@@ -56,7 +59,7 @@
                 "components/site-footer/siteFooter.js",
             ];
             var styles = [
-                // "modules/bootstrap/css/bootstrap.css",
+                "modules/bootstrap/css/bootstrap.css",
                 "style.css",
                 "components/site-header/siteHeader-style.css",
                 "components/site-menu/siteMenu-style.css",
@@ -70,7 +73,7 @@
                 document.write('<link href="'+ STATIC_PATH + "/" + styles[i] + "?rnd" + Math.random() +'" rel="stylesheet">')
             }
         </script>
-        <div class="app-container" ng-app="App" ng-controller="AppCtrl as ctrl">
+        <div class="app-container b" ng-app="App" ng-controller="AppCtrl as ctrl">
             <div class="container-fluid content-wrap">
                 <div class="row">
                     <site-header></site-header>
