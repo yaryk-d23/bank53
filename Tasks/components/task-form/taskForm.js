@@ -68,6 +68,7 @@
             data['__metadata'] = { "type": 'SP.Data.TasksListItem' };
 
             if(ctrl.itemId && ctrl.itemId != 'new'){
+				data['UniqueId0'] = 'TSK-'+(ctrl.itemId * ctrl.itemId * 53);
                 $ApiService.updateData('Tasks', ctrl.itemId, data).then(function(){
                     $('#task-modal').modal('hide');
                 });

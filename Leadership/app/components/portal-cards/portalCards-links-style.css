@@ -121,7 +121,7 @@ figure {
     width: 100%;
 }
 .btn {
-    background: #24abf2;
+    /*background: #24abf2;
     color: #fff;
     padding: 15px;
     font-weight: 700;
@@ -131,7 +131,7 @@ figure {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
 }
 .lightbox {
     display: none;
