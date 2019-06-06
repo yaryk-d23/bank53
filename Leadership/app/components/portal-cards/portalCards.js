@@ -6,10 +6,10 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', '$scope', '$routeParams', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', '$routeParams', '$uibModal', formCtrl]
     });
 
-    function formCtrl($ApiService, $q, $scope, $routeParams){
+    function formCtrl($ApiService, $q, $scope, $routeParams, $uibModal){
 		$('#link-style').remove();
         var ctrl = this;
         ctrl.parentLinkId = $routeParams.parentLinkId;
@@ -37,21 +37,21 @@
         }
 
         ctrl.open = function (itemId, parentSelector) {
-            var parentElem = parentSelector ? angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
-                templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Leadership/app/component/modal/modal-view.html',
+                templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Leadership/app/components/modal/modal-view.html',
                 controller: modalCtrl,
                 controllerAs: 'ctrl',
-                appendTo: parentElem,
+                appendTo: angular.element(document.querySelectorAll('.app-container')),
                 resolve: {
                     itemId: function () {
                         return itemId;
                     }
-            }
-        });
+				}
+			});
+		}
 
         function modalCtrl($uibModalInstance, itemId ) {
             var ctrl = this;
@@ -60,7 +60,7 @@
             //   $uibModalInstance.close(ctrl.selected.item);
             };
           
-            $ctrl.cancel = function () {
+            ctrl.cancel = function () {
               $uibModalInstance.dismiss('cancel');
             };
           }
