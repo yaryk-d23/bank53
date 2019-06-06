@@ -33,34 +33,10 @@
                 </div>
             </div>
             <div class="back">
-                <h3 data-toggle="modal" data-target="#modal" style="cursor:pointer;">{{link.BackTitle}}</h3> 
+                <h3 style="cursor:pointer;" ng-click="ctrl.open(link.Id, $event.currentTarget)">{{link.BackTitle}}</h3> 
                 </p>{{link.BackDescription}}</p> 
                 <a ng-href="{{link.BackLink ? link.BackLink.Url : ''}}" target="_blank">{{link.BackLinkTitle}}</a>
             </div>
         </div>        
-    </div>
-</div>
-<div>
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="task-modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Card</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form">
-						<div class="col-sm-12">
-							Content
-						</div>
-						<div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

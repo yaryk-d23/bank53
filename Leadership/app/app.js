@@ -2,6 +2,7 @@
     angular.module('App', [
         'ngRoute',
         'ngSanitize',
+        'ui.bootstrap',
     ])
     .controller('AppCtrl', [function() {
         var ctrl = this;

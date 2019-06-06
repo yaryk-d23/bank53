@@ -36,6 +36,35 @@
             });
         }
 
+        ctrl.open = function (itemId, parentSelector) {
+            var parentElem = parentSelector ? angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Leadership/app/component/modal/modal-view.html',
+                controller: modalCtrl,
+                controllerAs: 'ctrl',
+                appendTo: parentElem,
+                resolve: {
+                    itemId: function () {
+                        return itemId;
+                    }
+            }
+        });
+
+        function modalCtrl($uibModalInstance, itemId ) {
+            var ctrl = this;
+          
+            ctrl.ok = function () {
+            //   $uibModalInstance.close(ctrl.selected.item);
+            };
+          
+            $ctrl.cancel = function () {
+              $uibModalInstance.dismiss('cancel');
+            };
+          }
+
         function groupBy(xs, prop) {
             return xs.reduce(function(rv, x) {
               (rv[x[prop]] = rv[x[prop]] || []).push(x);
