@@ -56,7 +56,7 @@
                 Description: ctrl.Item.Title,
             };
             if(ctrl.Item.Badge && ctrl.Item.Badge.Id){
-                data['BageId'] = ctrl.Item.Badge.Id;
+                data['BadgeId'] = ctrl.Item.Badge.Id;
             }
             if(ctrl.Item.LinkedSource){
                 data['LinkedSource'] = {
