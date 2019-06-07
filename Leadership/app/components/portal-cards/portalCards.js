@@ -55,7 +55,12 @@
 
         function modalCtrl($uibModalInstance, itemId ) {
             var ctrl = this;
-          
+            ctrl.items = [];
+
+            $ApiService.getListItems('Topics', '$filter=SubcardsLink eq '+itemId).then(function(res){
+                ctrl.items = res;
+            });
+
             ctrl.ok = function () {
             //   $uibModalInstance.close(ctrl.selected.item);
             };

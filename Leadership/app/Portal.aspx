@@ -66,6 +66,7 @@
                 "components/site-menu/siteMenu-style.css",
                 "components/portal-cards/portalCards-style.css",
                 "components/site-footer/siteFooter-style.css",
+                "components/modal/modal-style.css",
             ];
             for(var i=0;i<scripts.length;i++){
                 document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
