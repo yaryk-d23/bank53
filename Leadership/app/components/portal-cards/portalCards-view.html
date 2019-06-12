@@ -34,9 +34,9 @@
                 </div>
             </div>
             <div class="back">
-                <h3 style="cursor:pointer;" ng-click="ctrl.open(link.Id, $event.currentTarget)">{{link.BackTitle}}</h3> 
+                <h3 style="cursor:pointer;">{{link.BackTitle}}</h3> 
                 </p>{{link.BackDescription}}</p> 
-                <a ng-href="{{link.BackLink ? link.BackLink.Url : ''}}" target="_blank">{{link.BackLinkTitle}}</a>
+                <a  ng-click="ctrl.open(link, $event.currentTarget)">{{link.BackLinkTitle}}</a>
             </div>
         </div>        
     </div>

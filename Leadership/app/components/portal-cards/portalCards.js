@@ -28,7 +28,7 @@
         });
 
         if(ctrl.parentLinkId){
-            $ApiService.getListItems('Subcards Links', "$orderBy=SortOrder&$filter=Status eq 'Active' and ParentLinkId eq "+ctrl.parentLinkId).then(function(res){
+            $ApiService.getListItems('Subcards Links', "$orderBy=SortOrder&$select=*,ParentLink/Title&$expand=ParentLink&$filter=Status eq 'Active' and ParentLinkId eq "+ctrl.parentLinkId).then(function(res){
                 ctrl.allLinks = res;
                 $('body .app-container').before('<link id="link-style" href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
             }).catch(function(e){
@@ -36,9 +36,10 @@
             });
         }
 
-        ctrl.open = function (itemId, parentSelector) {
+        ctrl.open = function (item, parentSelector) {
             var modalInstance = $uibModal.open({
                 animation: true,
+                size: 'lg',
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/Leadership/app/components/modal/modal-view.html',
@@ -46,18 +47,19 @@
                 controllerAs: 'ctrl',
                 appendTo: angular.element(document.querySelectorAll('.app-container')),
                 resolve: {
-                    itemId: function () {
-                        return itemId;
+                    item: function () {
+                        return item;
                     }
 				}
 			});
 		}
 
-        function modalCtrl($uibModalInstance, itemId ) {
+        function modalCtrl($uibModalInstance, item ) {
             var ctrl = this;
+            ctrl.item = item;
             ctrl.items = [];
 
-            $ApiService.getListItems('Topics', '$filter=SubcardsLink eq '+itemId).then(function(res){
+            $ApiService.getListItems('Topics', '$filter=SubcardsLink eq '+item.Id).then(function(res){
                 ctrl.items = res;
             });
 
