@@ -9,9 +9,53 @@
     font-size: 16px;
     cursor: pointer;
 }
- .topic-description {
-    
+.topic-description {
+    padding: 10px;
+    background: #e8e8e8;
+    color: #505050;
+    border: 1px solid #a9a9a9;
+    margin-top: 5px;
+}
+.topic-description .item-footer span{
+	border-left: 2px solid #505050;
 }
 .img-overview {
-    background-color: rgba(255,255,255,0.3);
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.4);
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    font-size: 2em;
+    font-weight: bold;
+    color: #1D4094;
+}
+.link-title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffffff;
+	background-color: #1D4094;
+	padding: 10px 0;
+}
+.modal-title {
+	color: #1D4094;
+}
+.item-footer span {
+	padding: 0 10px;
+	border-left: 2px solid #1D4094;
+}
+.item-footer span:first-child{
+	border-left: none;
+}
+.b .modal-content {
+	border: 2px solid #1D4094;
+}
+.b .modal-header {
+	padding-bottom: 0;
+	border-bottom: none;
+	color: #1D4094;
+}
+.b .modal-body {
+	padding-top: 0;
+	color: #1D4094;
 }

@@ -35,6 +35,7 @@
                 $('body .app-container').before('<link id="link-style" href="'+ _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/Leadership/app/components/portal-cards/portalCards-links-style.css?rnd" + Math.random() +'" rel="stylesheet">')
             });
         }
+		
 
         ctrl.open = function (item, parentSelector) {
             var modalInstance = $uibModal.open({
@@ -62,6 +63,14 @@
             $ApiService.getListItems('Topics', '$filter=SubcardsLink eq '+item.Id).then(function(res){
                 ctrl.items = res;
             });
+			ctrl.getSumTopicsHours = function(items){
+				if(!items || items.length == 0) return 0;
+				var sum = 0;
+				angular.forEach(items, function(item){
+					sum += item.Time ? item.Time : 0;
+				});
+				return sum;
+			}
 
             ctrl.ok = function () {
             //   $uibModalInstance.close(ctrl.selected.item);
