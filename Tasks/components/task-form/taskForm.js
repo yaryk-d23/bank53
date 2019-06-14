@@ -53,7 +53,7 @@
                 Title: ctrl.Item.Title,
                 XP: ctrl.Item.XP,
                 BadgeType: ctrl.Item.BadgeType,
-                Description: ctrl.Item.Title,
+                Description: ctrl.Item.Description,
             };
             if(ctrl.Item.Badge && ctrl.Item.Badge.Id){
                 data['BadgeId'] = ctrl.Item.Badge.Id;
