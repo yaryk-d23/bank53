@@ -1,3 +1,6 @@
+.b .modal {
+	overflow: auto;
+}
 .topic-container {
     list-style: none;
     margin-bottom: 10px;
