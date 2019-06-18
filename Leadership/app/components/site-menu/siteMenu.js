@@ -11,5 +11,9 @@
 
     function formCtrl($ApiService, $q, $scope){
         var ctrl = this;
+		ctrl.items = [];
+		$ApiService.getListItems('Navigation', '$sortby=SortOrder').then(function(res){
+			ctrl.items = res;
+		});
     }
 })();

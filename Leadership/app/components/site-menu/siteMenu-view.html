@@ -1,11 +1,11 @@
 <div class="menu">
     <div class="title">MENU</div>
     <ul class="navigation">
-        <li><a href="https://thebank.info53.com/teams/HCInt/Learn/leading/SiteAssets/Site/portal.aspx">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li ng-repeat="link in ctrl.items track by $index"><a ng-href="{{link.Link ? link.Link.Url : ''}}">{{link.Title}}</a></li>
+        <!--<li><a href="#">About</a></li>
         <li><a href="https://inside.info53.com/ep/ec/Welcome/">Employee Center</a></li>
         <li><a href="https://thebank.info53.com/Pages/Home.aspx">SharePoint</a></li>
-        <li><a href="https://thebank.info53.com/teams/HCInt/Learn/leading/_layouts/15/start.aspx#/SitePages/navigator.aspx">See the Navigator</a></li>
+        <li><a href="https://thebank.info53.com/teams/HCInt/Learn/leading/_layouts/15/start.aspx#/SitePages/navigator.aspx">See the Navigator</a></li>-->
     </ul>
 </div>
 

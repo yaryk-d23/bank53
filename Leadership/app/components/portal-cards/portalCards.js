@@ -70,7 +70,7 @@
 					sum += item.Time ? item.Time : 0;
 				});
 				return sum;
-			}
+			}			
 
             ctrl.ok = function () {
             //   $uibModalInstance.close(ctrl.selected.item);
