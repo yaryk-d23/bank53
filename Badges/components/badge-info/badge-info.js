@@ -17,6 +17,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
     
 
     var urlTaskId = getParameterByName('task');
+	var urlCampaignName = getParameterByName('campaign');
 
     updateData();
     ctrl.generatePdf = function($event, task) {
@@ -30,7 +31,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
 
     };
 
-    ctrl.createTaskItem = function(task){
+    ctrl.createTaskItem = function(task, url){
         var item = {
             Title: task.Title,
             Badge: task.BadgeId,
@@ -38,7 +39,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
             XP: task.XP,
             Task: task.Id
         };
-        $BadgesService.createTaskItem(item).then(function(res){
+        $BadgesService.createTaskItem(item, url).then(function(res){
             var userItem = {
                 Id: ctrl.userInfo.userItemId,
                 XP: ctrl.userInfo.xp + task.XP
@@ -127,6 +128,53 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
 
     function updateData(){
 		try{
+		$DashboardService.getAllWebs().then(function(data){
+			var taskLogItemsReq = [];
+			var allBadgesReq = [];
+			var allTaskItemsReq = [];
+			angular.forEach(data.value, function(val){
+				taskLogItemsReq.push($DashboardService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId, val.ServerRelativeUrl));
+				allBadgesReq.push($DashboardService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous&$filter=BadgeType eq 'User'", val.ServerRelativeUrl));
+				allTaskItemsReq.push($DashboardService.getTaskItems(undefined, val.ServerRelativeUrl));
+			});
+			var req = {
+				allBadges: $q.all(allBadgesReq),
+				allTask: $q.all(allTaskReq),
+				tasksListItems: $q.all(tasksListItemsReq),
+				userProfile: $BadgesService.getUserProfile(),
+			};
+			$q.all(req).then(function(res){
+				console.log(data);
+				angular.forEach(res.allBadges, function(val){
+					ctrl.allBadges.concat(val);
+				});
+				ctrl.allBadges = setBadgesOrder(ctrl.allBadges);
+				angular.forEach(res.tasksListItems, function(val){
+					ctrl.allTask.concat(val);
+				});
+				angular.forEach(res.tasksListItems, function(val){
+					ctrl.allTaskItems.concat(val);
+				});
+				
+				//add task if id is exist
+				if(urlCampaignName && urlTaskId) {
+					$BadgesService.getTaskLogItems('$filter=Task/Id eq '+decodeTaskId(urlTaskId)+' and AssignedTo/Id eq '+_spPageContextInfo.userId, _spPageContextInfo.webAbsoluteUrl +'/'+ urlCampaignName).then(function(taskRes){
+						if(!taskRes.length) {
+							$BadgesService.getTaskItems('$filter=Id eq '+decodeTaskId(urlTaskId),_spPageContextInfo.webAbsoluteUrl +'/'+ urlCampaignName).then(function (res){
+								//ExecuteOrDelayUntilScriptLoaded(function(){
+									ctrl.createTaskItem(res[0]);
+								//}, "SP.js");
+							});
+						}
+						else{
+							window.history.pushState(null,null,'?');
+						}
+					});
+				}
+			});
+			
+		});
+		
         var requestData = {
             taskLogItems: $BadgesService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId),
             userProfile: $BadgesService.getUserProfile(),

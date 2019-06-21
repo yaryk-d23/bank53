@@ -6,8 +6,16 @@ angular.module('DashboardApp')
             getBadgesItems: getBadgesItems,
             getTaskItems: getTaskItems,
             getTaskListItems: getTaskListItems,
-            getUserLogItems: getUserLogItems
+            getUserLogItems: getUserLogItems,
+			getAllWebs: getAllWebs
         };
+		
+		function getAllWebs(){
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + "/_api/Web/webs")
+                .then(function(res){
+                    return res.data;
+                });
+        }
 
         function getUserProfile(){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/SP.UserProfiles.PeopleManager/GetMyProperties')
@@ -33,24 +41,24 @@ angular.module('DashboardApp')
                 });
         }
 
-        function getBadgesItems(filter){
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
+        function getBadgesItems(filter, url){
+            return $http.get((url ? url : _spPageContextInfo.webAbsoluteUrl) + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
                 .then(function(res){
                     return res.data.value;
                 });
         }
 
-        function getTaskItems(filter){
+        function getTaskItems(filter, url){
             filter = filter ? filter : '';
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesTaskLog\')/items?'+filter)
+            return $http.get((url ? url : _spPageContextInfo.webAbsoluteUrl) + '/_api/web/lists/getbytitle(\'BadgesTaskLog\')/items?'+filter)
                 .then(function(res){
                     return res.data.value;
                 });
         }
 
-        function getTaskListItems(filter){
+        function getTaskListItems(filter, url){
             filter = filter ? filter : '';
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Tasks\')/items?$select=*,Badge/Id,Badge/Title&$expand=Badge&'+filter)
+            return $http.get((url ? url : _spPageContextInfo.webAbsoluteUrl) + '/_api/web/lists/getbytitle(\'Tasks\')/items?$select=*,Badge/Id,Badge/Title&$expand=Badge&'+filter)
                 .then(function(res){
                     return res.data.value;
                 });

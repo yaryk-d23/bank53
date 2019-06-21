@@ -39,6 +39,27 @@ function recentBadgesCtrl($DashboardService, $q, $filter){
             $('[data-toggle="tooltip"]').tooltip();   
         },500);
     });
+	
+	$DashboardService.getAllWebs().then(function(res){
+		console.log(res);
+		var allBadgesReq = [];
+		var allTaskReq = [];
+		var tasksListItemsReq = [];
+		angular.forEach(res.value, function(val){
+			allBadgesReq.push($DashboardService.getBadgesItems(undefined, val.ServerRelativeUrl));
+			allTaskReq.push($DashboardService.getTaskItems(undefined, val.ServerRelativeUrl));
+			tasksListItemsReq.push($DashboardService.getTaskListItems(undefined, val.ServerRelativeUrl));
+		});
+		var req = {
+			allBadges: $q.all(allBadgesReq),
+			allTask: $q.all(allTaskReq),
+			tasksListItems: $q.all(tasksListItemsReq)
+		};
+		$q.all(req).then(function(data){
+			console.log(data);
+		});
+		
+	});
 
     function getSum(arr){
         var sum = 0;

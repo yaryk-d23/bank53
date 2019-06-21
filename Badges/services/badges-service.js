@@ -9,8 +9,15 @@ angular.module('BadgesApp')
             updateUserLogItem: updateUserLogItem,
             getTaskLogItems: getTaskLogItems,
             getTaskItems: getTaskItems,
-            uploadFile: uploadFile
+            uploadFile: uploadFile,
+			getAllWebs: getAllWebs
         };
+		function getAllWebs(){
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + "/_api/Web/webs")
+                .then(function(res){
+                    return res.data;
+                });
+        }
 
         function getUserProfile(){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/SP.UserProfiles.PeopleManager/GetMyProperties')
@@ -27,14 +34,14 @@ angular.module('BadgesApp')
                 });
         }
 
-        function getBadgesItems(filter){
+        function getBadgesItems(filter, url){
             filter = filter ? filter : '';
             return new Promise(function(resolve, reject){
-                $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
+                $http.get((url ? url : _spPageContextInfo.webAbsoluteUrl) + '/_api/web/lists/getbytitle(\'BadgesList\')/items?'+filter)
                     .then(function(res){
                         var request = {};
                         angular.forEach(res.data.value, function(item, k){
-                            request[item.Id] = $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Tasks\')/items?'+
+                            request[item.Id] = $http.get((url ? url : _spPageContextInfo.webAbsoluteUrl) + '/_api/web/lists/getbytitle(\'Tasks\')/items?'+
                                 '$select=*,Badge/Id,Badge/Title&$expand=Badge'+
                                 '&$filter=Badge/Id eq '+item.Id);
                         });
@@ -49,27 +56,31 @@ angular.module('BadgesApp')
             });
         }
 
-        function getTaskLogItems(filter){
+        function getTaskLogItems(filter, url){
             filter = filter ? filter : '';
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'BadgesTaskLog\')/items?'+filter)
+            return $http.get((url ? url : _spPageContextInfo.webAbsoluteUrl) + '/_api/web/lists/getbytitle(\'BadgesTaskLog\')/items?'+filter)
                 .then(function(res){
                     return res.data.value;
                 });
         }
 
-        function getTaskItems(filter){
+        function getTaskItems(filter, url){
             filter = filter ? filter : '';
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'Tasks\')/items?$select=*,Badge/Id,Badge/Title&$expand=Badge&'+filter)
+            return $http.get((url ? url : _spPageContextInfo.webAbsoluteUrl) + '/_api/web/lists/getbytitle(\'Tasks\')/items?$select=*,Badge/Id,Badge/Title&$expand=Badge&'+filter)
                 .then(function(res){
                     return res.data.value;
                 });
         }
 
         
-        function createOrUpdateTaskItem(item){
+        function createOrUpdateTaskItem(item, url){
             return new Promise(function(resolve, reject){
-                // var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
-                var clientContext = new SP.ClientContext.get_current();
+				if(url){
+					var clientContext = new SP.ClientContext(url);
+				}
+				else {
+					var clientContext = new SP.ClientContext.get_current();
+				}
 
                 var oList = clientContext.get_web().get_lists().getByTitle("BadgesTaskLog");
                     
