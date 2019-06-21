@@ -118,9 +118,14 @@ angular.module('BadgesApp')
             });
         }
 
-        function updateUserLogItem(item){
+        function updateUserLogItem(item, url){
             return new Promise(function(resolve, reject){
-                var clientContext = new SP.ClientContext(_spPageContextInfo.webAbsoluteUrl);
+                if(url){
+					var clientContext = new SP.ClientContext(url);
+				}
+				else {
+					var clientContext = new SP.ClientContext.get_current();
+				}
                 var oList = clientContext.get_web().get_lists().getByTitle("UsersLog");
                 var oListItem = oList.getItemById(item.Id);
                 oListItem.set_item('XP',item.XP);
