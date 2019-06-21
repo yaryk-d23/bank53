@@ -219,17 +219,17 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
         return orderedBadges;
     }
 
-    ctrl.checkIsAllowedTask = function(badgeId){
+    ctrl.checkIsAllowedTask = function(badgeId, index){
         var flag = false;
-        var badge = ctrl.allBadges.filter(function(x){
+        var badge = ctrl.allBadges[index].filter(function(x){
             return x.Id == badgeId;
         })[0];
         if(!badge.PreviousId){
             flag = true;
         }
         else {
-            var grupedTaskByBadge = groupBy(ctrl.allTask, 'BadgeId');
-            var grupedTasksItemsByBadge = groupBy(ctrl.allTaskItems, 'BadgeId');
+            var grupedTaskByBadge = groupBy(ctrl.allTask[index], 'BadgeId');
+            var grupedTasksItemsByBadge = groupBy(ctrl.allTaskItems[index], 'BadgeId');
             if(grupedTaskByBadge[badge.PreviousId] && grupedTaskByBadge[badge.PreviousId].length == grupedTasksItemsByBadge[badge.PreviousId].length){
                 flag = true;
             }

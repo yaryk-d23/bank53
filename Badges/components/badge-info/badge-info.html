@@ -2,7 +2,7 @@
     <div id="task-toast" class="snackbar"></div>
 </div>
 <div class="badges-info">
-    <div class="badges-item  text-center" ng-repeat="badgeGroup in ctrl.allBadges track by $index">
+    <div class="badges-item  text-center" ng-repeat="badgeGroup in ctrl.allBadges track by $index" ng-init="parentIndex=$index">
         <div ng-repeat="badge in badgeGroup track by $index">
             <div class="badge-container" id="badge_{{badge.Id}}">
                 <img class="img-circle" ng-src="{{badge.Icon.Url}}"  id="spinner"/>
@@ -15,7 +15,7 @@
             </div>
             <div class="badge-buttons">
                 <button 
-                    ng-if="ctrl.checkIsAllowedTask(badge.Id)"
+                    ng-if="ctrl.checkIsAllowedTask(badge.Id, parentIndex)"
                     id="task_{{badge.Id}}_{{task.Id}}"
                     ng-repeat="task in badge.Tasks"
                     type="button" 
@@ -24,7 +24,7 @@
                     ng-disabled="ctrl.checkTask(task.Title,badge.Id)">
                     {{task.Title}}
                 </button>
-                <div ng-if="!ctrl.checkIsAllowedTask(badge.Id)">Complete <b>{{badge.Previous.Title}}</b></div>
+                <div ng-if="!ctrl.checkIsAllowedTask(badge.Id, parentIndex)">Complete <b>{{badge.Previous.Title}}</b></div>
                 <!-- <button type="button" 
                     class="btn btn-success" 
                     ng-click="ctrl.createTaskItem('Task 2',badge.Id); ctrl.showToast('Task2'+badge.Id);" 
