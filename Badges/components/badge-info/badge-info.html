@@ -1,9 +1,9 @@
 <div style="position: relative; width: 100%;">
     <div id="task-toast" class="snackbar"></div>
 </div>
-<div class="badges-info">
-    <div ng-repeat="badgeGroup in ctrl.allBadges track by $index" ng-init="parentIndex=$index">
-        <div class="badges-item  text-center" ng-repeat="badge in badgeGroup track by $index">
+<div>
+    <div class="badges-info" ng-repeat="badgeGroup in ctrl.allBadges track by $index" ng-init="parentIndex=$index">
+        <div class="badges-item  text-center"  ng-repeat="badge in badgeGroup track by $index">
             <div class="badge-container" id="badge_{{badge.Id}}">
                 <img class="img-circle" ng-src="{{badge.Icon.Url}}"  id="spinner"/>
                 <div class="rank-label-container">

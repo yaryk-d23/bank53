@@ -48,7 +48,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
                 allBadges: $BadgesService.getBadgesItems('$filter=Id eq '+task.BadgeId, url),
                 allTask: $BadgesService.getTaskLogItems('$filter=BadgeId eq '+task.BadgeId+' and AssignedToId eq '+_spPageContextInfo.userId, url),
                 tasksListItems: $BadgesService.getTaskItems('$filter=BadgeId eq '+task.BadgeId, url),
-                updateUserLogItem: $BadgesService.updateUserLogItem(userItem, url),
+                updateUserLogItem: $BadgesService.updateUserLogItem(userItem),
             };
             $q.all(requests).then(function(res){
                 updateData();
