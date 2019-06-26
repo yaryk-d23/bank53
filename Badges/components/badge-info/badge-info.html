@@ -3,17 +3,20 @@
 </div>
 <div>
     <div class="badges-info" ng-repeat="badgeGroup in ctrl.allBadges track by $index" ng-init="parentIndex=$index">
+        <div>
+            <h3>{{ctrl.allCampaigns[$index].Title}}</h3>
+        </div>
         <div class="badges-item  text-center"  ng-repeat="badge in badgeGroup track by $index">
-            <div class="badge-container" id="badge_{{badge.Id}}">
+            <a href="" class="badge-container" id="badge_{{badge.Id}}" style="display:block;">
                 <img class="img-circle" ng-src="{{badge.Icon.Url}}"  id="spinner"/>
                 <div class="rank-label-container">
                     <div><b>{{ctrl.getBadgeXP(badge.Tasks)}} XP</b></div>
                     <div>{{badge.Title}}</div>
-                    <div ng-bind-html="ctrl.trustHtml(badge.Description)"></div>
+                    <!-- <div ng-bind-html="ctrl.trustHtml(badge.Description)"></div> -->
                     
                 </div>
-            </div>
-            <div class="badge-buttons">
+            </a>
+            <!--<div class="badge-buttons">
                 <button 
                     ng-if="ctrl.checkIsAllowedTask(badge.Id, parentIndex)"
                     id="task_{{badge.Id}}_{{task.Id}}"
@@ -25,7 +28,7 @@
                     {{task.Title}}
                 </button>
                 <div ng-if="!ctrl.checkIsAllowedTask(badge.Id, parentIndex)">Complete <b>{{badge.Previous.Title}}</b></div>
-            </div>
+            </div>-->
         </div>
         <br/>
         <hr/>

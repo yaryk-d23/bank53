@@ -14,6 +14,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
     ctrl.allBadges = [];
     ctrl.allTask = [];
     ctrl.allTaskItems = [];
+    ctrl.allCampaigns = [];
     
 
     var urlTaskId = getParameterByName('task');
@@ -132,6 +133,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
                 var taskLogItemsReq = [];
                 var allBadgesReq = [];
                 var allTaskItemsReq = [];
+                ctrl.allCampaigns = data.value;
                 angular.forEach(data.value, function(val){
                     taskLogItemsReq.push($BadgesService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId, val.ServerRelativeUrl));
                     allBadgesReq.push($BadgesService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous&$filter=BadgeType eq 'User'", val.ServerRelativeUrl));
