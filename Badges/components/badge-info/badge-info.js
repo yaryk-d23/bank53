@@ -48,7 +48,7 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
                 allBadges: $BadgesService.getBadgesItems('$filter=Id eq '+task.BadgeId, url),
                 allTask: $BadgesService.getTaskLogItems('$filter=BadgeId eq '+task.BadgeId+' and AssignedToId eq '+_spPageContextInfo.userId, url),
                 tasksListItems: $BadgesService.getTaskItems('$filter=BadgeId eq '+task.BadgeId, url),
-                updateUserLogItem: $BadgesService.updateUserLogItem(userItem, url),
+                updateUserLogItem: $BadgesService.updateUserLogItem(userItem),
             };
             $q.all(requests).then(function(res){
                 updateData();
@@ -109,9 +109,9 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
         return xp;
     };
 
-    ctrl.checkTask = function(taskName, badgeId){
+    ctrl.checkTask = function(taskName, badgeId, index){
         var flag = false;
-        angular.forEach(ctrl.allTask,function(task, key){
+        angular.forEach(ctrl.allTask[index],function(task, key){
             if(task.Title == taskName && task.BadgeId == badgeId){
                 flag = true;
             }
@@ -128,14 +128,14 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
 
     function updateData(){
 		try{
-            $DashboardService.getAllWebs().then(function(data){
+            $BadgesService.getAllWebs().then(function(data){
                 var taskLogItemsReq = [];
                 var allBadgesReq = [];
                 var allTaskItemsReq = [];
                 angular.forEach(data.value, function(val){
-                    taskLogItemsReq.push($DashboardService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId, val.ServerRelativeUrl));
-                    allBadgesReq.push($DashboardService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous&$filter=BadgeType eq 'User'", val.ServerRelativeUrl));
-                    allTaskItemsReq.push($DashboardService.getTaskItems(undefined, val.ServerRelativeUrl));
+                    taskLogItemsReq.push($BadgesService.getTaskLogItems('$filter=AssignedToId eq '+_spPageContextInfo.userId, val.ServerRelativeUrl));
+                    allBadgesReq.push($BadgesService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous&$filter=BadgeType eq 'User'", val.ServerRelativeUrl));
+                    allTaskItemsReq.push($BadgesService.getTaskItems(undefined, val.ServerRelativeUrl));
                 });
                 var req = {
                     allBadges: $q.all(allBadgesReq),
