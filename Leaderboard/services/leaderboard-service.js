@@ -3,15 +3,8 @@ angular.module('LeaderboardApp')
         return {
             getUserLogItems: getUserLogItems,
             getTaskLogItems: getTaskLogItems,
-            getUserProfile: getUserProfile,
-            getAllWebs: getAllWebs
+            getUserProfile: getUserProfile
         };
-		function getAllWebs(){
-            return $http.get(_spPageContextInfo.webAbsoluteUrl + "/_api/Web/webs")
-                .then(function(res){
-                    return res.data;
-                });
-        }
 
         function getUserLogItems(filterValue){
             var filter = filterValue ? '&$filter='+filterValue : '';

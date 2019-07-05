@@ -146,7 +146,6 @@ function badgeInfoCtrl($BadgesService, $GeneratePDF, $sce, $q, $PopUpMsg){
                     userProfile: $BadgesService.getUserProfile(),
                 };
                 $q.all(req).then(function(res){
-                    console.log(data);
                     ctrl.allBadges = res.allBadges;
                     angular.forEach(ctrl.allBadges, function(val, k){
                         ctrl.allBadges[k] = setBadgesOrder(val);
