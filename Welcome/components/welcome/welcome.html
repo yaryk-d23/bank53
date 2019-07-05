@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-sm-12">
                         <div ng-repeat="camp in ctrl.allCampaigns">
-							<a ng-href=""></a>
+							<a ng-href="{{camp.ServerRelativeUrl}}"><h3>{{camp.Title}}</h3></a>
 						</div>
 						<a ng-if="ctrl.userInfo.userRole == 'Manager'" class="btn btn-success" href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Manager.aspx">Manager Page</a>
                     </div>

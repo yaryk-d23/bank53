@@ -14,8 +14,15 @@ angular.module('WelcomeApp')
             getBadgeIcon: getBadgeIcon,
             getAvatarsItems: getAvatarsItems,
             getSPUser: getSPUser,
-            getUserLogItemByUserId: getUserLogItemByUserId
+            getUserLogItemByUserId: getUserLogItemByUserId,
+            getAllWebs: getAllWebs
         };
+		function getAllWebs(){
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + "/_api/Web/webs")
+                .then(function(res){
+                    return res.data;
+                });
+        }
 
         function getSPUser(query){
             var url = _spPageContextInfo.webAbsoluteUrl +

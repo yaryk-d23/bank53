@@ -72,6 +72,10 @@ function userInfoCtrl($DashboardService, $q){
                 ctrl.userInfo.credits = user.Credits || 0;
                 ctrl.userInfo.xp = user.XP || 0;
                 ctrl.userInfo.userItemId = user.Id;
+                ctrl.userInfo.userRole = user.UserRole;
+            }
+            if(ctrl.userInfo.userRole == 'Manager'){
+                $('#navbarSupportedContent>.nav').append('<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Manager.aspx">Manager Page</a></li>');
             }
         });
     });

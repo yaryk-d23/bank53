@@ -34,7 +34,6 @@ function recentBadgesCtrl($DashboardService, $q, $filter){
     });*/
 	
 	$DashboardService.getAllWebs().then(function(res){
-		console.log(res);
 		var allBadgesReq = [];
 		var allTaskReq = [];
 		var tasksListItemsReq = [];
@@ -49,7 +48,6 @@ function recentBadgesCtrl($DashboardService, $q, $filter){
 			tasksListItems: $q.all(tasksListItemsReq)
 		};
 		$q.all(req).then(function(res){
-			console.log(res);
 			var grupedTaskByBadge = [];
 			angular.forEach(res.allTask, function(val, k){
 				grupedTaskByBadge[k] = groupBy(val, 'BadgeId');
@@ -68,7 +66,6 @@ function recentBadgesCtrl($DashboardService, $q, $filter){
 				});
 			});
 			ctrl.allBadges = $filter('orderBy')(ctrl.allBadges, '-Created');
-			console.log(ctrl.allBadges);
 			setTimeout(function(){
 				$('[data-toggle="tooltip"]').tooltip();   
 			},500);

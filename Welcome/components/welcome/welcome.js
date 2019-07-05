@@ -21,6 +21,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     ctrl.recentTasks = [];
     ctrl.allAvatars = [];
     var allBadges = [];
+    ctrl.allCampaigns = [];
     ctrl.moment = moment;
     ctrl.colorArr = ['#5cb85c', '#07b16a', '#33cddd', '#245698', '#79569c'];
 
@@ -35,6 +36,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     });
 
     var requests = {
+        allCampaigns: $WelcomeService.getAllWebs(),
         allAvatars: $WelcomeService.getAvatarsItems(),
         allBadges: $WelcomeService.getBadgesItems("$select=*,Previous/Title,Previous/Id&$expand=Previous"),
         allUserTasks: $WelcomeService.getTaskItems("$filter=BadgeType eq 'User'"),
@@ -45,6 +47,7 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
     };
 
     $q.all(requests).then(function(data){
+        ctrl.allCampaigns = data.allCampaigns.value;
         ctrl.allAvatars = data.allAvatars;
         allBadges = data.allBadges;
         ctrl.allTasks = data.allTasks;
@@ -108,6 +111,10 @@ function welcomeCtrl($WelcomeService, $GeneratePDF, $sce, $q){
                         
                     });
                 });
+            }
+
+            if(ctrl.userInfo.userRole == 'Manager'){
+                $('#navbarSupportedContent>.nav').append('<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Manager.aspx">Manager Page</a></li>');
             }
         });
         var groupedTasksByBadge = groupBy(ctrl.allTasks, 'BadgeId');
