@@ -1,0 +1,59 @@
+#retail-roles a {
+    text-decoration: none;
+}
+
+#retail-roles .l-accordion {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+#retail-roles .l-accordion__slide {
+    flex: 1;
+    transition: 2s ease-in-out;
+    -webkit-transform: skewX(-5deg);
+    transform: skewX(-5deg);
+    overflow: hidden;
+    display: flex;
+    border-left: 4px solid #fff;
+}
+#retail-roles [data-accordion-slide].l-accordion__slide:hover,
+#retail-roles [data-accordion-slide].l-accordion__slide:focus {
+    flex: 5;
+}
+#retail-roles .l-accordion__slide:first-child {
+    border-left: 0;
+    flex: 1.25;
+    margin-left: -3em;
+}
+#retail-roles .l-accordion__slide:last-child {
+    flex: 1.25;
+    margin-right: -3em;
+}
+#retail-roles  .l-accordion__inside {
+    -webkit-transform: skewX(5deg);
+    transform: skewX(5deg);
+    padding: 4em;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin: 0 -3em;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#retail-roles [data-accordion-slide="1"] .l-accordion__inside {
+    background-image: url("https://thebank.info53.com/teams/HCInt/Learn/leading/RET_FE/media/img/3.png");
+    background-position: 75% 40%;
+}
+#retail-roles h1 {
+    margin: 0;
+    color: #fff;
+    font-weight: 100;
+    font-size: 2.0rem;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1;
+    text-shadow: 0 0 10px #000000;
+}

@@ -1,0 +1,5 @@
+section.l-accordion
+	each val in [1, 2, 3, 4, 5]
+		.l-accordion__slide(data-accordion-slide=val)
+			.l-accordion__inside
+				h1= 'Slide ' + val

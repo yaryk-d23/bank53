@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body{
+background: #E2E2E2;
+}
+
+.grid {
+  box-sizing: border-box;
+  width: 50%;
+  background: black;
+  padding: 10px;
+
+  position: relative;
+  left: 250px;
+}
+.grid__container {
+  display: flex;
+  flex-wrap: wrap;
+  border: 2px solid #ffffff;
+}
+
+.box {
+  position: relative;
+  box-sizing: border-box;
+  width: 20%;
+  opacity:0.6;
+}
+.box::before {
+  content: '';
+  position: relative;
+  width: 100%;
+  display: block;
+  height: 0;
+  padding-bottom: 100%;
+}
+.box:hover {
+
+  opacity:1
+
+}
+
+
+.box__helper {
+  height: 0;
+  width: 100%;
+  padding-bottom: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.box__content {
+  border: 2px solid #ffffff;
+  padding: 0.5em 1em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.box_size_3x3 {
+  width: 60%;
+}
+.box_size_3x3 + .box + .box {
+  margin-top: -40%;
+}
+.box_size_3x3 + .box + .box + .box {
+  margin-top: -40%;
+  margin-left: 60%;
+}
+.box_size_2x2 {
+  width: 40%;
+}
+.box_size_2x2::before {
+  padding-bottom: 50%;
+}
+.box_size_2x2 + .box + .box + .box + .box {
+  margin-left: 40%;
+}
+.box_size_2x1 {
+  width: 40%;
+}
+.box_size_2x1::before {
+  padding-bottom: 50%;
+}
+.box_size_2x1 .box__helper {
+  padding-bottom: 50%;
+}
+
+.box__content {
+  font-size: 24px;
+  /*background-color: #252525;*/
+  color: #ffffff;
+  text-shadow: 2px 2px #000000;
+  
+}
+
+.box:nth-child(1) .box__content{
+  
+  background-image: url("https://thebank.info53.com/teams/HCInt/Learn/leading/RET_FE/media/img/connect8.jpg");
+  background-repeat:no-repeat;
+  background-position: 0%,0%;
+}
+
+.box:nth-child(2) .box__content{
+  color: #000000;
+  background-image: url("https://thebank.info53.com/teams/HCInt/Learn/leading/RET_FE/media/img/connect8.jpg");
+  background-repeat:no-repeat;
+  background-position: 0%,0%;
+}
+.box:nth-child(4) .box__content,
+.box:nth-child(6) .box__content{
+background-color: #1D4094;
+
+}
+
+
+.box:nth-child(7) .box__content {
+  background-image: url("https://thebank.info53.com/teams/HCInt/Learn/leading/RET_FE/media/img/ae.jpg");
+  background-position: 50%,50%;
+}
+
+.box:nth-child(9) .box__content {
+  background-image: url("https://thebank.info53.com/teams/HCInt/Learn/leading/RET_FE/media/img/aa.jpg");
+  background-position: 50%,50%;
+}
+
+</style>
+</head>
+
+<body>
+<div class="grid">
+  <div class="grid__container">
+  
+    <div class="box box_size_2x2">
+       <a href="https://thebank.info53.com/teams/HCInt/Learn/leading/RET_FE/learningpath.aspx"><div class="box__helper">
+        <div class="box__content">Preferred Banking Fundamentals</div>
+      </div></a>
+    </div>
+    <div class="box ">
+      <div class="box__helper">
+        <div class="box__content">2</div>
+      </div>
+    </div>
+    <div class="box ">
+      <div class="box__helper">
+        <div class="box__content">Preferred Banking Advanced</div>
+      </div>
+    </div>
+    <div class="box ">
+      <div class="box__helper">
+        <div class="box__content">4</div>
+      </div>
+    </div>
+    <div class="box ">
+      <div class="box__helper">
+        <div class="box__content">Continuing Education</div>
+      </div>
+    </div>
+    <div class="box ">
+      <div class="box__helper">
+        <div class="box__content"></div>
+      </div>
+    </div>
+    <div class="box ">
+      <div class="box__helper">
+        <div class="box__content">Additional</div>
+      </div>
+    </div>
+    <div class="box box_size_2x1">
+      <div class="box__helper">
+        <div class="box__content">Coach Toolkit</div>
+      </div>
+    </div>
+    <div class="box ">
+      <div class="box__helper">
+        <div class="box__content">9</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+</html>

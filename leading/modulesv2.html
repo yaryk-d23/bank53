@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+}
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    background: #ffffff;
+}
+.container {
+    width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.box {
+    width: 300px;
+    height: 400px;
+    position: relative;
+    background: #000;
+    box-shadow: 0 30px 30px #000000c0;
+    margin: 0px
+}
+.box .imgBx {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.box .imgBx img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    transition: .5s;
+}
+.box:hover .imgBx img {
+    opacity: 0;
+}
+.box .content {
+    position: absolute;
+    bottom:10px;
+    left: 10%;
+    width: 80%;
+    background: #fff;
+    height: 50px;
+    overflow: hidden;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: .5s;
+    text-align: center;
+}
+.box:hover .content {
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    padding-top: 80px;
+}
+.box .content h2 {
+    font-size: 36px;
+    margin: 0;
+    padding: 0;
+}
+.box .content p {
+    transition-delay: .5s;
+    opacity: 0;
+    text-align: justify;
+    margin: 10px 0 0;
+}
+.box:hover .content p,
+.box:hover .content .btn {
+    opacity: 1;
+}
+.box .content .btn {
+    text-align: right;
+    display: block;
+    margin: 10px 20px;
+    text-decoration: none;
+    border: 3px solid transparent;
+    transition-delay: .6s;
+    opacity: 0;
+}
+
+</style>
+</head>
+
+<body>
+    <div class="hero">
+        <div class="container">
+            <div class="box">
+                <div class="imgBx">
+                    <img src="https://images.unsplash.com/photo-1498387727476-b30055b2ef21?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+                        alt="">
+                </div>
+                <div class="content">
+                    <h2>Title One</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea aliquid hic non ipsum, sunt
+                        distinctio eveniet deserunt, quae consequuntur rem culpa enim dolorum cupiditate. Maiores modi
+                        quia explicabo blanditiis!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia cum eos dignissimos sequi
+                        expedita, dolorum impedit debitis ut fuga cupiditate! Magni delectus nemo architecto totam
+                        suscipit fugiat accusamus, fugit impedit.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+            <!--box-1-->
+            <div class="box">
+                <div class="imgBx">
+                    <img src="https://images.unsplash.com/photo-1540324155974-7523202daa3f?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+                        alt="">
+                </div>
+                <div class="content">
+                    <h2>Title Two</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea aliquid hic non ipsum, sunt
+                        distinctio eveniet deserunt, quae consequuntur rem culpa enim dolorum cupiditate. Maiores modi
+                        quia explicabo blanditiis!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia cum eos dignissimos sequi
+                        expedita, dolorum impedit debitis ut fuga cupiditate! Magni delectus nemo architecto totam
+                        suscipit fugiat accusamus, fugit impedit.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+            <!--box-2-->
+            <div class="box">
+                <div class="imgBx">
+                    <img src="https://images.unsplash.com/photo-1523450001312-faa4e2e37f0f?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+                        alt="">
+                </div>
+                <div class="content">
+                    <h2>Title Three</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea aliquid hic non ipsum, sunt
+                        distinctio eveniet deserunt, quae consequuntur rem culpa enim dolorum cupiditate. Maiores modi
+                        quia explicabo blanditiis!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia cum eos dignissimos sequi
+                        expedita, dolorum impedit debitis ut fuga cupiditate! Magni delectus nemo architecto totam
+                        suscipit fugiat accusamus, fugit impedit.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+            <!--box-3-->
+            <div class="box">
+                <div class="imgBx">
+                    <img src="https://images.unsplash.com/photo-1523450001312-faa4e2e37f0f?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+                        alt="">
+                </div>
+                <div class="content">
+                    <h2>Title Four</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea aliquid hic non ipsum, sunt
+                        distinctio eveniet deserunt, quae consequuntur rem culpa enim dolorum cupiditate. Maiores modi
+                        quia explicabo blanditiis!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia cum eos dignissimos sequi
+                        expedita, dolorum impedit debitis ut fuga cupiditate! Magni delectus nemo architecto totam
+                        suscipit fugiat accusamus, fugit impedit.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+            <!--box-4-->
+            <div class="box">
+                <div class="imgBx">
+                    <img src="https://images.unsplash.com/photo-1524293568345-75d62c3664f7?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+                        alt="">
+                </div>
+                <div class="content">
+                    <h2>Title Five</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea aliquid hic non ipsum, sunt
+                        distinctio eveniet deserunt, quae consequuntur rem culpa enim dolorum cupiditate. Maiores modi
+                        quia explicabo blanditiis!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia cum eos dignissimos sequi
+                        expedita, dolorum impedit debitis ut fuga cupiditate! Magni delectus nemo architecto totam
+                        suscipit fugiat accusamus, fugit impedit.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+            <!--box-5-->
+            <div class="box">
+                <div class="imgBx">
+                    <img src="https://images.unsplash.com/photo-1498387727476-b30055b2ef21?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+                        alt="">
+                </div>
+                <div class="content">
+                    <h2>Title Six</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati ea aliquid hic non ipsum, sunt
+                        distinctio eveniet deserunt, quae consequuntur rem culpa enim dolorum cupiditate. Maiores modi
+                        quia explicabo blanditiis!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia cum eos dignissimos sequi
+                        expedita, dolorum impedit debitis ut fuga cupiditate! Magni delectus nemo architecto totam
+                        suscipit fugiat accusamus, fugit impedit.
+                    </p>
+                    <a href="#" class="btn">Read More</a>
+                </div>
+            </div>
+            <!--box-6-->
+        </div>
+    </div>
+</body>
+
+</html>

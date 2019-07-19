@@ -1,0 +1,271 @@
+<html>
+
+
+<style>
+body{
+  font-family: 'Roboto','Open Sans', sans-serif;
+  background:#f7f7f7;
+}
+small{
+  color:grey;
+}
+.main>h1{
+  text-align:center;
+  margin-top:50px;
+  margin-bottom:50px
+}
+.main>h2{
+  margin-left:15px;
+  margin-top:70px;
+}
+/* START CARD SLIDER*/
+.scrolling-wrapper{
+    /*height:600px;*/
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  width:100%;  
+  -webkit-overflow-scrolling: touch;
+}
+.scrolling-wrapper p{
+    white-space:normal;
+  
+}
+
+.scrolling-wrapper>div{/*.scrolling_card*/
+  display:inline-block;
+  position:relative;
+  float:none;
+  width:80%; /*manage the width of the CARD on tiny device*/
+  width:300px; /*common width of the CARD*/
+  background:white;
+  box-shadow:0 0 15px #adadad;
+  overflow:hidden;
+  border:solid 1px grey;
+  margin:15px; /*space between cards*/
+}
+
+.card_top{
+  overflow:hidden;
+  width:100%;
+  height:200px;
+  background:grey;
+}
+.card_top img{
+  width:100%;
+}
+
+.card_content{
+  padding:25px; /* space text card*/
+  font-size:100%;
+}
+.card_content h5{
+    display:inline-block;
+    padding:0px 0 5px 0;
+    margin:0;
+    border-bottom:solid 2px grey;
+}
+.card_content h2{
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+.card_V2{
+  border-radius:12px;
+  border:none !important;
+  width:300px;
+}
+.card_top_V2{
+  height:223px;
+}
+.card_content_V2{
+  background:white;
+  position:relative;
+  padding-top:18px;
+  padding-bottom:10px;
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+<div class="main">
+    <h1>CARDS -
+        <u>HORIZONTAL</u>- SLIDER.</h1>
+    <h2>FIRST SLIDER <small>_ no-bootstrap</small></h2>
+    <div class="scrolling-wrapper">
+        <div class="scrolling_card">
+            <div class="card_top">
+                <img src="https://leaf-project.com/wp-content/uploads/2018/02/img-talk-1920x1280-min.jpg">
+
+            </div>
+            <div class="card_content">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+        <div class="scrolling_card">
+            <div class="card_top">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+                <!-- Photo by Rob Bye on Unsplash -->
+            </div>
+            <div class="card_content">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+        <div class="scrolling_card">
+            <div class="card_top">
+                <img src="https://leaf-project.com/wp-content/uploads/2018/02/img-talk-1920x1280-min.jpg">
+            </div>
+            <div class="card_content">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+        <div class="scrolling_card">
+            <div class="card_top">
+                <img src="https://leaf-project.com/wp-content/uploads/2018/02/img-talk-1920x1280-min.jpg">
+            </div>
+            <div class="card_content">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+<div class="scrolling_card">
+            <div class="card_top">
+                <img src="https://leaf-project.com/wp-content/uploads/2018/02/img-talk-1920x1280-min.jpg">
+            </div>
+            <div class="card_content">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <h2>SECOND SLIDER</h2>
+    <div class="scrolling-wrapper wrapper-V2">
+
+        <div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+        <div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+        <div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+        <div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+<div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+<div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+<div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+<div class="scrolling_card card_V2">
+            <div class="card_top card_top_V2">
+                <img src="https://images.unsplash.com/photo-1440330033336-7dcff4630cef?ixlib=rb-0.3.5&s=9e6f1f5515d04218a33968d142784ad0&auto=format&fit=crop&w=1571&q=80">
+
+            </div>
+            <div class="card_content card_content_V2">
+                <h5>BLOG</h5>
+                <h2>TITLE</h2>
+                <p>Lorem ipsum dolor sit amet, consect etur adipiscing elit. </p>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+
+
+</html>

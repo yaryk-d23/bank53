@@ -1,0 +1,52 @@
+.hero-container {
+  height: 20vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.hero {
+  
+
+
+background-image:  url("https://thebank.info53.com/teams/HCInt/Learn/leading/RET_FE/media/img/logob.png");
+background-repeat: no-repeat;
+background-color: #ffffff;
+background-position: left; 
+background-position: 5% 35%; 
+
+  height: 100%;
+  width: 100%;
+  padding: 40px;
+  transition: transform 2s;
+}
+
+
+.hero:hover {
+  /*transform: scale(1.15);*/
+}
+
+
+.hero-stuff {
+  position: absolute;
+  top: 20px;
+  left: 400px;
+}
+
+
+h3 {
+  font-size: 55px;
+  font-weight: 800;
+  font-family: sans-serif;
+  color: #1D4094;
+}
+
+h4 {
+  font-size: 55px;
+  font-weight: 800;
+  font-family: sans-serif;
+  color: #00AF66;
+}
+
+
