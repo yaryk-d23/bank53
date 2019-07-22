@@ -1,7 +1,9 @@
 <div id="retail-roles">
-    <div class="l-accordion__slide" ng-repeat="i in allRetailRoles trck by $index" data-accordion-slide="{{$index}}">
-        <a ng-href="{{(i.Link && i.Link.Url) ? i.Link.Url : ''}}" class="l-accordion__inside">
-            <h1>{{i.Title}}</h1>
-        </a>
-    </div>
+	<div class="l-accordion">
+		<div class="l-accordion__slide" ng-repeat="i in ctrl.allRetailRoles track by $index" data-accordion-slide="{{$index}}" >
+			<a ng-href="{{(i.Link && i.Link.Url) ? i.Link.Url : ''}}" class="l-accordion__inside" style="background-image: url('{{i.Image.Url}}')">
+				<h1>{{i.Title}}</h1>
+			</a>
+		</div>
+	</div>
 </div>

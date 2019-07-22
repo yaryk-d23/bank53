@@ -1,7 +1,7 @@
 (function(){
     angular.module('App')
     .component('retailRoles', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/app/components/site-footer/retailRoles-view.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/app/components/retail-roles/retailRoles-view.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
@@ -18,7 +18,10 @@
         };
 
         $q.all(request).then(function(res){
-            ctrl.allRetailRoles = res.allRetailRoles;
+			console.log(res);
+			setTimeout(function(){$scope.$apply(function(){
+				ctrl.allRetailRoles = res.allRetailRoles;
+			});},0);
         });
 
         function groupBy(xs, prop) {

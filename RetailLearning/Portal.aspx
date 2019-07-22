@@ -75,12 +75,12 @@
             <div class="container-fluid content-wrap">
                 <div class="row">
                     <site-header></site-header>
-                    <div ng-view>
                         <retail-roles></retail-roles>
+                    <div ng-view>
                     </div>
                 </div>
             </div>
-            <site-footer></site-footer>
+            <!--<site-footer></site-footer>-->
         </div>
     </body>
 </html>
