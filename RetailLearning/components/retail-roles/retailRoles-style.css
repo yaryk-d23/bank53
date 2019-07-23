@@ -22,10 +22,21 @@
 #retail-roles [data-accordion-slide].l-accordion__slide:focus {
     flex: 5;
 }
-#retail-roles [data-accordion-slide].l-accordion__slide .l-accordion__slide_cards {
+#retail-roles .l-accordion__slide_cards a {
+    display: block;
+	font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+	margin-bottom:10px;
+	text-align: center;
+}
+#retail-roles .l-accordion__slide_cards a:hover {
+	text-decoration: underline;
+}
+#retail-roles [data-accordion-slide].l-accordion__slide .l-accordion__slide_cards a {
     display: none;
 }
-#retail-roles [data-accordion-slide].l-accordion__slide:hover .l-accordion__slide_cards {
+#retail-roles [data-accordion-slide].l-accordion__slide:hover .l-accordion__slide_cards a {
     display: block;
 }
 #retail-roles .l-accordion__slide:first-child {

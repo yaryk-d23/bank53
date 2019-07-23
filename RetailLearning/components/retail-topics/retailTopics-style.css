@@ -7,9 +7,13 @@
 #retail-topics .tile-container {
     position: relative;
     display: inline-block;
-    widows: 20%;
-    max-width: 150px;
-    margin-left: 2%;
+    width: 20%;
+    max-width: 200px;
+}
+#retail-topics .tile-container a {
+	display: block;
+    width: 100%;
+    padding: 5%;
 }
 #retail-topics .tile-container:first-child {
     margin-left: 0;
@@ -17,10 +21,11 @@
 
 #retail-topics .tile-image {
     background-position: center;
-    background-size: 70%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 #retail-topics .tile-container:hover .tile-image {
-    background-size: 100%;
+    background-size: 200%;
 }
 #retail-topics .tile-image:after{
     content: "";
@@ -31,10 +36,11 @@
     position: absolute;
     bottom: 0;
     padding: 5px;
-    background-color: rgba(50,50,50,0.5);
+    background-color: rgba(18, 80, 189, 0.5);
     color: #fff;
     font-size: 14px;
-    height: 2px;
+    /*height: 2px;*/
+    width: 90%;
 }
 #retail-topics .tile-container:hover .tile-title {
     height: auto;

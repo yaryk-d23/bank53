@@ -6,7 +6,7 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', '$scope', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', '$routeParams', formCtrl]
     });
 
     function formCtrl($ApiService, $q, $scope, $routeParams){
