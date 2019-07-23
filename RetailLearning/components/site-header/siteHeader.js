@@ -1,7 +1,7 @@
 (function(){
     angular.module('App')
     .component('siteHeader', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/app/components/site-header/siteHeader-view.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/components/site-header/siteHeader-view.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },

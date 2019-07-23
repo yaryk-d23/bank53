@@ -2,7 +2,12 @@
 	<div class="l-accordion">
 		<div class="l-accordion__slide" ng-repeat="i in ctrl.allRetailRoles track by $index" data-accordion-slide="{{$index}}" >
 			<a ng-href="{{(i.Link && i.Link.Url) ? i.Link.Url : ''}}" class="l-accordion__inside" style="background-image: url('{{i.Image.Url}}')">
-				<h1>{{i.Title}}</h1>
+                <h1>{{i.Title}}</h1>
+                <div ng-if="ctrl.allRetailCards[i.Id] && ctrl.allRetailCards[i.Id].length">
+                    <a ng-repeat="card in ctrl.allRetailCards[i.Id] track by $index" ng-href="{{'#/card/'+card.Id}}">
+                        {{card.Title}}
+                    </a>
+                </div>
 			</a>
 		</div>
 	</div>

@@ -1,7 +1,7 @@
 (function(){
     angular.module('App')
     .component('retailRoles', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/app/components/retail-roles/retailRoles-view.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/components/retail-roles/retailRoles-view.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
@@ -12,15 +12,19 @@
     function formCtrl($ApiService, $q, $scope){
         var ctrl = this;
         ctrl.allRetailRoles = [];
+        ctrl.allRetailCards = [];
 
         var request = {
-            allRetailRoles: $ApiService.getListItems('RetailRoles', '$orderBy=SortOrder')
+            allRetailRoles: $ApiService.getListItems('RetailRoles', '$orderBy=SortOrder'),
+            allRetailCards: $ApiService.getListItems('RetailCards'),
+            
         };
 
         $q.all(request).then(function(res){
 			console.log(res);
 			setTimeout(function(){$scope.$apply(function(){
-				ctrl.allRetailRoles = res.allRetailRoles;
+                ctrl.allRetailRoles = res.allRetailRoles;
+                ctrl.allRetailCards = groupBy(res.allRetailCards, 'RetailRoleId');
 			});},0);
         });
 

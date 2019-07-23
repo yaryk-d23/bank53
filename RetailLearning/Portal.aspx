@@ -42,7 +42,7 @@
             <SharePoint:FormDigest runat="server"></SharePoint:FormDigest>
         </form>
         <script>
-            var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/RetailLearning/app";
+            var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/RetailLearning";
             var scripts = [
                 "modules/jquery-3.3.1.min.js",
                 "modules/angular/angular.min.js",
@@ -55,6 +55,7 @@
                 "services/api-service.js",
                 "components/site-header/siteHeader.js",
                 "components/retail-roles/retailRoles.js",
+                "components/retail-topics/retailTopics.js",
                 "components/site-footer/siteFooter.js",
             ];
             var styles = [
@@ -62,6 +63,7 @@
                 "app-style.css",
                 "components/site-header/siteHeader-style.css",
                 "components/retail-roles/retailRoles-style.css",
+                "components/retail-topics/retailTopics-style.css",
                 "components/site-footer/siteFooter-style.css",
             ];
             for(var i=0;i<scripts.length;i++){
@@ -75,7 +77,6 @@
             <div class="container-fluid content-wrap">
                 <div class="row">
                     <site-header></site-header>
-                        <retail-roles></retail-roles>
                     <div ng-view>
                     </div>
                 </div>

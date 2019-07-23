@@ -21,13 +21,13 @@
     .config(function($routeProvider, $locationProvider) {
       $locationProvider.hashPrefix('');
 
-    //   $routeProvider
-    //       .when('/', {
-    //           template: '<portal-cards></portal-cards>'
-    //       })
-    //       .when('/:parentLinkId', {
-    //         template: '<portal-cards></portal-cards>'
-    //     })
-    //      .otherwise('/');      
+      $routeProvider
+          .when('/', {
+              template: '<retail-roles></retail-roles>'
+          })
+          .when('/card/:cardId', {
+            template: '<retail-topics></retail-topics>'
+        })
+         .otherwise('/');      
     });
 })();
