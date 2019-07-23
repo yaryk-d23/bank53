@@ -22,6 +22,12 @@
 #retail-roles [data-accordion-slide].l-accordion__slide:focus {
     flex: 5;
 }
+#retail-roles [data-accordion-slide].l-accordion__slide .l-accordion__slide_cards {
+    display: none;
+}
+#retail-roles [data-accordion-slide].l-accordion__slide:hover .l-accordion__slide_cards {
+    display: block;
+}
 #retail-roles .l-accordion__slide:first-child {
     border-left: 0;
     flex: 1.25;
