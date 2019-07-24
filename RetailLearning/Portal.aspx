@@ -57,6 +57,7 @@
                 "components/retail-roles/retailRoles.js",
                 "components/retail-topics/retailTopics.js",
                 "components/site-footer/siteFooter.js",
+                "components/retail-learning/retailLearning.js",
             ];
             var styles = [
                 "modules/bootstrap/css/bootstrap.css",
@@ -65,6 +66,7 @@
                 "components/retail-roles/retailRoles-style.css",
                 "components/retail-topics/retailTopics-style.css",
                 "components/site-footer/siteFooter-style.css",
+                "components/retail-learning/retailLearning-style.css",
             ];
             for(var i=0;i<scripts.length;i++){
                 document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')

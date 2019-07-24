@@ -11,14 +11,14 @@
 						<h1>{{i.Title}}</h1>
 					</div>
 					<br/>
-                    <a ng-repeat="card in ctrl.allRetailCards[i.Id] track by $index" ng-href="{{'#/card/'+card.Id}}">
+                    <a ng-repeat="card in ctrl.allRetailCards[i.Id] track by $index" ng-href="{{'#/retail-topics/'+card.Id}}">
                         {{card.Title}}
                     </a>
                 </div>
             </div>
             <a 
                 ng-if="ctrl.allRetailCards[i.Id] && ctrl.allRetailCards[i.Id].length < 2" 
-                ng-href="{{'#/card/'+ctrl.allRetailCards[i.Id][0].Id}}" 
+                ng-href="{{'#/retail-topics/'+ctrl.allRetailCards[i.Id][0].Id}}" 
                 class="l-accordion__inside" 
                 style="background-image: url('{{i.Image.Url}}')"
             >

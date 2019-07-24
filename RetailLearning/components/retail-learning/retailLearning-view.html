@@ -1,0 +1,29 @@
+<div id="retail-learning">
+	<div class="container">
+			<div class="blog-card" ng-repeat="item in ctrl.allretailLearning track by $index" ng-class="{'alt': ($index%2 != 0)}">
+					<div class="meta">
+						<div class="photo" style="background-image: url({{(item.Image ? item.Image.Url : 'https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/noimage.png')}})"></div>
+						<ul class="details">
+							<li class="author"><a href="#">{{item.AuthorUser.Title}}</a></li>
+							<li class="date">{{ctrl.getTopicHours(item.Time)}}</li>
+							<li class="tags">
+								<ul>
+									<li><a href="#">Learn</a></li>
+									<li><a href="#">Contact</a></li>
+									<li><a href="#">Help</a></li>
+									<li><a href="#">Guide</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="description">
+						<h1>{{item.Title}}</h1>
+						<h2>{{item.SubTitle}}</h2>
+						<p>{{item.Description}}</p>
+						<p class="read-more">
+							<a ng-href="{{item.Link ? item.Link.Url : ''}}">Begin</a>
+						</p>
+					</div>
+			</div>
+	</div>
+</div>

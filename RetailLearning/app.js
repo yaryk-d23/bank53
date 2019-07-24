@@ -22,12 +22,15 @@
       $locationProvider.hashPrefix('');
 
       $routeProvider
-          .when('/', {
-              template: '<retail-roles></retail-roles>'
-          })
-          .when('/card/:cardId', {
+        .when('/', {
+            template: '<retail-roles></retail-roles>'
+        })
+        .when('/retail-topics/:cardId', {
             template: '<retail-topics></retail-topics>'
         })
-         .otherwise('/');      
+        .when('/retail-learning/:topicId', {
+            template: '<retail-learning></retail-learning>'
+        })
+        .otherwise('/');      
     });
 })();
