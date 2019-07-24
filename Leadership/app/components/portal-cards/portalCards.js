@@ -60,17 +60,35 @@
             ctrl.item = item;
             ctrl.items = [];
 
-            $ApiService.getListItems('Topics', '$filter=SubcardsLink eq '+item.Id).then(function(res){
+            $ApiService.getListItems('Topics', '$orderBy=SortOrder&$filter=SubcardsLink eq '+item.Id).then(function(res){
                 ctrl.items = res;
             });
 			ctrl.getSumTopicsHours = function(items){
-				if(!items || items.length == 0) return 0;
+				if(!items || items.length == 0) return 0+' min';
+				var result = '';
 				var sum = 0;
 				angular.forEach(items, function(item){
 					sum += item.Time ? item.Time : 0;
 				});
-				return sum;
-			}			
+				if(sum<60){
+					result = sum + ' min';
+				}
+				else {
+					result = parseInt(sum/60) + ' hour '+ (sum%60) + ' min';
+				}
+				return result;
+			}	
+			ctrl.getTopicHours = function(val){
+				if(!val) return 0+' min';
+				var result = '';
+				if(val<60){
+					result = val + ' min';
+				}
+				else {
+					result = parseInt(val/60) + ' hour '+ (val%60) + ' min';
+				}
+				return result;
+			}				
 
             ctrl.ok = function () {
             //   $uibModalInstance.close(ctrl.selected.item);
