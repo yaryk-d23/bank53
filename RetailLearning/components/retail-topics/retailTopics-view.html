@@ -1,10 +1,18 @@
 <div id="retail-topics">
-    <div class="tiles-container">
-		<div class="tile-container" ng-repeat="topic in ctrl.allRetailTopics track by $index">
-			<a ng-href="{{'#/retail-learning/'+topic.Id}}">
-				<div class="tile-image" style="background-image: url({{(topic.Image ? topic.Image.Url : 'https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/noimage.png')}})"></div>
-				<div class="tile-title">{{topic.Title}}</div>
+	<div class="container">
+		<div>
+			<a href="#/">
+				<i class="glyphicon glyphicon-arrow-left"></i>
+				Back
 			</a>
 		</div>
-    </div>
+		<div class="tiles-container">
+			<div class="tile-container" ng-repeat="topic in ctrl.allRetailTopics track by $index">
+				<a ng-href="{{'#/retail-learning/'+topic.Id}}">
+					<div class="tile-image" style="background-image: url('{{topic.Image ? topic.Image.Url : ctrl.defaultImage}}')"></div>
+					<div class="tile-title">{{topic.Title}}</div>
+				</a>
+			</div>
+		</div>
+	</div>
 </div>

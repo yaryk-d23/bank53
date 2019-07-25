@@ -65,18 +65,18 @@
     display: inline-block;
 }
 #retail-learning .blog-card .details .author:before {
-    font-family: FontAwesome;
+    font-family: 'Glyphicons Halflings';
     margin-right: 10px;
-    content: "\f007";
+    content: "\e008";
 }
 #retail-learning .blog-card .details .date:before {
-    font-family: FontAwesome;
+    font-family: 'Glyphicons Halflings';
     margin-right: 10px;
-    content: "\f133";
+    content: "\e023";
 }
 #retail-learning .blog-card .details .tags ul:before {
-    font-family: FontAwesome;
-    content: "\f02b";
+    font-family: 'Glyphicons Halflings';
+    content: "\e144";
     margin-right: 10px;
 }
 #retail-learning .blog-card .details .tags li {
@@ -116,11 +116,10 @@
     position: relative;
 }
 #retail-learning .blog-card .description .read-more a:after {
-    content: "\f061";
-    font-family: FontAwesome;
+    content: "\e092";
+    font-family: 'Glyphicons Halflings';
     margin-left: -10px;
     opacity: 0;
-    vertical-align: middle;
     transition: margin .3s, opacity .3s;
 }
 #retail-learning .blog-card .description .read-more a:hover:after {
