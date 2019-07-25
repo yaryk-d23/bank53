@@ -149,7 +149,7 @@
             }
         }, true);
         $scope.$watch('ctrl.NumberOfOfferingsToScheduleArr', function(newVal, oldVal){
-            angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(val){
+            angular.forEach(ctrl.NumberOfOfferingsToScheduleArr, function(val,k){
                 if(val.TrainingRoomReserved && val.TrainingRoomReserved.Title != 'Other'){
                     val.TrainingRoomName = val.TrainingRoomReserved.Title;
                     val.Floor = val.TrainingRoomReserved.Floor;
@@ -158,7 +158,7 @@
                     val.State = val.TrainingRoomReserved.State;
                     val.Zip = val.TrainingRoomReserved.Zip;
                 }
-                if(val.TrainingRoomReserved && val.TrainingRoomReserved.Title == 'Other'){
+                if((oldVal[k] && oldVal[k].TrainingRoomReserved && oldVal[k].TrainingRoomReserved.Title != 'Other') && val.TrainingRoomReserved && val.TrainingRoomReserved.Title == 'Other'){
                     val.TrainingRoomName = "";
                     val.Floor = "";
                     val.Address = "";
@@ -221,7 +221,7 @@
             item['RequestType'] = {"__metadata":{"type":"Collection(Edm.String)"},"results":item.RequestType};
             
             if(item.Topic){
-                item['CourseNumber'] = item.Topic.CourseNumber;
+                //item['CourseNumber'] = item.Topic.CourseNumber;
                 item['TopicId'] = item.Topic.Id;
                 delete item.Topic;
             }
