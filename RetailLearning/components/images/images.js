@@ -1,7 +1,7 @@
 (function(){
     angular.module('App')
-    .component('retailTopics', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/components/retail-topics/retailTopics-view.html?rnd' + Math.random(),
+    .component('images', {
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/components/images/images-view.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
@@ -11,8 +11,6 @@
 
     function formCtrl($ApiService, $q, $scope, $routeParams){
         var ctrl = this;
-        ctrl.retailCardId = $routeParams.cardId;
-        ctrl.defaultImage = 'https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/noimage.png';
         ctrl.allRetailTopics = [
             {
                 Image: {
@@ -52,14 +50,25 @@
                 Id: 6
             },
         ];
-        // var request = {
-        //     allRetailTopics: $ApiService.getListItems('RetailTopics', '$filter=RetailCardId eq '+ ctrl.retailCardId),
-            
-        // };
-
-        // $q.all(request).then(function(res){
-		// 	ctrl.allRetailTopics = res.allRetailTopics;
-        // });
+        
+        //ctrl.allRetailTopics = createChunksFromArray(ctrl.allRetailTopics, 3);
+        console.log(ctrl.allRetailTopics);
+        function createChunksFromArray(array, chankLength){
+            var temparray = [];
+            var i,j;
+            for (i=0,j=array.length; i<j; i+=chankLength) {
+                temparray.push(array.slice(i,i+chankLength));
+            }
+            angular.forEach(temparray, function(value,k){
+                if(value.length < chankLength){
+                    var emptyLength = chankLength-value.length;
+                    for(var i=0;i<emptyLength;i++){
+                        value.push({isEmpty: true});
+                    }
+                }
+            });
+            return temparray;
+        }
 
         function groupBy(xs, prop) {
             return xs.reduce(function(rv, x) {

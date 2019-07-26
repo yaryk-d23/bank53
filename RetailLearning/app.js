@@ -22,14 +22,17 @@
       $locationProvider.hashPrefix('');
 
       $routeProvider
+        // .when('/', {
+        //     template: '<retail-roles></retail-roles>'
+        // })
+        // .when('/retail-topics/:cardId', {
+        //     template: '<retail-topics></retail-topics>'
+        // })
+        // .when('/retail-learning/:topicId', {
+        //     template: '<retail-learning></retail-learning>'
+        // })
         .when('/', {
-            template: '<retail-roles></retail-roles>'
-        })
-        .when('/retail-topics/:cardId', {
-            template: '<retail-topics></retail-topics>'
-        })
-        .when('/retail-learning/:topicId', {
-            template: '<retail-learning></retail-learning>'
+            template: '<images></images>'
         })
         .otherwise('/');      
     });

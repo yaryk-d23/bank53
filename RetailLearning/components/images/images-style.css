@@ -1,5 +1,38 @@
-#retail-topics a {
+#retail-topics .image {
     text-decoration: none;
+}
+#retail-topics .image-container {
+    max-width: 600px;
+    padding: 10px;
+    border: 2px solid #818181;
+}
+.row-container {
+    display: flex;
+
+}
+.row-reverse {
+    flex-direction: column-reverse;
+}
+#retail-topics .image {
+    display: inline-block;
+}
+#retail-topics .image:nth-child(3n+1) {
+    background: red;
+    min-width: 33.3%;
+    flex: 1 33.3%;
+    height: 100px;
+}
+#retail-topics .image:nth-child(3n+2) {
+    background: yellow;
+    min-width: 33.3%;
+    flex: 1 33.3%;
+    height: 75px;
+}
+#retail-topics .image:nth-child(3n+3) {
+    background: green;
+    min-width: 33.3%;
+    flex: 1 33.3%;
+    height: 50px;
 }
 #retail-topics .tiles-container {
     margin: 10px 0;

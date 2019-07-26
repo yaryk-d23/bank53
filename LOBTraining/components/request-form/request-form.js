@@ -63,7 +63,6 @@
             if(!$select.search || $select.search.length < 3) return;
             $ApiService.getUser($select.search).then(function(res){
                 ctrl.allUsers = res;
-                console.log(res);
             });
         };
         ctrl.selectetTab = 0;
@@ -221,7 +220,7 @@
             item['RequestType'] = {"__metadata":{"type":"Collection(Edm.String)"},"results":item.RequestType};
             
             if(item.Topic){
-                item['CourseNumber'] = item.Topic.CourseNumber;
+                //item['CourseNumber'] = item.Topic.CourseNumber;
                 item['TopicId'] = item.Topic.Id;
                 delete item.Topic;
             }
