@@ -5,6 +5,7 @@
         'ngSanitize',
         'validation',
         'validation.rule',
+        'Preloader',
 		    'ui.select'
     ])
     .filter('propsFilter', function() {

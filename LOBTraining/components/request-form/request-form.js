@@ -35,10 +35,10 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', '$scope', '$SendEmail', '$sce', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', '$SendEmail', '$sce', '$Preload', formCtrl]
     });
 
-    function formCtrl($ApiService, $q, $scope, $SendEmail, $sce){
+    function formCtrl($ApiService, $q, $scope, $SendEmail, $sce, $Preload){
         var ctrl = this;
         var listTitle = 'LOBTrainingRequest';
         var urlItemId = getParameterByName('ItemId');
@@ -188,6 +188,7 @@
                 });
                 return;
             }
+            $Preload.show();
             var item = angular.copy(ctrl.item);
             if(item.RequestDate){
                 item.RequestDate = item.RequestDate.toISOString();
@@ -243,7 +244,10 @@
                             var data = angular.copy(item);
                             data['__metadata'] = { "type": 'SP.Data.ScheduledOfferingDetailsListItem' };
                             if(data.Instructor){
-                                item['InstructorId'] = data.Instructor.Id;
+                                item['InstructorId'] = {results: []};
+                                angular.forEach(data.Instructor, function(val){
+                                    item.InstructorId.results.push(val.Id);
+                                });
                                 delete data.Instructor;
                             }
                             if(data.TrainingRoomReserved){
@@ -276,8 +280,12 @@
                                     CourseTitle: newItem.CourseTitle
                                     })
                                     .then(function(){
-                                        alert("Completed");
-                                        location.href = '/teams/HCInt/Learn/LobTR/';
+                                        setTimeout(function(){
+                                            $scope.$apply(function(){
+                                                $Preload.hide();
+                                                location.href = '/teams/HCInt/Learn/LobTR/';
+                                            });
+                                        },0);
                                 });
                             });
                         }
@@ -305,8 +313,12 @@
                                         CourseTitle: newItem.CourseTitle
                                         })
                                         .then(function(){
-                                            alert("Completed");
-                                            location.href = '/teams/HCInt/Learn/LobTR/';
+                                            setTimeout(function(){
+                                                $scope.$apply(function(){
+                                                    $Preload.hide();
+                                                    location.href = '/teams/HCInt/Learn/LobTR/';
+                                                });
+                                            },0);
                                     });
                                 });
                             });

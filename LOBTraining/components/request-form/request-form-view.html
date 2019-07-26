@@ -394,7 +394,13 @@
                         <label for="Instructor" class="control-label required">Instructor</label>
                     </div>
                     <div class="col-sm-8">
-                        <ui-select ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Instructor" theme="selectize" style="height: 34px;" title="Choose Instructor">
+                        <ui-select 
+                            multiple    
+                            ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Instructor" 
+                            theme="selectize" 
+                            style="height: 34px;" 
+                            title="Choose Instructor"
+                        >
                             <ui-select-match placeholder="Select or search a instructor in the list...">{{$select.selected.Title}}</ui-select-match>
                             <ui-select-choices repeat="instructor in ctrl.instructorsChoice | filter: $select.search">
                                 <span ng-bind-html="instructor.Title | highlight: $select.search"></span>

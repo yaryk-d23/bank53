@@ -321,13 +321,28 @@
                         <label for="Instructor" class="control-label required">Instructor</label>
                     </div>
                     <div class="col-sm-8">
-                        <input 
+                        <!-- <input 
                             class="form-control" 
                             name="Employee"
                             id="Employee" 
                             ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Instructor.Title" 
                             readonly
-                        />
+                        /> -->
+                        <ui-select 
+                            readonly
+                            disabled
+                            multiple    
+                            ng-model="ctrl.NumberOfOfferingsToScheduleArr[ctrl.selectetTab].Instructor" 
+                            theme="selectize" 
+                            style="height: 34px;" 
+                            title="Choose Instructor"
+                        >
+                            <ui-select-match placeholder="Select or search a instructor in the list...">{{$select.selected.Title}}</ui-select-match>
+                            <ui-select-choices repeat="instructor in ctrl.instructorsChoice | filter: $select.search">
+                                <span ng-bind-html="instructor.Title | highlight: $select.search"></span>
+                                <!-- <small ng-bind-html="instructor.Email | highlight: $select.search"></small> -->
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
                 <div class="form-group">
