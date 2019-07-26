@@ -21,7 +21,6 @@
         };
 
         $q.all(request).then(function(res){
-			console.log(res);
 			setTimeout(function(){$scope.$apply(function(){
                 ctrl.allRetailRoles = res.allRetailRoles;
                 ctrl.allRetailCards = groupBy(res.allRetailCards, 'RetailRoleId');

@@ -11,7 +11,7 @@
 }
 #retail-roles .l-accordion__slide {
     flex: 1;
-    transition: 2s ease-in-out;
+    transition: 0.1s ease-in-out;
     -webkit-transform: skewX(-5deg);
     transform: skewX(-5deg);
     overflow: hidden;

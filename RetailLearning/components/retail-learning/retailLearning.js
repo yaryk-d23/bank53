@@ -13,10 +13,16 @@
         var ctrl = this;
         ctrl.retailTopicId = $routeParams.topicId;
         ctrl.allretailLearning = [];
+		ctrl.defaultImage = 'https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/noimage.png';
         var request = {
             allretailLearning: $ApiService.getListItems('RetailLearning', '$select=*,AuthorUser/Title&$expand=AuthorUser&$filter=RetailTopicId eq '+ ctrl.retailTopicId),
             
         };
+		
+		ctrl.goBack = function(e){
+			e.preventDefault();
+			history.back();
+		};
 
         ctrl.getTopicHours = function(val){
             if(!val) return 0+' min';
