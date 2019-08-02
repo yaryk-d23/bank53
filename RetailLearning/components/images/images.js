@@ -17,37 +17,36 @@
                     Url: 'https://s16815.pcdn.co/wp-content/uploads/2017/07/iStock-679437550-FF170728.jpg',
                 },
                 Title: 'Discuss1',
-                Id: 1
+                Id: 1,
+                Height: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'http://www.interview-skills.co.uk/blog/wp-content/uploads/2015/07/How-to-stand-out-group-tasks-discussions-1024x835.jpg',
                 },
                 Title: 'Discuss2',
-                Id: 2
+                Id: 2,
+                Height: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
                 },
                 Title: 'Discuss3',
-                Id: 3
+                Id: 3,
+                Height: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4nHHYy5nyCnX__ltLPGA8QTPX4CV97oM3sjUkdOvfNl-AGqXsw',
                 },
                 Title: 'Discuss4',
-                Id: 4
+                Id: 4,
+                Height: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/people-2557399_1920.jpeg?vRenYxoGCjPYALoGt4Hz6Mll8FmG2dQm',
                 },
                 Title: 'Discuss5',
-                Id: 5
-            },{
-                Image: {
-                    Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUhvNj3DH4xUQcCC8jIsw7Iu-MDjtUUB5mM1Dgide-X-JwgUmJ',
-                },
-                Title: 'Discuss6',
-                Id: 6
+                Id: 5,
+                Height: getRandomSize(100, 200)
             },
         ];
         
@@ -76,5 +75,10 @@
               return rv;
             }, {});
         }
+        function getRandomSize(min, max) {
+            return Math.round(Math.random() * (max - min) + min) + 'px';
+        }
+        
+        
     }
 })();

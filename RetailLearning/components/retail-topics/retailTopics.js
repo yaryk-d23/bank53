@@ -19,7 +19,10 @@
         };
 
         $q.all(request).then(function(res){
-			ctrl.allRetailTopics = res.allRetailTopics;
+            angular.forEach(function(val){
+                val.Height = getRandomSize(100, 200);
+            });
+            ctrl.allRetailTopics = res.allRetailTopics;
         });
 
         function groupBy(xs, prop) {
@@ -27,6 +30,9 @@
               (rv[x[prop]] = rv[x[prop]] || []).push(x);
               return rv;
             }, {});
+        }
+        function getRandomSize(min, max) {
+            return Math.round(Math.random() * (max - min) + min) + 'px';
         }
     }
 })();

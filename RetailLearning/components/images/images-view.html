@@ -1,16 +1,16 @@
 <div id="retail-topics">
     <div class="container">
-        <div class="image-container">
-            <div  class="image col-sm-4 float-left" ng-repeat="i in ctrl.allRetailTopics">
-                {{item.Title}}
+        <div class="">
+            <div class="image-container">
+                <a
+                    ng-href="{{i.Link ? i.Link.Url : '#'}}"
+                    class="masonry-item"
+                    ng-repeat="i in ctrl.allRetailTopics"
+                    ng-style="{'width': '200px', 'height': i.Height, 'background-image': 'url({{i.Image.Url}})'}"
+                >
+                    <div class="tile-title">{{i.Title}}</div>
+                </a>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="image-container">
-        <div class="row-container" ng-repeat="(i, val) in ctrl.allRetailTopics track by $index" ng-class="{'row-reverse': $index%2!=0}">
-            <div class="image" ng-repeat="item in ctrl.allRetailTopics[i]">
-                {{item.Title}}
-            </div>
-        </div>
-    </div> -->

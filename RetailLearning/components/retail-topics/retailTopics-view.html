@@ -1,4 +1,4 @@
-<div id="retail-topics">
+<!-- <div id="retail-topics">
 	<div class="container">
 		<div>
 			<a href="#/">
@@ -15,4 +15,26 @@
 			</div>
 		</div>
 	</div>
+</div> -->
+<div id="retail-topics">
+    <div class="container">
+		<div>
+			<a href="#/">
+				<i class="glyphicon glyphicon-arrow-left"></i>
+				Back
+			</a>
+		</div>
+        <div class="">
+            <div class="image-container">
+                <a
+					ng-href="{{'#/retail-learning/'+topic.Id}}"
+                    class="masonry-item"
+                    ng-repeat="i in ctrl.allRetailTopics"
+                    ng-style="{'width': '200px', 'height': i.Height, 'background-image': 'url({{topic.Image ? topic.Image.Url : ctrl.defaultImage}})'}"
+                >
+                    <div class="tile-title">{{i.Title}}</div>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
