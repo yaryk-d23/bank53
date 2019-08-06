@@ -6,10 +6,10 @@
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$q', '$scope', '$routeParams', formCtrl]
+        controller: ['$ApiService', '$q', '$scope', '$routeParams', '$location', formCtrl]
     });
 
-    function formCtrl($ApiService, $q, $scope, $routeParams){
+    function formCtrl($ApiService, $q, $scope, $routeParams, $location){
         var ctrl = this;
         ctrl.retailCardId = $routeParams.cardId;
         ctrl.allRetailTopics = [];
@@ -19,10 +19,15 @@
         };
 
         $q.all(request).then(function(res){
-            angular.forEach(res.allRetailTopics, function(val){
-                val.Height = getRandomSize(100, 200);
-            });
-            ctrl.allRetailTopics = res.allRetailTopics;
+            if(res.length == 1){
+                $location.path('/retail-learning/'+res[0].Id);
+            }
+            else {
+                angular.forEach(res.allRetailTopics, function(val){
+                    val.Height = getRandomSize(100, 200);
+                });
+                ctrl.allRetailTopics = res.allRetailTopics;
+            }
         });
 
         function groupBy(xs, prop) {
