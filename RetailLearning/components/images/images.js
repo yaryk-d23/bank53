@@ -42,10 +42,17 @@
                 Height: getRandomSize(100, 200)
             },{
                 Image: {
-                    Url: 'https://akm-img-a-in.tosshub.com/indiatoday/images/story/201904/people-2557399_1920.jpeg?vRenYxoGCjPYALoGt4Hz6Mll8FmG2dQm',
+                    Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
                 },
-                Title: 'Discuss5',
-                Id: 5,
+                Title: 'Discuss3',
+                Id: 3,
+                Height: getRandomSize(100, 200)
+            },{
+                Image: {
+                    Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4nHHYy5nyCnX__ltLPGA8QTPX4CV97oM3sjUkdOvfNl-AGqXsw',
+                },
+                Title: 'Discuss4',
+                Id: 4,
                 Height: getRandomSize(100, 200)
             },
         ];

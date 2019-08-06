@@ -65,9 +65,9 @@
                 "app-style.css",
                 "components/site-header/siteHeader-style.css",
                 "components/retail-roles/retailRoles-style.css",
-                "components/retail-topics/retailTopics-style.css",
-                "components/site-footer/siteFooter-style.css",
-                "components/retail-learning/retailLearning-style.css",
+                // "components/retail-topics/retailTopics-style.css",
+                // "components/site-footer/siteFooter-style.css",
+                // "components/retail-learning/retailLearning-style.css",
                 "components/images/images-style.css",
             ];
             for(var i=0;i<scripts.length;i++){
@@ -81,8 +81,7 @@
             <div class="container-fluid content-wrap">
                 <div class="row">
                     <site-header></site-header>
-                    <div ng-view>
-                        </div>
+                    <images></images>
                 </div>
             </div>
             <!-- <site-footer></site-footer> -->
