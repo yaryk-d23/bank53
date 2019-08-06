@@ -27,10 +27,10 @@
         <div class="">
             <div class="image-container">
                 <a
-					ng-href="{{'#/retail-learning/'+topic.Id}}"
+					ng-href="{{'#/retail-learning/'+i.Id}}"
                     class="masonry-item"
                     ng-repeat="i in ctrl.allRetailTopics"
-                    ng-style="{'width': '200px', 'height': i.Height, 'background-image': 'url({{topic.Image ? topic.Image.Url : ctrl.defaultImage}})'}"
+                    ng-style="{'height': i.Height, 'background-image': 'url({{i.Image ? i.Image.Url : ctrl.defaultImage}})'}"
                 >
                     <div class="tile-title">{{i.Title}}</div>
                 </a>

@@ -19,7 +19,7 @@
         };
 
         $q.all(request).then(function(res){
-            angular.forEach(function(val){
+            angular.forEach(res.allRetailTopics, function(val){
                 val.Height = getRandomSize(100, 200);
             });
             ctrl.allRetailTopics = res.allRetailTopics;

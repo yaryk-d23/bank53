@@ -49,8 +49,8 @@
   }
   #retail-topics .image-container {
       max-width: 650px;
-      padding: 10px;
-      border: 2px solid #818181;;
+      padding: 5px;
+      border: 2px solid #818181;
   }
   #retail-topics .image-container {
       -webkit-column-count: 3;
@@ -61,6 +61,7 @@
       column-gap: 10px;
   }
   #retail-topics .masonry-item {
+		width: 200px;
       background-size: cover;
       background-position: 50% 50%;
       display: inline-block;
@@ -90,20 +91,7 @@
     height: auto;
   }
   
-  @media (max-width: 1200px) {
-    #retail-topics .image-container {
-      -moz-column-count: 3;
-      -webkit-column-count: 3;
-      column-count: 3;
-    }
-  }
-  @media (max-width: 1000px) {
-    #retail-topics .image-container {
-      -moz-column-count: 3;
-      -webkit-column-count: 3;
-      column-count: 3;
-    }
-  }
+  
   @media (max-width: 800px) {
     #retail-topics .image-container {
       max-width: 420px;
