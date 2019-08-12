@@ -19,8 +19,8 @@
         };
 
         $q.all(request).then(function(res){
-            if(res.length == 1){
-                $location.path('/retail-learning/'+res[0].Id);
+            if(res.allRetailTopics.length == 1){
+                $location.path('/retail-learning/'+res.allRetailTopics[0].Id);
             }
             else {
                 angular.forEach(res.allRetailTopics, function(val){
