@@ -1,4 +1,4 @@
-<div id="retail-topics">
+<!-- <div id="retail-topics">
     <div class="container">
         <div class="image-container">
             <div class="">
@@ -11,6 +11,19 @@
                     <div class="tile-title">{{i.Title}}</div>
                 </a>
             </div>
+        </div>
+    </div>
+</div> -->
+<div id="retail-topics">
+    <div class="grid">
+        <div class="grid__container">
+            <div class="box " ng-repeat="i in ctrl.allRetailTopics track by $index" ng-class="{'box_size_2x2': $index == 0}">
+                <a ng-href="{{i.Link ? i.Link.Url : '#'}}">
+                    <div class="box__helper">
+                        <div class="box__content" ng-style="{'background-image': 'url({{i.Image.Url}})'}">{{i.Title}}</div>
+                    </div>
+                </a>
+             </div>
         </div>
     </div>
 </div>

@@ -1,108 +1,90 @@
-/* #retail-topics a {
-    text-decoration: none;
-}
-#retail-topics .tiles-container {
-    margin: 10px 0;
-}
-#retail-topics .tile-container {
+/*  */
+.grid {
+    box-sizing: border-box;
+    width: 50%;
+    background: black;
+    padding: 10px;
+  
     position: relative;
-    display: inline-block;
+    left: 250px;
+  }
+  .grid__container {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid #ffffff;
+  }
+  
+  .box {
+    position: relative;
+    box-sizing: border-box;
     width: 20%;
-    max-width: 200px;
-}
-#retail-topics .tile-container a {
-	display: block;
-    width: 100%;
-    padding: 5%;
-}
-#retail-topics .tile-container:first-child {
-    margin-left: 0;
-}
-
-#retail-topics .tile-image {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-#retail-topics .tile-container:hover .tile-image {
-    background-size: 200%;
-}
-#retail-topics .tile-image:after{
-    content: "";
-    display: block;
-    padding-bottom: 100%; 
-}
-#retail-topics .tile-title {
-    position: absolute;
-    bottom: 10px;
-    padding: 5px;
-    background-color: rgba(18, 80, 189, 0.5);
-    color: #fff;
-    font-size: 14px;
-    width: 90%;
-}
-#retail-topics .tile-container:hover .tile-title {
-    height: auto;
-} */
-#retail-topics .image {
-    text-decoration: none;
+    opacity:0.6;
   }
-  #retail-topics .image-container {
-    border: 10px solid #000;
-    max-width: 826px;
-  }
-  #retail-topics .image-container>div {
-    border: 3px solid #fff;
-    background-color: #000;
-  }
-  #retail-topics .image-container>div {
-      -webkit-columns: 200px;
-      -webkit-column-gap: 0;
-      -moz-columns: 200px;
-      -moz-column-gap: 0;
-      columns: 200px;
-      column-gap: 0;
-  }
-  #retail-topics .masonry-item {
-    background-size: cover;
-    background-position: 50% 50%;
-    display: block;
+  .box::before {
+    content: '';
     position: relative;
-    border: 2px solid #d0d0d0;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
-    overflow: hidden;
-  }
-  
-  #retail-topics .tile-title {
-      position: absolute;
-      bottom: 0px;
-      padding: 5px;
-      background-color: rgba(18, 80, 189, 0.5);
-      color: #fff;
-      font-size: 14px;
-      /* height: 2px; */
-      width: 100%;
-  }
-  #retail-topics .masonry-item:hover .tile-title {
-      height: auto;
-  }
-  
-  #retail-topics .image-container img {
-    /* Just in case there are inline attributes */
     width: 100%;
-    height: auto;
+    display: block;
+    height: 0;
+    padding-bottom: 100%;
   }
-
-  @media (max-width: 800px) {
-    #retail-topics .image-container {
-        max-width: 426px;
-    }
-  }
-  @media (max-width: 400px) {
-    #retail-topics .image-container {
-        max-width: 226px;
-    }
+  .box:hover {
+  
+    opacity:1
+  
   }
   
+  
+  .box__helper {
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .box__content {
+    border: 2px solid #ffffff;
+    padding: 0.5em 1em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .box_size_3x3 {
+    width: 60%;
+  }
+  .box_size_3x3 + .box + .box {
+    margin-top: -40%;
+  }
+  .box_size_3x3 + .box + .box + .box {
+    margin-top: -40%;
+    margin-left: 60%;
+  }
+  .box_size_2x2 {
+    width: 40%;
+  }
+  .box_size_2x2::before {
+    padding-bottom: 50%;
+  }
+  .box_size_2x2 + .box + .box + .box + .box {
+    margin-left: 40%;
+  }
+  .box_size_2x1 {
+    width: 40%;
+  }
+  .box_size_2x1::before {
+    padding-bottom: 50%;
+  }
+  .box_size_2x1 .box__helper {
+    padding-bottom: 50%;
+  }
+  
+  .box__content {
+    font-size: 24px;
+    /*background-color: #252525;*/
+    color: #ffffff;
+    text-shadow: 2px 2px #000000;
+    
+  }

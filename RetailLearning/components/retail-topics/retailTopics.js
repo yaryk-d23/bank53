@@ -23,9 +23,9 @@
                 $location.path('/retail-learning/'+res[0].Id);
             }
             else {
-                angular.forEach(res.allRetailTopics, function(val){
-                    val.Height = getRandomSize(100, 200);
-                });
+                // angular.forEach(res.allRetailTopics, function(val){
+                //     val.Height = getRandomSize(100, 200);
+                // });
                 ctrl.allRetailTopics = res.allRetailTopics;
             }
         });

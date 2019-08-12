@@ -18,42 +18,80 @@
                 },
                 Title: 'Discuss1',
                 Id: 1,
-                Height: getRandomSize(100, 200)
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'http://www.interview-skills.co.uk/blog/wp-content/uploads/2015/07/How-to-stand-out-group-tasks-discussions-1024x835.jpg',
                 },
                 Title: 'Discuss2',
                 Id: 2,
-                Height: getRandomSize(100, 200)
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
                 },
                 Title: 'Discuss3',
                 Id: 3,
-                Height: getRandomSize(100, 200)
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4nHHYy5nyCnX__ltLPGA8QTPX4CV97oM3sjUkdOvfNl-AGqXsw',
                 },
                 Title: 'Discuss4',
                 Id: 4,
-                Height: getRandomSize(100, 200)
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
                 },
                 Title: 'Discuss3',
                 Id: 3,
-                Height: getRandomSize(100, 200)
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
             },{
                 Image: {
                     Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4nHHYy5nyCnX__ltLPGA8QTPX4CV97oM3sjUkdOvfNl-AGqXsw',
                 },
                 Title: 'Discuss4',
                 Id: 4,
-                Height: getRandomSize(100, 200)
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
+            },{
+                Image: {
+                    Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
+                },
+                Title: 'Discuss3',
+                Id: 3,
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
+            },{
+                Image: {
+                    Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4nHHYy5nyCnX__ltLPGA8QTPX4CV97oM3sjUkdOvfNl-AGqXsw',
+                },
+                Title: 'Discuss4',
+                Id: 4,
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
+            },{
+                Image: {
+                    Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
+                },
+                Title: 'Discuss3',
+                Id: 3,
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
+            },{
+                Image: {
+                    Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4nHHYy5nyCnX__ltLPGA8QTPX4CV97oM3sjUkdOvfNl-AGqXsw',
+                },
+                Title: 'Discuss4',
+                Id: 4,
+                Height: getRandomSize(100, 200),
+                Width: getRandomSize(100, 200)
             },
         ];
         
