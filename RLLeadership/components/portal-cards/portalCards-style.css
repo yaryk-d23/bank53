@@ -1,0 +1,78 @@
+footer, nav {
+    display: block;
+}
+.portal-cards a {
+    text-decoration: none;
+    color: #ffffff;
+}
+.portal-cards figure {
+    margin: 0;
+}
+
+.portal-cards .tile {
+    width: 250px;
+    height: 350px;
+    margin: 2em;
+    position: relative;
+    float: left;
+    display:inline-block;
+}
+.portal-cards .tile .front, .portal-cards .tile .back {
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 250px;
+    height: 350px;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+    border-radius: 8px;
+}
+.portal-cards .tile h3, .portal-cards .tile p, .portal-cards .tile a {
+    padding: 0 10px;
+}
+.portal-cards .tile img {
+    max-height: 130px;
+}
+.portal-cards .tile .front {
+    background: #fff;
+    transition: all 0.5s ease-in-out;
+    z-index: 2;
+}
+.portal-cards .tile .front h3 {
+    font-size: 2em;
+    color: #1D4094;
+    text-shadow: 0 0 2px #000;
+    margin-top: -1.0em;
+    margin-bottom: 1.5em;
+}
+.portal-cards .tile .back {
+    background: #FF8800;
+    color: white;
+    z-index: 1;
+    padding-top: 50px;
+}
+.portal-cards .tile .back h3 {
+    font-size: 1.5em;
+    color: white;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.portal-cards .tile .back a {
+    display: block;
+    font-size: 1.2em;
+    color: white;
+    border-top: 1px solid #fc0;
+    margin: 0 20px;
+    padding: 0.5em 0;
+}
+.portal-cards .tile:hover .front {
+    top: -300px;
+    transform: rotate(2deg);
+}
+
+.portal-cards .tile .back a:hover {
+    color: #1D4094;
+}

@@ -45,30 +45,6 @@
                 Id: 4,
                 Height: getRandomSize(100, 200),
                 Width: getRandomSize(100, 200)
-            },{
-                Image: {
-                    Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
-                },
-                Title: 'Discuss3',
-                Id: 5,
-                Height: getRandomSize(100, 200),
-                Width: getRandomSize(100, 200)
-            },{
-                Image: {
-                    Url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4nHHYy5nyCnX__ltLPGA8QTPX4CV97oM3sjUkdOvfNl-AGqXsw',
-                },
-                Title: 'Discuss4',
-                Id: 6,
-                Height: getRandomSize(100, 200),
-                Width: getRandomSize(100, 200)
-            },{
-                Image: {
-                    Url: 'http://himachal.nic.in/images/discussion-forum.jpg',
-                },
-                Title: 'Discuss3',
-                Id: 7,
-                Height: getRandomSize(100, 200),
-                Width: getRandomSize(100, 200)
             },
         ];
         
