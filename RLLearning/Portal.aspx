@@ -42,7 +42,7 @@
             <SharePoint:FormDigest runat="server"></SharePoint:FormDigest>
         </form>
         <script>
-            var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/RLLeadership";
+            var STATIC_PATH = _spPageContextInfo.webServerRelativeUrl + "/SiteAssets/app/RLLearning";
             var scripts = [
                 "modules/jquery-3.3.1.min.js",
                 "modules/angular/angular.min.js",
