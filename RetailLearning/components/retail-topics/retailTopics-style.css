@@ -1,12 +1,10 @@
 /*  */
 .grid {
     box-sizing: border-box;
-    width: 50%;
     background: black;
     padding: 10px;
   
     position: relative;
-    left: 250px;
   }
   .grid__container {
     display: flex;
@@ -68,6 +66,10 @@
   .box_size_2x2::before {
     padding-bottom: 50%;
   }
+  .box_size_2x2>a.add-padding{
+	display: block;
+    padding-bottom: 50%;
+  }
   .box_size_2x2 + .box + .box + .box + .box {
     margin-left: 40%;
   }
@@ -86,5 +88,6 @@
     /*background-color: #252525;*/
     color: #ffffff;
     text-shadow: 2px 2px #000000;
+	background-size: cover;
     
   }
