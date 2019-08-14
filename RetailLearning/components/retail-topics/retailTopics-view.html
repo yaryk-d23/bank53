@@ -8,10 +8,10 @@
 		</div>
 		<div class="grid" ng-if="ctrl.allRetailTopics.length">
 			<div class="grid__container">
-				<div class="box " ng-repeat="i in ctrl.allRetailTopics track by $index" ng-class="{'box_size_2x2': $index == 0}">
-					<a ng-href="{{'#/retail-learning/'+i.Id}}" ng-class="{'add-padding': ctrl.allRetailTopics.length < 5}">
+				<div class="box " ng-repeat="i in ctrl.emptyTopicsArr track by $index" ng-class="{'box_size_2x2': $index == 0, 'box_size_2x1': ($index == 7 || $index == 9)}" ng-init="item=ctrl.allRetailTopics[$index]">
+					<a ng-href="{{item ? '#/retail-learning/'+item.Id : ''}}" ng-class="{'add-padding': ctrl.allRetailTopics.length < 5}">
 						<div class="box__helper">
-							<div class="box__content" ng-style="{'background-image': 'url({{i.Image.Url}})'}">{{i.Title}}</div>
+							<div class="box__content" ng-style="{'background-image': 'url({{item.Image.Url}})'}">{{i.Title}}</div>
 						</div>
 					</a>
 					</div>

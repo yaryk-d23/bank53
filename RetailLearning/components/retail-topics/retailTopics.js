@@ -13,6 +13,7 @@
         var ctrl = this;
         ctrl.retailCardId = $routeParams.cardId;
         ctrl.allRetailTopics = [];
+        ctrl.emptyTopicsArr = [{},{},{},{},{},{},{},{},{},{}];
 		ctrl.defaultImage = 'https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/noimage.png';
         var request = {
             allRetailTopics: $ApiService.getListItems('RetailTopics', '$filter=RetailCardId eq '+ ctrl.retailCardId),
