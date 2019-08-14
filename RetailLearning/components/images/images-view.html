@@ -15,15 +15,27 @@
     </div>
 </div> -->
 <div id="retail-topics">
-    <div class="grid">
-        <div class="grid__container">
-            <div class="box " ng-repeat="i in ctrl.allRetailTopics track by $index" ng-class="{'box_size_2x2': $index == 0}">
-                <a ng-href="{{i.Link ? i.Link.Url : '#'}}">
-                    <div class="box__helper">
-                        <div class="box__content" ng-style="{'background-image': 'url({{i.Image.Url}})'}">{{i.Title}}</div>
-                    </div>
+        <div class="">
+            <div>
+                <a href="#/">
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                    Back
                 </a>
-             </div>
+            </div>
+            <div class="grid" ng-if="ctrl.allRetailTopics.length">
+                <div class="grid__container">
+                    <div class="box " ng-repeat="i in ctrl.emptyTopicsArr track by $index" ng-class="{'box_size_2x2': $index == 0, 'box_size_2x1': ($index == 7 || $index == 9)}" ng-init="item=ctrl.allRetailTopics[$index]">
+                        <a ng-href="{{item.Link ? item.Link.Url : '#'}}">
+                            <div class="box__helper">
+                                <div class="box__content" ng-style="{'background-image': 'url({{item.Image.Url}})'}">{{i.Title}}</div>
+                            </div>
+                        </a>
+                        </div>
+                </div>
+            </div>
+            <div ng-if="!ctrl.allRetailTopics.length">
+                <p>No items!</p>
+            </div>
         </div>
     </div>
-</div>
+    
