@@ -14,7 +14,7 @@
     <!--CSS Links here-->
 	
 	<!-- Sharepoint Dependencies -->
-	<script src="/_layouts/1033/init.js"></script>
+	<!--<script src="/_layouts/1033/init.js"></script>
     <script src="/_layouts/1033/core.js"></script>
     <script src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
     <script src="/_layouts/SP.Core.js"></script>
@@ -23,10 +23,19 @@
     <script src="/_layouts/SP.UI.Dialog.js"></script>
     <script src="/_layouts/ScriptResx.ashx?culture=en%2Dus&name=SP%2ERes"></script>
 
-    <link rel="stylesheet" href="/_layouts/15/1033/styles/Themable/corev15.css">
+   
 
     <!--JS Links here-->
-    
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+	<script src="/_layouts/1033/init.js"></script>
+    <script src="/_layouts/1033/core.js"></script>
+    <script src="/_layouts/15/SP.Core.js"></script>
+    <script src="/_layouts/15/SP.Runtime.js"></script>
+    <script src="/_layouts/15/SP.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.5.3/bluebird.min.js"></script>
+
+    <link rel="stylesheet" href="/_layouts/15/1033/styles/Themable/corev15.css">
 	
   </head>
 
