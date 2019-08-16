@@ -11,10 +11,10 @@
 
     function formCtrl($ApiService, $q, $scope, $routeParams){
         var ctrl = this;
-        ctrl.item = item;
         ctrl.items = [];
+        ctrl.parentLinkId = $routeParams.parentLinkId;
 
-        $ApiService.getListItems('Topics', '$orderBy=SortOrder&$filter=SubcardsLink eq '+item.Id).then(function(res){
+        $ApiService.getListItems('Topics', '$orderBy=SortOrder&$filter=SubcardsLink eq '+ctrl.parentLinkId).then(function(res){
             ctrl.items = res;
         });
         ctrl.getSumTopicsHours = function(items){

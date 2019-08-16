@@ -25,10 +25,10 @@
         .when('/', {
             template: '<retail-roles></retail-roles>'
         })
-        .when('/retail-topics/:cardId', {
+        .when('/retail-topics/:parentLinkId', {
             template: '<portal-cards></portal-cards>'
         })
-        .when('/retail-learning/:topicId', {
+        .when('/retail-learning/:parentLinkId', {
             template: '<retail-learning></retail-learning>'
         })
         .otherwise('/');      

@@ -1,0 +1,29 @@
+#admin-table .site-user {
+    display: inline-block;
+    margin-right: 5px;
+}
+#admin-table .site-user > span {
+    vertical-align: middle;
+}
+#admin-table .site-user > span.glyphicon {
+    margin-left: 3px;
+    color: red;
+    cursor: pointer;
+}
+
+
+.b .modal {
+	overflow: auto;
+}
+.b .modal-content {
+	border: 2px solid #1D4094;
+}
+.b .modal-header {
+	padding-bottom: 0;
+	border-bottom: none;
+	color: #1D4094;
+}
+.b .modal-body {
+	padding-top: 0;
+	color: #1D4094;
+}

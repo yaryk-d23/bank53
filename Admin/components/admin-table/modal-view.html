@@ -1,0 +1,36 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="ctrl.cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h2 class="modal-title text-center" id="modal-title">{{ctrl.item.Title}}</h2>
+</div>
+<div class="modal-body" id="modal-body">
+	<div class="col-sm-12"><br/></div>
+    <div class="col-sm-12">
+		<div class="form-group">
+            <label for="LDLeader">Memebers</label>
+            <ui-select 
+                multiple 
+                ng-model="ctrl.users" 
+                theme="bootstrap" 
+                close-on-select="true" 
+                title="Choose a person"
+            >
+                <ui-select-match placeholder="Select person...">{{$item.Title}} &lt;{{$item.Email}}&gt;</ui-select-match>
+                <ui-select-choices 
+                refresh="ctrl.getUsers($select)"
+                    refresh-delay="0"
+                    repeat="user as user in ctrl.allUsers | propsFilter: {Title: $select.search}">
+                    <div ng-bind-html="user.Title | highlight: $select.search"></div>
+                    <small>
+                        email: {{user.Email}}
+                    </small>
+                </ui-select-choices>
+            </ui-select>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Close</button>
+    <button class="btn btn-primary" type="button" ng-click="ctrl.ok()">Add</button>
+</div>
