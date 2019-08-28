@@ -25,7 +25,7 @@
 
         <!--JS Links here-->
         
-        <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+        <script type="text/javascript" src="//thebank.info53.com///ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
         <script src="/_layouts/1033/init.js"></script>
         <script src="/_layouts/1033/core.js"></script>
         <script src="/_layouts/15/SP.Core.js"></script>
@@ -55,7 +55,7 @@
                 "services/api-service.js",
                 "components/site-header/siteHeader.js",
                 "components/retail-roles/retailRoles.js",
-                "components/portal-cards/portalСards.js",
+                "components/portal-cards/portalCards.js",
                 "components/site-footer/siteFooter.js",
                 "components/retail-learning/retailLearning.js",
             ];
@@ -64,7 +64,7 @@
                 "app-style.css",
                 "components/site-header/siteHeader-style.css",
                 "components/retail-roles/retailRoles-style.css",
-                "components/portal-cards/portalСards-style.css",
+                "components/portal-cards/portalCards-style.css",
                 "components/portal-cards/portalCards-links-style.css",
                 "components/site-footer/siteFooter-style.css",
                 "components/retail-learning/retailLearning-style.css",
