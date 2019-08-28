@@ -10,7 +10,8 @@
                     <p> &#160;</p>
                     <h3>{{link.Title}}</h3>
                     <p>{{link.Description}}</p> 
-                    <br/>
+                    <br/> 
+                    <a ng-href="{{link.Link ? link.Link.Url : ''}}">{{link.LinkTitle}}</a>
                 </div>
             </div>
             <div class="back">

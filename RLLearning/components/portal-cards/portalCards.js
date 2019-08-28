@@ -1,7 +1,7 @@
 (function(){
     angular.module('App')
     .component('portalCards', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RLLearning/app/components/portal-cards/portalCards-view.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RLLearning/components/portal-cards/portalCards-view.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
@@ -14,7 +14,7 @@
         var ctrl = this;
         ctrl.parentLinkId = $routeParams.parentLinkId;
         ctrl.allLinks = [];
-
+		$('body').css('background','#e8f5ff');
         if(ctrl.parentLinkId){
             $ApiService.getListItems('Subcards Links', "$orderBy=SortOrder&$select=*,ParentLink/Title&$expand=ParentLink&$filter=Status eq 'Active' and ParentLinkId eq "+ctrl.parentLinkId).then(function(res){
                 ctrl.allLinks = res;

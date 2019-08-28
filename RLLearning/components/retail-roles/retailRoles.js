@@ -13,7 +13,7 @@
         var ctrl = this;
         ctrl.allRetailRoles = [];
         ctrl.allRetailCards = [];
-
+		$('body').css('background','#fff');
         var request = {
             allRetailRoles: $ApiService.getListItems('RetailRoles', '$orderBy=SortOrder'),
             allRetailCards: $ApiService.getListItems('RetailCards'),

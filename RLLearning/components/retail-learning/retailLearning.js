@@ -11,12 +11,22 @@
 
     function formCtrl($ApiService, $q, $scope, $routeParams){
         var ctrl = this;
-        ctrl.items = [];
         ctrl.parentLinkId = $routeParams.parentLinkId;
-
-        $ApiService.getListItems('Topics', '$orderBy=SortOrder&$filter=SubcardsLink eq '+ctrl.parentLinkId).then(function(res){
-            ctrl.items = res;
+        ctrl.items = [];
+		$('body').css('background','#fff');
+		
+		var req = {
+			parentItem: $ApiService.getListItems('Subcards Links', "$select=*,ParentLink/Title&$expand=ParentLink&$filter=Id eq "+ctrl.parentLinkId),
+			items: $ApiService.getListItems('Topics', '$orderBy=SortOrder&$filter=SubcardsLink eq '+ctrl.parentLinkId)
+		};
+        $q.all(req).then(function(res){
+            ctrl.items = res.items;
+			ctrl.item = res.parentItem[0];
         });
+		ctrl.goBack = function(e){
+			e.preventDefault();
+			history.back();
+		}
         ctrl.getSumTopicsHours = function(items){
             if(!items || items.length == 0) return 0+' min';
             var result = '';
