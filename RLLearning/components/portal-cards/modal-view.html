@@ -1,0 +1,64 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="ctrl.cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h2 class="modal-title text-center" id="modal-title">{{ctrl.item.Title}}</h2>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="col-sm-12 text-center">
+        <div class="link-title">{{ctrl.item.ParentLink.Title}}</div>
+    </div>
+	<div class="col-sm-12"><br/></div>
+    <div class="col-sm-12 col-md-12 col-lg-4">
+		<div>
+			<div style="position:relative">
+				<div>
+					<img style="width:100%;" ng-src="{{ctrl.item.Image ? ctrl.item.Image.Url : ''}}">
+				</div>
+				<div class="img-overview">
+					<div>{{ctrl.item.Title}}</div>
+				</div>
+			</div>
+			<br/>
+			<div>
+				<div style="font-size:16px;"><b>Overview</b></div>
+				<div>{{ctrl.item.Overview}}</div>
+			</div>
+			<br/>
+			<div class="item-footer">
+				<p>
+					<span>{{ctrl.getSumTopicsHours(ctrl.items)}}</span>
+					<span>{{ctrl.item.Category}}</span>
+				</p>
+			</div>
+		</div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-8">
+        <div><h3><b>Topics</b></h3></div>
+        <div ng-if="ctrl.items.length">
+            <div ng-repeat="item in ctrl.items track by $index" class="topic-container" ng-init="hide=true">
+                <div ng-click="hide=!hide" data-toggle="collapse" data-target="{{'#desc'+$index}}" class="topic-title">{{item.Title}}
+                    <span class="glyphicon" ng-class="{'glyphicon-chevron-down': hide, 'glyphicon-chevron-up': !hide}"></span>
+                </div>
+                <div class="topic-description collapse" id="{{'desc'+$index}}">
+                    <div>{{item.Description}}</div>
+					<br/>
+					<div class="text-right" ng-if="item.StartLink && item.StartLink.Url">
+						<a class="btn btn-success" ng-href="{{item.StartLink ? item.StartLink.Url : ''}}" target="_blank">Start</a>
+						<br/>
+					</div>
+					<div class="item-footer">
+						<p>
+							<span>{{ctrl.getTopicHours(item.Time)}}</span>
+							<span>{{item.Modality}}</span>
+						</p>
+					</div>
+                </div>
+            </div>
+        </div>
+		<div ng-if="ctrl.items.length == 0">No topics for this card.</div>
+    </div>
+    <div class="clearfix"></div>
+    
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="ctrl.cancel()">Close</button>
+</div>
