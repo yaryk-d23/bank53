@@ -9,7 +9,12 @@
 		<div class="grid" ng-if="ctrl.allRetailTopics.length">
 			<div class="grid__container">
 				<div class="box " ng-repeat="i in ctrl.emptyTopicsArr track by $index" ng-class="{'box_size_2x2': $index == 0, 'box_size_2x1': ($index == 7 || $index == 9)}" ng-init="item=ctrl.allRetailTopics[$index]">
-					<a ng-href="{{item ? '#/retail-learning/'+item.Id : ''}}">
+					<a ng-href="{{item ? '#/portal-cards/'+item.Id : ''}}" ng-if="!item.ExternalLink || !item.ExternalLink.Url">
+						<div class="box__helper">
+							<div class="box__content" ng-style="{'background-image': 'url({{item.Image.Url}})'}">{{item.Title}}</div>
+						</div>
+					</a>
+					<a ng-if="item.ExternalLink && item.ExternalLink.Url" ng-href="{{item.ExternalLink.Url}}">
 						<div class="box__helper">
 							<div class="box__content" ng-style="{'background-image': 'url({{item.Image.Url}})'}">{{item.Title}}</div>
 						</div>

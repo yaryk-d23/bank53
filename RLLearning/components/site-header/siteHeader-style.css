@@ -6,6 +6,15 @@
     margin-bottom: 20px;
 }
 
+#site-header .hero-bg {
+    height: 70px;
+    width: 100%;
+    background-image: url("https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/commheader.png");
+    background-size: cover;
+    background-position: 50% 20%;
+
+}
+/* https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning */
 #site-header .hero {
     background-image:  url("https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/logob.png");
     background-repeat: no-repeat;
@@ -15,13 +24,13 @@
 
     height: 100%;
     width: 100%;
-    padding: 40px;
+    padding: 0px 40px;
     transition: transform 2s;
 }
 
 #site-header .hero-stuff {
     position: absolute;
-    top: 20px;
+    top: 95px;
     left: 400px;
 }
 #site-header h3 {

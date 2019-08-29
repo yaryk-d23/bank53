@@ -20,15 +20,12 @@
         };
 
         $q.all(request).then(function(res){
-            if(res.allRetailTopics.length == 1){
-                $location.path('/retail-learning/'+res.allRetailTopics[0].Id);
-            }
-            else {
-                // angular.forEach(res.allRetailTopics, function(val){
-                //     val.Height = getRandomSize(100, 200);
-                // });
+            // if(res.allRetailTopics.length == 1){
+            //     $location.path('/retail-learning/'+res.allRetailTopics[0].Id);
+            // }
+            // else {
                 ctrl.allRetailTopics = res.allRetailTopics;
-            }
+            // }
         });
 
         function groupBy(xs, prop) {
@@ -36,9 +33,6 @@
               (rv[x[prop]] = rv[x[prop]] || []).push(x);
               return rv;
             }, {});
-        }
-        function getRandomSize(min, max) {
-            return Math.round(Math.random() * (max - min) + min) + 'px';
         }
     }
 })();
