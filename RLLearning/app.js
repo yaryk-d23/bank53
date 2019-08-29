@@ -14,7 +14,7 @@
 		
 		function setContentWrapPadding(){
 			var footerHeight = $('.footer').height();
-			$('.content-wrap').css('padding-bottom', footerHeight);
+			$('.content-wrap').css('padding-bottom', footerHeight+20);
 		}
 
     }])

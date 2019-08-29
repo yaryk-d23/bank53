@@ -5,3 +5,7 @@ body {
     margin: 0;
     overflow: auto;
 }
+.app-container {
+	position: relative;
+    min-height: 100vh;
+}
