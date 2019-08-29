@@ -25,7 +25,10 @@
         .when('/', {
             template: '<retail-roles></retail-roles>'
         })
-        .when('/retail-topics/:parentLinkId', {
+        .when('/retail-topics/:cardId', {
+            template: '<retail-topics></retail-topics>'
+        })
+        .when('/portal-cards/:parentLinkId', {
             template: '<portal-cards></portal-cards>'
         })
         .when('/retail-learning/:parentLinkId', {

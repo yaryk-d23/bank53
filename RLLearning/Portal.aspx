@@ -58,6 +58,7 @@
                 "components/portal-cards/portalCards.js",
                 "components/site-footer/siteFooter.js",
                 "components/retail-learning/retailLearning.js",
+                "components/retail-topics/retailTopics.js",
             ];
             var styles = [
                 "modules/bootstrap/css/bootstrap.css",
@@ -68,6 +69,7 @@
                 "components/portal-cards/portalCards-links-style.css",
                 "components/site-footer/siteFooter-style.css",
                 "components/retail-learning/retailLearning-style.css",
+                "components/retail-topics/retailTopics-style.css",
             ];
             for(var i=0;i<scripts.length;i++){
                 document.write('<script language="javascript" type="text/javascript" src="'+ STATIC_PATH + "/" + scripts[i] + "?rnd" + Math.random() +'"><\/script>')
@@ -84,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            <!--<site-footer></site-footer>-->
+            <site-footer></site-footer>
         </div>
     </body>
 </html>

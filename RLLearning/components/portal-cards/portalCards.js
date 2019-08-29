@@ -22,7 +22,7 @@
         }
 
         ctrl.open = function (e,item) {
-            e.prevetntDefault();
+            e.preventDefault();
             var modalInstance = $uibModal.open({
                 animation: true,
                 size: 'md',

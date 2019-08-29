@@ -1,0 +1,89 @@
+/*  */
+.grid {
+    box-sizing: border-box;
+    background: black;
+    padding: 10px;
+  
+    position: relative;
+  }
+  .grid__container {
+    display: flex;
+    flex-wrap: wrap;
+    border: 2px solid #ffffff;
+  }
+  
+  .box {
+    position: relative;
+    box-sizing: border-box;
+    width: 20%;
+    opacity:0.6;
+  }
+  .box::before {
+    content: '';
+    position: relative;
+    width: 100%;
+    display: block;
+    height: 0;
+    padding-bottom: 100%;
+  }
+  .box:hover {
+  
+    opacity:1
+  
+  }
+  
+  
+  .box__helper {
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .box__content {
+    border: 2px solid #ffffff;
+    padding: 0.5em 1em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .box_size_3x3 {
+    width: 60%;
+  }
+  .box_size_3x3 + .box + .box {
+    margin-top: -40%;
+  }
+  .box_size_3x3 + .box + .box + .box {
+    margin-top: -40%;
+    margin-left: 60%;
+  }
+  .box_size_2x2 {
+    width: 40%;
+  }
+  .box_size_2x2::before {
+    padding-bottom: 50%;
+  }
+  .box_size_2x2 + .box + .box + .box + .box {
+    margin-left: 40%;
+  }
+  .box_size_2x1 {
+    width: 40%;
+  }
+  .box_size_2x1::before {
+    padding-bottom: 50%;
+  }
+  .box_size_2x1 .box__helper {
+    padding-bottom: 50%;
+  }
+  
+  .box__content {
+    font-size: 24px;
+    /*background-color: #252525;*/
+    color: #ffffff;
+    text-shadow: 2px 2px #000000;
+	background-size: cover;
+    
+  }
