@@ -25,7 +25,7 @@
             e.preventDefault();
             var modalInstance = $uibModal.open({
                 animation: true,
-                size: 'md',
+                size: 'lg',
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RLLearning/components/portal-cards/modal-view.html',
@@ -81,6 +81,10 @@
             };
           }
 		
+		ctrl.goBack = function(e){
+			e.preventDefault();
+			history.back();
+		}
 
         
         function groupBy(xs, prop) {

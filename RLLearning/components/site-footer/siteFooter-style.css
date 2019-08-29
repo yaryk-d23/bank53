@@ -1,6 +1,9 @@
 .footer {
     background: #000;
     clear: both;
+	position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 .footer .col {
   width: 190px;
