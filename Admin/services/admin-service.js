@@ -6,7 +6,8 @@ angular.module('App')
             removeUserFromGroup: removeUserFromGroup,
             getUser: getUser,
             getAllWebs: getAllWebs,
-            addUserToGroup: addUserToGroup
+            addUserToGroup: addUserToGroup,
+            getCurrentUser: getCurrentUser
         };
 		
 		function getAllWebs(){
@@ -67,6 +68,13 @@ angular.module('App')
                 return res.data.value;
             });
         }
+
+        function getCurrentUser(){
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/currentuser?$expand=Groups')
+                .then(function(res){
+                    return res.data;
+                });
+        } 
 
         function getUser(query){
                 var url = _spPageContextInfo.webAbsoluteUrl +

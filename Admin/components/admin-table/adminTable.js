@@ -5,30 +5,70 @@ angular.module('App')
             //user: '<'
         },
         controllerAs: 'ctrl',
-        controller: ['$ApiService', '$sce', '$q', '$uibModal' , componentCtrl]
+        controller: ['$ApiService', '$sce', '$q', '$uibModal', '$scope' , componentCtrl]
     });
 
-function componentCtrl($ApiService, $sce, $q, $uibModal){
+function componentCtrl($ApiService, $sce, $q, $uibModal, $scope){
     var ctrl = this;
+    ctrl.currentUser = {};
     ctrl.allWebs = [];
-    $ApiService.getAllWebs().then(function(res){
-        ctrl.allWebs = res;
+    var allWebs = [];
+    ctrl.isCampaignsAdmin = false;
+    var appReqs = {
+        allWebs: $ApiService.getAllWebs(),
+        currentUser: $ApiService.getCurrentUser()
+    };
+    $q.all(appReqs).then(function(res){
+        allWebs = res.allWebs;
+        ctrl.currentUser = res.currentUser;
+        angular.forEach(res.currentUser.Groups, function(group, key){
+            if(group.Title === 'Campaigns Admins') {
+                ctrl.isCampaignsAdmin = true;
+            }
+        });
+        if(ctrl.isCampaignsAdmin){
+            ctrl.allWebs = res.allWebs;
+        }
+        
+        
         geyAccessUserForSites();
     });
 
     function geyAccessUserForSites() {
         var req = {};
-        angular.forEach(ctrl.allWebs, function(web){
-            req[web.Title] = $ApiService.getSiteGroup(web.Url, "$filter=Title eq '"+web.Title+" Members'");
+        angular.forEach(allWebs, function(web){
+            req[web.Title + ' Members'] = $ApiService.getSiteGroup(web.Url, "$filter=Title eq '"+web.Title+" Members'");
+            req[web.Title + ' Owners'] = $ApiService.getSiteGroup(web.Url, "$filter=Title eq '"+web.Title+" Owners'");
+
         });
         $q.all(req).then(function(res){
-            angular.forEach(res, function(group, key){
-                angular.forEach(ctrl.allWebs, function(web){
-                    if(web.Title == key){
-                        web['MemberGroup'] = group;
+            angular.forEach(allWebs, function(web){
+                angular.forEach(res, function(group, key){
+                    if(web.Title +' Members'  == key){
+                        web['MembersGroup'] = group;
+                        
+                    }
+                    if(web.Title +' Owners'  == key){
+                        web['OwnersGroup'] = group;
+                        if(ctrl.isCampaignsAdmin){
+                            web['Visible'] = true;
+                        }
+                        else {
+                            angular.forEach(group.Users, function(user){
+                                if(user.Id == ctrl.currentUser.Id){
+                                    web['Visible'] = true;
+                                }
+                            });
+                        }
                     }
                 });
             });
+            ctrl.allWebs = allWebs;
+            setTimeout(function(){
+                $scope.$apply(function(){
+                    ctrl.allWebs = allWebs;
+                });
+            },0);
         });
     }
 

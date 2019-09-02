@@ -9,21 +9,21 @@
                         <th style="width: 40%">Access users</th>
                         <th style="width: 15%">&nbsp;</th>
                     </tr>
-                    <tr ng-repeat="web in ctrl.allWebs track by $index">
+                    <tr ng-repeat="web in ctrl.allWebs track by $index" ng-if="web.Visible">
                         <td>
                             <a ng-href="{{web.Url}}">{{web.Title}}</a>
                         </td>
                         <td>
-                            <div ng-repeat="user in web.MemberGroup.Users" class="site-user">
+                            <div ng-repeat="user in web.MembersGroup.Users" class="site-user">
                                 <span>{{user.Title}}</span>
-                                <span class="glyphicon glyphicon-remove" ng-click="ctrl.removeUser(web.MemberGroup.Id, user.Id)"></span>
+                                <span class="glyphicon glyphicon-remove" ng-click="ctrl.removeUser(web.MembersGroup.Id, user.Id)"></span>
                             </div>
                         </td>
                         <td>
                             <div>
                                 <!-- <a href="javascript:OpenPopUpPage('\u002fdev\u002fOT\u002f_layouts\u002f15\u002faclinv.aspx?GroupId=44');">Add user</a> -->
-                                <!-- <a ng-href="{{web.Url + '/_layouts/15/people.aspx?MembershipGroupId='+web.MemberGroup.Id}}">Manage</a> -->
-                                <a href="#" ng-click="ctrl.open(web.MemberGroup)">Add user</a>
+                                <!-- <a ng-href="{{web.Url + '/_layouts/15/people.aspx?MembershipGroupId='+web.MembersGroup.Id}}">Manage</a> -->
+                                <a href="#" ng-click="ctrl.open(web.MembersGroup)">Add user</a>
                             </div>
                         </td>
                     </tr>
