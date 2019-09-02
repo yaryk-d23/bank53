@@ -1,6 +1,6 @@
 <div>
     <div>
-        <a href="#/" class="dbutton">Back</a>
+        <a href="#" class="dbutton" ng-click="ctrl.goBack($event)">Back</a>
     </div>
     <div class="wrapper">
         <div class="tile job-bucket"  ng-repeat="link in ctrl.allLinks track by $index">

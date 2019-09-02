@@ -14,7 +14,7 @@
 							<div class="box__content" ng-style="{'background-image': 'url({{item.Image.Url}})'}">{{item.Title}}</div>
 						</div>
 					</a>
-					<a ng-if="item.ExternalLink && item.ExternalLink.Url" ng-href="{{item.ExternalLink.Url}}">
+					<a ng-if="item.ExternalLink && item.ExternalLink.Url" ng-href="{{item.ExternalLink.Url}}" target="_blank">
 						<div class="box__helper">
 							<div class="box__content" ng-style="{'background-image': 'url({{item.Image.Url}})'}">{{item.Title}}</div>
 						</div>

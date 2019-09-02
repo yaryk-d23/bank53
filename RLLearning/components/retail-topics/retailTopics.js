@@ -1,7 +1,7 @@
 (function(){
     angular.module('App')
     .component('retailTopics', {
-        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RetailLearning/components/retail-topics/retailTopics-view.html?rnd' + Math.random(),
+        templateUrl: _spPageContextInfo.webServerRelativeUrl + '/SiteAssets/app/RLLearning/components/retail-topics/retailTopics-view.html?rnd' + Math.random(),
         bindings: {
             //user: '<'
         },
@@ -16,7 +16,7 @@
         ctrl.emptyTopicsArr = [{},{},{},{},{},{},{},{},{},{}];
 		ctrl.defaultImage = 'https://thebank.info53.com/sites/RetailLearn/SiteAssets/app/RetailLearning/assets/img/noimage.png';
         var request = {
-            allRetailTopics: $ApiService.getListItems('RetailTopics', '$filter=RetailCardId eq '+ ctrl.retailCardId),
+            allRetailTopics: $ApiService.getListItems('RetailTopics', '$filter=ParentLinkId eq '+ ctrl.retailCardId),
         };
 
         $q.all(request).then(function(res){
