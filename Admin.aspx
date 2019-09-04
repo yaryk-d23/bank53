@@ -22,11 +22,9 @@
     <script src="/_layouts/SP.js"></script>
     <script src="/_layouts/SP.UI.Dialog.js"></script>
     <script src="/_layouts/ScriptResx.ashx?culture=en%2Dus&name=SP%2ERes"></script>
-
    
-
     <!--JS Links here-->
-    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+    <script type="text/javascript" src="//thebank.info53.com///ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
 	<script src="/_layouts/1033/init.js"></script>
     <script src="/_layouts/1033/core.js"></script>
     <script src="/_layouts/15/SP.Core.js"></script>
@@ -82,7 +80,6 @@
         "modules/bootstrap/js/bootstrap.min.js",
         "modules/bootstrap/js/ui-bootstrap-tpls-2.5.0.min.js",
         "modules/ui-select/select.js",
-
         "Admin/app.js",
         "Admin/services/admin-service.js",
         "Admin/components/admin-table/adminTable.js",
