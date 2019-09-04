@@ -14,20 +14,29 @@ function componentCtrl($ApiService, $sce, $q, $uibModal, $scope){
     ctrl.allWebs = [];
     var allWebs = [];
     ctrl.isCampaignsAdmin = false;
+    var grantedAccessCampaigns = [];
     var appReqs = {
         allWebs: $ApiService.getAllWebs(),
-        currentUser: $ApiService.getCurrentUser()
+        currentUser: $ApiService.getCurrentUser(),
+        pemissionItem: $ApiService.getPermissionListItem('$filter=UserId eq '+_spPageContextInfo.userId)
     };
     $q.all(appReqs).then(function(res){
         allWebs = res.allWebs;
         ctrl.currentUser = res.currentUser;
-        angular.forEach(res.currentUser.Groups, function(group, key){
-            if(group.Title === 'Campaigns Admins') {
+        angular.forEach(res.pemissionItem, function(i, key){
+            if(i.IsGlobalAdmin) {
                 ctrl.isCampaignsAdmin = true;
             }
         });
         if(ctrl.isCampaignsAdmin){
             ctrl.allWebs = res.allWebs;
+        }
+        else if(!ctrl.isCampaignsAdmin){
+            angular.forEach(res.pemissionItem, function(i, key){
+                if(i.CampaignAdmin && i.CampaignTitle) {
+                    grantedAccessCampaigns.push(i.CampaignTitle);
+                }
+            });
         }
         
         
@@ -53,12 +62,8 @@ function componentCtrl($ApiService, $sce, $q, $uibModal, $scope){
                         if(ctrl.isCampaignsAdmin){
                             web['Visible'] = true;
                         }
-                        else {
-                            angular.forEach(group.Users, function(user){
-                                if(user.Id == ctrl.currentUser.Id){
-                                    web['Visible'] = true;
-                                }
-                            });
+                        else if(grantedAccessCampaigns.indexOf(web.Title) != -1){
+                            web['Visible'] = true;
                         }
                     }
                 });

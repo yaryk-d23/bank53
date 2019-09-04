@@ -7,8 +7,17 @@ angular.module('App')
             getUser: getUser,
             getAllWebs: getAllWebs,
             addUserToGroup: addUserToGroup,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            getPermissionListItem: getPermissionListItem
         };
+
+        function getPermissionListItem(filter){
+            filter = filter ? filter : '';
+            return $http.get(_spPageContextInfo.webAbsoluteUrl + '/_api/web/lists/getbytitle(\'CampaignsPermissions\')/items?$select=*,User/Id,User/Title&$expand=User&'+filter)
+                .then(function(res){
+                    return res.data.value;
+                });
+        }
 		
 		function getAllWebs(){
             return $http.get(_spPageContextInfo.webAbsoluteUrl + "/_api/Web/webs")

@@ -3,10 +3,24 @@
     angular.module('DashboardApp', [
     ])
 
-    .controller('AppCtrl', [function() {
+    .controller('AppCtrl', ['$DashboardService', function($DashboardService) {
         setInterval(function(){
             setHeight();
         },500);
+        $DashboardService.getPermissionListItem('$filter=UserId eq '+_spPageContextInfo.userId).then(function(res){
+            var addLink = false;
+            angular.forEach(res, function(i, key){
+                if(i.IsGlobalAdmin) {
+                    addLink = true;
+                }
+                else if(i.CampaignAdmin && i.CampaignTitle){
+                    addLink = true;
+                }
+            });
+            if(addLink){
+                $('#navbarSupportedContent>.nav').append('<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Admin.aspx">Admin Page</a></li>');
+            }
+        });
         function setHeight(){
             // if(angular.element(document.querySelectorAll('#dashboard > div > .col-lg-9'))[0] && angular.element(document).width() >= 1200) {
             //     var height = angular.element(document.querySelectorAll('#dashboard > div > .col-lg-9'))[0].offsetHeight;

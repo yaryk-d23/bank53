@@ -24,7 +24,13 @@
     <script src="/_layouts/ScriptResx.ashx?culture=en%2Dus&name=SP%2ERes"></script>
 
     <!--JS Links here-->
-    
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+	<script src="/_layouts/1033/init.js"></script>
+    <script src="/_layouts/1033/core.js"></script>
+    <script src="/_layouts/15/SP.Core.js"></script>
+    <script src="/_layouts/15/SP.Runtime.js"></script>
+    <script src="/_layouts/15/SP.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
 	
   </head>
 
