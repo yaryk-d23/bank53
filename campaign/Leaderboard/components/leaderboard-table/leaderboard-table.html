@@ -1,0 +1,96 @@
+<div class="leaderboard-table">
+    <div class="row controls">
+        <!-- <div class="input-group">
+            <select 
+                class="form-control" 
+                ng-options="opt as opt for opt in ctrl.groupBy track by opt" 
+                ng-model="ctrl.groupByValue" 
+                ng-change="ctrl.loadData()"
+            >
+            </select>
+        </div> -->
+        <div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" ng-class="ctrl.groupByValue == opt ? 'active' : ''" ng-repeat="opt in ctrl.groupBy track by $index">
+                    <a href="#" ng-click="ctrl.groupByValue=opt;ctrl.loadData();">{{opt}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="current-user" ng-if="ctrl.groupByValue == 'Role'">
+            <div>
+                <b>Current user: </b>
+                <span ng-repeat="user in ctrl.filterData() track by $index" ng-if="user.User.Id == ctrl.userInfo.userId">#{{$index + 1}} </span>
+                <span>{{ctrl.userInfo.fullName}} </span>
+                <span>{{ctrl.userInfo.xp}} XP</span>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="ctrl.groupByValue == 'Role'">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th style="min-width: 100px;">User</th>
+                <th>XP</th>
+                <th>Role</th>
+                <th>Department</th>
+                <th>Region</th>
+            </tr>
+            <tr ng-repeat="user in ctrl.filterData() track by $index">
+                <td>{{$index + 1}}</td>
+                <td>
+                    <div class="user-container">
+                        <div ng-if="$index < 3" class="img-container">
+                            <img class="img-circle" ng-src="{{user.Avatar ? user.Avatar.Url : '/_layouts/15/userphoto.aspx?size=S&username='+user.User.EMail}}" />
+                        </div>
+                        <div ng-if="$index >= 3" class="img-container">
+                            <img class="hide-image img-circle" src="/_layouts/15/userphoto.aspx?size=S&username=username"/>
+                        </div>
+                        <div ng-if="$index < 3">{{user.User.Title}}</div>
+                        <div ng-if="$index >= 3" class="hide-text">##############</div>
+                    </div>
+                </td>
+                <td>{{user.XP}}</td>
+                <td>
+                    <div ng-if="$index < 3">{{user.Role}}</div>
+                    <div ng-if="$index >= 3" class="hide-text">##############</div>
+                </td>
+                <td>
+                    <div ng-if="$index < 3">{{user.Department}}</div>
+                    <div ng-if="$index >= 3" class="hide-text">##############</div>
+                </td>
+                <td>
+                    <div ng-if="$index < 3">{{user.Region}}</div>
+                    <div ng-if="$index >= 3" class="hide-text">##############</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row" ng-if="ctrl.groupByValue == 'Department'">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Department</th>
+                <th>XP</th>
+            </tr>
+            <tr ng-repeat="(i, dept) in ctrl.filterData() track by $index">
+                <td>{{$index + 1}}</td>
+                <td>{{i}}</td>
+                <td>{{ctrl.getSumOfXP(dept)}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="row" ng-if="ctrl.groupByValue == 'Region'">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>Region</th>
+                <th>XP</th>
+            </tr>
+            <tr ng-repeat="(i, region) in ctrl.filterData() track by $index">
+                <td>{{$index + 1}}</td>
+                <td>{{i}}</td>
+                <td>{{ctrl.getSumOfXP(region)}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+.propeties-form .modal-header .close,
+.ta-toolbar .btn{
+    min-width: 0px;
+}
+.ta-root .ta-editor {
+    min-height: 100px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    position: relative;
+    padding: 0;
+}
+.ta-scroll-window > .ta-bind {
+    height: auto;
+    min-height: 100px;
+    padding: 6px 12px;
+}
+.b .dropdown-menu{
+    display: block;
+}
+.b .modal-dialog {
+    /* max-width: 900px;
+    width: auto; */
+}
+.propeties-form .avatar-item {
+    position: relative;
+    width: 100px;
+    display: inline-block;
+    padding: 5px;
+    margin-left: 5px;
+    border: 1px solid #f7f7f7;
+}
+.propeties-form .avatar-item:first-child{
+    margin-left: 0;
+}
+.propeties-form .avatar-image {
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+}
+.propeties-form .avatar-image:after{
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
+.propeties-form .cheked-avatar,
+.propeties-form .lock-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    opacity: 0.8;
+    text-align: center;
+    padding-top: 40%;
+}
+.propeties-form .cheked-avatar {
+}
+.propeties-form .lock-image {
+    cursor: not-allowed;
+}
+.propeties-form .cheked-avatar i {
+    color: #06d706;
+    border: 2px solid #06d706;
+    border-radius: 100%;
+    padding: 2px;
+}
+
+
+@media screen and (max-width: 1366px) , screen and (max-height: 768px) {
+    .b .modal-body {
+        max-height: 400px;
+        overflow: auto;
+    }
+}

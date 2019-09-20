@@ -1,0 +1,27 @@
+<div class="propeties-form">
+        <div class="modal fade" tabindex="-1" role="dialog" id="propeties-form">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Propeties</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form">
+                            <div class="avatar-item" ng-repeat="item in ctrl.allAvatars track by $index" ng-click="ctrl.setAvatar(item)">
+                                <div class="avatar-image" ng-style="{'background-image': 'url({{item.Avatar.Url}})'}"></div>
+                                <div ng-if="item.XP > ctrl.userInfo.xp" class="lock-image">Need: {{item.XP}}XP</div>
+                                <div ng-if="ctrl.userInfo.avatar.Url == item.Avatar.Url" class="cheked-avatar">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="ctrl.saveData()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

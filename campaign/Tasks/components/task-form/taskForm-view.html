@@ -1,0 +1,58 @@
+<div>
+    <div class="modal fade" id="task-modal" tabindex="-1" role="dialog" aria-labelledby="task-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Task</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="Title" class="control-label">Title</label>
+                                <input type="text" name="Title" class="form-control" ng-model="ctrl.Item.Title"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Badge" class="control-label">Badge</label>
+                                <ui-select ng-model="ctrl.Item.Badge"  style="height: 34px;" title="Choose a Badge">
+                                    <ui-select-match placeholder="Select or search a Badge in the list...">{{$select.selected.Title}}</ui-select-match>
+                                    <ui-select-choices repeat="badge in ctrl.badgesChoice | filter: $select.search">
+                                        <span ng-bind-html="badge.Title | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="XP" class="control-label">XP</label>
+                                <input type="number" name="XP" class="form-control" ng-model="ctrl.Item.XP"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="BadgeType" class="control-label">Badge Type</label>
+                                <select class="form-control" ng-model="ctrl.Item.BadgeType" ng-options="opt as opt for opt in ctrl.badgeTypeChoice track by opt"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="LinkedSource" class="control-label">Linked Source</label>
+                                <input type="text" name="LinkedSource" class="form-control" ng-model="ctrl.Item.LinkedSource"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="Description" class="control-label">Description</label>
+                                <textarea cols="3" name="Description" class="form-control" ng-model="ctrl.Item.Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="ctrl.saveData()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

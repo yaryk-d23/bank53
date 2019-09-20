@@ -1,0 +1,82 @@
+<div class="quick-leaderboard">
+    <div class="section-title">
+        Leaderboard
+    </div>
+    <div class="">
+        <div style="display:block;">
+            <b>
+                In my Role (look at LeaderBoards your EID XP as compared to XP for other with Role)
+            </b>
+        </div>
+        <div class="item-container">
+            <div class="quick-leaderboard-item  text-center" ng-repeat="user in ctrl.leaderboardByRole track by $index">
+                <div class="user-badge">
+                    <img class="img-circle" ng-src="{{user.Avatar ? user.Avatar.Url : '/_layouts/15/userphoto.aspx?size=S&username='+user.User.EMail}}" />
+                </div>
+                <div class="user-picture">
+                    <!-- <div>
+                        <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{user.User.EMail}}" />
+                        <span>{{user.User.Title}}</span>
+                    </div> -->
+                    <div>{{user.User.Title}}</div>
+                    <div>{{user.Role}}</div>
+                </div>
+                <div class="user-xp">
+                    {{user.XP}} XP
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div  style="display:block;">
+            <b>
+                Departments (calc each Deparment, compare for most XP)
+            </b>
+        </div>
+        <div class="item-container">
+            <div class="quick-leaderboard-item  text-center" ng-repeat="dept in ctrl.userLogItemsByDept | orderBy: '-xp' track by $index" ng-if="$index<3">
+                <div class="user-badge">
+                    <!-- <img class="img-circle" ng-src="{{badge.Icon.Url}}" /> -->
+                </div>
+                <div class="user-picture">
+                    <div>
+                        <!-- <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" /> -->
+                        <span>{{dept.title}}</span>
+                    </div>
+                </div>
+                <div class="user-xp">
+                    {{dept.xp}} XP
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div style="display:block;">
+            <b>
+                Regions (calc each Region, compare for most XP)
+            </b>
+        </div>
+        <div class="item-container">
+            <div class="quick-leaderboard-item  text-center" ng-repeat="region in ctrl.userLogItemsByRegion | orderBy: '-xp' track by $index" ng-if="$index<3">
+                <div class="user-badge">
+                    <!-- <img class="img-circle" ng-src="{{badge.Icon.Url}}" /> -->
+                </div>
+                <div class="user-picture">
+                    <div>
+                        <!-- <img class="img-circle" ng-src="/_layouts/15/userphoto.aspx?size=S&username={{ctrl.userInfo.userName}}" /> -->
+                        <span>{{region.title}}</span>
+                    </div>
+                </div>
+                <div class="user-xp">
+                    {{region.xp}} XP
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="quick-leaderboard-header">
+            <div>&nbsp;</div>
+            <div >
+                <a class="btn btn-success" href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Leaderboard.aspx">View Leaderboard</a>
+            </div>
+        </div>
+        <br/>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+.leaderboard-table .img-circle {
+    width: 100%;
+    border-radius: 50%;
+    padding-right: 5px;
+}
+.leaderboard-table .table td {
+    /* overflow: hidden;
+    word-break: break-all; */
+}
+.leaderboard-table .table>tbody>tr>td{
+    vertical-align: middle;
+}
+.user-container,
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+.user-container>.img-container, 
+.user-container>div,
+.controls>div {
+    display: flex;
+}
+.user-container>.img-container {
+    flex: 0 25%;
+}
+.user-container>div {
+    flex: 0 75%;
+    box-sizing: border-box;
+}
+
+.controls>div{
+    flex: 0 50%;
+}
+.controls .current-user {
+    justify-content: flex-end;
+}
+.hide-text {
+    text-shadow: 0px 0px 10px #000!important;
+    color: transparent!important;
+    user-select: none;
+}
+.hide-image {
+    filter: blur(3px);
+}
