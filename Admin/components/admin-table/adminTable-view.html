@@ -11,7 +11,7 @@
                     </tr>
                     <tr ng-repeat="web in ctrl.allWebs track by $index" ng-if="web.Visible">
                         <td>
-                            <a ng-href="{{web.Url}}">{{web.Title}}</a>
+                            <a ng-href="{{web.Url + '/SiteAssets/app/Welcome.aspx'}}">{{web.Title}}</a>
                         </td>
                         <td>
                             <div ng-repeat="user in web.MembersGroup.Users" class="site-user">

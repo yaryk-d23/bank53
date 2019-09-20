@@ -25,7 +25,7 @@
 
     <!--JS Links here-->
     
-	<script type="text/javascript" src="//thebank.info53.com///ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+	<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
 	<script src="/_layouts/1033/init.js"></script>
     <script src="/_layouts/1033/core.js"></script>
     <script src="/_layouts/15/SP.Core.js"></script>
