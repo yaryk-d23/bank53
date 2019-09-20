@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <h4>Avatar</h4>
-						<a ng-if="ctrl.userInfo.userRole == 'Manager'" class="btn btn-success" href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Manager.aspx">Manager Page</a>
+						<a ng-if="ctrl.userInfo.userRole == 'Manager'" class="btn btn-success" href="Manager.aspx">Manager Page</a>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-8">
                         <div class="profile-header-img text-center">
@@ -94,7 +94,7 @@
                         <div ng-repeat="camp in ctrl.allCampaigns">
 							<a ng-href="{{camp.ServerRelativeUrl + '/SiteAssets/app/Welcome.aspx'}}"><h3>{{camp.Title}}</h3></a>
 						</div>
-						<a ng-if="ctrl.userInfo.userRole == 'Manager'" class="btn btn-success" href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Manager.aspx">Manager Page</a>
+						<a ng-if="ctrl.userInfo.userRole == 'Manager'" class="btn btn-success" href="Manager.aspx">Manager Page</a>
                     </div>
                     <div class="clearfix"></div>
                     <br/>

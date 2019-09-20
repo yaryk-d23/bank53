@@ -24,7 +24,13 @@
     <script src="/_layouts/ScriptResx.ashx?culture=en%2Dus&name=SP%2ERes"></script>
 
     <!--JS Links here-->
-    
+    <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
+	<script src="/_layouts/1033/init.js"></script>
+    <script src="/_layouts/1033/core.js"></script>
+    <script src="/_layouts/15/SP.Core.js"></script>
+    <script src="/_layouts/15/SP.Runtime.js"></script>
+    <script src="/_layouts/15/SP.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
 	
   </head>
 
@@ -70,10 +76,9 @@
 		</span>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="nav navbar-nav">
-				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Welcome.aspx">Home</a></li>
-				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Dashboard.aspx">My Dashboard</a></li>
-				<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Badges.aspx">Trainings</a></li>
-				<!-- <li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Leaderboard.aspx">Leaderboard</a></li> -->
+				<li><a href="Welcome.aspx">Home</a></li>
+				<li><a href="Dashboard.aspx">My Dashboard</a></li>
+				<li><a href="Badges.aspx">Trainings</a></li>
 			</ul>
 		</div>
     </nav>

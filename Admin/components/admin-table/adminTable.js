@@ -40,10 +40,10 @@ function componentCtrl($ApiService, $sce, $q, $uibModal, $scope){
         }
         
         
-        geyAccessUserForSites();
+        getAccessUserForSites();
     });
 
-    function geyAccessUserForSites() {
+    function getAccessUserForSites() {
         var req = {};
         angular.forEach(allWebs, function(web){
             req[web.Title + ' Members'] = $ApiService.getSiteGroup(web.Url, "$filter=Title eq '"+web.Title+" Members'");
@@ -81,7 +81,7 @@ function componentCtrl($ApiService, $sce, $q, $uibModal, $scope){
         var conf = confirm("Are you sure?");
         if(conf){
             $ApiService.removeUserFromGroup(groupId, userId);
-            geyAccessUserForSites();
+            getAccessUserForSites();
         }
     };
 
@@ -117,7 +117,7 @@ function componentCtrl($ApiService, $sce, $q, $uibModal, $scope){
             req.push($ApiService.addUserToGroup(groupId, data));
         });
         $q.all(req).then(function(){
-            geyAccessUserForSites();
+            getAccessUserForSites();
         });
     }
 

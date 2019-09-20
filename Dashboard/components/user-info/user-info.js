@@ -75,7 +75,7 @@ function userInfoCtrl($DashboardService, $q){
                 ctrl.userInfo.userRole = user.UserRole;
             }
             if(ctrl.userInfo.userRole == 'Manager'){
-                $('#navbarSupportedContent>.nav').append('<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Manager.aspx">Manager Page</a></li>');
+                $('#navbarSupportedContent>.nav').append('<li><a href="Manager.aspx">Manager Page</a></li>');
             }
         });
     });

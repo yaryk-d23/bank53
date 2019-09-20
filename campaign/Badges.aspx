@@ -86,7 +86,7 @@
 		</span>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Welcome.aspx">Home</a></li>
+				<li class="active"><a href="Welcome.aspx">Home</a></li>
 				<li class="" ><a id="campaign-link" href="#">Home</a></li>
 				<li class="active"><a href="Badges.aspx">Trainings</a></li>
 			</ul>

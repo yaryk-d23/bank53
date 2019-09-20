@@ -18,7 +18,7 @@
                 }
             });
             if(addLink){
-                $('#navbarSupportedContent>.nav').append('<li><a href="https://thebank.info53.com/teams/HCInt/Learn/Gamification/SiteAssets/app/Admin.aspx">Admin Page</a></li>');
+                $('#navbarSupportedContent>.nav').append('<li><a href="Admin.aspx">Admin Page</a></li>');
             }
         });
         function setHeight(){
