@@ -57,20 +57,21 @@
 }
 #manager  .user-container{
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+/*     flex-wrap: wrap;
+    flex-direction: row; */
     align-items: center;
 }
 #manager .user-container>img, 
 #manager .user-container>div{
-    display: flex;
+/*     display: flex; */
 }
 #manager .user-container>img {
-    flex: 0 25%;
+/*     flex: 0 25%; */
     max-width: 36px;
+	width: 100%;
 }
 #manager .user-container>div {
-    flex: 0 75%;
+/*     flex: 0 75%; */
     padding-left: 10px;
     box-sizing: border-box;
 }
